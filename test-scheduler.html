@@ -1,0 +1,120 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>scheduler.js test harness</title>
+<pre id="out">running...</pre>
+<!-- Plain classic scripts, not modules (see scheduler.js's header for why:
+     file:// pages can't load ES modules at all). Opening this file directly
+     works with no server. -->
+<script src="data/catalog.js"></script>
+<script src="channels.js"></script>
+<script src="scheduler.js"></script>
+<script>
+const _internal = window.SCHEDULER_INTERNAL;
+const lines = [];
+let pass = 0, fail = 0;
+function check(name, cond, detail) {
+  if (cond) { pass++; lines.push(`PASS ${name}`); }
+  else { fail++; lines.push(`FAIL ${name}${detail ? " — " + detail : ""}`); }
+}
+
+const byNumber = Object.fromEntries(CHANNELS.map((c) => [c.number, c]));
+
+function main() {
+  const catalog = window.CATALOG;
+
+  // -- determinism ------------------------------------------------------
+  const toon = byNumber[3]; // TOON CHANNEL / Animation
+  const t0 = Date.now();
+  const a = getPositionAt(toon, catalog, t0);
+  const b = getPositionAt(toon, catalog, t0);
+  check("determinism: same channel+time -> identical result",
+    a && b && a.showId === b.showId && a.episode.key === b.episode.key && a.offsetSec === b.offsetSec,
+    JSON.stringify({ a, b }));
+
+  // -- offset is within episode bounds -----------------------------------
+  check("genre channel: offset within episode duration",
+    a && a.offsetSec >= 0 && a.offsetSec < a.episode.durationSec,
+    `offset=${a && a.offsetSec} dur=${a && a.episode.durationSec}`);
+
+  // -- genre pool covers every episode of every show in that genre --------
+  const animationShows = Object.values(catalog.shows).filter((s) => s.genre === "Animation");
+  const expectedEpisodeCount = animationShows.reduce((n, s) => n + s.episodes.length, 0);
+  // walk the internal pool builder directly to check coverage without relying on timing
+  const ids = animationShows.map((s) => s.id).sort();
+  const info = _internal.buildPool(ids, catalog, "genre:Animation");
+  check("genre pool includes every Animation episode exactly once",
+    info.pool.length === expectedEpisodeCount,
+    `pool=${info.pool.length} expected=${expectedEpisodeCount}`);
+
+  // -- reproducibility across process boundary (re-shuffle same seed) -----
+  const reshuffled = _internal.shuffled([1, 2, 3, 4, 5], "seed-x");
+  const reshuffled2 = _internal.shuffled([1, 2, 3, 4, 5], "seed-x");
+  check("shuffle: same seed -> same order", JSON.stringify(reshuffled) === JSON.stringify(reshuffled2),
+    JSON.stringify({ reshuffled, reshuffled2 }));
+
+  // -- advancing time moves position forward (not stuck) -------------------
+  const later = getPositionAt(toon, catalog, t0 + (a.episode.durationSec + 5) * 1000);
+  check("advancing past the episode boundary changes position",
+    later && (later.showId !== a.showId || later.episode.key !== a.episode.key || later.offsetSec < a.offsetSec),
+    JSON.stringify({ a, later }));
+
+  // -- dayparted curated channel: Saturday morning window ------------------
+  const satMorning = byNumber[14];
+  const satTime = new Date(2026, 7, 15, 9, 0, 0).getTime(); // Sat 2026-08-15 09:00 local (August = month index 7)
+  const satPos = getPositionAt(satMorning, catalog, satTime);
+  check("Saturday 9am lands in the Saturday-morning pool",
+    satPos && satMorning.daypart[0].pool.includes(satPos.showId),
+    `showId=${satPos && satPos.showId}`);
+
+  // -- dayparted curated channel: outside window uses fallback -------------
+  const weekday = new Date(2026, 7, 10, 15, 0, 0).getTime(); // Mon 2026-08-10 15:00 local
+  const fallbackPos = getPositionAt(satMorning, catalog, weekday);
+  check("weekday afternoon uses the fallback pool, not the Saturday pool",
+    fallbackPos && satMorning.fallbackPool.includes(fallbackPos.showId) &&
+      !satMorning.daypart[0].pool.includes(fallbackPos.showId),
+    `showId=${fallbackPos && fallbackPos.showId}`);
+
+  // -- dayparting continuity: cumulative airtime keeps advancing week to week
+  const satNext = new Date(2026, 7, 22, 9, 0, 0).getTime(); // following Saturday, same time-of-window
+  const el1 = _internal.windowElapsedSec(satMorning.daypart[0], satTime);
+  const el2 = _internal.windowElapsedSec(satMorning.daypart[0], satNext);
+  const windowLenSec = (satMorning.daypart[0].endHour - satMorning.daypart[0].startHour) * 3600;
+  check("cumulative window airtime advances by ~one window length across a week",
+    Math.abs((el2 - el1) - windowLenSec) < 1,
+    `el1=${el1} el2=${el2} windowLenSec=${windowLenSec}`);
+
+  // -- every channel in the lineup resolves to a valid position ------------
+  const sampleTimes = [
+    new Date(2026, 7, 10, 9, 0, 0).getTime(),   // Mon
+    new Date(2026, 7, 14, 21, 30, 0).getTime(), // Fri night
+    new Date(2026, 7, 15, 23, 30, 0).getTime(), // Sat late
+    new Date(2026, 7, 16, 3, 0, 0).getTime(),   // Sun small hours
+  ];
+  let channelsChecked = 0, sweepFailures = 0;
+  for (const c of CHANNELS) {
+    if (c.kind === "guide") continue;
+    channelsChecked++;
+    for (const t of sampleTimes) {
+      const pos = getPositionAt(c, catalog, t);
+      const ok = pos && pos.offsetSec >= 0 && pos.offsetSec < pos.episode.durationSec && catalog.shows[pos.showId];
+      if (!ok) {
+        sweepFailures++;
+        lines.push(`  detail: channel ${c.number} (${c.name}) at ${new Date(t)} — ${JSON.stringify(pos)}`);
+      }
+    }
+  }
+  check(`all ${channelsChecked} non-guide channels resolve a valid position at 4 sample times`,
+    sweepFailures === 0, `${sweepFailures} bad result(s)`);
+
+  document.getElementById("out").textContent =
+    lines.join("\n") + `\n\n${pass} passed, ${fail} failed`;
+  document.title = fail === 0 ? "ALL PASS" : `${fail} FAILED`;
+}
+
+try {
+  main();
+} catch (e) {
+  document.getElementById("out").textContent = "ERROR: " + (e && e.stack || e);
+  document.title = "ERROR";
+}
+</script>

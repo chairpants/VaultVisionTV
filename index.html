@@ -1,0 +1,57 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VaultVisionTV</title>
+<link rel="stylesheet" href="style.css">
+
+<div id="tv">
+  <video id="screen" playsinline></video>
+
+  <div id="osd" class="hidden">
+    <div id="osd-ch"></div>
+    <div id="osd-tagline"></div>
+    <div id="osd-show"></div>
+    <div id="osd-episode"></div>
+    <div id="osd-bar"><div id="osd-bar-fill"></div></div>
+  </div>
+
+  <div id="digit-osd" class="hidden"></div>
+
+  <div id="guide" class="hidden"></div>
+
+  <div id="blank-msg" class="hidden">NO SIGNAL</div>
+  <div id="start-hint" class="hidden">CLICK OR PRESS ANY KEY TO START</div>
+</div>
+
+<div id="remote">
+  <div class="remote-row">
+    <button data-action="ch-up">CH +</button>
+    <button data-action="ch-down">CH &minus;</button>
+    <button data-action="guide">GUIDE</button>
+  </div>
+  <div class="remote-row keypad">
+    <button data-digit="1">1</button>
+    <button data-digit="2">2</button>
+    <button data-digit="3">3</button>
+    <button data-digit="4">4</button>
+    <button data-digit="5">5</button>
+    <button data-digit="6">6</button>
+    <button data-digit="7">7</button>
+    <button data-digit="8">8</button>
+    <button data-digit="9">9</button>
+    <button data-digit="0">0</button>
+    <button data-action="enter">ENTER</button>
+  </div>
+</div>
+
+<!-- Plain classic scripts, not modules — Chrome refuses to load ES modules
+     over file://, full stop, no header can fix it. Loading order matters:
+     each file assigns onto the shared top-level scope / window for the next
+     one to use, same trick VaultVision itself uses for shows.js/data.js. -->
+<script src="data/catalog.js"></script>
+<script src="channels.js"></script>
+<script src="scheduler.js"></script>
+<script src="player.js"></script>
+<script src="remote.js"></script>
+<script src="guide.js"></script>
+<script src="app.js"></script>
