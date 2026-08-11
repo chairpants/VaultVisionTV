@@ -17,19 +17,48 @@
 
   <div id="digit-osd" class="hidden"></div>
 
+  <!-- Shown during a break only when no commercial fits the time left (the
+       leftover sliver at the end of a slot, or no spots loaded at all). -->
+  <div id="pad-card" class="hidden">STAND BY</div>
+
+  <!-- Lower third during a commercial break: what's coming back on and how
+       long until it does. The video shrinks to sit above it (layoutCrop). -->
+  <div id="chyron" class="hidden">
+    <span id="chyron-label">UP NEXT</span>
+    <span id="chyron-title"></span>
+    <span id="chyron-sub"></span>
+    <span id="chyron-clock"></span>
+  </div>
+
   <div id="guide" class="hidden"></div>
 
   <div id="blank-msg" class="hidden">NO SIGNAL</div>
   <div id="start-hint" class="hidden">CLICK OR PRESS ANY KEY TO START</div>
 </div>
 
+<!-- Sits mostly off the bottom edge; only #remote-head shows until you
+     mouse over it (CSS :hover, see style.css). -->
 <div id="remote">
-  <div class="remote-row">
-    <button data-action="ch-up">CH +</button>
-    <button data-action="ch-down">CH &minus;</button>
-    <button data-action="guide">GUIDE</button>
+  <div id="remote-head"><span>VAULTVISION</span></div>
+
+  <div class="rockers">
+    <div class="rocker">
+      <button data-action="ch-up">CH &plus;</button>
+      <button data-action="ch-down">CH &minus;</button>
+    </div>
+    <div class="rocker">
+      <button data-action="vol-up">VOL &plus;</button>
+      <button data-action="vol-down">VOL &minus;</button>
+    </div>
   </div>
-  <div class="remote-row keypad">
+
+  <div class="remote-row">
+    <button data-action="guide" class="fn-guide">GUIDE</button>
+    <button data-action="last" class="fn-last">RETURN</button>
+    <button data-action="mute" class="fn-mute">MUTE</button>
+  </div>
+
+  <div class="keypad">
     <button data-digit="1">1</button>
     <button data-digit="2">2</button>
     <button data-digit="3">3</button>
@@ -39,8 +68,15 @@
     <button data-digit="7">7</button>
     <button data-digit="8">8</button>
     <button data-digit="9">9</button>
-    <button data-digit="0">0</button>
-    <button data-action="enter">ENTER</button>
+    <button data-digit="0" class="key-zero">0</button>
+    <button data-action="web" class="key-web" title="Open on archive.org" aria-label="Open on archive.org">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/>
+        <ellipse cx="12" cy="12" rx="4.2" ry="9"/>
+        <path d="M3 12h18M5.1 6.4h13.8M5.1 17.6h13.8"/>
+      </svg>
+    </button>
+    <button data-action="enter" class="key-enter">ENTER</button>
   </div>
 </div>
 
@@ -49,6 +85,7 @@
      each file assigns onto the shared top-level scope / window for the next
      one to use, same trick VaultVision itself uses for shows.js/data.js. -->
 <script src="data/catalog.js"></script>
+<script src="data/commercials.js"></script>
 <script src="channels.js"></script>
 <script src="scheduler.js"></script>
 <script src="player.js"></script>

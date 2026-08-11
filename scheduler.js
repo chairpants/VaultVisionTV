@@ -18,6 +18,16 @@
 const EPOCH_MS = new Date("2020-01-06T00:00:00").getTime();
 const WEEK_MS = 7 * 24 * 3600 * 1000;
 
+// Every episode occupies a whole number of half-hour slots rather than just
+// its own runtime, so program starts land on :00 and :30 — the epoch is local
+// midnight and every slot is a multiple of SLOT_SEC, so the grid stays on the
+// clock forever. The leftover tail of a slot (a 23-minute episode in a 30-
+// minute slot) is dead air the player fills with a countdown card.
+// ponytail: real commercial pods go in that gap later; nothing here changes
+// when they do, the pad just gets content instead of a countdown.
+const SLOT_SEC = 30 * 60;
+const slotFor = (durationSec) => Math.ceil(durationSec / SLOT_SEC) * SLOT_SEC;
+
 // -- deterministic shuffle ---------------------------------------------------
 // Same seed -> same order, every reload, every machine. That's what makes a
 // channel's schedule reproducible without storing anything.
@@ -54,7 +64,9 @@ function shuffled(arr, seedStr) {
 // A "pool" is a flat, deterministically-ordered list of every episode of
 // every show in a set of showIds, plus a prefix-sum duration index so a
 // timestamp can be located in it with a binary search.
-function buildPool(showIds, catalog, seedStr) {
+// `slotted`: programs occupy whole half-hour slots (the broadcast grid);
+// commercials pack back-to-back with no padding of their own.
+function buildPool(showIds, catalog, seedStr, { slotted = true } = {}) {
   const flat = [];
   for (const id of showIds) {
     const show = catalog.shows[id];
@@ -69,37 +81,114 @@ function buildPool(showIds, catalog, seedStr) {
   let acc = 0;
   for (let i = 0; i < ordered.length; i++) {
     cumulative[i] = acc;
-    acc += ordered[i].episode.durationSec;
+    const dur = ordered[i].episode.durationSec;
+    acc += slotted ? slotFor(dur) : dur;
   }
-  return { pool: ordered, cumulative, totalSec: acc };
+  return { pool: ordered, cumulative, totalSec: acc, slotted };
+}
+
+// -- broken files -------------------------------------------------------------
+// archive.org items rot: a file listed in an item's metadata can still 404 or
+// refuse to decode. The player reports those here the moment the <video>
+// element gives up, and every lookup from then on substitutes past them for
+// the rest of the session — so the guide never advertises a programme the
+// player already knows it can't show. Session-only on purpose: it's a
+// runtime observation, not a fact about the catalog.
+const brokenKeys = new Set();
+
+// The next entry at or after `idx` that isn't known-broken. Falls back to the
+// original once it's been all the way round — if every file in a pool is
+// dead there's nothing to substitute, and the player shows NO SIGNAL.
+function usableFrom(pool, idx) {
+  if (brokenKeys.size === 0) return pool[idx];
+  let i = idx;
+  for (let hops = 0; hops < pool.length; hops++) {
+    if (!brokenKeys.has(pool[i].episode.key)) return pool[i];
+    i = (i + 1) % pool.length;
+  }
+  return pool[idx];
 }
 
 function locate(poolInfo, elapsedSec) {
-  const { pool, cumulative, totalSec } = poolInfo;
+  const { pool, cumulative, totalSec, slotted } = poolInfo;
   if (pool.length === 0 || totalSec <= 0) return null;
-  const t = ((elapsedSec % totalSec) + totalSec) % totalSec; // safe mod for any sign
+  // Safe mod for any sign — but the negative branch's round-trip through
+  // `+ totalSec` costs an ULP, which can drop a value that sits exactly on a
+  // cumulative boundary just below it, landing the search on the *previous*
+  // entry at ~100% of its duration. getAdAt anchors breaks exactly on
+  // boundaries, so take the exact path whenever elapsed is already positive.
+  const t = elapsedSec >= 0 ? elapsedSec % totalSec : ((elapsedSec % totalSec) + totalSec) % totalSec;
   let lo = 0, hi = pool.length - 1;
   while (lo < hi) {
     const mid = (lo + hi + 1) >> 1;
     if (cumulative[mid] <= t) lo = mid; else hi = mid - 1;
   }
-  const entry = pool[lo];
+  const offsetSec = t - cumulative[lo];
+  const scheduled = pool[lo]; // what the grid says; may be unplayable
+  const entry = usableFrom(pool, lo);
+  if (!slotted) {
+    // Commercial pool: no slot grid, so none of the padding fields apply.
+    return { showId: entry.showId, show: entry.show, episode: entry.episode, offsetSec };
+  }
+  const next = usableFrom(pool, (lo + 1) % pool.length);
   return {
     showId: entry.showId,
     show: entry.show,
     episode: entry.episode,
-    offsetSec: t - cumulative[lo],
+    offsetSec,
+    // Past the episode's runtime but still inside its slot: dead air until
+    // the clock reaches the next :00/:30. Callers must check this before
+    // treating offsetSec as a seek position. A substitute shorter than the
+    // programme it replaced simply goes to break early.
+    padding: offsetSec >= entry.episode.durationSec,
+    // Measured from the *scheduled* entry, never the substitute — a dead file
+    // must not shift the grid, or channels and the guide would disagree about
+    // when the next programme starts.
+    slotEndsInSec: slotFor(scheduled.episode.durationSec) - offsetSec,
+    next: { showId: next.showId, show: next.show, episode: next.episode },
   };
 }
 
 const poolCache = new Map(); // cacheKey -> poolInfo, memoized across calls
-function cachedPool(cacheKey, showIds, catalog, seedStr) {
+function cachedPool(cacheKey, showIds, catalog, seedStr, opts) {
   let info = poolCache.get(cacheKey);
   if (!info) {
-    info = buildPool(showIds, catalog, seedStr);
+    info = buildPool(showIds, catalog, seedStr, opts);
     poolCache.set(cacheKey, info);
   }
   return info;
+}
+
+// -- commercials --------------------------------------------------------------
+// Ads only ever run in the dead tail of a slot, after an episode has ended —
+// never inside one. The spots come from data/commercials.js
+// (tools/build-commercials.py); wrapping them in a one-show pseudo-catalog
+// lets the same shuffle + prefix-sum machinery index them.
+function adPool() {
+  const spots = (window.COMMERCIALS && window.COMMERCIALS.spots) || [];
+  const wrapped = { shows: { ads: { id: "ads", title: "Commercial", episodes: spots } } };
+  return cachedPool("ads", ["ads"], wrapped, "ads:v1", { slotted: false });
+}
+
+// What's airing `padElapsedSec` into a slot's dead tail, given `padLeftSec`
+// still to fill. Each break starts at the top of a spot — anchored at a
+// per-episode index in the shuffled pool, so it's deterministic like
+// everything else, but a different break every time rather than the same ads
+// in the same order. Returns null when there are no spots, or when the next
+// one wouldn't finish before the slot rolls over: the player shows the
+// countdown card for that leftover sliver rather than cutting an ad off.
+function getAdAt(episodeKey, padElapsedSec, padLeftSec) {
+  const info = adPool();
+  if (!info || info.pool.length === 0) return null;
+  const startIdx = hashSeed(`ad:${episodeKey}`) % info.pool.length;
+  const found = locate(info, info.cumulative[startIdx] + padElapsedSec);
+  if (!found) return null;
+  // A substituted spot can be shorter than the one it replaced, putting the
+  // offset past its end — skip to the STAND BY card rather than seeking off
+  // the end of it.
+  if (found.offsetSec >= found.episode.durationSec) return null;
+  if (found.episode.durationSec - found.offsetSec > padLeftSec) return null;
+  return { spot: found.episode, offsetSec: found.offsetSec };
 }
 
 function genrePool(channel, catalog) {
@@ -186,8 +275,13 @@ function getPositionAt(channel, catalog, timestampMs) {
 
 // Exposed for the manual test harness and for anything that wants to reason
 // about determinism directly.
-const _internal = { hashSeed, mulberry32, shuffled, buildPool, locate, windowElapsedSec };
+const _internal = { hashSeed, mulberry32, shuffled, buildPool, locate, windowElapsedSec, slotFor,
+                    adPool, brokenKeys };
 
 window.getPositionAt = getPositionAt;
+window.getAdAt = getAdAt;
+window.markBroken = (key) => brokenKeys.add(key);
+window.isBroken = (key) => brokenKeys.has(key);
 window.EPOCH_MS = EPOCH_MS;
+window.SLOT_SEC = SLOT_SEC;
 window.SCHEDULER_INTERNAL = _internal;

@@ -54,16 +54,43 @@ function cropCSS(c) {
     : "";
 }
 
+// Hosted-movie shows (MonsterVision, USA Up All Night, ...) carry the real
+// film title separately from the wrapper show's own name — put the movie
+// front and center, the way a real "movie of the night" bumper would, with
+// the host show as the secondary line instead of a code.
+function titleLines(show, episode) {
+  return {
+    title: episode.movieTitle || show.title,
+    sub: episode.movieTitle
+      ? show.title
+      : episode.name ? `${episode.code}  ${episode.name}` : episode.code,
+  };
+}
+
+const mmss = (sec) => {
+  const s = Math.max(0, Math.ceil(sec));
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+};
+
 const DRIFT_CHECK_MS = 15000;
 const DRIFT_TOLERANCE_SEC = 3;
 const OSD_VISIBLE_MS = 4000;
 
+const PAD_TICK_MS = 500; // twice a second so the countdown never visibly skips
+const SUBSTITUTE_MS = 1500; // how long the failure card sits before the swap
+const NO_SIGNAL_TEXT = "NO SIGNAL";
+
 function createPlayer(els) {
-  const { video, osd, osdCh, osdTagline, osdShow, osdEpisode, osdBarFill, blankMsg, startHint } = els;
+  const { video, osd, osdCh, osdTagline, osdShow, osdEpisode, osdBarFill, blankMsg, startHint,
+          padCard, chyron, chyronTitle, chyronSub, chyronClock } = els;
 
   let loadedEpisodeKey = null;
+  let loadedItemId = null; // archive.org item behind whatever is on screen, ads included
+  let lastTuned = null; // {channel, catalog} — what to re-tune after a failure
+  let substituteTimer = null;
   let driftTimer = null;
   let osdFadeTimer = null;
+  let padTimer = null;
   let tuneToken = 0; // invalidates in-flight resolves if the user flips again before they land
   let currentCrop = null; // {x,y,w,h} of the episode currently loaded, or null
 
@@ -76,12 +103,20 @@ function createPlayer(els) {
     const c = currentCrop;
     const vw = (video.videoWidth || 4) * (c ? c.w : 1);
     const vh = (video.videoHeight || 3) * (c ? c.h : 1);
-    const containerAR = container.clientWidth / container.clientHeight;
+    // During a break the chyron owns the bottom strip — letterbox the picture
+    // into what's left and push it up by the same amount, since #tv centers
+    // its flex child including margins. Measured, not a constant, so the bar
+    // can be restyled in CSS alone.
+    const reserved = chyron.classList.contains("hidden") ? 0 : chyron.offsetHeight;
+    const availW = container.clientWidth;
+    const availH = container.clientHeight - reserved;
+    const containerAR = availW / availH;
     const videoAR = vw / vh;
-    const w = videoAR > containerAR ? container.clientWidth : container.clientHeight * videoAR;
-    const h = videoAR > containerAR ? container.clientWidth / videoAR : container.clientHeight;
+    const w = videoAR > containerAR ? availW : availH * videoAR;
+    const h = videoAR > containerAR ? availW / videoAR : availH;
     video.style.width = `${w}px`;
     video.style.height = `${h}px`;
+    video.style.marginBottom = reserved ? `${reserved}px` : "";
     video.style.objectFit = "fill";
     video.style.transformOrigin = "0 0";
     video.style.transform = cropCSS(c);
@@ -110,18 +145,9 @@ function createPlayer(els) {
   function showOsd(channel, position) {
     osdCh.textContent = `CH ${channel.number} — ${channel.name}`;
     osdTagline.textContent = channel.tagline || "";
-    // Hosted-movie shows (MonsterVision, USA Up All Night, ...) carry the
-    // real film title separately from the wrapper show's own name — put the
-    // movie front and center, the way a real "movie of the night" bumper
-    // would, with the host show as the secondary line instead of a code.
-    const movieTitle = position.episode.movieTitle;
-    osdShow.textContent = movieTitle || position.show.title;
-    const label = movieTitle
-      ? position.show.title
-      : position.episode.name
-        ? `${position.episode.code}  ${position.episode.name}`
-        : position.episode.code;
-    osdEpisode.textContent = label;
+    const lines = titleLines(position.show, position.episode);
+    osdShow.textContent = lines.title;
+    osdEpisode.textContent = lines.sub;
     const pct = Math.min(100, (position.offsetSec / position.episode.durationSec) * 100);
     osdBarFill.style.width = `${pct}%`;
     osd.classList.remove("hidden", "fade");
@@ -148,16 +174,136 @@ function createPlayer(els) {
     }
   }
 
+  function stopPad() {
+    clearInterval(padTimer);
+    padTimer = null;
+    padCard.classList.add("hidden");
+    if (!chyron.classList.contains("hidden")) {
+      chyron.classList.add("hidden");
+      layoutCrop(); // picture back to full size
+    }
+  }
+
+  // The lower third: what's coming back on, and how long until it does.
+  // Runs for the whole break, over the spots and the STAND BY card alike.
+  function showChyron(pos) {
+    const lines = titleLines(pos.next.show, pos.next.episode);
+    chyronTitle.textContent = lines.title;
+    chyronSub.textContent = lines.sub;
+    chyronClock.textContent = mmss(pos.slotEndsInSec);
+    if (chyron.classList.contains("hidden")) {
+      chyron.classList.remove("hidden");
+      layoutCrop(); // shrink the picture to make room
+    }
+  }
+
+  // Loads and plays one commercial. `pendingSpotKey` keeps the twice-a-second
+  // pad ticker from re-resolving the same spot while its URL is still in
+  // flight (only slow on the first break — the item's metadata is cached
+  // after that, and every spot lives in the same item).
+  let pendingSpotKey = null;
+  async function playSpot(spot, seekSec) {
+    if (spot.key === loadedEpisodeKey) {
+      if (Math.abs(video.currentTime - seekSec) > DRIFT_TOLERANCE_SEC) video.currentTime = seekSec;
+      if (video.paused) video.play().catch(() => unlockOnFirstGesture());
+      return;
+    }
+    if (spot.key === pendingSpotKey) return;
+    pendingSpotKey = spot.key;
+    const myToken = ++tuneToken;
+    const url = await resolveEpisodeUrl(spot.itemId, spot.fileHint);
+    pendingSpotKey = null;
+    if (myToken !== tuneToken) return; // channel flipped, or the break moved on
+    if (!url) return; // bad spot — the next tick just tries the following one
+    loadedEpisodeKey = spot.key;
+    loadedItemId = spot.itemId;
+    currentCrop = null; // ads are full-frame; never inherit the episode's crop
+    video.src = url;
+    video.addEventListener("loadedmetadata", () => {
+      if (myToken !== tuneToken) return;
+      layoutCrop();
+      video.currentTime = seekSec;
+      video.play().catch(() => unlockOnFirstGesture());
+    }, { once: true });
+  }
+
+  // Decides what the dead tail of a slot shows right now: a commercial if one
+  // fits in the time left, otherwise the countdown.
+  function renderBreak(pos) {
+    showChyron(pos);
+    const padElapsed = pos.offsetSec - pos.episode.durationSec;
+    const ad = getAdAt(pos.episode.key, padElapsed, pos.slotEndsInSec);
+    if (!ad) {
+      video.pause();
+      padCard.classList.remove("hidden");
+      return;
+    }
+    padCard.classList.add("hidden");
+    playSpot(ad.spot, ad.offsetSec);
+  }
+
+  // The episode is over but its slot isn't — run the commercial break, then
+  // tune the moment the clock hits the next :00/:30. Its own ticker (not the
+  // 15s drift loop) so spot changes and the countdown stay honest.
+  function showPad(channel, catalog, position) {
+    osd.classList.add("hidden");
+    renderBreak(position);
+
+    clearInterval(padTimer);
+    padTimer = setInterval(() => {
+      const pos = getPositionAt(channel, catalog, Date.now());
+      if (!pos || !pos.padding) {
+        stopPad();
+        tune(channel, catalog); // slot rolled over — start the next show
+        return;
+      }
+      renderBreak(pos);
+    }, PAD_TICK_MS);
+  }
+
+  // An archive.org file that 404s or won't decode leaves the picture black
+  // with no other symptom, so the <video> element's own error event is the
+  // only signal we get. Retire the file for the session, show a card, and let
+  // the scheduler substitute the next usable programme into the same slot.
+  function onMediaError() {
+    const key = loadedEpisodeKey;
+    if (!key || !video.getAttribute("src")) return; // teardown, not a real failure
+    if (isBroken(key)) return; // already retired; a second event is just noise
+    markBroken(key);
+    console.warn(`unplayable, substituting: ${key} (${video.currentSrc || "no src"})`);
+    loadedEpisodeKey = null;
+    failOver();
+  }
+
+  // Hold the failure card briefly, then re-tune — by which point locate() is
+  // already skipping the retired file.
+  function failOver() {
+    stopPad();
+    video.pause();
+    blankMsg.textContent = "TECHNICAL DIFFICULTIES";
+    blankMsg.classList.remove("hidden");
+    clearTimeout(substituteTimer);
+    substituteTimer = setTimeout(() => {
+      if (lastTuned) tune(lastTuned.channel, lastTuned.catalog);
+    }, SUBSTITUTE_MS);
+  }
+
+  video.addEventListener("error", onMediaError);
+
   // `silent`: the background drift loop calls this every 15s just to keep
   // the picture honest against wall-clock time — that's not a channel
   // change, so it should never pop the OSD banner. Real tune()s (a channel
   // press, or closing the guide) leave silent false.
   async function tune(channel, catalog, { silent = false } = {}) {
     const myToken = ++tuneToken;
+    lastTuned = { channel, catalog };
+    clearTimeout(substituteTimer);
     blankMsg.classList.add("hidden");
+    blankMsg.textContent = NO_SIGNAL_TEXT;
 
     const position = getPositionAt(channel, catalog, Date.now());
     if (!position) {
+      stopPad();
       video.pause();
       video.removeAttribute("src");
       blankMsg.classList.remove("hidden");
@@ -166,15 +312,36 @@ function createPlayer(els) {
       return;
     }
 
+    // locate() hands back a known-broken entry only when it went right round
+    // the pool without finding a usable one — every file on this channel is
+    // dead, so there's nothing left to substitute in.
+    if (isBroken(position.episode.key)) {
+      stopPad();
+      video.pause();
+      osd.classList.add("hidden");
+      blankMsg.classList.remove("hidden");
+      return;
+    }
+
+    if (position.padding) {
+      showPad(channel, catalog, position);
+      return;
+    }
+    stopPad();
+
     const isNewEpisode = position.episode.key !== loadedEpisodeKey;
     if (isNewEpisode) {
       const url = await resolveEpisodeUrl(position.episode.itemId, position.episode.fileHint);
       if (myToken !== tuneToken) return; // superseded by a later tune while we awaited
       if (!url) {
-        blankMsg.classList.remove("hidden");
+        // Metadata lists no playable file for this episode at all — same
+        // outcome as a file that won't decode, so treat it the same way.
+        markBroken(position.episode.key);
+        failOver();
         return;
       }
       loadedEpisodeKey = position.episode.key;
+      loadedItemId = position.episode.itemId;
       currentCrop = position.episode.crop || null;
       video.src = url;
       const onReady = () => {
@@ -204,5 +371,5 @@ function createPlayer(els) {
     driftTimer = null;
   }
 
-  return { tune, startDriftLoop, stopDriftLoop, showOsd };
+  return { tune, startDriftLoop, stopDriftLoop, showOsd, getItemId: () => loadedItemId };
 }

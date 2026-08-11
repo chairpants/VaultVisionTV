@@ -6,17 +6,27 @@
 const IDLE_COMMIT_MS = 1500;
 const MAX_DIGITS = 3;
 
-function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide }) {
+const FLASH_MS = 1200;
+
+function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide,
+                      onVolumeStep, onMute, onLastChannel, onWeb }) {
   let buffer = "";
   let idleTimer = null;
+  let flashText = ""; // transient status (VOL 70, MUTE) borrowing the same corner
+  let flashTimer = null;
 
   function render() {
-    if (buffer) {
-      digitOsd.textContent = buffer;
-      digitOsd.classList.remove("hidden");
-    } else {
-      digitOsd.classList.add("hidden");
-    }
+    const text = buffer || flashText;
+    digitOsd.textContent = text;
+    digitOsd.classList.toggle("hidden", !text);
+  }
+
+  // Exposed so app.js can echo volume/mute without owning the OSD element.
+  function flash(text) {
+    flashText = text;
+    render();
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(() => { flashText = ""; render(); }, FLASH_MS);
   }
 
   function commit() {
@@ -47,6 +57,10 @@ function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide }) {
     if (e.key === "Escape" || e.key === "Backspace") { clearBuffer(); return; }
     if (e.key === "PageUp" || e.key === "]") { onChannelStep(1); return; }
     if (e.key === "PageDown" || e.key === "[") { onChannelStep(-1); return; }
+    if (e.key === "ArrowUp") { onVolumeStep(1); return; }
+    if (e.key === "ArrowDown") { onVolumeStep(-1); return; }
+    if (e.key === "m" || e.key === "M") { onMute(); return; }
+    if (e.key === "r" || e.key === "R") { onLastChannel(); return; }
     if (e.key === "g" || e.key === "G") { onGuide(); return; }
   });
 
@@ -59,8 +73,15 @@ function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide }) {
     switch (btn.dataset.action) {
       case "ch-up": onChannelStep(1); break;
       case "ch-down": onChannelStep(-1); break;
+      case "vol-up": onVolumeStep(1); break;
+      case "vol-down": onVolumeStep(-1); break;
+      case "mute": onMute(); break;
+      case "last": onLastChannel(); break;
+      case "web": onWeb(); break;
       case "guide": onGuide(); break;
       case "enter": commit(); break;
     }
   });
+
+  return { flash };
 }
