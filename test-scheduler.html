@@ -6,6 +6,7 @@
      file:// pages can't load ES modules at all). Opening this file directly
      works with no server. -->
 <script src="data/catalog.js"></script>
+<script src="data/commercials.js"></script>
 <script src="channels.js"></script>
 <script src="scheduler.js"></script>
 <script>
@@ -31,10 +32,42 @@ function main() {
     a && b && a.showId === b.showId && a.episode.key === b.episode.key && a.offsetSec === b.offsetSec,
     JSON.stringify({ a, b }));
 
-  // -- offset is within episode bounds -----------------------------------
-  check("genre channel: offset within episode duration",
-    a && a.offsetSec >= 0 && a.offsetSec < a.episode.durationSec,
-    `offset=${a && a.offsetSec} dur=${a && a.episode.durationSec}`);
+  // -- offset is within the episode, or in the slot's pad after it ---------
+  check("genre channel: offset within episode duration (or padding after it)",
+    a && a.offsetSec >= 0 && (a.padding || a.offsetSec < a.episode.durationSec),
+    `offset=${a && a.offsetSec} dur=${a && a.episode.durationSec} padding=${a && a.padding}`);
+
+  // -- slot grid: every program start lands on :00 or :30 ------------------
+  // The slot a position sits in ends at now + slotEndsInSec; that instant is
+  // the next program's start, and it must be on the half-hour.
+  let gridChecked = 0, gridOff = [];
+  for (const c of CHANNELS) {
+    if (c.kind === "guide") continue;
+    for (const t of [t0, t0 + 3.7e6, t0 + 5 * 864e5 + 1234]) {
+      const pos = getPositionAt(c, catalog, t);
+      if (!pos) continue;
+      gridChecked++;
+      const boundary = new Date(Math.round(t + pos.slotEndsInSec * 1000));
+      if (boundary.getMinutes() % 30 !== 0 || boundary.getSeconds() !== 0) {
+        gridOff.push(`ch${c.number} -> ${boundary.toTimeString().slice(0, 8)}`);
+      }
+    }
+  }
+  check(`all ${gridChecked} sampled slot boundaries land on :00 or :30`,
+    gridOff.length === 0, gridOff.slice(0, 5).join(", "));
+
+  // -- padding: the tail of a slot after a short episode -------------------
+  // Pick a channel position, jump to one second past the episode's end. If
+  // the episode doesn't exactly fill its slot, that must be padding, and the
+  // countdown must be positive and shorter than a whole slot.
+  const short = getPositionAt(toon, catalog, t0);
+  const afterEnd = t0 + (short.episode.durationSec - short.offsetSec + 1) * 1000;
+  const padPos = getPositionAt(toon, catalog, afterEnd);
+  const fillsSlot = _internal.slotFor(short.episode.durationSec) === short.episode.durationSec;
+  check("one second past a short episode's end is padding, counting down",
+    fillsSlot || (padPos.padding && padPos.slotEndsInSec > 0 && padPos.slotEndsInSec < 1800 &&
+      padPos.next && padPos.next.episode),
+    JSON.stringify({ dur: short.episode.durationSec, padding: padPos.padding, left: padPos.slotEndsInSec }));
 
   // -- genre pool covers every episode of every show in that genre --------
   const animationShows = Object.values(catalog.shows).filter((s) => s.genre === "Animation");
@@ -53,8 +86,10 @@ function main() {
     JSON.stringify({ reshuffled, reshuffled2 }));
 
   // -- advancing time moves position forward (not stuck) -------------------
-  const later = getPositionAt(toon, catalog, t0 + (a.episode.durationSec + 5) * 1000);
-  check("advancing past the episode boundary changes position",
+  // Past the *slot* boundary now, not just the episode's runtime — the pad
+  // after a short episode still belongs to the same episode.
+  const later = getPositionAt(toon, catalog, t0 + (a.slotEndsInSec + 5) * 1000);
+  check("advancing past the slot boundary changes position",
     later && (later.showId !== a.showId || later.episode.key !== a.episode.key || later.offsetSec < a.offsetSec),
     JSON.stringify({ a, later }));
 
@@ -83,6 +118,45 @@ function main() {
     Math.abs((el2 - el1) - windowLenSec) < 1,
     `el1=${el1} el2=${el2} windowLenSec=${windowLenSec}`);
 
+  // -- commercial breaks fill the pad ---------------------------------------
+  // Walk each channel's next break second by second: it must open at the top
+  // of a spot (regression — the safe-mod in locate() used to undershoot an
+  // exact cumulative boundary by an ULP and join the *previous* spot at ~100%
+  // of its duration), and no spot may still be running when the slot rolls.
+  let breaksChecked = 0;
+  const breakProblems = [];
+  for (const c of CHANNELS) {
+    if (c.kind === "guide") continue;
+    let t = t0, p = getPositionAt(c, catalog, t), hops = 0;
+    while (p && p.padding && hops++ < 50) {
+      t += (p.slotEndsInSec + 1) * 1000;
+      p = getPositionAt(c, catalog, t);
+    }
+    if (!p) continue;
+    const padStart = t + (p.episode.durationSec - p.offsetSec) * 1000;
+    let firstAd = null, overruns = 0;
+    for (let s = 0; s < 3600; s++) {
+      const pos = getPositionAt(c, catalog, padStart + s * 1000);
+      if (!pos || !pos.padding) break;
+      const ad = getAdAt(pos.episode.key, pos.offsetSec - pos.episode.durationSec, pos.slotEndsInSec);
+      if (!ad) continue; // leftover sliver: countdown card, no spot fits
+      if (!firstAd) firstAd = ad;
+      if (ad.spot.durationSec - ad.offsetSec > pos.slotEndsInSec + 0.001) overruns++;
+    }
+    if (!firstAd) continue;
+    breaksChecked++;
+    if (firstAd.offsetSec > 1.5 || overruns) {
+      breakProblems.push(`ch${c.number} joinAt=${firstAd.offsetSec.toFixed(2)} overruns=${overruns}`);
+    }
+  }
+  check(`commercial breaks on ${breaksChecked} channels start at the top of a spot and never overrun the slot`,
+    breakProblems.length === 0, breakProblems.slice(0, 5).join("; "));
+
+  check("commercials are loaded and shorter than a slot",
+    _internal.adPool().pool.length > 0 &&
+      _internal.adPool().pool.every((e) => e.episode.durationSec > 0 && e.episode.durationSec < 1800),
+    `spots=${_internal.adPool().pool.length}`);
+
   // -- every channel in the lineup resolves to a valid position ------------
   const sampleTimes = [
     new Date(2026, 7, 10, 9, 0, 0).getTime(),   // Mon
@@ -96,7 +170,8 @@ function main() {
     channelsChecked++;
     for (const t of sampleTimes) {
       const pos = getPositionAt(c, catalog, t);
-      const ok = pos && pos.offsetSec >= 0 && pos.offsetSec < pos.episode.durationSec && catalog.shows[pos.showId];
+      const ok = pos && pos.offsetSec >= 0 && catalog.shows[pos.showId] &&
+        (pos.padding || pos.offsetSec < pos.episode.durationSec);
       if (!ok) {
         sweepFailures++;
         lines.push(`  detail: channel ${c.number} (${c.name}) at ${new Date(t)} — ${JSON.stringify(pos)}`);
@@ -105,6 +180,38 @@ function main() {
   }
   check(`all ${channelsChecked} non-guide channels resolve a valid position at 4 sample times`,
     sweepFailures === 0, `${sweepFailures} bad result(s)`);
+
+  // -- broken files are substituted, without moving the grid ---------------
+  // Run last: markBroken mutates a session-wide registry, so anything after
+  // this would be reasoning about a doctored schedule.
+  const victimCh = byNumber[3];
+  const before = getPositionAt(victimCh, catalog, t0);
+  markBroken(before.episode.key);
+  const after = getPositionAt(victimCh, catalog, t0);
+  check("a broken episode is replaced by a different one",
+    after && after.episode.key !== before.episode.key,
+    `before=${before.episode.key} after=${after && after.episode.key}`);
+  check("substituting does not move the slot boundary",
+    after && Math.abs(after.slotEndsInSec - before.slotEndsInSec) < 1e-9,
+    `before=${before.slotEndsInSec} after=${after && after.slotEndsInSec}`);
+  const boundaryAfter = new Date(Math.round(t0 + after.slotEndsInSec * 1000));
+  check("the substituted slot still ends on :00 or :30",
+    boundaryAfter.getMinutes() % 30 === 0 && boundaryAfter.getSeconds() === 0,
+    boundaryAfter.toTimeString().slice(0, 8));
+
+  // Every file in a pool dead: nothing to substitute, so the caller gets the
+  // broken entry back and the player can fall through to NO SIGNAL.
+  const tinyCatalog = { shows: { t: { id: "t", genre: "T", episodes: [
+    { key: "t1", itemId: "i", fileHint: "a.mp4", durationSec: 600 },
+    { key: "t2", itemId: "i", fileHint: "b.mp4", durationSec: 600 },
+  ] } } };
+  const tinyPool = _internal.buildPool(["t"], tinyCatalog, "tiny");
+  _internal.brokenKeys.add("t1");
+  _internal.brokenKeys.add("t2");
+  const exhausted = _internal.locate(tinyPool, 5);
+  check("an all-broken pool returns a broken entry rather than looping forever",
+    exhausted && _internal.brokenKeys.has(exhausted.episode.key),
+    JSON.stringify(exhausted && exhausted.episode.key));
 
   document.getElementById("out").textContent =
     lines.join("\n") + `\n\n${pass} passed, ${fail} failed`;

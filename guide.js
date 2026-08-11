@@ -23,6 +23,13 @@ function timeLabel(d) {
   return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
 }
 
+// Columns are the scheduler's own half-hour slots, not "now +30" — so a cell
+// header is the time that program actually starts. Floored against EPOCH_MS
+// rather than the raw epoch so it matches the grid the pools are built on,
+// whatever the local UTC offset is.
+const SLOT_MS = SLOT_SEC * 1000;
+const slotStart = (ms) => EPOCH_MS + Math.floor((ms - EPOCH_MS) / SLOT_MS) * SLOT_MS;
+
 function programLabel(catalog, channel, atMs) {
   const pos = getPositionAt(channel, catalog, atMs);
   if (!pos) return "—";
@@ -53,21 +60,20 @@ function createGuide({ root, channels, catalog, tuneTo }) {
   let refreshTimer = null;
 
   function renderColumnHeaders(now) {
-    const t30 = new Date(now.getTime() + 30 * 60000);
-    const t60 = new Date(now.getTime() + 60 * 60000);
+    const s0 = slotStart(now.getTime());
     const spans = colsEl.querySelectorAll("span:not(.ch-col)");
-    spans[0].textContent = `NOW (${timeLabel(now)})`;
-    spans[1].textContent = `+30 MIN (${timeLabel(t30)})`;
-    spans[2].textContent = `+60 MIN (${timeLabel(t60)})`;
+    spans[0].textContent = `NOW (${timeLabel(new Date(s0))})`;
+    spans[1].textContent = timeLabel(new Date(s0 + SLOT_MS));
+    spans[2].textContent = timeLabel(new Date(s0 + 2 * SLOT_MS));
   }
 
   function renderRows() {
-    const now = new Date();
+    const s0 = slotStart(Date.now());
     trackEl.innerHTML = tunableChannels
       .map((c) => {
-        const now0 = programLabel(catalog, c, now.getTime());
-        const now30 = programLabel(catalog, c, now.getTime() + 30 * 60000);
-        const now60 = programLabel(catalog, c, now.getTime() + 60 * 60000);
+        const now0 = programLabel(catalog, c, s0);
+        const now30 = programLabel(catalog, c, s0 + SLOT_MS);
+        const now60 = programLabel(catalog, c, s0 + 2 * SLOT_MS);
         return `<div class="guide-row" data-ch="${c.number}">
           <span class="ch-col">${c.number} ${c.name}</span>
           <span class="prog live">${now0}</span>

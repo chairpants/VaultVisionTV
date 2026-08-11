@@ -1,0 +1,160 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>break mode preview — VaultVisionTV</title>
+<!-- THROWAWAY. A staging harness for commercial-break mode, which otherwise
+     only appears in the gap between two shows. Loads the real style.css and
+     the real spot list, and replicates layoutCrop's letterbox math, so what
+     you see here is what the app does. Delete whenever. -->
+<link rel="stylesheet" href="style.css">
+<style>
+  /* preview chrome only — none of this ships */
+  #panel {
+    position: fixed; top: 12px; left: 12px; z-index: 50;
+    background: rgba(0,0,0,.82); border: 1px solid #444; padding: 10px 12px;
+    display: flex; gap: 8px; align-items: center; font-size: .8em; color: #aaa;
+  }
+  #panel button {
+    background: #2c2c2c; color: #ddd; border: 1px solid #555;
+    padding: 6px 10px; font: inherit; cursor: pointer;
+  }
+  #panel button.on { background: #fff700; color: #000; border-color: #fff700; }
+  #panel span { letter-spacing: 1px; }
+</style>
+
+<div id="tv">
+  <video id="screen" playsinline muted></video>
+
+  <div id="pad-card" class="hidden">STAND BY</div>
+
+  <div id="chyron" class="hidden">
+    <span id="chyron-label">UP NEXT</span>
+    <span id="chyron-title"></span>
+    <span id="chyron-sub"></span>
+    <span id="chyron-clock"></span>
+  </div>
+</div>
+
+<div id="panel">
+  <span>PREVIEW</span>
+  <button data-mode="ad">COMMERCIAL</button>
+  <button data-mode="standby">STAND BY</button>
+  <button data-mode="show">SHOW (no break)</button>
+  <span id="note"></span>
+</div>
+
+<script src="data/commercials.js"></script>
+<script>
+// A real slot tail: a couple of minutes of spots, then a sliver too short for
+// another one, then the show comes back — the same three states the player
+// walks through, on a fast loop so you can see all of them.
+const DEMO_BREAK_SEC = 150;
+const SLIVER_SEC = 18; // below this, no spot fits: STAND BY
+
+const video = document.getElementById("screen");
+const chyron = document.getElementById("chyron");
+const chyronTitle = document.getElementById("chyron-title");
+const chyronSub = document.getElementById("chyron-sub");
+const chyronClock = document.getElementById("chyron-clock");
+const padCard = document.getElementById("pad-card");
+const note = document.getElementById("note");
+
+const spots = (window.COMMERCIALS && window.COMMERCIALS.spots) || [];
+const encodePath = (p) => p.split("/").map(encodeURIComponent).join("/");
+const spotUrl = (s) => `https://archive.org/download/${s.itemId}/${encodePath(s.fileHint)}`;
+const mmss = (sec) => {
+  const s = Math.max(0, Math.ceil(sec));
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+};
+
+// Stand-in for whatever's coming back on.
+const NEXT = { title: "The Fairly OddParents", sub: "S03E12  Boy Toy / Inspection Detection" };
+
+// -- copy of player.js's layoutCrop, minus the crop transform ---------------
+function layoutCrop() {
+  const container = video.parentElement;
+  const reserved = chyron.classList.contains("hidden") ? 0 : chyron.offsetHeight;
+  const availW = container.clientWidth;
+  const availH = container.clientHeight - reserved;
+  const videoAR = (video.videoWidth || 4) / (video.videoHeight || 3);
+  const containerAR = availW / availH;
+  const w = videoAR > containerAR ? availW : availH * videoAR;
+  const h = videoAR > containerAR ? availW / videoAR : availH;
+  video.style.width = `${w}px`;
+  video.style.height = `${h}px`;
+  video.style.marginBottom = reserved ? `${reserved}px` : "";
+  video.style.objectFit = "fill";
+}
+window.addEventListener("resize", layoutCrop);
+video.addEventListener("loadedmetadata", layoutCrop);
+// If archive.org is slow or unreachable, colour bars stand in at the right size.
+video.style.background =
+  "repeating-linear-gradient(90deg,#c0c000 0 14.28%,#00c0c0 0 28.56%,#00c000 0 42.84%," +
+  "#c000c0 0 57.12%,#c00000 0 71.4%,#0000c0 0 85.68%,#111 0 100%)";
+
+function setChyron(visible, remainSec) {
+  chyronTitle.textContent = NEXT.title;
+  chyronSub.textContent = NEXT.sub;
+  chyronClock.textContent = mmss(remainSec);
+  const was = chyron.classList.contains("hidden");
+  chyron.classList.toggle("hidden", !visible);
+  if (was !== !visible) layoutCrop();
+}
+
+let spotIndex = Math.floor(Math.random() * Math.max(1, spots.length));
+function playNextSpot() {
+  if (!spots.length) { note.textContent = "no data/commercials.js — bars stand in"; return; }
+  const spot = spots[spotIndex++ % spots.length];
+  video.src = spotUrl(spot);
+  video.play().catch(() => {});
+  note.textContent = `${spot.fileHint} · ${spot.durationSec}s`;
+}
+video.addEventListener("ended", () => { if (mode === "ad") playNextSpot(); });
+
+let mode = "ad";
+let remain = DEMO_BREAK_SEC;
+
+function apply(next) {
+  mode = next;
+  document.querySelectorAll("#panel button")
+    .forEach((b) => b.classList.toggle("on", b.dataset.mode === mode));
+  if (mode === "show") {
+    padCard.classList.add("hidden");
+    setChyron(false, 0);
+    video.pause();
+    note.textContent = "full-size picture, no break furniture";
+    return;
+  }
+  setChyron(true, remain);
+  if (mode === "standby") {
+    padCard.classList.remove("hidden");
+    video.pause();
+    note.textContent = "leftover sliver — no spot fits the time left";
+  } else {
+    padCard.classList.add("hidden");
+    if (video.paused) playNextSpot();
+  }
+}
+
+document.querySelectorAll("#panel button").forEach((b) =>
+  b.addEventListener("click", () => {
+    if (b.dataset.mode !== "show") remain = DEMO_BREAK_SEC;
+    apply(b.dataset.mode);
+  })
+);
+
+// Drive the loop: spots -> sliver -> show comes back -> start over.
+setInterval(() => {
+  if (mode === "show") return;
+  remain -= 0.5;
+  if (remain <= 0) {
+    apply("show");
+    setTimeout(() => { remain = DEMO_BREAK_SEC; apply("ad"); }, 4000);
+    return;
+  }
+  if (mode === "ad" && remain <= SLIVER_SEC) apply("standby");
+  else setChyron(true, remain);
+}, 500);
+
+apply("ad");
+</script>
