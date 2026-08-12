@@ -18,9 +18,8 @@
 //
 // Several channels below are single-show pools built from VaultVision shows
 // that are themselves recordings of real broadcast blocks (FoxKids, SNICK,
-// NickAtNite, USAUpAllNight, MonsterVision, SciFiAnime, SatMorning, TGIF) —
-// those don't need curating at all, they're already exactly what this app
-// is simulating.
+// NickAtNite, MonsterVision, SciFiAnime, SatMorning, TGIF) — those don't need
+// curating at all, they're already exactly what this app is simulating.
 //
 // Channel 1 is deliberately unused — real cable lineups commonly skip it too.
 //
@@ -221,8 +220,10 @@ window.CHANNELS = [
     daypart: [], fallbackPool: ["SNICK"] },
   { number: 30, name: "NICK AT NITE", kind: "curated", tagline: "Reruns, exactly as recorded.",
     daypart: [], fallbackPool: ["NickAtNite"] },
-  { number: 31, name: "USA UP ALL NIGHT", kind: "curated", tagline: "Movies, minus the hosts (mostly).",
-    daypart: [], fallbackPool: ["USAUpAllNight"] },
+  // 31 (USA UP ALL NIGHT) retired -- its one show leaned heavily on
+  // tasteless content with no redeeming value, unlike the rest of the
+  // lineup. Left unused rather than renumbering everything above it, same
+  // as channel 1.
   { number: 32, name: "MONSTERVISION", kind: "curated", tagline: "Joe Bob's basement, streaming forever.",
     daypart: [], fallbackPool: ["MonsterVision"] },
   { number: 33, name: "SCI-FI SATURDAY ANIME", kind: "curated", tagline: "Anime, exactly as broadcast.",
@@ -442,8 +443,12 @@ window.CHANNELS = [
   {
     number: 55, name: "DOUBLE FEATURE DRIVE-IN", kind: "curated",
     tagline: "Two movies, no host, no waiting.",
+    // USAUpAllNight (its original co-star here) was retired outright -- see
+    // the note by channel 31. Left as MonsterVision alone rather than
+    // renumbering/removing this slot too, even though that now overlaps
+    // channels 32 and 57.
     daypart: [],
-    fallbackPool: ["USAUpAllNight", "MonsterVision"],
+    fallbackPool: ["MonsterVision"],
   },
   {
     number: 56, name: "MATINEE MADNESS", kind: "curated",
