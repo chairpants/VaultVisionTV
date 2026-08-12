@@ -220,10 +220,13 @@ window.CHANNELS = [
     daypart: [], fallbackPool: ["SNICK"] },
   { number: 30, name: "NICK AT NITE", kind: "curated", tagline: "Reruns, exactly as recorded.",
     daypart: [], fallbackPool: ["NickAtNite"] },
-  // 31 (USA UP ALL NIGHT) retired -- its one show leaned heavily on
-  // tasteless content with no redeeming value, unlike the rest of the
-  // lineup. Left unused rather than renumbering everything above it, same
-  // as channel 1.
+  // 31 (USA UP ALL NIGHT) retired -- its one show (USAUpAllNight) leaned
+  // heavily on tasteless content with no redeeming value, unlike the rest
+  // of the lineup, and is excluded from the catalog entirely (see
+  // tools/build-catalog.py's EXCLUDED_SHOWS) rather than just left off
+  // every channel's pool, so it can't resurface via a future genre-channel
+  // addition either. Left unused rather than renumbering everything above
+  // it, same as channel 1.
   { number: 32, name: "MONSTERVISION", kind: "curated", tagline: "Joe Bob's basement, streaming forever.",
     daypart: [], fallbackPool: ["MonsterVision"] },
   { number: 33, name: "SCI-FI SATURDAY ANIME", kind: "curated", tagline: "Anime, exactly as broadcast.",

@@ -38,6 +38,17 @@ DEAD_ITEMS = {
     "stephen-kings-the-langoliers-1995-hd",  # The Langoliers (1995), 3.00h
 }
 
+# Whole shows VaultVision lists but this app deliberately doesn't carry, for
+# reasons that have nothing to do with the files being broken (that's
+# DEAD_ITEMS above). Excluding the show here -- rather than just leaving it
+# off every channel's pool -- means it structurally can't resurface: a genre
+# channel sweeps every show of its genre with no per-show opt-out list to
+# remember to update, so a show excluded only at the channel layer stays one
+# future genre-channel addition away from quietly coming back.
+EXCLUDED_SHOWS = {
+    "USAUpAllNight",  # leaned heavily on tasteless content with no redeeming value
+}
+
 # Fallback runtime (seconds) for episodes with no entry in a show's
 # `durations` map — 22 of VaultVision's shows ship an empty durations map
 # entirely (see ADDING_A_SHOW.md), and individual rows can be missing even in
@@ -195,6 +206,8 @@ def main():
     genres = set()
     t0 = time.time()
     for i, row in enumerate(rows, 1):
+        if row["id"] in EXCLUDED_SHOWS:
+            continue
         entry = build_show_entry(row)
         if entry:
             shows[entry["id"]] = entry
