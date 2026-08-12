@@ -185151,30 +185151,6 @@
    "title": "Land of the Lost (1991)",
    "totalDurationSec": 35914
   },
-  "Langoliers": {
-   "artUrl": "https://chairpants.github.io/VaultVision/art/Langoliers.jpg",
-   "episodes": [
-    {
-     "code": "Movie",
-     "crop": null,
-     "durationSec": 10802,
-     "fileHint": "Stephen King's The Langoliers 1995 (HD).mp4",
-     "index": 0,
-     "introSkipSec": 0,
-     "itemId": "stephen-kings-the-langoliers-1995-hd",
-     "key": "stephen-kings-the-langoliers-1995-hd::Stephen King's The Langoliers 1995 (HD).mp4",
-     "movieTitle": null,
-     "name": "",
-     "seasonNum": 1,
-     "title": "THE LANGOLIERS - Movie"
-    }
-   ],
-   "genre": "TV Movies",
-   "grouping": "flat",
-   "id": "Langoliers",
-   "title": "Stephen King's The Langoliers (1995)",
-   "totalDurationSec": 10802
-  },
   "LeaveIttoBeavertheSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/LeaveIttoBeavertheSeries.jpg",
    "episodes": [
@@ -289671,20 +289647,6 @@
      "title": "SCI-FI ANIME - VHS Tape #5 (undated, multi-show)"
     },
     {
-     "code": "VHS Tape #8 (undated, multi-show)",
-     "crop": null,
-     "durationSec": 27728,
-     "fileHint": null,
-     "index": 10,
-     "introSkipSec": 0,
-     "itemId": "myopic-vhs-no-08",
-     "key": "myopic-vhs-no-08",
-     "movieTitle": null,
-     "name": "",
-     "seasonNum": 1,
-     "title": "SCI-FI ANIME - VHS Tape #8 (undated, multi-show)"
-    },
-    {
      "code": "VHS Tape #9 (undated, multi-show)",
      "crop": null,
      "durationSec": 26971,
@@ -289703,7 +289665,7 @@
    "grouping": "flat",
    "id": "SciFiAnime",
    "title": "Sci-Fi Saturday Anime",
-   "totalDurationSec": 141907
+   "totalDurationSec": 114179
   },
   "Seinfeld": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Seinfeld.jpg",
