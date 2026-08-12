@@ -142,7 +142,7 @@ window.CHANNELS = [
     number: 20, name: "NIGHTMARE ALLEY", kind: "curated",
     tagline: "Stephen King, wall to wall.",
     daypart: [{ days: [5, 6], startHour: 21, endHour: 24, pool: [
-      "It1990", "Langoliers", "StormOfTheCentury", "TheShining1997",
+      "It1990", "StormOfTheCentury", "TheShining1997",
       "TheStand1994", "Tommyknockers", "SometimesTheyComeBack",
     ] }],
     fallbackPool: ["TwilightZone1959", "AlfredHitchcockPresents"],

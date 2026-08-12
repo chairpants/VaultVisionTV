@@ -316,6 +316,40 @@ function main() {
     skipEps > 0 && skipBad.length === 0,
     skipEps === 0 ? "no episodes with introSkipSec — expected Hitchcock/Twilight Zone" : skipBad.slice(0, 5).join(", "));
 
+  // -- seek-index warmer: the set it has to keep warm stays small -----------
+  // player.js warms the index of every currently-airing item over 3h, one per
+  // 15s tick. That only works because the set is small — the viewer can only
+  // tune to what's airing now. If a schedule or threshold change ever put
+  // dozens of long items on air at once, the warmer would thrash and steal
+  // bandwidth from the picture, so pin the bound here rather than find out.
+  const WARM_OVER_SEC = 3 * 3600; // mirrors player.js
+  let worstWarmSet = 0, warmSamples = 0;
+  const longItems = new Set();
+  for (let m = 0; m < 24 * 60; m += 15) {
+    const at = t0 + m * 60 * 1000;
+    let n = 0;
+    for (const c of CHANNELS) {
+      if (c.kind === "guide") continue;
+      const p = getPositionAt(c, catalog, at);
+      if (p && p.episode.durationSec > WARM_OVER_SEC) { n++; longItems.add(p.episode.key); }
+    }
+    worstWarmSet = Math.max(worstWarmSet, n);
+    warmSamples++;
+  }
+  check(`warmer: at most ${worstWarmSet} channels air a >3h item at once (${longItems.size} distinct over 24h)`,
+    worstWarmSet <= 8, `${worstWarmSet} simultaneous across ${warmSamples} samples — warmer would thrash`);
+
+  // -- dead archive.org items stay pruned ----------------------------------
+  // These return {"error"} from archive.org/metadata. tools/build-catalog.py
+  // drops them via DEAD_ITEMS; this fails if a rebuild ever lets them back in.
+  const deadItems = ["myopic-vhs-no-08", "stephen-kings-the-langoliers-1995-hd"];
+  const resurrected = Object.values(catalog.shows)
+    .flatMap((s) => s.episodes)
+    .filter((e) => deadItems.includes(e.itemId))
+    .map((e) => e.itemId);
+  check("no episode references a known-dead archive.org item",
+    resurrected.length === 0, resurrected.join(", "));
+
   document.getElementById("out").textContent =
     lines.join("\n") + `\n\n${pass} passed, ${fail} failed`;
   document.title = fail === 0 ? "ALL PASS" : `${fail} FAILED`;
