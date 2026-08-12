@@ -34,7 +34,15 @@ window.CHANNELS = [
 
   // -- genre channels: one per catalog genre, zero curation -----------------
   { number: 3, name: "TOON CHANNEL", kind: "genre", genre: "Animation",
-    tagline: "Cartoons, all day, every day." },
+    tagline: "Cartoons, all day, every day.",
+    // Adult animation, tagged genre "Animation" same as everything else but
+    // not appropriate for this basic-cable-feel channel — already properly
+    // curated on LATE NIGHT CARTOONS (channel 45).
+    excludeShowIds: [
+      "BigMouth", "Duckman", "DrawnTogether", "Oblongs", "HomeMovies",
+      "BobandMargaret", "Undergrads", "MoralOrel", "AeonFlux",
+      "Boondocks", "PJs", "BeavisButthead",
+    ] },
   { number: 4, name: "SITCOM CENTRAL", kind: "genre", genre: "Sitcoms",
     tagline: "Laugh track included." },
   { number: 5, name: "CLASSIC TV", kind: "genre", genre: "Classic Sitcoms",
@@ -54,7 +62,10 @@ window.CHANNELS = [
   { number: 12, name: "REWIND", kind: "genre", genre: "Broadcast Blocks",
     tagline: "Exactly as it aired." },
   { number: 13, name: "REALITY CHECK", kind: "genre", genre: "Reality TV",
-    tagline: "Unscripted. Mostly." },
+    tagline: "Unscripted. Mostly.",
+    // Consistently unplayable (archive.org files error out) — see also its
+    // removal from TRUE CRIME TONIGHT's curated pool.
+    excludeShowIds: ["LivePDSeriesNotDoneYet"] },
 
   // -- original curated dayparted channels -----------------------------------
   {
@@ -79,7 +90,7 @@ window.CHANNELS = [
       "FamilyMatters", "StepByStep", "SavedByTheBell", "GrowingPains", "PunkyBrewster",
     ] }],
     fallbackPool: [
-      "Seinfeld", "MadAboutYou", "HomeImprovement", "EverybodyLovesRaymond",
+      "MadAboutYou", "HomeImprovement", "EverybodyLovesRaymond",
       "KingofQueens", "DrewCareyShow", "NewsRadio",
     ],
   },
@@ -88,14 +99,14 @@ window.CHANNELS = [
     tagline: "Past your bedtime.",
     daypart: [
       { days: [0, 1, 2, 3, 4, 5, 6], startHour: 23, endHour: 24, pool: [
-        "ConanOBrien", "MADtv", "InsomniacwithDaveAttell", "NightCourt", "Seinfeld", "MASH",
+        "ConanOBrien", "MADtv", "InsomniacwithDaveAttell", "NightCourt", "MASH",
       ] },
       { days: [0, 1, 2, 3, 4, 5, 6], startHour: 0, endHour: 2, pool: [
-        "ConanOBrien", "MADtv", "InsomniacwithDaveAttell", "NightCourt", "Seinfeld", "MASH",
+        "ConanOBrien", "MADtv", "InsomniacwithDaveAttell", "NightCourt", "MASH",
       ] },
     ],
     fallbackPool: [
-      "Roseanne", "MarriedWithChildren", "Taxi1978", "WkrpinCincinnati", "MurphyBrown",
+      "MarriedWithChildren", "Taxi1978", "WkrpinCincinnati", "MurphyBrown",
     ],
   },
 
@@ -258,7 +269,7 @@ window.CHANNELS = [
     number: 41, name: "TRUE CRIME TONIGHT", kind: "curated",
     tagline: "Real cops, real stunts, real reruns.",
     daypart: [{ days: [0, 1, 2, 3, 4, 5, 6], startHour: 21, endHour: 23, pool: [
-      "LivePDSeriesNotDoneYet", "WorldsWildestPoliceVideos",
+      "WorldsWildestPoliceVideos",
       "MostExtremeEliminationChallenge", "BeyondScaredStraight2", "JuryDutySeries",
     ] }],
     fallbackPool: ["NYPDBlue", "Rookies", "Chase"],
