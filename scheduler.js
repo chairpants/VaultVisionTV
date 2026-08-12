@@ -39,6 +39,21 @@ const WEEK_MS = 7 * 24 * 3600 * 1000;
 const SLOT_SEC = 5 * 60;
 const slotFor = (durationSec) => Math.ceil(durationSec / SLOT_SEC) * SLOT_SEC;
 
+// How much of a file actually airs. Some rips open on footage that isn't the
+// show — a station bumper, an uploader's colorization credit — and
+// episode.introSkipSec (from VaultVision's introSkipSeconds/introSkipBySeason)
+// is how far in the real content starts. That intro is not part of the
+// broadcast at all, so it comes off the length the schedule reasons about:
+// slot start maps to content start, and the slot ends when the content does.
+//
+// Everything downstream must agree on this — if the grid sized slots by the
+// full file while the player seeked past the intro, the picture would run
+// `introSkipSec` past the end of the file at the tail of every airing.
+// ponytail: clamped to 1s rather than validated at build time — a skip longer
+// than the file is bad data, and a 1-second slot is a visible symptom rather
+// than a division by zero.
+const playableSec = (ep) => Math.max(1, ep.durationSec - (ep.introSkipSec || 0));
+
 // -- deterministic shuffle ---------------------------------------------------
 // Same seed -> same order, every reload, every machine. That's what makes a
 // channel's schedule reproducible without storing anything.
@@ -92,8 +107,9 @@ function buildPool(showIds, catalog, seedStr, { slotted = true } = {}) {
   let acc = 0;
   for (let i = 0; i < ordered.length; i++) {
     cumulative[i] = acc;
-    const dur = ordered[i].episode.durationSec;
-    acc += slotted ? slotFor(dur) : dur;
+    // Commercials pack by their true length; programmes by the slot their
+    // airable content rounds up to.
+    acc += slotted ? slotFor(playableSec(ordered[i].episode)) : ordered[i].episode.durationSec;
   }
   return { pool: ordered, cumulative, totalSec: acc, slotted };
 }
@@ -147,15 +163,15 @@ function locate(poolInfo, elapsedSec) {
     show: entry.show,
     episode: entry.episode,
     offsetSec,
-    // Past the episode's runtime but still inside its slot: dead air until
-    // the clock reaches the next :00/:30. Callers must check this before
-    // treating offsetSec as a seek position. A substitute shorter than the
-    // programme it replaced simply goes to break early.
-    padding: offsetSec >= entry.episode.durationSec,
+    // Past the episode's airable runtime but still inside its slot: dead air
+    // until the clock reaches the next grid mark. Callers must check this
+    // before treating offsetSec as a seek position. A substitute shorter than
+    // the programme it replaced simply goes to break early.
+    padding: offsetSec >= playableSec(entry.episode),
     // Measured from the *scheduled* entry, never the substitute — a dead file
     // must not shift the grid, or channels and the guide would disagree about
     // when the next programme starts.
-    slotEndsInSec: slotFor(scheduled.episode.durationSec) - offsetSec,
+    slotEndsInSec: slotFor(playableSec(scheduled.episode)) - offsetSec,
     next: { showId: next.showId, show: next.show, episode: next.episode },
   };
 }
@@ -295,7 +311,7 @@ function getPositionAt(channel, catalog, timestampMs) {
 // Exposed for the manual test harness and for anything that wants to reason
 // about determinism directly.
 const _internal = { hashSeed, mulberry32, shuffled, buildPool, locate, windowElapsedSec, slotFor,
-                    adPool, brokenKeys };
+                    playableSec, adPool, brokenKeys };
 
 window.getPositionAt = getPositionAt;
 window.getAdAt = getAdAt;
@@ -303,4 +319,5 @@ window.markBroken = (key) => brokenKeys.add(key);
 window.isBroken = (key) => brokenKeys.has(key);
 window.EPOCH_MS = EPOCH_MS;
 window.SLOT_SEC = SLOT_SEC;
+window.playableSec = playableSec;
 window.SCHEDULER_INTERNAL = _internal;

@@ -30,10 +30,19 @@ html, body {
    this rule only takes the video out of #tv's centered flex flow (position
    left/top intentionally omitted here; JS owns them in guide mode, since a
    CSS-only offset can't track a flexbox-laid-out element it doesn't know
-   the size of). No border/shadow of its own — #guide-video-slot is the
-   single visible frame, so the picture just sits flush inside it. */
+   the size of). No border/shadow of its own — #guide-video-frame draws the
+   outline, sized to the picture rather than to the slot it letterboxes in. */
 #tv.guide-open #screen {
   position: absolute; z-index: 11;
+}
+
+/* `outline` rather than `border`: it's drawn outside the box, so the element
+   can be set to exactly the picture's rect and still frame it without
+   overlapping a pixel of it or needing box-sizing math. */
+#guide-video-frame {
+  position: absolute; z-index: 11; pointer-events: none;
+  outline: 2px solid rgba(10,170,255,.55); border-radius: 4px;
+  box-shadow: 0 0 24px rgba(0,0,0,.6);
 }
 
 #blank-msg {
@@ -140,7 +149,10 @@ html, body {
   padding: 8px 16px; color: #0af; letter-spacing: 2px; font-size: 1.1em;
 }
 
-#guide-top { flex: 1 1 45%; display: flex; min-height: 0; }
+/* The picture gets the larger share: a docked 4:3 or 16:9 frame wants the
+   height more than the listings do, and the two rows it costs the grid below
+   are cheap when that grid scrolls anyway. */
+#guide-top { flex: 1 1 58%; display: flex; min-height: 0; }
 
 #guide-info {
   flex: 0 0 50%; min-width: 0; padding: 20px 24px; display: flex; flex-direction: column;
@@ -154,16 +166,19 @@ html, body {
   color: #7fff9f; font-size: 1.1em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-/* The bezel the docked picture sits inside. The picture itself floats above
-   #guide entirely (z-index 11 vs. this element's stacking context) — it's
-   never actually a child of this box — but player.js's layoutCrop()
-   measures this element's own getBoundingClientRect() every time it lays
-   the picture out in guide mode, so the two stay pixel-aligned regardless
-   of how this flexbox layout resolves (font metrics, viewport size, etc.)
-   without needing to duplicate that math in JS. */
+/* The region the docked picture letterboxes into — an invisible spacer, not a
+   bezel. The picture itself floats above #guide entirely (z-index 11 vs. this
+   element's stacking context) and is never a child of this box, but
+   player.js's layoutCrop() measures this element's own getBoundingClientRect()
+   every time it lays the picture out in guide mode, so the two stay aligned
+   regardless of how this flexbox layout resolves (font metrics, viewport size,
+   etc.) without duplicating that math in JS.
+   The visible outline is #guide-video-frame, which JS sets to the picture's
+   own rect — this box is generally a different shape (a 4:3 picture in a wide
+   slot leaves pillarbox on both sides), and a border here would frame that
+   empty space rather than the programme. */
 #guide-video-slot {
   flex: 0 0 50%; margin: 20px 20px 20px 0;
-  border: 2px solid rgba(10,170,255,.35); border-radius: 4px;
 }
 
 #guide-listings {
@@ -188,13 +203,52 @@ html, body {
 #guide-rows::-webkit-scrollbar-thumb:hover { background: rgba(127,232,255,.55); }
 
 .guide-row {
-  display: flex; align-items: center; padding: 10px 16px; cursor: pointer;
+  display: flex; align-items: stretch; padding: 10px 16px; cursor: pointer;
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
 .guide-row:hover, .guide-row.highlight { background: rgba(10,170,255,.15); }
-.guide-row .ch-col { color: #fff700; letter-spacing: 1px; }
-.guide-row .prog { color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 12px; }
-.guide-row .prog.live { color: #7fff9f; }
+.guide-row .ch-col { color: #fff700; letter-spacing: 1px; display: flex; align-items: center; }
+
+/* A row's programmes are laid out on a real time axis: left/width are
+   percentages of the 90-minute window, set inline by guide.js, so a block is
+   exactly as wide as the airtime it occupies. The repeating gradient is the
+   :00/:30 ruling underneath (thirds of the window), matching the column
+   headers above. */
+.guide-row .prog-track {
+  flex: 1 1 0; position: relative; min-width: 0; height: 2.1em;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(127,232,255,.14) 0 1px, transparent 1px calc(100% / 3));
+}
+/* border-left is the programme's start line — the vertical tick at the exact
+   moment it begins, which is also the moment the one before it ends. Two
+   exceptions: `joined` blocks take the channel mid-programme (a daypart
+   switch), so the line goes dotted — the picture does change there, but
+   nothing starts; and `edge`, the leftmost block, butts against the window's
+   own edge rather than a boundary, so it gets no line at all. */
+/* Deliberately not a flex box: text-overflow: ellipsis has no effect on a flex
+   container's contents, and a narrow block (a 5-minute slot is ~5% of the row)
+   depends on ellipsing to stay readable. line-height does the vertical
+   centering instead. */
+.guide-row .prog {
+  position: absolute; top: 0; bottom: 0; z-index: 1; line-height: 2.1em;
+  color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  border-left: 2px solid rgba(127,232,255,.55); padding: 0 8px;
+  background: rgba(0,40,70,.35);
+}
+.guide-row .prog.joined { border-left-style: dotted; border-left-color: rgba(127,232,255,.35); }
+.guide-row .prog.edge { border-left: none; }
+.guide-row .prog.live { color: #7fff9f; background: rgba(0,60,50,.35); }
+.guide-row .prog-time { color: #7fe8ff; font-weight: normal; opacity: .75; margin-right: 6px; }
+
+/* Where we are in the window right now — the same "you are here" line a cable
+   box drew down its grid. Yellow is enough to tell it apart from the cyan
+   programme boundaries; it sits *behind* the blocks (z-index below .prog) and
+   carries no glow, so it never washes out the title text it passes through. */
+.guide-row .now-line {
+  position: absolute; top: -1px; bottom: -1px; width: 2px; margin-left: -1px;
+  background: rgba(255,247,0,.75); z-index: 0; pointer-events: none;
+}
 
 /* -- on-screen remote -------------------------------------------------------- */
 /* Parked off the bottom edge with only the head strip showing; :hover rolls
