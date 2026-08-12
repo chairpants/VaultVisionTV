@@ -27,6 +27,17 @@ BASE = "https://chairpants.github.io/VaultVision"
 OUT_JSON = Path(__file__).parent.parent / "data" / "catalog.json"
 OUT_JS = Path(__file__).parent.parent / "data" / "catalog.js"
 
+# archive.org items that no longer exist — /metadata/<id> answers {"error": ...}
+# because the item was darkened or withdrawn. VaultVision still lists them, so
+# they come back on every rebuild unless dropped here. The player copes (no
+# playable file -> markBroken -> failOver), but only after a wasted metadata
+# round trip and a visible failover, and the guide still advertises them.
+# Re-check with: curl -s https://archive.org/metadata/<id>
+DEAD_ITEMS = {
+    "myopic-vhs-no-08",                      # Sci-Fi Saturday Anime, 7.70h
+    "stephen-kings-the-langoliers-1995-hd",  # The Langoliers (1995), 3.00h
+}
+
 # Fallback runtime (seconds) for episodes with no entry in a show's
 # `durations` map — 22 of VaultVision's shows ship an empty durations map
 # entirely (see ADDING_A_SHOW.md), and individual rows can be missing even in
@@ -136,6 +147,8 @@ def build_show_entry(row):
         if not isinstance(e, list) or len(e) < 2:
             continue
         item_id = e[0]
+        if item_id in DEAD_ITEMS:
+            continue
         title = e[1]
         file_hint = e[2] if len(e) > 2 else None
         key = episode_key(item_id, file_hint)

@@ -100,7 +100,15 @@ const mmss = (sec) => {
 };
 
 const DRIFT_CHECK_MS = 15000;
-const DRIFT_TOLERANCE_SEC = 3;
+// Must stay comfortably above what a seek actually costs, or the correction
+// becomes the problem: on a multi-gigabyte item (Storm of the Century is
+// 2.2GB / 5.8h with a 17.7MB moov) a tune-in seek lands hours into the file
+// and takes seconds to buffer. That latency *is* drift — so with a tolerance
+// tighter than the seek cost, every 15s check finds the picture "late",
+// re-seeks, re-buffers, and lands late again. It never converges, and the
+// symptom is a fresh frame every several seconds forever.
+// Being ~10s off a simulated broadcast is invisible; a reseek loop is not.
+const DRIFT_TOLERANCE_SEC = 10;
 const OSD_VISIBLE_MS = 4000;
 
 const PAD_TICK_MS = 500; // twice a second so the countdown never visibly skips
@@ -260,7 +268,11 @@ function createPlayer(els) {
       video.play().catch(() => unlockOnFirstGesture());
     } else {
       // resync: only nudge if we've actually drifted, so normal playback
-      // isn't fighting a reseek every 15s
+      // isn't fighting a reseek every 15s.
+      // Never correct while a seek is still landing or the buffer is starved
+      // — currentTime is meaningless mid-seek, and issuing a second seek
+      // just restarts the stall that caused the reading in the first place.
+      if (video.seeking || video.readyState < 3 /* HAVE_FUTURE_DATA */) return;
       if (Math.abs(video.currentTime - seekTo) > DRIFT_TOLERANCE_SEC) {
         video.currentTime = seekTo;
       }
@@ -450,12 +462,72 @@ function createPlayer(els) {
     if (!silent) showOsd(channel, position);
   }
 
+  // -- seek-index warmer -----------------------------------------------------
+  // A few catalog items are multi-hour tapes (6h Saturday-morning blocks, whole
+  // TV-movie broadcasts). Their mp4 seek index is sized by frame *count*, not
+  // runtime — Storm of the Century's is 17.7MB, Nick at Nite's 44.5MB — and the
+  // browser needs all of it before it can paint frame one, wherever in the file
+  // the schedule drops you. Nothing streams around that; it's a prerequisite,
+  // not the picture. Cold, it's ~10-30s of black on tune-in.
+  //
+  // So fetch it before it's asked for. The user can only tune to what's airing
+  // *now*, and that's a small set: sampled every 5 minutes across a day, 2-6
+  // channels are showing something over the threshold at once. Warming exactly
+  // that set is the whole job.
+  //
+  // A hidden preload="metadata" element is the entire mechanism — the browser
+  // walks the mp4 boxes itself, so an item with its index at the end of the
+  // file (1993-wsb-tv-abc-saturday-morning) needs no special case here. It also
+  // warms archive.org's edge node, which is what actually makes the real tune
+  // fast; the browser's own media cache is capped and evicts these happily.
+  const WARM_OVER_SEC = 3 * 3600;
+  const WARM_TIMEOUT_MS = 90000; // a 44MB index on a slow node, then give up
+  const warmAttempted = new Set();
+  let warmEl = null;
+  let warming = false;
+
+  async function warmTick(catalog) {
+    if (warming) return;
+    // Never race the picture for bandwidth: if the real video is still filling
+    // its buffer, what the viewer is actually watching wins.
+    if (!video.paused && video.readyState < 3 /* HAVE_FUTURE_DATA */) return;
+
+    for (const c of window.CHANNELS || []) {
+      if (c.kind === "guide") continue;
+      const pos = getPositionAt(c, catalog, Date.now());
+      if (!pos || pos.episode.durationSec <= WARM_OVER_SEC) continue;
+      const key = pos.episode.key;
+      // Attempted, not succeeded: a dead or failing item must not be retried
+      // every tick forever. Worst case we skip one warm and the tune is slow.
+      if (warmAttempted.has(key) || isBroken(key) || key === loadedEpisodeKey) continue;
+      warmAttempted.add(key);
+
+      warming = true;
+      const url = await resolveEpisodeUrl(pos.episode.itemId, pos.episode.fileHint);
+      if (!url) { warming = false; return; }
+      if (!warmEl) {
+        // Kept on this closure so it isn't collected mid-load. Never attached
+        // to the document — it exists only to make the browser do the fetch.
+        warmEl = document.createElement("video");
+        warmEl.preload = "metadata";
+        warmEl.muted = true;
+      }
+      const release = () => { clearTimeout(timer); warming = false; };
+      const timer = setTimeout(release, WARM_TIMEOUT_MS);
+      warmEl.addEventListener("loadedmetadata", release, { once: true });
+      warmEl.addEventListener("error", release, { once: true });
+      warmEl.src = url;
+      return; // one per tick — these are 8-45MB each
+    }
+  }
+
   function startDriftLoop(getCurrentChannel, catalog) {
     stopDriftLoop();
     driftTimer = setInterval(() => {
       const channel = getCurrentChannel();
       if (!channel || channel.kind === "guide") return;
       tune(channel, catalog, { silent: true });
+      warmTick(catalog); // piggybacks the 15s tick; no timer of its own
     }, DRIFT_CHECK_MS);
   }
 
