@@ -10,7 +10,7 @@
 <script src="channels.js"></script>
 <script src="scheduler.js"></script>
 <script>
-const _internal = window.SCHEDULER_INTERNAL;
+const schedInternal = window.SCHEDULER_INTERNAL;
 const lines = [];
 let pass = 0, fail = 0;
 function check(name, cond, detail) {
@@ -37,9 +37,11 @@ function main() {
     a && a.offsetSec >= 0 && (a.padding || a.offsetSec < a.episode.durationSec),
     `offset=${a && a.offsetSec} dur=${a && a.episode.durationSec} padding=${a && a.padding}`);
 
-  // -- slot grid: every program start lands on :00 or :30 ------------------
+  // -- slot grid: every program start lands on a clean SLOT_SEC mark -------
   // The slot a position sits in ends at now + slotEndsInSec; that instant is
-  // the next program's start, and it must be on the half-hour.
+  // the next program's start, and it must land on the grid (every SLOT_SEC
+  // minutes, not hardcoded to :00/:30 — see scheduler.js's own SLOT_SEC).
+  const slotMinutes = SLOT_SEC / 60;
   let gridChecked = 0, gridOff = [];
   for (const c of CHANNELS) {
     if (c.kind === "guide") continue;
@@ -48,12 +50,12 @@ function main() {
       if (!pos) continue;
       gridChecked++;
       const boundary = new Date(Math.round(t + pos.slotEndsInSec * 1000));
-      if (boundary.getMinutes() % 30 !== 0 || boundary.getSeconds() !== 0) {
+      if (boundary.getMinutes() % slotMinutes !== 0 || boundary.getSeconds() !== 0) {
         gridOff.push(`ch${c.number} -> ${boundary.toTimeString().slice(0, 8)}`);
       }
     }
   }
-  check(`all ${gridChecked} sampled slot boundaries land on :00 or :30`,
+  check(`all ${gridChecked} sampled slot boundaries land on a ${slotMinutes}-minute grid mark`,
     gridOff.length === 0, gridOff.slice(0, 5).join(", "));
 
   // -- padding: the tail of a slot after a short episode -------------------
@@ -63,9 +65,9 @@ function main() {
   const short = getPositionAt(toon, catalog, t0);
   const afterEnd = t0 + (short.episode.durationSec - short.offsetSec + 1) * 1000;
   const padPos = getPositionAt(toon, catalog, afterEnd);
-  const fillsSlot = _internal.slotFor(short.episode.durationSec) === short.episode.durationSec;
+  const fillsSlot = schedInternal.slotFor(short.episode.durationSec) === short.episode.durationSec;
   check("one second past a short episode's end is padding, counting down",
-    fillsSlot || (padPos.padding && padPos.slotEndsInSec > 0 && padPos.slotEndsInSec < 1800 &&
+    fillsSlot || (padPos.padding && padPos.slotEndsInSec > 0 && padPos.slotEndsInSec < SLOT_SEC &&
       padPos.next && padPos.next.episode),
     JSON.stringify({ dur: short.episode.durationSec, padding: padPos.padding, left: padPos.slotEndsInSec }));
 
@@ -74,14 +76,14 @@ function main() {
   const expectedEpisodeCount = animationShows.reduce((n, s) => n + s.episodes.length, 0);
   // walk the internal pool builder directly to check coverage without relying on timing
   const ids = animationShows.map((s) => s.id).sort();
-  const info = _internal.buildPool(ids, catalog, "genre:Animation");
+  const info = schedInternal.buildPool(ids, catalog, "genre:Animation");
   check("genre pool includes every Animation episode exactly once",
     info.pool.length === expectedEpisodeCount,
     `pool=${info.pool.length} expected=${expectedEpisodeCount}`);
 
   // -- reproducibility across process boundary (re-shuffle same seed) -----
-  const reshuffled = _internal.shuffled([1, 2, 3, 4, 5], "seed-x");
-  const reshuffled2 = _internal.shuffled([1, 2, 3, 4, 5], "seed-x");
+  const reshuffled = schedInternal.shuffled([1, 2, 3, 4, 5], "seed-x");
+  const reshuffled2 = schedInternal.shuffled([1, 2, 3, 4, 5], "seed-x");
   check("shuffle: same seed -> same order", JSON.stringify(reshuffled) === JSON.stringify(reshuffled2),
     JSON.stringify({ reshuffled, reshuffled2 }));
 
@@ -111,8 +113,8 @@ function main() {
 
   // -- dayparting continuity: cumulative airtime keeps advancing week to week
   const satNext = new Date(2026, 7, 22, 9, 0, 0).getTime(); // following Saturday, same time-of-window
-  const el1 = _internal.windowElapsedSec(satMorning.daypart[0], satTime);
-  const el2 = _internal.windowElapsedSec(satMorning.daypart[0], satNext);
+  const el1 = schedInternal.windowElapsedSec(satMorning.daypart[0], satTime);
+  const el2 = schedInternal.windowElapsedSec(satMorning.daypart[0], satNext);
   const windowLenSec = (satMorning.daypart[0].endHour - satMorning.daypart[0].startHour) * 3600;
   check("cumulative window airtime advances by ~one window length across a week",
     Math.abs((el2 - el1) - windowLenSec) < 1,
@@ -152,10 +154,15 @@ function main() {
   check(`commercial breaks on ${breaksChecked} channels start at the top of a spot and never overrun the slot`,
     breakProblems.length === 0, breakProblems.slice(0, 5).join("; "));
 
-  check("commercials are loaded and shorter than a slot",
-    _internal.adPool().pool.length > 0 &&
-      _internal.adPool().pool.every((e) => e.episode.durationSec > 0 && e.episode.durationSec < 1800),
-    `spots=${_internal.adPool().pool.length}`);
+  // Not "shorter than a slot" — a spot only has to fit whatever padding is
+  // left in the slot's tail (getAdAt enforces that per-break), and can run
+  // well past SLOT_SEC itself (the long-form infomercial in the pool is
+  // there specifically to cover unusually long padding windows). This just
+  // checks the pool matches build-commercials.py's own MAX_SEC bound.
+  check("commercials are loaded and within the configured duration bound",
+    schedInternal.adPool().pool.length > 0 &&
+      schedInternal.adPool().pool.every((e) => e.episode.durationSec > 0 && e.episode.durationSec < 1800),
+    `spots=${schedInternal.adPool().pool.length}`);
 
   // -- every channel in the lineup resolves to a valid position ------------
   const sampleTimes = [
@@ -195,8 +202,8 @@ function main() {
     after && Math.abs(after.slotEndsInSec - before.slotEndsInSec) < 1e-9,
     `before=${before.slotEndsInSec} after=${after && after.slotEndsInSec}`);
   const boundaryAfter = new Date(Math.round(t0 + after.slotEndsInSec * 1000));
-  check("the substituted slot still ends on :00 or :30",
-    boundaryAfter.getMinutes() % 30 === 0 && boundaryAfter.getSeconds() === 0,
+  check(`the substituted slot still ends on a ${slotMinutes}-minute grid mark`,
+    boundaryAfter.getMinutes() % slotMinutes === 0 && boundaryAfter.getSeconds() === 0,
     boundaryAfter.toTimeString().slice(0, 8));
 
   // Every file in a pool dead: nothing to substitute, so the caller gets the
@@ -205,12 +212,12 @@ function main() {
     { key: "t1", itemId: "i", fileHint: "a.mp4", durationSec: 600 },
     { key: "t2", itemId: "i", fileHint: "b.mp4", durationSec: 600 },
   ] } } };
-  const tinyPool = _internal.buildPool(["t"], tinyCatalog, "tiny");
-  _internal.brokenKeys.add("t1");
-  _internal.brokenKeys.add("t2");
-  const exhausted = _internal.locate(tinyPool, 5);
+  const tinyPool = schedInternal.buildPool(["t"], tinyCatalog, "tiny");
+  schedInternal.brokenKeys.add("t1");
+  schedInternal.brokenKeys.add("t2");
+  const exhausted = schedInternal.locate(tinyPool, 5);
   check("an all-broken pool returns a broken entry rather than looping forever",
-    exhausted && _internal.brokenKeys.has(exhausted.episode.key),
+    exhausted && schedInternal.brokenKeys.has(exhausted.episode.key),
     JSON.stringify(exhausted && exhausted.episode.key));
 
   document.getElementById("out").textContent =

@@ -24,6 +24,18 @@ html, body {
   width: 100%; height: 100%; object-fit: contain; background: #000;
 }
 
+/* Picture-in-picture docking while the TV Guide is up. player.js's
+   layoutCrop() measures guide.js's own #guide-video-slot bezel directly and
+   sets the letterboxed width/height/left/top inline to match it exactly —
+   this rule only takes the video out of #tv's centered flex flow (position
+   left/top intentionally omitted here; JS owns them in guide mode, since a
+   CSS-only offset can't track a flexbox-laid-out element it doesn't know
+   the size of). No border/shadow of its own — #guide-video-slot is the
+   single visible frame, so the picture just sits flush inside it. */
+#tv.guide-open #screen {
+  position: absolute; z-index: 11;
+}
+
 #blank-msg {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   font-size: 3vw; letter-spacing: 4px; color: #888; animation: flicker 1.2s steps(2) infinite;
@@ -43,7 +55,9 @@ html, body {
    in for it) at 5, readouts over that at 8, the guide over everything at 10,
    remote at 20. Every one of these is position:absolute inside #tv, so
    without explicit values DOM order decides and the opaque pad card buries
-   the lot. */
+   the lot. Exception: while the guide is open the picture itself jumps to 11
+   (see #tv.guide-open #screen below) — docked as a small box in the corner,
+   it needs to sit above the guide rather than under it. */
 
 /* -- on-screen display: channel banner, cable-box style -------------------- */
 #osd {
@@ -110,40 +124,74 @@ html, body {
 }
 
 /* -- TV Guide channel -------------------------------------------------------- */
-/* Semi-transparent throughout — the video underneath keeps playing while the
-   guide is up (see app.js's toggleGuide), so you can glance at what's on
-   without losing your place, the way a real cable box's guide overlay does. */
+/* Mini-guide layout: the live picture docks into a picture-in-picture box in
+   the top-right (#tv.guide-open #screen, above), an info panel in the
+   top-left describes whichever row is currently hovered/highlighted, and the
+   channel listings run the full width of the bottom half with real NOW/+30/
+   +60 column headers. Reads like an actual cable box's guide instead of a
+   tinted overlay parked over the full picture — opaque rather than
+   translucent throughout, since the picture is no longer underneath it. */
 #guide {
-  position: absolute; inset: 0; z-index: 10; background: rgba(0,13,26,.55); overflow: hidden;
-  font-size: 1.1em;
+  position: absolute; inset: 0; z-index: 10; background: rgba(0,10,20,.94);
+  display: flex; flex-direction: column; overflow: hidden; font-size: 1.1em;
 }
 #guide-header {
-  display: flex; background: rgba(0,26,51,.7); border-bottom: 2px solid #0af;
-  padding: 10px 16px; color: #0af; letter-spacing: 2px; font-size: 1.3em;
+  flex: none; display: flex; background: rgba(0,26,51,.7); border-bottom: 2px solid #0af;
+  padding: 8px 16px; color: #0af; letter-spacing: 2px; font-size: 1.1em;
+}
+
+#guide-top { flex: 1 1 45%; display: flex; min-height: 0; }
+
+#guide-info {
+  flex: 0 0 50%; min-width: 0; padding: 20px 24px; display: flex; flex-direction: column;
+  gap: 6px; border-right: 1px solid rgba(127,232,255,.15);
+}
+#guide-info-num { color: #fff700; font-size: 1.8em; letter-spacing: 2px; }
+#guide-info-name { color: #fff; font-size: 1.5em; letter-spacing: 1px; }
+#guide-info-tagline { color: #7fe8ff; font-style: italic; opacity: .85; }
+#guide-info-live-label { margin-top: auto; color: #999; font-size: .75em; letter-spacing: 3px; }
+#guide-info-live {
+  color: #7fff9f; font-size: 1.1em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* The bezel the docked picture sits inside. The picture itself floats above
+   #guide entirely (z-index 11 vs. this element's stacking context) — it's
+   never actually a child of this box — but player.js's layoutCrop()
+   measures this element's own getBoundingClientRect() every time it lays
+   the picture out in guide mode, so the two stay pixel-aligned regardless
+   of how this flexbox layout resolves (font metrics, viewport size, etc.)
+   without needing to duplicate that math in JS. */
+#guide-video-slot {
+  flex: 0 0 50%; margin: 20px 20px 20px 0;
+  border: 2px solid rgba(10,170,255,.35); border-radius: 4px;
+}
+
+#guide-listings {
+  flex: 1 1 55%; display: flex; flex-direction: column; min-height: 0;
+  border-top: 1px solid rgba(127,232,255,.2);
 }
 #guide-cols {
-  display: flex; padding: 6px 16px; color: #7fe8ff; opacity: .8;
-  background: rgba(0,13,26,.4);
+  flex: none; display: flex; padding: 6px 16px; color: #7fe8ff; opacity: .8;
+  background: rgba(0,13,26,.6);
   border-bottom: 1px solid rgba(127,232,255,.25); font-size: .8em;
 }
 #guide-cols span, .guide-row span { flex: 1 1 0; }
-#guide-cols .ch-col, .guide-row .ch-col { flex: 0 0 180px; }
+#guide-cols .ch-col, .guide-row .ch-col { flex: 0 0 220px; }
 
-#guide-rows { position: relative; height: calc(100% - 96px); overflow: hidden; }
-#guide-track { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
-/* Fades to blank at the end of each scroll cycle, covering the reset from
-   bottom back to top so it's never seen happening, then fades back out. */
-#guide-wipe {
-  position: absolute; inset: 0; z-index: 2; background: #000;
-  opacity: 0; will-change: opacity; pointer-events: none;
-}
+/* Free native scrolling (wheel/trackpad/scrollbar) rather than an
+   auto-scroll cycle — guide.js's show() jumps this to the tuned channel via
+   scrollIntoView, then leaves it alone. */
+#guide-rows { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; }
+#guide-rows::-webkit-scrollbar { width: 10px; }
+#guide-rows::-webkit-scrollbar-track { background: rgba(0,13,26,.4); }
+#guide-rows::-webkit-scrollbar-thumb { background: rgba(127,232,255,.35); border-radius: 5px; }
+#guide-rows::-webkit-scrollbar-thumb:hover { background: rgba(127,232,255,.55); }
 
 .guide-row {
   display: flex; align-items: center; padding: 10px 16px; cursor: pointer;
   border-bottom: 1px solid rgba(255,255,255,.08);
-  text-shadow: 0 1px 3px rgba(0,0,0,.9); /* legible over whatever's playing behind it */
 }
-.guide-row:hover, .guide-row.focus { background: rgba(10,170,255,.15); }
+.guide-row:hover, .guide-row.highlight { background: rgba(10,170,255,.15); }
 .guide-row .ch-col { color: #fff700; letter-spacing: 1px; }
 .guide-row .prog { color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 12px; }
 .guide-row .prog.live { color: #7fff9f; }

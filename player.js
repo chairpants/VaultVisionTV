@@ -26,15 +26,25 @@ function fetchItemMetadata(itemId) {
 // (AC3/DTS the browser can't decode), so prefer archive.org's auto-derived
 // same-stem .mp4 when one exists. No fileHint at all (~0.4% of episodes) ->
 // take the item's first .mp4, else first .ogv/.webm.
+//
+// A fileHint that already names a .mp4/.webm/.ogv isn't necessarily safe as
+// given, though: archive.org's *original* upload can itself be named
+// "foo.mp4" while carrying non-web audio (AC3/DTS), with the actual web-safe
+// transcode filed separately as "foo.ia.mp4" (source: "derivative",
+// original: "foo.mp4" in the item's metadata) — an exact-name match lands on
+// the silent original instead. Check for a derivative naming this fileHint
+// as its `original` first, before falling back to the extension-based guess
+// or the exact-name match.
 async function resolveEpisodeUrl(itemId, fileHint) {
   const meta = await fetchItemMetadata(itemId);
   const files = meta.files || [];
+  const derivative = fileHint && files.find((f) => f.original === fileHint && /\.(mp4|webm|ogv)$/i.test(f.name));
   const needsDerivative = fileHint && !/\.(mp4|webm|ogv)$/i.test(fileHint);
   const derivativeName = needsDerivative && fileHint.replace(/\.[^./]+$/, ".mp4");
-  const file = fileHint
+  const file = derivative || (fileHint
     ? (needsDerivative && files.find((f) => f.name === derivativeName)) ||
       files.find((f) => f.name === fileHint)
-    : files.find((f) => /\.mp4$/i.test(f.name)) || files.find((f) => /\.(ogv|webm)$/i.test(f.name));
+    : files.find((f) => /\.mp4$/i.test(f.name)) || files.find((f) => /\.(ogv|webm)$/i.test(f.name)));
   return file ? `https://archive.org/download/${itemId}/${encodePath(file.name)}` : null;
 }
 
@@ -80,6 +90,13 @@ const PAD_TICK_MS = 500; // twice a second so the countdown never visibly skips
 const SUBSTITUTE_MS = 1500; // how long the failure card sits before the swap
 const NO_SIGNAL_TEXT = "NO SIGNAL";
 
+// Fallback box for the docked picture-in-picture video (fraction of #tv) if
+// guide.js's own #guide-video-slot bezel can't be found for some reason —
+// layoutCrop() normally measures that element directly instead, so the
+// picture and its decorative frame can't drift apart.
+const GUIDE_VIDEO_W_FRAC = 0.44;
+const GUIDE_VIDEO_H_FRAC = 0.4;
+
 function createPlayer(els) {
   const { video, osd, osdCh, osdTagline, osdShow, osdEpisode, osdBarFill, blankMsg, startHint,
           padCard, chyron, chyronTitle, chyronSub, chyronClock } = els;
@@ -93,6 +110,7 @@ function createPlayer(els) {
   let padTimer = null;
   let tuneToken = 0; // invalidates in-flight resolves if the user flips again before they land
   let currentCrop = null; // {x,y,w,h} of the episode currently loaded, or null
+  let guideMode = false; // true while the TV Guide is up — see setGuideMode
 
   // Sizes the <video> box itself to the cropped picture's true aspect ratio
   // (letterboxed within its container), then applies the crop transform —
@@ -106,22 +124,62 @@ function createPlayer(els) {
     // During a break the chyron owns the bottom strip — letterbox the picture
     // into what's left and push it up by the same amount, since #tv centers
     // its flex child including margins. Measured, not a constant, so the bar
-    // can be restyled in CSS alone.
-    const reserved = chyron.classList.contains("hidden") ? 0 : chyron.offsetHeight;
-    const availW = container.clientWidth;
-    const availH = container.clientHeight - reserved;
+    // can be restyled in CSS alone. Neither applies in guide mode: the video
+    // leaves the centered flex flow entirely (position:absolute) and fits
+    // instead into guide.js's own #guide-video-slot bezel — measured
+    // directly (getBoundingClientRect, in the same viewport-relative
+    // coordinate space #tv's absolute children use, since #tv itself is
+    // fixed at inset:0) rather than recomputed independently, so the picture
+    // and its decorative frame can't drift apart the way two separately
+    // calculated layouts (flexbox math here, CSS top/right there) did before.
+    const reserved = !guideMode && !chyron.classList.contains("hidden") ? chyron.offsetHeight : 0;
+    let availW, availH, boxLeft, boxTop;
+    if (guideMode) {
+      const slot = document.getElementById("guide-video-slot");
+      const rect = slot && slot.getBoundingClientRect();
+      // Inset by the bezel's own border-width so the picture sits flush
+      // inside the frame instead of straddling it.
+      const inset = slot ? parseFloat(getComputedStyle(slot).borderLeftWidth) || 0 : 0;
+      boxLeft = (rect ? rect.left : 0) + inset;
+      boxTop = (rect ? rect.top : 0) + inset;
+      availW = (rect ? rect.width : container.clientWidth * GUIDE_VIDEO_W_FRAC) - inset * 2;
+      availH = (rect ? rect.height : container.clientHeight * GUIDE_VIDEO_H_FRAC) - inset * 2;
+    } else {
+      availW = container.clientWidth;
+      availH = container.clientHeight - reserved;
+    }
     const containerAR = availW / availH;
     const videoAR = vw / vh;
     const w = videoAR > containerAR ? availW : availH * videoAR;
     const h = videoAR > containerAR ? availW / videoAR : availH;
     video.style.width = `${w}px`;
     video.style.height = `${h}px`;
-    video.style.marginBottom = reserved ? `${reserved}px` : "";
+    if (guideMode) {
+      // Center within the bezel on whichever axis the letterboxed picture
+      // doesn't fully fill.
+      video.style.left = `${boxLeft + (availW - w) / 2}px`;
+      video.style.top = `${boxTop + (availH - h) / 2}px`;
+    } else {
+      video.style.left = "";
+      video.style.top = "";
+    }
+    video.style.marginBottom = !guideMode && reserved ? `${reserved}px` : "";
     video.style.objectFit = "fill";
     video.style.transformOrigin = "0 0";
     video.style.transform = cropCSS(c);
   }
   window.addEventListener("resize", layoutCrop);
+
+  // Docks the picture into a small top-right box (guide open) or restores it
+  // to the normal full-screen centered layout (guide closed). CSS positions
+  // the box; this just supplies the sizing fraction and re-runs layoutCrop
+  // immediately, since a re-tune that lands on the same episode wouldn't
+  // otherwise touch layout at all.
+  function setGuideMode(open) {
+    guideMode = open;
+    video.parentElement.classList.toggle("guide-open", open);
+    layoutCrop();
+  }
 
   // Chrome (and others) block audible autoplay until the page has seen a
   // real user gesture — the very first tune() on load runs before that ever
@@ -371,5 +429,5 @@ function createPlayer(els) {
     driftTimer = null;
   }
 
-  return { tune, startDriftLoop, stopDriftLoop, showOsd, getItemId: () => loadedItemId };
+  return { tune, startDriftLoop, stopDriftLoop, showOsd, getItemId: () => loadedItemId, setGuideMode };
 }

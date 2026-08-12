@@ -18,14 +18,25 @@
 const EPOCH_MS = new Date("2020-01-06T00:00:00").getTime();
 const WEEK_MS = 7 * 24 * 3600 * 1000;
 
-// Every episode occupies a whole number of half-hour slots rather than just
-// its own runtime, so program starts land on :00 and :30 — the epoch is local
-// midnight and every slot is a multiple of SLOT_SEC, so the grid stays on the
-// clock forever. The leftover tail of a slot (a 23-minute episode in a 30-
-// minute slot) is dead air the player fills with a countdown card.
-// ponytail: real commercial pods go in that gap later; nothing here changes
-// when they do, the pad just gets content instead of a countdown.
-const SLOT_SEC = 30 * 60;
+// Every episode occupies a whole number of SLOT_SEC-sized slots rather than
+// just its own runtime, so program starts always land on a clean grid mark —
+// the epoch is local midnight and every slot is a multiple of SLOT_SEC, so
+// the grid stays on the clock forever. The leftover tail of a slot (a
+// 22-minute episode in a 25-minute slot) is dead air the player fills with
+// commercials, or a countdown card once nothing fits what's left.
+//
+// A fine 5-minute grid rather than a flat 30 minutes specifically to cut
+// that leftover tail down: at 30 minutes, a typical ~22-minute sitcom or
+// cartoon always rounds up to the *next* half-hour mark, leaving a fixed
+// 8-minute commercial tail on every single airing, every channel, no
+// exceptions. At 5 minutes, that same episode only rounds up to 25 minutes —
+// a 3-minute tail instead. Programs still start on a clean, deterministic
+// grid mark; it's just a finer one. guide.js's own column headers ("NOW",
+// "+30", "+60") are intentionally *not* derived from this constant — see
+// GUIDE_COLUMN_SEC there — a real TV Guide's columns mean literal 30/60-
+// minute lookaheads regardless of how finely a station grids its own
+// programming underneath.
+const SLOT_SEC = 5 * 60;
 const slotFor = (durationSec) => Math.ceil(durationSec / SLOT_SEC) * SLOT_SEC;
 
 // -- deterministic shuffle ---------------------------------------------------
@@ -195,8 +206,16 @@ function genrePool(channel, catalog) {
   const cacheKey = `genre:${channel.number}`;
   let ids = poolCache.get(cacheKey + ":ids");
   if (!ids) {
+    // `excludeShowIds` is optional — lets a genre channel opt a specific show
+    // out of its otherwise-automatic, zero-curation pool. Only real use so
+    // far: adult animation is tagged genre "Animation" same as every kids'
+    // cartoon, so without this it'd get swept into TOON CHANNEL right
+    // alongside them; those shows already have a proper home on LATE NIGHT
+    // CARTOONS. This just keeps them from *also* showing up somewhere that
+    // isn't curated for that at all.
+    const excluded = new Set(channel.excludeShowIds || []);
     ids = Object.values(catalog.shows)
-      .filter((s) => s.genre === channel.genre)
+      .filter((s) => s.genre === channel.genre && !excluded.has(s.id))
       .map((s) => s.id)
       .sort();
     poolCache.set(cacheKey + ":ids", ids);
