@@ -6,6 +6,11 @@
 
 <div id="tv">
   <video id="screen" playsinline></video>
+  <!-- Outlines the docked picture while the guide is up. A sibling of the
+       video rather than a border on it, because the video carries the crop
+       transform and a border would be scaled and shifted along with it —
+       player.js's layoutCrop() sizes this to the exact picture rect. -->
+  <div id="guide-video-frame" class="hidden"></div>
 
   <div id="osd" class="hidden">
     <div id="osd-ch"></div>

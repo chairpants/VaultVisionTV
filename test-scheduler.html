@@ -9,6 +9,9 @@
 <script src="data/commercials.js"></script>
 <script src="channels.js"></script>
 <script src="scheduler.js"></script>
+<!-- Defines functions only, nothing runs at load — pulled in for
+     programsBetween, the guide's timeline walk. -->
+<script src="guide.js"></script>
 <script>
 const schedInternal = window.SCHEDULER_INTERNAL;
 const lines = [];
@@ -34,8 +37,8 @@ function main() {
 
   // -- offset is within the episode, or in the slot's pad after it ---------
   check("genre channel: offset within episode duration (or padding after it)",
-    a && a.offsetSec >= 0 && (a.padding || a.offsetSec < a.episode.durationSec),
-    `offset=${a && a.offsetSec} dur=${a && a.episode.durationSec} padding=${a && a.padding}`);
+    a && a.offsetSec >= 0 && (a.padding || a.offsetSec < playableSec(a.episode)),
+    `offset=${a && a.offsetSec} playable=${a && playableSec(a.episode)} padding=${a && a.padding}`);
 
   // -- slot grid: every program start lands on a clean SLOT_SEC mark -------
   // The slot a position sits in ends at now + slotEndsInSec; that instant is
@@ -63,13 +66,13 @@ function main() {
   // the episode doesn't exactly fill its slot, that must be padding, and the
   // countdown must be positive and shorter than a whole slot.
   const short = getPositionAt(toon, catalog, t0);
-  const afterEnd = t0 + (short.episode.durationSec - short.offsetSec + 1) * 1000;
+  const afterEnd = t0 + (playableSec(short.episode) - short.offsetSec + 1) * 1000;
   const padPos = getPositionAt(toon, catalog, afterEnd);
-  const fillsSlot = schedInternal.slotFor(short.episode.durationSec) === short.episode.durationSec;
+  const fillsSlot = schedInternal.slotFor(playableSec(short.episode)) === playableSec(short.episode);
   check("one second past a short episode's end is padding, counting down",
     fillsSlot || (padPos.padding && padPos.slotEndsInSec > 0 && padPos.slotEndsInSec < SLOT_SEC &&
       padPos.next && padPos.next.episode),
-    JSON.stringify({ dur: short.episode.durationSec, padding: padPos.padding, left: padPos.slotEndsInSec }));
+    JSON.stringify({ playable: playableSec(short.episode), padding: padPos.padding, left: padPos.slotEndsInSec }));
 
   // -- genre pool covers every episode of every show in that genre --------
   const animationShows = Object.values(catalog.shows).filter((s) => s.genre === "Animation");
@@ -219,6 +222,99 @@ function main() {
   check("an all-broken pool returns a broken entry rather than looping forever",
     exhausted && schedInternal.brokenKeys.has(exhausted.episode.key),
     JSON.stringify(exhausted && exhausted.episode.key));
+
+  // -- guide timeline ------------------------------------------------------
+  // programsBetween (guide.js) walks the same schedule to find the boundaries
+  // the guide draws its vertical lines at. Two properties matter: the blocks
+  // must tile the window with no gaps or overlaps (every instant belongs to
+  // exactly one programme, same as the picture), and any block drawn with a
+  // solid start line must really be a start — tuning in one second later must
+  // land at the top of that programme, not partway through it. Blocks that
+  // pick up mid-programme (daypart pool switches) must be flagged `joined`
+  // instead, which is what makes their line dotted.
+  const HALF_HOUR = 30 * 60 * 1000;
+  const windowStart = EPOCH_MS + Math.floor((t0 - EPOCH_MS) / HALF_HOUR) * HALF_HOUR;
+  const windowEnd = windowStart + 3 * HALF_HOUR;
+  let tiled = 0, blockCount = 0, tileBad = [];
+  for (const c of CHANNELS) {
+    if (c.kind === "guide") continue;
+    const blocks = programsBetween(catalog, c, windowStart, windowEnd);
+    if (blocks.length === 0) { tileBad.push(`ch${c.number}: no blocks`); continue; }
+    tiled++;
+    blockCount += blocks.length;
+    if (blocks[0].airsFrom !== windowStart) tileBad.push(`ch${c.number}: does not start at the window`);
+    if (blocks[blocks.length - 1].airsUntil < windowEnd) tileBad.push(`ch${c.number}: ends early`);
+    for (let i = 0; i < blocks.length; i++) {
+      const b = blocks[i];
+      if (b.airsUntil <= b.airsFrom) tileBad.push(`ch${c.number}: block ${i} is empty`);
+      if (i > 0 && b.airsFrom !== blocks[i - 1].airsUntil) {
+        tileBad.push(`ch${c.number}: gap/overlap at block ${i}`);
+      }
+      const justAfter = getPositionAt(c, catalog, b.airsFrom + 1000);
+      const reallyStarts = justAfter && justAfter.offsetSec <= 2;
+      if (!b.joined && !reallyStarts) {
+        tileBad.push(`ch${c.number}: block ${i} drawn as a start but isn't (offset=${justAfter && justAfter.offsetSec})`);
+      }
+      if (b.joined && reallyStarts && i > 0) {
+        tileBad.push(`ch${c.number}: block ${i} flagged joined but is a real start`);
+      }
+    }
+  }
+  check(`guide timeline: ${blockCount} blocks across ${tiled} channels tile the window, start lines are real starts`,
+    tileBad.length === 0, tileBad.slice(0, 5).join(", "));
+
+  // -- channel pools reference real shows ----------------------------------
+  // buildPool only console.warns on an unknown show id, so a typo in a
+  // hand-written pool silently shrinks that channel instead of failing. These
+  // are typed by hand, so check them.
+  let poolRefs = 0, unknownRefs = [], emptyChannels = [];
+  for (const c of CHANNELS) {
+    if (c.kind === "guide") continue;
+    const ids = [...(c.fallbackPool || []), ...(c.daypart || []).flatMap((w) => w.pool || []),
+                 ...(c.excludeShowIds || [])];
+    for (const id of ids) {
+      poolRefs++;
+      if (!catalog.shows[id]) unknownRefs.push(`ch${c.number} -> ${id}`);
+    }
+    if (c.kind === "curated" && (c.fallbackPool || []).length === 0) emptyChannels.push(`ch${c.number}`);
+  }
+  check(`all ${poolRefs} channel pool references name a show in the catalog`,
+    unknownRefs.length === 0, unknownRefs.slice(0, 8).join(", "));
+  // Every curated channel needs a fallback: with none, it goes dead the moment
+  // it falls outside its daypart windows.
+  check("every curated channel has a non-empty fallbackPool",
+    emptyChannels.length === 0, emptyChannels.join(", "));
+
+  // -- intro skip ----------------------------------------------------------
+  // For a rip with baked-in intro footage, slot time maps onto content time:
+  // offset 0 is the first real frame, and the seek advances one-for-one with
+  // the clock without ever running off the end of the file. (The old
+  // max(offset, skip) form pinned the seek at `skip` for the first `skip`
+  // seconds while playback ran past it, so the drift check kept snapping the
+  // picture back — this walk fails if that ever returns.)
+  const seekFor = (ep, offsetSec) => offsetSec + (ep.introSkipSec || 0); // mirrors player.js
+  const skipShows = Object.values(catalog.shows)
+    .filter((s) => s.episodes.some((e) => (e.introSkipSec || 0) > 0));
+  let skipEps = 0, skipBad = [];
+  for (const s of skipShows) {
+    for (const ep of s.episodes) {
+      if (!(ep.introSkipSec > 0)) continue;
+      skipEps++;
+      const playable = playableSec(ep);
+      if (playable + ep.introSkipSec !== ep.durationSec) skipBad.push(`${s.id}: playable mismatch`);
+      if (seekFor(ep, 0) !== ep.introSkipSec) skipBad.push(`${s.id}: offset 0 is not the content start`);
+      let prev = -1;
+      for (let o = 0; o < playable; o += Math.max(1, Math.floor(playable / 20))) {
+        const seek = seekFor(ep, o);
+        if (seek <= prev) skipBad.push(`${s.id}: seek not advancing at offset ${o}`);
+        if (seek >= ep.durationSec) skipBad.push(`${s.id}: seek ${seek} past end ${ep.durationSec}`);
+        prev = seek;
+      }
+    }
+  }
+  check(`intro skip: ${skipEps} episodes across ${skipShows.length} shows map slot time onto content time`,
+    skipEps > 0 && skipBad.length === 0,
+    skipEps === 0 ? "no episodes with introSkipSec — expected Hitchcock/Twilight Zone" : skipBad.slice(0, 5).join(", "));
 
   document.getElementById("out").textContent =
     lines.join("\n") + `\n\n${pass} passed, ${fail} failed`;
