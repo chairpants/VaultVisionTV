@@ -1,6 +1,12 @@
-// The TV Guide channel: a Prevue-Guide-style grid (channel | now | +30 | +60)
-// built from the same getPositionAt() the player uses — so what a row says
-// is airing is exactly what you'll see if you tune to it.
+// The TV Guide channel: a Prevue-Guide-style grid built from the same
+// getPositionAt() the player uses — so what a row says is airing is exactly
+// what you'll see if you tune to it.
+//
+// Each row is a proportional 90-minute timeline (NOW through +60) rather than
+// three sampled columns: a programme's block is as wide as the airtime it
+// actually occupies, and the vertical line on its left edge is the moment it
+// starts — which is also the moment the previous one ends. See
+// programsBetween() for how those boundaries are found.
 //
 // Listings scroll freely (native overflow-y, mouse wheel/trackpad/scrollbar)
 // rather than auto-scrolling on a timer — opening the guide jumps straight
@@ -26,16 +32,61 @@ function timeLabel(d) {
 // guide's columns represent actually changed.
 const GUIDE_COLUMN_SEC = 30 * 60;
 const SLOT_MS = GUIDE_COLUMN_SEC * 1000;
+const WINDOW_MS = 3 * SLOT_MS; // NOW through +60, the span a row draws across
 // Floored against EPOCH_MS rather than the raw epoch so it matches the grid
 // the pools are built on, whatever the local UTC offset is.
 const slotStart = (ms) => EPOCH_MS + Math.floor((ms - EPOCH_MS) / SLOT_MS) * SLOT_MS;
 
-function programLabel(catalog, channel, atMs) {
-  const pos = getPositionAt(channel, catalog, atMs);
+const shortTime = (d) => `${d.getHours() % 12 || 12}:${String(d.getMinutes()).padStart(2, "0")}`;
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+// Programme titles come from archive.org metadata, not from us — escape them
+// before they go anywhere near innerHTML.
+const esc = (s) => String(s).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+
+function posLabel(pos) {
   if (!pos) return "—";
   if (pos.episode.movieTitle) return pos.episode.movieTitle; // real film title, not the host show's name
   const ep = pos.episode.name ? ` — ${pos.episode.name}` : "";
   return pos.show.title + ep;
+}
+
+const programLabel = (catalog, channel, atMs) => posLabel(getPositionAt(channel, catalog, atMs));
+
+// Every programme airing between startMs and endMs, by walking the same
+// schedule the player follows: ask what's on at t, jump to the end of that
+// slot, ask again. slotEndsInSec is measured from the scheduled programme
+// (never a substitute), so a block's [airsFrom, airsUntil) is exactly the
+// stretch that programme holds the channel — the boundaries between them are
+// the moments the picture actually changes.
+//
+// `joined` means the programme was already running when it took the channel,
+// so no start line is drawn for it. That's the first block on every row (the
+// window opens mid-programme), and also any block at a daypart boundary: a
+// curated channel switching pools at 9am picks up wherever that pool's
+// continuous timeline has reached, which is generally mid-episode (see
+// scheduler.js's fallback note). Drawing those as fresh starts would put a
+// start line where nothing starts.
+function programsBetween(catalog, channel, startMs, endMs) {
+  const out = [];
+  let t = startMs;
+  // ponytail: 40-block cap is a runaway guard, not a real limit — 90 minutes
+  // can't hold more than 18 slots at the 5-minute grid.
+  while (t < endMs && out.length < 40) {
+    const pos = getPositionAt(channel, catalog, t);
+    if (!pos) break;
+    // A missing/zero slotEndsInSec would spin forever; fall back to one column.
+    const airsUntil = pos.slotEndsInSec > 0 ? t + pos.slotEndsInSec * 1000 : t + SLOT_MS;
+    out.push({
+      label: posLabel(pos),
+      airsFrom: t,
+      airsUntil,
+      // Sub-second offsets are grid rounding, not a real join.
+      joined: pos.offsetSec >= 1,
+      startedAtMs: t - pos.offsetSec * 1000, // true start, may predate the window
+    });
+    t = airsUntil;
+  }
+  return out;
 }
 
 function createGuide({ root, channels, catalog, tuneTo, getCurrentNumber }) {
@@ -107,23 +158,41 @@ function createGuide({ root, channels, catalog, tuneTo, getCurrentNumber }) {
     renderInfoPanel(new Date());
   }
 
+  // Each row is a proportional timeline rather than three equal columns: a
+  // block's width is the airtime it actually occupies, and its left border is
+  // the moment it starts. So a 25-minute cartoon and a 2-hour movie look like
+  // what they are, and the vertical lines march across the row at the real
+  // programme boundaries instead of only at :00 and :30.
   function renderRows() {
     const s0 = slotStart(Date.now());
+    const nowPct = ((Date.now() - s0) / WINDOW_MS) * 100;
+    const pct = (ms) => ((clamp(ms, s0, s0 + WINDOW_MS) - s0) / WINDOW_MS) * 100;
     // The periodic refresh() rebuilds this from scratch (program labels can
     // have changed), which would otherwise reset the user's own scroll
     // position back to the top — save and restore it around the rebuild.
     const savedScrollTop = rowsWrap.scrollTop;
     trackEl.innerHTML = tunableChannels
       .map((c) => {
-        const now0 = programLabel(catalog, c, s0);
-        const now30 = programLabel(catalog, c, s0 + SLOT_MS);
-        const now60 = programLabel(catalog, c, s0 + 2 * SLOT_MS);
+        const blocks = programsBetween(catalog, c, s0, s0 + WINDOW_MS)
+          .map((b, i) => {
+            const left = pct(b.airsFrom);
+            const width = pct(b.airsUntil) - left;
+            // `edge`: the leftmost block butts against the window edge, which
+            // is a viewport boundary, not a programme boundary — no line.
+            const cls = `prog${i === 0 ? " live edge" : ""}${b.joined ? " joined" : ""}`;
+            // Joined blocks stamp nothing — the programme's own start is
+            // elsewhere, so a time here would read as a start that isn't one.
+            const stamp = b.joined ? "" : `<b class="prog-time">${shortTime(new Date(b.airsFrom))}</b> `;
+            const when = b.joined
+              ? `joined in progress, until ${shortTime(new Date(b.airsUntil))}`
+              : `${shortTime(new Date(b.airsFrom))}–${shortTime(new Date(b.airsUntil))}`;
+            return `<span class="${cls}" style="left:${left}%;width:${width}%" title="${esc(when)}  ${esc(b.label)}">${stamp}${esc(b.label)}</span>`;
+          })
+          .join("");
         const hl = c.number === highlightedNumber ? " highlight" : "";
         return `<div class="guide-row${hl}" data-ch="${c.number}">
           <span class="ch-col">${c.number} ${c.name}</span>
-          <span class="prog live">${now0}</span>
-          <span class="prog">${now30}</span>
-          <span class="prog">${now60}</span>
+          <span class="prog-track">${blocks}<i class="now-line" style="left:${nowPct}%"></i></span>
         </div>`;
       })
       .join("");

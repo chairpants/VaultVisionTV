@@ -328,4 +328,102 @@ window.CHANNELS = [
     ],
     fallbackPool: ["DragonBallZ", "Digimon"],
   },
+
+  // -- channels 47-54: built from what the curated lineup above never picked --
+  // The genre channels already sweep every show in the catalog, so nothing
+  // here is about coverage — these are themed pools drawn from the ~125 shows
+  // no curated channel had claimed, which is where the leftovers happened to
+  // cluster once they were sorted by era and tone.
+  {
+    number: 47, name: "MODERN TOONS", kind: "curated",
+    tagline: "The cartoons your little brother taped over yours.",
+    daypart: [],
+    fallbackPool: [
+      "SpongeBobSquarePants", "FairlyOddParents", "DextersLaboratorytheSeries",
+      "CampLakebottom", "GravityFalls", "Histeria", "KaBlam", "BobbysWorld",
+      "AceVenturaPetDetectiveSeries", "ArchiesWeirdMysteries", "BrakShowSeries",
+    ],
+  },
+  {
+    number: 48, name: "ACTION TOONS", kind: "curated",
+    tagline: "Every vehicle transforms into something.",
+    daypart: [],
+    fallbackPool: [
+      "BikerMiceFromMars", "RamboTheForceofFreedom", "TransformersPrime",
+      "SonictheHedgehog", "AdventuresOfSonic", "MutantLeague", "Godzilla",
+      "TMNTNextMutation", "SpawntheAnimatedSeriesSeries480x480", "MightyMax",
+      "StarcomtheUSSpaceForceSeries", "KarateKid", "MotorcityTVseries",
+      "BuzzLightyearofStarCommand", "DuckDodgers",
+    ],
+  },
+  {
+    number: 49, name: "BLACK & WHITE HOUR", kind: "curated",
+    tagline: "Before color, and none the worse.",
+    daypart: [],
+    fallbackPool: [
+      "LeaveIttoBeavertheSeries", "DickVanDyke", "TheLucyShow", "HeresLucy",
+      "McHalesNavySeries", "TheMonkees", "PeabodysImprobableHistory",
+      "LippytheLionandHardyHarHar", "WallyGator", "HermanandKatnip",
+    ],
+  },
+  {
+    number: 50, name: "FAMILY HOUR", kind: "curated",
+    tagline: "A lesson learned before the credits.",
+    // The 8-10pm family block real networks actually ran; outside it the
+    // channel keeps to the same era rather than going somewhere else entirely.
+    daypart: [{ days: [0, 1, 2, 3, 4, 5, 6], startHour: 20, endHour: 22, pool: [
+      "Roseanne", "CosbyShow", "FactsofLife", "DesigningWomen", "MamasFamily",
+      "TheHoganFamily", "ALFtheSeries", "LifeGoesOn", "JusttheTenofUs",
+      "ArchieBunkersPlace", "HighwayToHeaven",
+    ] }],
+    fallbackPool: ["BlessThisHouse", "BosomBuddies", "ItsYourMove", "HarryandtheHendersons"],
+  },
+  {
+    number: 51, name: "APARTMENT 5B", kind: "curated",
+    tagline: "Nobody here has a real job.",
+    daypart: [],
+    fallbackPool: [
+      "Seinfeld", "Nanny", "DharmaAndGreg", "VeronicasCloset", "NedAndStacey",
+      "Joey", "RudeAwakening", "WhatILikeAboutYou", "StillStanding", "Reba",
+      "UnhappilyEverAfter", "BernieMacShow", "AreWeThereYet", "SoulMan",
+    ],
+  },
+  {
+    number: 52, name: "STORYTIME", kind: "curated",
+    tagline: "Read along if you like.",
+    // A real weekday pre-school block: mornings for the youngest end of the
+    // pool, with the after-school-aged shows as the rest of the day's filler.
+    daypart: [{ days: [1, 2, 3, 4, 5], startHour: 7, endHour: 11, pool: [
+      "LittleBear", "BerenstainBears", "CliffordtheBigRedDogSeriesSeries",
+      "Zoboomafoo", "BertandErniesGreatAdventures", "MrMen",
+      "WonderPetsEpisodeswithMissingEpisodes", "TheWorldofDavidtheGnome",
+    ] }],
+    fallbackPool: [
+      "AdventuresinWonderland", "Ghostwriter", "Wishbone", "RoundtheTwist",
+      "NickArcade", "JimHensonHour", "LandOfTheLost1991", "MouseFactory",
+    ],
+  },
+  {
+    number: 53, name: "SKETCH VAULT", kind: "curated",
+    tagline: "Bits, and nothing but.",
+    daypart: [],
+    fallbackPool: [
+      "InLivingColor", "MontyPythonsFlyingCircus", "ABCsFridays",
+      "BenStillerShow", "HeyVernIt",
+    ],
+  },
+  {
+    number: 54, name: "CULT & CANCELLED", kind: "curated",
+    tagline: "Thirteen episodes, no more.",
+    // Short-run and burned-off series — the pool is deliberately made of shows
+    // that never got a second season, which is the whole premise of the
+    // channel rather than an accident of what was left over.
+    daypart: [],
+    fallbackPool: [
+      "FireflySeries", "LoneGunmen", "Middleman", "Jericho", "TheNetAmericanTVseries",
+      "Action", "BakersfieldPD", "Woops", "Tucker", "YouWish", "TeenAngel",
+      "WeberShow", "Mulaney", "CavemenSeriesSlightlyBetterQuality", "Ted",
+      "MortalKombatConquest", "Animorphs", "LifeAsWeKnowIt",
+    ],
+  },
 ];

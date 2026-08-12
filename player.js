@@ -64,6 +64,23 @@ function cropCSS(c) {
     : "";
 }
 
+// The transform above only *positions* the wanted region over the element's
+// box — it doesn't remove the rest of the frame. A transform isn't clipped by
+// the element's own bounds, and nothing upstream clips it either (#tv is the
+// whole viewport), so without this the black surround and the watermark panel
+// scale up right along with the picture and paint straight over the layout,
+// i.e. the crop has no visible effect at all.
+//
+// clip-path is measured in the element's own untransformed box, where the
+// frame is drawn whole (object-fit: fill) — so the crop rect's fractions are
+// usable as inset percentages directly, and the transform then maps what
+// survives onto the box.
+function clipCSS(c) {
+  if (!c) return "";
+  const pct = (v) => `${(v * 100).toFixed(4)}%`;
+  return `inset(${pct(c.y)} ${pct(1 - c.x - c.w)} ${pct(1 - c.y - c.h)} ${pct(c.x)})`;
+}
+
 // Hosted-movie shows (MonsterVision, USA Up All Night, ...) carry the real
 // film title separately from the wrapper show's own name — put the movie
 // front and center, the way a real "movie of the night" bumper would, with
@@ -111,6 +128,7 @@ function createPlayer(els) {
   let tuneToken = 0; // invalidates in-flight resolves if the user flips again before they land
   let currentCrop = null; // {x,y,w,h} of the episode currently loaded, or null
   let guideMode = false; // true while the TV Guide is up — see setGuideMode
+  const frame = document.getElementById("guide-video-frame");
 
   // Sizes the <video> box itself to the cropped picture's true aspect ratio
   // (letterboxed within its container), then applies the crop transform —
@@ -155,17 +173,30 @@ function createPlayer(els) {
     video.style.width = `${w}px`;
     video.style.height = `${h}px`;
     if (guideMode) {
-      // Center within the bezel on whichever axis the letterboxed picture
+      // Center within the slot on whichever axis the letterboxed picture
       // doesn't fully fill.
-      video.style.left = `${boxLeft + (availW - w) / 2}px`;
-      video.style.top = `${boxTop + (availH - h) / 2}px`;
+      const left = boxLeft + (availW - w) / 2;
+      const top = boxTop + (availH - h) / 2;
+      video.style.left = `${left}px`;
+      video.style.top = `${top}px`;
+      // The outline hugs the picture, not the slot — same rect, no transform
+      // (a border on the video itself would be scaled by the crop).
+      if (frame) {
+        frame.style.left = `${left}px`;
+        frame.style.top = `${top}px`;
+        frame.style.width = `${w}px`;
+        frame.style.height = `${h}px`;
+        frame.classList.remove("hidden");
+      }
     } else {
       video.style.left = "";
       video.style.top = "";
+      if (frame) frame.classList.add("hidden");
     }
     video.style.marginBottom = !guideMode && reserved ? `${reserved}px` : "";
     video.style.objectFit = "fill";
     video.style.transformOrigin = "0 0";
+    video.style.clipPath = clipCSS(c);
     video.style.transform = cropCSS(c);
   }
   window.addEventListener("resize", layoutCrop);
@@ -206,7 +237,7 @@ function createPlayer(els) {
     const lines = titleLines(position.show, position.episode);
     osdShow.textContent = lines.title;
     osdEpisode.textContent = lines.sub;
-    const pct = Math.min(100, (position.offsetSec / position.episode.durationSec) * 100);
+    const pct = Math.min(100, (position.offsetSec / playableSec(position.episode)) * 100);
     osdBarFill.style.width = `${pct}%`;
     osd.classList.remove("hidden", "fade");
     clearTimeout(osdFadeTimer);
@@ -214,12 +245,16 @@ function createPlayer(els) {
   }
 
   function applyPositionToVideo(position, { isNewTune }) {
-    // Some rips open on baked-in footage that isn't the show (a station
-    // bumper, an uploader's colorization credit) — episode.introSkipSec, from
-    // VaultVision's introSkipSeconds/introSkipBySeason, is how far in the
-    // real content starts. If the schedule would land before that, jump
-    // straight past it rather than showing dead air.
-    const seekTo = Math.max(position.offsetSec, position.episode.introSkipSec || 0);
+    // episode.introSkipSec is baked-in footage that isn't the show (a station
+    // bumper, an uploader's colorization credit). It isn't part of the
+    // broadcast, so the slot's clock maps onto the content *after* it: offset
+    // 0 is the first real frame. The scheduler sizes the slot off the same
+    // playable length (see playableSec), so the two stay in step.
+    //
+    // Not max(offset, skip) — that pinned the seek at `skip` for the first
+    // `skip` seconds of the slot while playback ran on past it, so the 15s
+    // drift check kept yanking the picture back to the same frame.
+    const seekTo = position.offsetSec + (position.episode.introSkipSec || 0);
     if (isNewTune) {
       video.currentTime = seekTo;
       video.play().catch(() => unlockOnFirstGesture());
@@ -289,7 +324,7 @@ function createPlayer(els) {
   // fits in the time left, otherwise the countdown.
   function renderBreak(pos) {
     showChyron(pos);
-    const padElapsed = pos.offsetSec - pos.episode.durationSec;
+    const padElapsed = pos.offsetSec - playableSec(pos.episode);
     const ad = getAdAt(pos.episode.key, padElapsed, pos.slotEndsInSec);
     if (!ad) {
       video.pause();
