@@ -426,4 +426,50 @@ window.CHANNELS = [
       "MortalKombatConquest", "Animorphs", "LifeAsWeKnowIt",
     ],
   },
+
+  // -- more movie channels ------------------------------------------------
+  // The catalog only has 12 shows actually tagged genre "TV Movies" (all of
+  // it already split between CATASTROPHE CHANNEL and NIGHTMARE ALLEY, with
+  // MOVIE VAULT as their automatic combined pool) -- no untapped TV-movie
+  // content exists to build more channels from without repeating titles.
+  // What the catalog *does* have is depth inside two "Broadcast Blocks"
+  // shows that are themselves nothing but movies, one per episode:
+  // MonsterVision (76 films) and USA Up All Night (40). Pools work at whole-
+  // show granularity, not per-episode, so a new channel can't cherry-pick a
+  // subset of either show's episodes -- these three instead get their
+  // variety from *combining* whole shows differently (and, for CREATURE
+  // DOUBLE FEATURE, a different daypart) than any existing channel does.
+  {
+    number: 55, name: "DOUBLE FEATURE DRIVE-IN", kind: "curated",
+    tagline: "Two movies, no host, no waiting.",
+    daypart: [],
+    fallbackPool: ["USAUpAllNight", "MonsterVision"],
+  },
+  {
+    number: 56, name: "MATINEE MADNESS", kind: "curated",
+    tagline: "Popcorn movies, any time of day.",
+    daypart: [],
+    // The same 12 shows MOVIE VAULT's genre pool sweeps automatically, but
+    // as its own independently-seeded curated pool -- a different shuffle
+    // order and no genre-channel coupling, so it airs something different
+    // at any given moment than channel 11 does.
+    fallbackPool: [
+      "Tornado1996", "VolcanoFireOnTheMountain", "Asteroid1997", "Meteorites1998",
+      "WithoutWarning1994", "Y2KTheMovie", "It1990", "StormOfTheCentury",
+      "TheShining1997", "TheStand1994", "Tommyknockers", "SometimesTheyComeBack",
+    ],
+  },
+  {
+    number: 57, name: "CREATURE DOUBLE FEATURE", kind: "curated",
+    tagline: "Monsters, madmen, and made-for-TV mayhem.",
+    // Sunday 8-10pm horror block, the same slot CATASTROPHE CHANNEL uses for
+    // disaster movies -- this is its monster-movie counterpart, pairing
+    // MonsterVision with every King TV movie at once (NIGHTMARE ALLEY never
+    // runs Sundays, so this doesn't just duplicate it).
+    daypart: [{ days: [0], startHour: 20, endHour: 22, pool: [
+      "MonsterVision", "It1990", "StormOfTheCentury", "TheShining1997",
+      "TheStand1994", "Tommyknockers", "SometimesTheyComeBack",
+    ] }],
+    fallbackPool: ["MonsterVision"],
+  },
 ];
