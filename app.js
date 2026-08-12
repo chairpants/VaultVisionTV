@@ -43,6 +43,7 @@ function main() {
     channels: CHANNELS,
     catalog,
     tuneTo,
+    getCurrentNumber: () => currentNumber,
   });
 
   function tuneTo(number) {
@@ -54,17 +55,27 @@ function main() {
     if (!channel) return; // no such channel — ignore, like a real tuner would
     if (number !== currentNumber) lastNumber = currentNumber;
     currentNumber = number;
+    // Picking a channel straight off a guide row bypasses toggleGuide()
+    // entirely, so it has to undo the docking itself — otherwise the picture
+    // stayed sized/positioned for the guide's PIP box until the next time
+    // the GUIDE key happened to be pressed.
     guideOpen = false;
     guide.hide();
+    player.setGuideMode(false);
     player.tune(channel, catalog);
   }
 
   function toggleGuide() {
     guideOpen = !guideOpen;
     if (guideOpen) {
-      guide.show(); // video plays on, untouched, behind the (semi-transparent) overlay
+      // show() before setGuideMode(true): layoutCrop() measures
+      // #guide-video-slot's live layout box, which only exists once the
+      // guide's DOM is actually visible (display:none elements have no box).
+      guide.show();
+      player.setGuideMode(true);
     } else {
       guide.hide();
+      player.setGuideMode(false);
       // re-tune on close: cheap no-op if nothing changed (same episode key
       // skips the src reload), but corrects any drift and re-flashes the
       // OSD banner so it's obvious what you've come back to
