@@ -250,6 +250,54 @@ html, body {
   background: rgba(255,247,0,.75); z-index: 0; pointer-events: none;
 }
 
+/* -- Video On Demand ---------------------------------------------------------- */
+/* Unlike the guide (a translucent overlay over the still-playing picture),
+   VOD takes over the whole screen the same way any other channel does — the
+   picture is simply stopped (app.js's enterVod), so this can be fully
+   opaque throughout rather than needing to stay legible over live video. */
+#vod {
+  position: absolute; inset: 0; z-index: 10; background: rgba(0,0,0,.94);
+  display: flex; flex-direction: column; overflow: hidden; font-size: 1.1em;
+}
+#vod-header {
+  flex: none; display: flex; align-items: center; justify-content: space-between;
+  background: rgba(0,26,51,.7); border-bottom: 2px solid #0af;
+  padding: 14px 24px; gap: 24px;
+}
+#vod-title { color: #fff700; font-size: 1.3em; letter-spacing: 1px; flex: none; }
+#vod-breadcrumb {
+  color: #7fe8ff; font-size: .9em; letter-spacing: .5px; text-align: right;
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* Free native scrolling, same as #guide-rows — no auto-scroll cycle, no
+   keyboard row-stepping (see vod.js's header comment). */
+#vod-rows { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; }
+#vod-rows::-webkit-scrollbar { width: 10px; }
+#vod-rows::-webkit-scrollbar-track { background: rgba(0,13,26,.4); }
+#vod-rows::-webkit-scrollbar-thumb { background: rgba(127,232,255,.35); border-radius: 5px; }
+#vod-rows::-webkit-scrollbar-thumb:hover { background: rgba(127,232,255,.55); }
+
+.vod-row {
+  padding: 12px 24px; cursor: pointer; color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.vod-row:hover { background: rgba(10,170,255,.15); }
+
+/* Hold-to-scrub UI, VOD playback only — player.js owns this directly (see
+   its header comment on why it isn't a vod.js concern). Centered over the
+   picture, same "readout box" language as #osd/#digit-osd. */
+#vod-seek {
+  position: absolute; left: 50%; bottom: 15%; transform: translateX(-50%); z-index: 8;
+  background: rgba(0,0,0,.8); border: 2px solid rgba(255,255,255,.25);
+  padding: 16px 28px; width: 60vw; max-width: 700px; text-align: center;
+}
+#vod-seek-dir { color: #fff700; font-size: 1.2em; letter-spacing: 2px; }
+#vod-seek-bar { margin-top: 12px; height: 8px; background: rgba(255,255,255,.2); }
+#vod-seek-fill { height: 100%; width: 0%; background: #fff700; }
+#vod-seek-time { margin-top: 8px; color: #7fe8ff; font-size: .95em; letter-spacing: 1px; }
+
 /* -- on-screen remote -------------------------------------------------------- */
 /* Parked off the bottom edge with only the head strip showing; :hover rolls
    it back up, and it rolls back down 3s after you stop interacting.

@@ -21,15 +21,29 @@
 // NickAtNite, MonsterVision, SciFiAnime, SatMorning, TGIF) — those don't need
 // curating at all, they're already exactly what this app is simulating.
 //
-// Channel 1 is deliberately unused — real cable lineups commonly skip it too.
+//   kind: "vod"     — not a scheduled simulation at all: a browsable menu
+//                      (see vod.js) driven live off the catalog, sectioned
+//                      by genre same as the "genre" channels above. Has no
+//                      daypart/pool/genre fields of its own.
+//
+// The guide doesn't need a numbered channel slot for its own sake — it's
+// already reachable via a dedicated action (the on-screen GUIDE button / `g`
+// key, see remote.js) independent of any number — so it sits on channel 1
+// (formerly deliberately unused, real cable lineups commonly skip it too) to
+// free up channel 2, the lowest tunable slot, for VIDEO ON DEMAND. Declaring
+// VOD as the very next entry after the guide makes it the topmost row in the
+// guide's own listings too (which filter out kind:"guide" but nothing else).
 //
 // Plain script, not a module (see scheduler.js's header for why) — loaded via
 // <script src="channels.js">, so file:// pages can load it too.
-const GUIDE_CHANNEL = 2;
+const GUIDE_CHANNEL = 1;
+const VOD_CHANNEL = 2;
 window.GUIDE_CHANNEL = GUIDE_CHANNEL;
+window.VOD_CHANNEL = VOD_CHANNEL;
 
 window.CHANNELS = [
   { number: GUIDE_CHANNEL, name: "TV GUIDE", kind: "guide", tagline: "What's on, eventually." },
+  { number: VOD_CHANNEL, name: "🎬 VIDEO ON DEMAND", kind: "vod", tagline: "Pick something. Anything." },
 
   // -- genre channels: one per catalog genre, zero curation -----------------
   { number: 3, name: "TOON CHANNEL", kind: "genre", genre: "Animation",

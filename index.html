@@ -37,6 +37,22 @@
 
   <div id="guide" class="hidden"></div>
 
+  <!-- Video On Demand: a browsable menu, not a scheduled channel, so unlike
+       the guide it takes over the whole screen the same way any other
+       channel does (see app.js's enterVod) rather than docking the live
+       picture in a corner. Populated by vod.js's createVod(). -->
+  <div id="vod" class="hidden"></div>
+
+  <!-- Hold-to-scrub UI, VOD playback only — player.js's vodSeekBegin/
+       vodSeekCommit own it directly (it's lower-level than a vod.js
+       concern: scrubbing happens while the browse overlay above is
+       hidden). -->
+  <div id="vod-seek" class="hidden">
+    <div id="vod-seek-dir"></div>
+    <div id="vod-seek-bar"><div id="vod-seek-fill"></div></div>
+    <div id="vod-seek-time"></div>
+  </div>
+
   <div id="blank-msg" class="hidden">NO SIGNAL</div>
   <div id="start-hint" class="hidden">CLICK OR PRESS ANY KEY TO START</div>
 </div>
@@ -96,4 +112,5 @@
 <script src="player.js"></script>
 <script src="remote.js"></script>
 <script src="guide.js"></script>
+<script src="vod.js"></script>
 <script src="app.js"></script>
