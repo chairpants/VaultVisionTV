@@ -411,7 +411,7 @@ window.CHANNELS = [
     // The 8-10pm family block real networks actually ran; outside it the
     // channel keeps to the same era rather than going somewhere else entirely.
     daypart: [{ days: [0, 1, 2, 3, 4, 5, 6], startHour: 20, endHour: 22, pool: [
-      "Roseanne", "CosbyShow", "FactsofLife", "DesigningWomen", "MamasFamily",
+      "CosbyShow", "FactsofLife", "DesigningWomen", "MamasFamily",
       "TheHoganFamily", "ALFtheSeries", "LifeGoesOn", "JusttheTenofUs",
       "ArchieBunkersPlace", "HighwayToHeaven",
     ] }],
@@ -422,7 +422,7 @@ window.CHANNELS = [
     tagline: "Nobody here has a real job.",
     daypart: [],
     fallbackPool: [
-      "Seinfeld", "Nanny", "DharmaAndGreg", "VeronicasCloset", "NedAndStacey",
+      "Nanny", "DharmaAndGreg", "VeronicasCloset", "NedAndStacey",
       "Joey", "RudeAwakening", "WhatILikeAboutYou", "StillStanding", "Reba",
       "UnhappilyEverAfter", "BernieMacShow", "AreWeThereYet", "SoulMan",
     ],
@@ -546,7 +546,7 @@ window.CHANNELS = [
     fallbackPool: [
       "FamilyMatters", "GrowingPains", "PunkyBrewster", "SavedByTheBell",
       "FactsofLife", "DesigningWomen", "ALFtheSeries", "NightCourt",
-      "Newhart", "MurphyBrown", "Roseanne", "MarriedWithChildren",
+      "Newhart", "MurphyBrown", "MarriedWithChildren",
       "BosomBuddies", "CosbyShow", "ArchieBunkersPlace", "MamasFamily",
       "HeyDude", "TheHoganFamily", "LifeGoesOn", "JusttheTenofUs",
       "ItsYourMove", "LeaveIttoBeavertheSeries",
@@ -557,7 +557,7 @@ window.CHANNELS = [
     tagline: "Must-see, whenever you tune in.",
     daypart: [],
     fallbackPool: [
-      "MadAboutYou", "HomeImprovement", "Seinfeld", "NewsRadio",
+      "MadAboutYou", "HomeImprovement", "NewsRadio",
       "Nanny", "VeronicasCloset", "NedAndStacey", "StepByStep",
       "ParkerLewis", "TeenAngel", "YouWish", "UnhappilyEverAfter",
       "JeffFoxworthyShow", "SoulMan", "BakersfieldPD", "AlexMack",
