@@ -45,14 +45,20 @@ window.CHANNELS = [
   { number: GUIDE_CHANNEL, name: "TV GUIDE", kind: "guide", tagline: "What's on, eventually." },
   { number: VOD_CHANNEL, name: "🎬 VIDEO ON DEMAND", kind: "vod", tagline: "Pick something. Anything." },
 
+  // Was TOON CHANNEL (genre "Animation", a flat 92-show sweep with no
+  // structure to it) — retired, and every Animation-genre show now has
+  // exactly one curated home instead: SATURDAY MORNING/SUNDAY FUNNIES
+  // (14/27, general-audience), TEEN ACTION THEATER (43), LATE NIGHT
+  // CARTOONS (45, adult). Refilled rather than left empty — a small,
+  // always-on three-show rotation, no daypart gating needed.
+  {
+    number: 3, name: "QUEENS & RAYMOND", kind: "curated",
+    tagline: "Married, with in-laws.",
+    daypart: [],
+    fallbackPool: ["KingofQueens", "EverybodyLovesRaymond", "Reba"],
+  },
+
   // -- genre channels: one per catalog genre, zero curation -----------------
-  // 3 (TOON CHANNEL, genre "Animation") retired — a flat 92-show sweep with
-  // no structure to it, all of it now placed by age/tone instead: SATURDAY
-  // MORNING/SUNDAY FUNNIES (14/27, general-audience), TEEN ACTION THEATER
-  // (43), LATE NIGHT CARTOONS (45, adult). Every Animation-genre show has
-  // exactly one home now rather than also being swept here with no curation
-  // at all. Left unused rather than renumbering everything above it, same
-  // as channel 1.
   { number: 4, name: "SITCOM CENTRAL", kind: "genre", genre: "Sitcoms",
     tagline: "Laugh track included." },
   { number: 5, name: "CLASSIC TV", kind: "genre", genre: "Classic Sitcoms",
