@@ -77,11 +77,14 @@ window.CHANNELS = [
     tagline: "Feature presentation, every hour." },
   { number: 12, name: "REWIND", kind: "genre", genre: "Broadcast Blocks",
     tagline: "Exactly as it aired." },
+  // Live PD used to be excluded here by id: every one of its files needs an
+  // archive.org login (401 to anonymous requests), so it could never play. It's
+  // now dropped from the catalog itself via build-catalog.py's EXCLUDED_SHOWS,
+  // which is what "removed" should mean — the channel-layer list only hid it
+  // from this one channel and left it browsable in VOD, since vod.js reads the
+  // catalog directly and has no equivalent opt-out.
   { number: 13, name: "REALITY CHECK", kind: "genre", genre: "Reality TV",
-    tagline: "Unscripted. Mostly.",
-    // Consistently unplayable (archive.org files error out) — see also its
-    // removal from TRUE CRIME TONIGHT's curated pool.
-    excludeShowIds: ["LivePDSeriesNotDoneYet"] },
+    tagline: "Unscripted. Mostly." },
 
   // -- original curated dayparted channels -----------------------------------
   {
