@@ -214,6 +214,12 @@ function main() {
     if ((e.key === "Escape" || e.key === "Backspace") && vodPlaying) returnToVodMenu();
   });
 
+  // The picture is the same <video> element whether full-screen or docked
+  // as the guide's mini preview (see player.js's layoutCrop) — one handler
+  // covers both directions of the toggle: click the full picture to bring
+  // the guide up, click the docked mini picture to bring it back down.
+  video.addEventListener("click", () => tuneTo(GUIDE_CHANNEL));
+
   player.startDriftLoop(() => byNumber[currentNumber], catalog);
   tuneTo(DEFAULT_CHANNEL);
 }
