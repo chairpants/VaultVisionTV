@@ -121,6 +121,14 @@ function main() {
     } else {
       guide.hide();
       player.setGuideMode(false);
+      // VOD is a real channel number but not a scheduled one, so there's no
+      // position to re-tune to: getPositionAt returns null for kind:"vod" and
+      // tune() reacts by pausing, dropping the src and showing NO SIGNAL —
+      // i.e. it would kill the on-demand title playing underneath the guide.
+      // Same hazard the drift loop already guards against (see player.js's
+      // startDriftLoop). Undocking the picture is all that's needed here;
+      // on-demand playback never drifts, it just resumes where it was.
+      if (currentNumber === VOD_CHANNEL) return;
       // re-tune on close: cheap no-op if nothing changed (same episode key
       // skips the src reload), but corrects any drift and re-flashes the
       // OSD banner so it's obvious what you've come back to
