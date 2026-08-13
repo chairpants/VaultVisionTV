@@ -5,7 +5,12 @@
 // GUIDE_CHANNEL, VOD_CHANNEL, CATALOG, createPlayer, createGuide, createVod,
 // and initRemote all come from earlier <script src> tags in index.html
 // loading into the shared top-level scope; order matters there.
-const DEFAULT_CHANNEL = 3; // TOON CHANNEL
+// Was 3 (TOON CHANNEL) -- retired along with the rest of the flat cartoon
+// sweep (see channels.js), and channel 3 has since been refilled with an
+// unrelated sitcom rotation, so this stays on KIDS & LEARNING: a genre
+// channel, so always has something airing (no daypart gap to land in), and
+// wholesome/all-ages the way a default ought to be.
+const DEFAULT_CHANNEL = 8; // KIDS & LEARNING
 const VOLUME_STEP = 0.1;
 
 const byNumber = Object.fromEntries(CHANNELS.map((c) => [c.number, c]));

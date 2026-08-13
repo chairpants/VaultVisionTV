@@ -223,12 +223,10 @@ function genrePool(channel, catalog) {
   let ids = poolCache.get(cacheKey + ":ids");
   if (!ids) {
     // `excludeShowIds` is optional — lets a genre channel opt a specific show
-    // out of its otherwise-automatic, zero-curation pool. Only real use so
-    // far: adult animation is tagged genre "Animation" same as every kids'
-    // cartoon, so without this it'd get swept into TOON CHANNEL right
-    // alongside them; those shows already have a proper home on LATE NIGHT
-    // CARTOONS. This just keeps them from *also* showing up somewhere that
-    // isn't curated for that at all.
+    // out of its otherwise-automatic, zero-curation pool. Current use:
+    // REALITY CHECK (genre "Reality TV") excludes LivePDSeriesNotDoneYet,
+    // whose archive.org files are consistently unplayable — the guide would
+    // otherwise still advertise it.
     const excluded = new Set(channel.excludeShowIds || []);
     ids = Object.values(catalog.shows)
       .filter((s) => s.genre === channel.genre && !excluded.has(s.id))
