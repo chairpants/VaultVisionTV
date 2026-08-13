@@ -24,11 +24,18 @@ function vodEpisodeLabel(episode) {
 // them before they go anywhere near innerHTML (same policy as guide.js).
 const vodEsc = (s) => String(s).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
 
+// Sorted, deduped seasonNum values across a show's episodes. A seasons
+// level only makes sense when there's more than one -- most tape/movie-pile
+// shows (MonsterVision and the like) only ever have a single value here.
+const vodSeasons = (show) => [...new Set(show.episodes.map((ep) => ep.seasonNum))].sort((a, b) => a - b);
+
 function createVod({ root, catalog, playEpisode, onExit }) {
-  // Nav stack: [] at the section list, [genre] one level in, [genre, show]
-  // two levels in (an episode list). Selecting an episode calls playEpisode
-  // and leaves the stack alone, so Back from playback (see app.js) drops
-  // right back into the same episode list without re-navigating.
+  // Nav stack: [] section list, [genre] shows, [genre, show] seasons-or-
+  // episodes (episodes directly if the show only has one season), [genre,
+  // show, season] episodes filtered to that season. Selecting an episode
+  // calls playEpisode and leaves the stack alone, so Back from playback
+  // (see app.js) drops right back into the same episode list without
+  // re-navigating.
   let stack = [];
   let currentItems = [];
 
@@ -56,16 +63,33 @@ function createVod({ root, catalog, playEpisode, onExit }) {
         .sort((a, b) => a.title.localeCompare(b.title))
         .map((show) => ({ label: show.title, onSelect: () => { stack = [genre, show]; render(); } }));
     }
-    const [, show] = stack;
-    return show.episodes.map((episode) => ({
-      label: vodEpisodeLabel(episode),
-      onSelect: () => playEpisode(show, episode),
-    }));
+    if (stack.length === 2) {
+      const [genre, show] = stack;
+      const seasons = vodSeasons(show);
+      if (seasons.length > 1) {
+        return seasons.map((season) => ({
+          label: `Season ${season}  (${show.episodes.filter((ep) => ep.seasonNum === season).length})`,
+          onSelect: () => { stack = [genre, show, season]; render(); },
+        }));
+      }
+      // Single season/flat show -- nothing to choose between, straight to episodes.
+      return show.episodes.map((episode) => ({
+        label: vodEpisodeLabel(episode),
+        onSelect: () => playEpisode(show, episode),
+      }));
+    }
+    const [, show, season] = stack;
+    return show.episodes
+      .filter((ep) => ep.seasonNum === season)
+      .map((episode) => ({ label: vodEpisodeLabel(episode), onSelect: () => playEpisode(show, episode) }));
   }
 
   function render() {
     breadcrumbEl.textContent =
-      stack.length === 0 ? "" : stack.length === 1 ? stack[0] : `${stack[0]}   /   ${stack[1].title}`;
+      stack.length === 0 ? "" :
+      stack.length === 1 ? stack[0] :
+      stack.length === 2 ? `${stack[0]}   /   ${stack[1].title}` :
+      `${stack[0]}   /   ${stack[1].title}   /   Season ${stack[2]}`;
     currentItems = itemsForLevel();
     rowsEl.innerHTML = currentItems
       .map((it, i) => `<div class="vod-row" data-idx="${i}">${vodEsc(it.label)}</div>`)
