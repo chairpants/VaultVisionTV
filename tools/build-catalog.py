@@ -27,37 +27,53 @@ BASE = "https://chairpants.github.io/VaultVision"
 OUT_JSON = Path(__file__).parent.parent / "data" / "catalog.json"
 OUT_JS = Path(__file__).parent.parent / "data" / "catalog.js"
 
-# archive.org items that no longer exist — /metadata/<id> answers {"error": ...}
-# because the item was darkened or withdrawn. VaultVision still lists them, so
-# they come back on every rebuild unless dropped here. The player copes (no
+# archive.org items nothing can be played from. VaultVision still lists them,
+# so they come back on every rebuild unless dropped here. The player copes (no
 # playable file -> markBroken -> failOver), but only after a wasted metadata
 # round trip and a visible failover, and the guide still advertises them.
-# Re-check with: curl -s https://archive.org/metadata/<id>
+#
+# Two ways an item lands here, and the second one is invisible to a metadata
+# check:
+#   * the item is gone   — /metadata/<id> answers {"error": ...} (darkened or
+#     withdrawn).
+#   * the item is gated  — /metadata/<id> answers 200 and lists every file,
+#     but /download/<id>/<file> answers 401/403 to anonymous requests because
+#     the item needs an archive.org login. Metadata alone looks perfectly
+#     healthy, so check a real file with a range request, the way <video> does.
+# Re-check with:
+#   curl -s https://archive.org/metadata/<id>
+#   curl -s -o /dev/null -L -r 0-1 -w '%{http_code}\n' https://archive.org/download/<id>/<file>
 DEAD_ITEMS = {
     "myopic-vhs-no-08",                      # Sci-Fi Saturday Anime, 7.70h
     "stephen-kings-the-langoliers-1995-hd",  # The Langoliers (1995), 3.00h
+    # Gated, not gone: collection ["loggedin","deemphasize"] with
+    # access-restricted-item true. All 37 files 401 anonymously. This is the
+    # whole of upstream's LivePDSeriesNotDoneYet, which therefore drops out
+    # with no episodes left — the playable Live PD episodes come from the two
+    # opensource_movies items in data/local-shows/LivePD instead.
+    "live-pd-complete-series_202311",
 }
 
-# Whole shows VaultVision lists but this app deliberately doesn't carry.
+# Whole shows VaultVision lists but this app deliberately doesn't carry, for
+# reasons that have nothing to do with whether the files play (that's
+# DEAD_ITEMS above -- an unplayable source is a source problem, so it gets
+# dropped by item and the show falls out on its own if nothing is left).
 # Excluding the show here -- rather than just leaving it off every channel's
 # pool -- means it structurally can't resurface: a genre channel sweeps every
 # show of its genre with no per-show opt-out list to remember to update, so a
 # show excluded only at the channel layer stays one future genre-channel
 # addition away from quietly coming back.
-#
-# DEAD_ITEMS above is the other exclusion list, and the difference is how the
-# breakage shows up: DEAD_ITEMS is for items whose /metadata/<id> itself
-# errors. An item can answer metadata perfectly and still be unplayable, which
-# is a whole-show problem and belongs here instead.
 EXCLUDED_SHOWS = {
     "USAUpAllNight",  # leaned heavily on tasteless content with no redeeming value
-    # Every file needs an archive.org login: the item is in the "loggedin"
-    # collection with access-restricted-item true, so /metadata answers 200
-    # with all 37 files listed while /download/<item>/<file> answers 401 to
-    # anonymous requests -- nothing the player can do with that. Verify with:
-    #   curl -sIL -r 0-1 "https://archive.org/download/live-pd-complete-series_202311/Live%20PD_S01E01_10.28.16%20%28720p%2030FPS%29.mp4"
-    "LivePDSeriesNotDoneYet",
 }
+
+# Shows that live in this repo rather than upstream VaultVision, listed in
+# data/local-shows/shows.csv with the same columns as upstream's shows.js CSV
+# (title,id,genre,ext) and one <id>/data.js each in VaultVision's own format.
+# For content VaultVision doesn't carry, or carries only from a source that
+# turned out to be unplayable -- a rebuild can't pick those up from upstream by
+# definition, so they have to be part of the repo to survive one.
+LOCAL_SHOWS_DIR = Path(__file__).parent.parent / "data" / "local-shows"
 
 # Fallback runtime (seconds) for episodes with no entry in a show's
 # `durations` map — 22 of VaultVision's shows ship an empty durations map
@@ -139,13 +155,39 @@ def resolve_intro_skip(show_data, season):
     return int(value) if isinstance(value, (int, float)) else 0
 
 
-def build_show_entry(row):
+def load_local_shows():
+    """[(row, data.js text)] for data/local-shows, same row shape as upstream.
+
+    `row["artUrl"]` is set here because local art sits next to its data.js
+    instead of in upstream's flat /art directory."""
+    manifest = LOCAL_SHOWS_DIR / "shows.csv"
+    if not manifest.exists():
+        return []
+    out = []
+    for row in csv.reader(io.StringIO(manifest.read_text(encoding="utf-8"))):
+        if not row or row[0].lstrip().startswith("#"):
+            continue
+        title, show_id, genre, ext = (c.strip() for c in row)
+        data = LOCAL_SHOWS_DIR / show_id / "data.js"
+        if not data.exists():
+            print(f"  SKIP {show_id}: no {data}", file=sys.stderr)
+            continue
+        out.append(({
+            "title": title, "id": show_id, "genre": genre, "ext": ext,
+            "artUrl": f"data/local-shows/{show_id}/{show_id}.{ext}",
+        }, data.read_text(encoding="utf-8")))
+    return out
+
+
+def build_show_entry(row, text=None):
+    """`text` is the show's data.js; fetched from upstream when not supplied."""
     show_id = row["id"]
-    try:
-        text = fetch(f"shows/{show_id}/data.js")
-    except Exception as e:
-        print(f"  SKIP {show_id}: fetch failed ({e})", file=sys.stderr)
-        return None
+    if text is None:
+        try:
+            text = fetch(f"shows/{show_id}/data.js")
+        except Exception as e:
+            print(f"  SKIP {show_id}: fetch failed ({e})", file=sys.stderr)
+            return None
     try:
         d = parse_show(text)
     except JsParseError as e:
@@ -200,7 +242,7 @@ def build_show_entry(row):
         "id": show_id,
         "title": row["title"],
         "genre": genre,
-        "artUrl": f"{BASE}/art/{show_id}.{row['ext']}",
+        "artUrl": row.get("artUrl") or f"{BASE}/art/{show_id}.{row['ext']}",
         "grouping": grouping,
         "totalDurationSec": sum(ep["durationSec"] for ep in episodes),
         "episodes": episodes,
@@ -224,6 +266,16 @@ def main():
             genres.add(entry["genre"])
         if i % 25 == 0:
             print(f"  ...{i}/{len(rows)}")
+
+    local = load_local_shows()
+    if local:
+        print(f"adding {len(local)} local show(s) from {LOCAL_SHOWS_DIR} ...")
+    for row, text in local:
+        entry = build_show_entry(row, text)
+        if entry:
+            shows[entry["id"]] = entry
+            genres.add(entry["genre"])
+            print(f"  {entry['id']}: {len(entry['episodes'])} episodes")
 
     total_eps = sum(len(s["episodes"]) for s in shows.values())
     catalog = {

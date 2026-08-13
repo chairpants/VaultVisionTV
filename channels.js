@@ -77,12 +77,13 @@ window.CHANNELS = [
     tagline: "Feature presentation, every hour." },
   { number: 12, name: "REWIND", kind: "genre", genre: "Broadcast Blocks",
     tagline: "Exactly as it aired." },
-  // Live PD used to be excluded here by id: every one of its files needs an
-  // archive.org login (401 to anonymous requests), so it could never play. It's
-  // now dropped from the catalog itself via build-catalog.py's EXCLUDED_SHOWS,
-  // which is what "removed" should mean — the channel-layer list only hid it
-  // from this one channel and left it browsable in VOD, since vod.js reads the
-  // catalog directly and has no equivalent opt-out.
+  // Live PD used to be excluded here by id, because every file in the item
+  // VaultVision sources it from needs an archive.org login (401 anonymously).
+  // That was the wrong layer — it hid the show from this one channel while
+  // vod.js, which reads the catalog directly, still offered all 37 dead
+  // episodes. The unplayable item is now dropped in build-catalog.py's
+  // DEAD_ITEMS, and the 13 episodes that do exist on open items come from
+  // data/local-shows/LivePD, so this sweep picks them up with no opt-out list.
   { number: 13, name: "REALITY CHECK", kind: "genre", genre: "Reality TV",
     tagline: "Unscripted. Mostly." },
 
@@ -332,8 +333,12 @@ window.CHANNELS = [
   {
     number: 41, name: "TRUE CRIME TONIGHT", kind: "curated",
     tagline: "Real cops, real stunts, real reruns.",
+    // LivePD is back after being pulled for being unplayable: its old source
+    // item needs an archive.org login, but 13 episodes exist on two open items
+    // (see data/local-shows/LivePD), and a ride-along is the most on-theme
+    // thing this channel could possibly air.
     daypart: [{ days: [0, 1, 2, 3, 4, 5, 6], startHour: 21, endHour: 23, pool: [
-      "WorldsWildestPoliceVideos",
+      "WorldsWildestPoliceVideos", "LivePD",
       "MostExtremeEliminationChallenge", "BeyondScaredStraight2", "JuryDutySeries",
     ] }],
     fallbackPool: ["NYPDBlue", "Rookies", "Chase"],
