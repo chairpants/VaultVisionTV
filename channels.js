@@ -488,9 +488,12 @@ window.CHANNELS = [
     number: 53, name: "SKETCH VAULT", kind: "curated",
     tagline: "Bits, and nothing but.",
     daypart: [],
+    // WhoseLineIsItAnyway is improv rather than sketch, but it's the same
+    // half-hour studio-comedy shape and it nearly doubles the channel's depth
+    // on its own (173.5h against the other five's 114.5h).
     fallbackPool: [
       "InLivingColor", "MontyPythonsFlyingCircus", "ABCsFridays",
-      "BenStillerShow", "HeyVernIt",
+      "BenStillerShow", "HeyVernIt", "WhoseLineIsItAnyway",
     ],
   },
   {
