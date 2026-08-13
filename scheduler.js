@@ -223,10 +223,14 @@ function genrePool(channel, catalog) {
   let ids = poolCache.get(cacheKey + ":ids");
   if (!ids) {
     // `excludeShowIds` is optional — lets a genre channel opt a specific show
-    // out of its otherwise-automatic, zero-curation pool. Current use:
-    // REALITY CHECK (genre "Reality TV") excludes LivePDSeriesNotDoneYet,
-    // whose archive.org files are consistently unplayable — the guide would
-    // otherwise still advertise it.
+    // out of its otherwise-automatic, zero-curation pool. Currently unused:
+    // its only user was REALITY CHECK hiding LivePDSeriesNotDoneYet (every
+    // file needs an archive.org login, so it could never play), and that turned
+    // out to be the wrong layer — it hid the show from one channel while VOD,
+    // which reads the catalog directly, still offered it. Genuinely unplayable
+    // shows belong in build-catalog.py's EXCLUDED_SHOWS so they leave the
+    // catalog altogether. Kept for the case this was meant for: a show that
+    // plays fine but doesn't belong on one particular channel.
     const excluded = new Set(channel.excludeShowIds || []);
     ids = Object.values(catalog.shows)
       .filter((s) => s.genre === channel.genre && !excluded.has(s.id))
