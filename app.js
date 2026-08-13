@@ -178,6 +178,7 @@ function main() {
     onTuneNumber: tuneTo,
     onChannelStep: step,
     onGuide: () => tuneTo(GUIDE_CHANNEL),
+    onVod: () => tuneTo(VOD_CHANNEL),
     onVolumeStep: stepVolume,
     onMute: toggleMute,
     onLastChannel: () => tuneTo(lastNumber),

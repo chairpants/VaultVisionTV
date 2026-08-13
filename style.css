@@ -355,6 +355,7 @@ html, body {
 .keypad button { font-size: 1em; letter-spacing: 0; }
 .key-enter { font-size: .78em !important; letter-spacing: 2px; }
 .fn-guide { color: #fff700; }
+.fn-vod { color: #7fff9f; }
 .fn-last { color: #7fe8ff; }
 .fn-mute { color: #ff8b7a; }
 #remote button:active, #remote button.pressed {
