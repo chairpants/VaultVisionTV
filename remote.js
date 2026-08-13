@@ -8,7 +8,7 @@ const MAX_DIGITS = 3;
 
 const FLASH_MS = 1200;
 
-function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide,
+function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide, onVod,
                       onVolumeStep, onMute, onLastChannel, onWeb, onSeekStart, onSeekEnd }) {
   let buffer = "";
   let idleTimer = null;
@@ -68,6 +68,7 @@ function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide,
     if (e.key === "m" || e.key === "M") { onMute(); return; }
     if (e.key === "r" || e.key === "R") { onLastChannel(); return; }
     if (e.key === "g" || e.key === "G") { onGuide(); return; }
+    if (e.key === "v" || e.key === "V") { onVod(); return; }
   });
 
   document.addEventListener("keyup", (e) => {
@@ -89,6 +90,7 @@ function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide,
       case "last": onLastChannel(); break;
       case "web": onWeb(); break;
       case "guide": onGuide(); break;
+      case "vod": onVod(); break;
       case "enter": commit(); break;
     }
   });
