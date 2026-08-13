@@ -385,11 +385,15 @@ window.CHANNELS = [
         "Duckman", "DrawnTogether", "BigMouth", "Oblongs", "HomeMovies",
         "BobandMargaret", "Undergrads", "MoralOrel", "AeonFlux", "Boondocks",
         "PJs", "BeavisButthead", "BrakShowSeries", "SpawntheAnimatedSeriesSeries480x480",
+        // Spun off from BeavisButthead, which is already the anchor here.
+        "Daria",
       ] },
       { days: [0, 1, 2, 3, 4, 5, 6], startHour: 0, endHour: 1, pool: [
         "Duckman", "DrawnTogether", "BigMouth", "Oblongs", "HomeMovies",
         "BobandMargaret", "Undergrads", "MoralOrel", "AeonFlux", "Boondocks",
         "PJs", "BeavisButthead", "BrakShowSeries", "SpawntheAnimatedSeriesSeries480x480",
+        // Spun off from BeavisButthead, which is already the anchor here.
+        "Daria",
       ] },
     ],
     // BrakShowSeries and Spawn were previously only reachable via the
