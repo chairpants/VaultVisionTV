@@ -9,7 +9,7 @@ const MAX_DIGITS = 3;
 const FLASH_MS = 1200;
 
 function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide,
-                      onVolumeStep, onMute, onLastChannel, onWeb }) {
+                      onVolumeStep, onMute, onLastChannel, onWeb, onSeekStart, onSeekEnd }) {
   let buffer = "";
   let idleTimer = null;
   let flashText = ""; // transient status (VOL 70, MUTE) borrowing the same corner
@@ -59,9 +59,19 @@ function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide,
     if (e.key === "PageDown" || e.key === "[") { onChannelStep(-1); return; }
     if (e.key === "ArrowUp") { onVolumeStep(1); return; }
     if (e.key === "ArrowDown") { onVolumeStep(-1); return; }
+    // Only VOD playback does anything with these (app.js no-ops otherwise)
+    // — e.repeat guards against the OS's own key-repeat re-firing keydown
+    // throughout a hold; the actual scrubbing runs off player.js's own
+    // ticker between this start and the keyup below, not off repeat events.
+    if (e.key === "ArrowLeft") { if (!e.repeat) onSeekStart(-1); return; }
+    if (e.key === "ArrowRight") { if (!e.repeat) onSeekStart(1); return; }
     if (e.key === "m" || e.key === "M") { onMute(); return; }
     if (e.key === "r" || e.key === "R") { onLastChannel(); return; }
     if (e.key === "g" || e.key === "G") { onGuide(); return; }
+  });
+
+  document.addEventListener("keyup", (e) => {
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") onSeekEnd();
   });
 
   root.addEventListener("click", (e) => {

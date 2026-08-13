@@ -124,7 +124,8 @@ const GUIDE_VIDEO_H_FRAC = 0.4;
 
 function createPlayer(els) {
   const { video, osd, osdCh, osdTagline, osdShow, osdEpisode, osdBarFill, blankMsg, startHint,
-          padCard, chyron, chyronTitle, chyronSub, chyronClock } = els;
+          padCard, chyron, chyronTitle, chyronSub, chyronClock,
+          vodSeek, vodSeekFill, vodSeekDirEl, vodSeekTimeEl } = els;
 
   let loadedEpisodeKey = null;
   let loadedItemId = null; // archive.org item behind whatever is on screen, ads included
@@ -462,6 +463,102 @@ function createPlayer(els) {
     if (!silent) showOsd(channel, position);
   }
 
+  // -- Video On Demand ---------------------------------------------------------
+  // Parallel to tune(), not part of it: a specific episode from t=0 (or its
+  // introSkipSec), no wall-clock scheduling position. Live channels never
+  // enable trick-play (there's no "seeking" a simulated broadcast — see
+  // applyPositionToVideo above), but an on-demand title is genuinely
+  // on-demand, so it gets real seeking: hold left/right moves a marker
+  // (vodSeekTarget) without touching the actual video, and only the release
+  // commits it to video.currentTime — scrubbing this way never fights a
+  // half-finished intermediate seek the way stepping video.currentTime on
+  // every tick would.
+  let vodSeekEpisode = null; // set by playEpisode; durationSec clamps the marker
+  let vodSeekActive = false;
+  let vodSeekTarget = 0;
+  let vodSeekDir = 1;
+  let vodSeekTimer = null;
+  const VOD_SEEK_STEP_SEC = 10;
+  const VOD_SEEK_TICK_MS = 150;
+
+  function renderVodSeekUi() {
+    const total = (vodSeekEpisode && vodSeekEpisode.durationSec) || 0;
+    const pct = total > 0 ? Math.min(100, Math.max(0, (vodSeekTarget / total) * 100)) : 0;
+    vodSeekFill.style.width = `${pct}%`;
+    vodSeekDirEl.textContent = vodSeekDir < 0 ? "◀◀ REWIND" : "FAST FORWARD ▶▶";
+    vodSeekTimeEl.textContent = `${mmss(vodSeekTarget)} / ${mmss(total)}`;
+  }
+
+  // First press in a hold starts the scrub (marker begins at the video's
+  // actual current position) and its own ticker; a later press before
+  // release (direction reversed mid-hold) just updates which way it moves.
+  function vodSeekBegin(direction) {
+    if (!vodSeekActive) {
+      vodSeekActive = true;
+      vodSeekTarget = video.currentTime;
+      vodSeek.classList.remove("hidden");
+      clearInterval(vodSeekTimer);
+      vodSeekTimer = setInterval(() => {
+        const total = (vodSeekEpisode && vodSeekEpisode.durationSec) || Infinity;
+        vodSeekTarget = Math.min(total, Math.max(0, vodSeekTarget + VOD_SEEK_STEP_SEC * vodSeekDir));
+        renderVodSeekUi();
+      }, VOD_SEEK_TICK_MS);
+      renderVodSeekUi();
+    }
+    vodSeekDir = direction;
+  }
+
+  function vodSeekCommit() {
+    if (!vodSeekActive) return;
+    vodSeekActive = false;
+    clearInterval(vodSeekTimer);
+    vodSeekTimer = null;
+    video.currentTime = vodSeekTarget;
+    vodSeek.classList.add("hidden");
+  }
+
+  function showVodOsd(show, episode) {
+    osdCh.textContent = "🎬 VIDEO ON DEMAND";
+    osdTagline.textContent = "on demand";
+    const lines = titleLines(show, episode);
+    osdShow.textContent = lines.title;
+    osdEpisode.textContent = lines.sub;
+    osdBarFill.style.width = "0%"; // no live schedule position to show progress against
+    osd.classList.remove("hidden", "fade");
+    clearTimeout(osdFadeTimer);
+    osdFadeTimer = setTimeout(() => osd.classList.add("fade"), OSD_VISIBLE_MS);
+  }
+
+  // Returns true on success, false if there's no playable file -- the
+  // caller (app.js) drops back to the episode list either way, there's no
+  // "next in the pool" the way a live channel's failover has.
+  async function playEpisode(show, episode) {
+    const myToken = ++tuneToken;
+    clearTimeout(substituteTimer);
+    stopPad();
+    blankMsg.classList.add("hidden");
+
+    const url = await resolveEpisodeUrl(episode.itemId, episode.fileHint);
+    if (myToken !== tuneToken) return false; // superseded by a later tune/VOD selection while we awaited
+    if (!url) return false;
+
+    loadedEpisodeKey = episode.key;
+    loadedItemId = episode.itemId;
+    currentCrop = episode.crop || null;
+    vodSeekEpisode = episode;
+    video.src = url;
+    const onReady = () => {
+      video.removeEventListener("loadedmetadata", onReady);
+      if (myToken !== tuneToken) return;
+      layoutCrop();
+      video.currentTime = episode.introSkipSec || 0;
+      video.play().catch(() => unlockOnFirstGesture());
+    };
+    video.addEventListener("loadedmetadata", onReady);
+    showVodOsd(show, episode);
+    return true;
+  }
+
   // -- seek-index warmer -----------------------------------------------------
   // A few catalog items are multi-hour tapes (6h Saturday-morning blocks, whole
   // TV-movie broadcasts). Their mp4 seek index is sized by frame *count*, not
@@ -525,7 +622,13 @@ function createPlayer(els) {
     stopDriftLoop();
     driftTimer = setInterval(() => {
       const channel = getCurrentChannel();
-      if (!channel || channel.kind === "guide") return;
+      // "vod" has no scheduled position to correct toward -- unlike
+      // "guide", currentNumber genuinely can equal the VOD channel's number
+      // for the whole time it's open (VOD replaces the screen like a real
+      // channel change rather than overlaying live video the way the guide
+      // does), so without this a stray tune() every 15s would find "no
+      // position" and stop the video out from under VOD.
+      if (!channel || channel.kind === "guide" || channel.kind === "vod") return;
       tune(channel, catalog, { silent: true });
       warmTick(catalog); // piggybacks the 15s tick; no timer of its own
     }, DRIFT_CHECK_MS);
@@ -536,5 +639,8 @@ function createPlayer(els) {
     driftTimer = null;
   }
 
-  return { tune, startDriftLoop, stopDriftLoop, showOsd, getItemId: () => loadedItemId, setGuideMode };
+  return {
+    tune, startDriftLoop, stopDriftLoop, showOsd, getItemId: () => loadedItemId, setGuideMode,
+    playEpisode, vodSeekBegin, vodSeekCommit,
+  };
 }
