@@ -87,27 +87,34 @@ window.CHANNELS = [
   {
     number: 14, name: "SATURDAY MORNING", kind: "curated",
     tagline: "Cereal not included.",
-    // Elementary-tier cartoons, half of the split (see SUNDAY FUNNIES,
-    // channel 27, for the rest) — general-audience and nonviolent, the
-    // teen-action titles this pool used to also carry (XMen, SpiderManTAS,
-    // TeenageMutantNinjaTurtles, CaptainPlanet) moved to TEEN ACTION
-    // THEATER (43) instead.
+    // Elementary-tier cartoons, 1980-onward half of the split — SUNDAY
+    // FUNNIES (27) takes everything pre-1980. The split used to be
+    // Saturday-vs-Sunday with no content axis at all, which put Popeye and
+    // 1960s Hanna-Barbera in the same rotation as Gravity Falls and
+    // SpongeBob; era is the axis now, and the day each block airs is just
+    // flavor on top of it. The teen-action titles this pool used to also
+    // carry (XMen, SpiderManTAS, TeenageMutantNinjaTurtles, CaptainPlanet)
+    // moved to TEEN ACTION THEATER (43).
     daypart: [{ days: [6], startHour: 8, endHour: 12, pool: [
       "MuppetBabies", "GarfieldandFriendsSeries", "TinyToonAdventures",
       "Animaniacs", "DuckTalesSeriesWorkinProgress", "DarkwingDucktheSeries",
-      "LOONEYTUNESSERIES", "RockyandBullwinkleShow", "WackyRacesSeries",
-      "PowerpuffGirls", "Recess", "PopeyetheSailorMan",
-      "AceVenturaPetDetectiveSeries", "AdventuresOfSonic", "AlvinandtheChipmunks",
-      "ArchiesWeirdMysteries", "BobbysWorld", "BuzzLightyearofStarCommand",
-      "CampLakebottom", "CaptainN", "CaspersScareSchool",
-      "CaspertheFriendlyGhost", "CelebritysComicolor", "CouragetheCowardlyDog",
-      "DextersLaboratorytheSeries", "DuckDodgers", "EdEddNEddySeriesAllEpisodesandSpecials",
-      "FairlyOddParents", "GarbagePailKids", "GravityFalls",
-      "Histeria",
+      "PowerpuffGirls", "Recess", "DextersLaboratorytheSeries",
+      "EdEddNEddySeriesAllEpisodesandSpecials", "CouragetheCowardlyDog",
+      "SonictheHedgehog", "SpongeBobSquarePants", "InspectorGadget",
+      "Beetlejuice", "AlvinandtheChipmunks",
     ] }],
+    // Was eight 1960s/70s classic sitcoms — i.e. this "cartoon channel" was
+    // a 60s-sitcom channel 164 of every 168 hours, since a dayparted channel
+    // plays its fallback every hour outside the window. Same era, same tier,
+    // still cartoons: the rest of the 1980+ pool.
     fallbackPool: [
-      "AllInTheFamily", "GreenAcres", "MaryTylerMooreShow", "Newhart",
-      "GetSmart", "Jeffersons", "MisterEd", "PetticoatJunction",
+      "AceVenturaPetDetectiveSeries", "AdventuresOfSonic", "ArchiesWeirdMysteries",
+      "BobbysWorld", "BuzzLightyearofStarCommand", "CampLakebottom",
+      "CaptainN", "CaspersScareSchool", "DuckDodgers", "FairlyOddParents",
+      "GarbagePailKids", "GravityFalls", "Histeria",
+      "HeathcliffandtheCatillacCatsTVSeries", "MightyMousetheNewAdventures",
+      "PolePosition", "PoliceAcademyTheAnimatedSeries", "CampCandy",
+      "KaBlam", "LandBeforeTime", "MorphFiles", "SwanBoy",
     ],
   },
   {
@@ -163,7 +170,13 @@ window.CHANNELS = [
       "Tornado1996", "VolcanoFireOnTheMountain", "Asteroid1997",
       "Meteorites1998", "WithoutWarning1994", "Y2KTheMovie",
     ] }],
-    fallbackPool: ["TheShining1997", "TheStand1994"],
+    // Was TheShining1997 + TheStand1994 -- 4 episodes on a 10.4h loop for the
+    // 166 hours this channel isn't running its Sunday block, i.e. a Stephen
+    // King channel duplicating NIGHTMARE ALLEY (20). Now the rest of the
+    // library's end-of-the-world pictures.
+    fallbackPool: [
+      "DeepImpact", "Armageddon", "Invasion", "Rapture", "NoahArk", "Speed2",
+    ],
   },
   {
     number: 20, name: "NIGHTMARE ALLEY", kind: "curated",
@@ -183,7 +196,13 @@ window.CHANNELS = [
       "HammerHouseofHorror", "666ParkAvenueSeries", "AmericanGothic1995",
       "FreddysNightmares", "AshvsEvilDead",
     ] }],
-    fallbackPool: ["AreYouAfraidOfTheDark", "EerieIndiana"],
+    // Was AreYouAfraidOfTheDark + EerieIndiana, which is EERIE AFTER SCHOOL's
+    // (22) whole premise and meant this adult anthology channel ran kids'
+    // horror 92% of the week. The three deepest classics from its own window
+    // instead.
+    fallbackPool: [
+      "TwilightZone1959", "AlfredHitchcockPresents", "NewAlfredHitchcockPresents",
+    ],
   },
   {
     number: 22, name: "EERIE AFTER SCHOOL", kind: "curated",
@@ -230,20 +249,25 @@ window.CHANNELS = [
   // channel 1.
   {
     number: 27, name: "SUNDAY FUNNIES", kind: "curated",
-    tagline: "The other Saturday morning (on a Sunday).",
-    // Elementary-tier cartoons, the other half of the split (see SATURDAY
-    // MORNING, channel 14).
+    tagline: "Ink, paint, and nothing after 1979.",
+    // Elementary-tier cartoons, the pre-1980 half of the split (see SATURDAY
+    // MORNING, channel 14, for 1980-onward). Theatrical shorts and the
+    // Hanna-Barbera TV era — the name still fits, it just means the vintage
+    // funny pages now instead of "the other Saturday".
+    // TheWorldofDavidtheGnome (1985) dropped: wrong era for this pool and
+    // already the youngest-tier anchor of STORYTIME (52).
     daypart: [{ days: [0], startHour: 8, endHour: 12, pool: [
-      "Beetlejuice", "CattanoogaCatstheSeries", "HeathcliffandtheCatillacCatsTVSeries",
-      "InspectorGadget", "MightyMousetheNewAdventures", "PolePosition",
-      "PoliceAcademyTheAnimatedSeries", "CampCandy", "HermanandKatnip",
-      "Houndcats", "JosieandthePussycatsTVseries", "KaBlam",
-      "LandBeforeTime", "LippytheLionandHardyHarHar", "MorphFiles",
-      "MotormouseandAutocat", "PeabodysImprobableHistory", "SonictheHedgehog",
-      "SpongeBobSquarePants", "SwanBoy", "WallyGator",
-      "TheWorldofDavidtheGnome",
+      "LOONEYTUNESSERIES", "RockyandBullwinkleShow", "PopeyetheSailorMan",
+      "CaspertheFriendlyGhost", "WackyRacesSeries", "JosieandthePussycatsTVseries",
+      "CattanoogaCatstheSeries", "Houndcats",
     ] }],
-    fallbackPool: ["LOONEYTUNESSERIES", "RockyandBullwinkleShow"],
+    // The shorter vintage pools, plus the two deepest titles from the window
+    // for volume — these run 164 h/week, so they carry the channel.
+    fallbackPool: [
+      "CelebritysComicolor", "HermanandKatnip", "LippytheLionandHardyHarHar",
+      "MotormouseandAutocat", "PeabodysImprobableHistory", "WallyGator",
+      "LOONEYTUNESSERIES", "RockyandBullwinkleShow",
+    ],
   },
 
   // -- literal recorded broadcast blocks, each its own channel ----------------
@@ -387,9 +411,11 @@ window.CHANNELS = [
 
   // -- channels 49-54: built from what the curated lineup above never picked --
   // The genre channels already sweep every show in the catalog, so nothing
-  // here is about coverage — these are themed pools drawn from the ~125 shows
-  // no curated channel had claimed, which is where the leftovers happened to
-  // cluster once they were sorted by era and tone.
+  // here is about coverage — these are themed pools drawn from the shows no
+  // curated channel had claimed at the time, which is where the leftovers
+  // happened to cluster once they were sorted by era and tone. (That leftover
+  // set is now almost entirely the TV Movies the channels at 55-57 draw from;
+  // see the note there.)
   // 47 (MODERN TOONS) and 48 (ACTION TOONS) retired — both entirely
   // cartoons, redistributed into the elementary tier (14/27) and TEEN
   // ACTION THEATER (43) by the same age/tone split the rest of the animated
@@ -399,10 +425,18 @@ window.CHANNELS = [
     number: 49, name: "BLACK & WHITE HOUR", kind: "curated",
     tagline: "Before color, and none the worse.",
     daypart: [],
+    // Six of the ten titles this pool used to carry were shot in color --
+    // HeresLucy, TheMonkees, and the four Hanna-Barbera/Famous Studios
+    // cartoons (Peabody, Lippy, WallyGator, HermanandKatnip) -- so the
+    // channel's one stated rule was the one thing its pool didn't honor. Now
+    // monochrome live-action only; the cartoons went to SUNDAY FUNNIES (27),
+    // which is the pre-1980 cartoon channel and where they belong anyway.
+    // MisterEd added (b&w for its whole run, and this is a better home for it
+    // than a cartoon channel's filler). TheLucyShow is the one compromise:
+    // seasons 1-3 are b&w, 4-6 are color, and pools are whole-show only.
     fallbackPool: [
-      "LeaveIttoBeavertheSeries", "DickVanDyke", "TheLucyShow", "HeresLucy",
-      "McHalesNavySeries", "TheMonkees", "PeabodysImprobableHistory",
-      "LippytheLionandHardyHarHar", "WallyGator", "HermanandKatnip",
+      "LeaveIttoBeavertheSeries", "DickVanDyke", "TheLucyShow",
+      "McHalesNavySeries", "MisterEd",
     ],
   },
   {
@@ -467,39 +501,46 @@ window.CHANNELS = [
   },
 
   // -- more movie channels ------------------------------------------------
-  // The catalog only has 12 shows actually tagged genre "TV Movies" (all of
-  // it already split between CATASTROPHE CHANNEL and NIGHTMARE ALLEY, with
-  // MOVIE VAULT as their automatic combined pool) -- no untapped TV-movie
-  // content exists to build more channels from without repeating titles.
-  // What the catalog *does* have is depth inside two "Broadcast Blocks"
-  // shows that are themselves nothing but movies, one per episode:
-  // MonsterVision (76 films) and USA Up All Night (40). Pools work at whole-
-  // show granularity, not per-episode, so a new channel can't cherry-pick a
-  // subset of either show's episodes -- these three instead get their
-  // variety from *combining* whole shows differently (and, for CREATURE
-  // DOUBLE FEATURE, a different daypart) than any existing channel does.
+  // The catalog has 65 shows tagged genre "TV Movies" -- one film per show,
+  // WOC off-air recordings with the broadcaster and airdate in the filename.
+  // 53 of them had no curated home at all and were reachable only via MOVIE
+  // VAULT (11), because the comment that used to sit here asserted the
+  // catalog held just 12 and concluded no untapped movie content existed.
+  // That was true when it was written and stopped being true when the
+  // library grew. The three channels below now pull from those 53 by kind,
+  // so 19/20/55/56/57 share no titles at all.
+  //
+  // Movies are inherently a thin pool -- 65 films at ~2h is ~130h total, so
+  // no single-genre movie channel can fill a week without repeating. Each
+  // one below gets 8-12 distinct films rather than the 1-2 several of them
+  // had, which is the most the library supports.
   {
     number: 55, name: "DOUBLE FEATURE DRIVE-IN", kind: "curated",
     tagline: "Two movies, no host, no waiting.",
-    // USAUpAllNight (its original co-star here) was retired outright -- see
-    // the note by channel 31. Left as MonsterVision alone rather than
-    // renumbering/removing this slot too, even though that now overlaps
-    // channels 32 and 57.
+    // Was MonsterVision alone -- byte-identical to channel 32 and to 57's
+    // fallback, three slots airing one 76-film show. Re-pooled to the
+    // action/adventure end of the movie library: the B-picture double bill a
+    // drive-in actually ran, which is a real theme rather than a reshuffle.
     daypart: [],
-    fallbackPool: ["MonsterVision"],
+    fallbackPool: [
+      "RumbleInTheBronx", "JudgeDredd", "BatmanAndRobin", "TheSpecialist",
+      "AssaultOnDevilsIsland", "MedicineMan", "MemoirsOfAnInvisibleMan",
+      "DeadPresidents",
+    ],
   },
   {
     number: 56, name: "MATINEE MADNESS", kind: "curated",
     tagline: "Popcorn movies, any time of day.",
     daypart: [],
-    // The same 12 shows MOVIE VAULT's genre pool sweeps automatically, but
-    // as its own independently-seeded curated pool -- a different shuffle
-    // order and no genre-channel coupling, so it airs something different
-    // at any given moment than channel 11 does.
+    // Was the same 12 disaster/King titles channels 19 and 20 already own,
+    // differing from MOVIE VAULT only by shuffle seed. Now the family
+    // matinee: Disney, Muppets, and the perennials a station ran in the
+    // afternoon.
     fallbackPool: [
-      "Tornado1996", "VolcanoFireOnTheMountain", "Asteroid1997", "Meteorites1998",
-      "WithoutWarning1994", "Y2KTheMovie", "It1990", "StormOfTheCentury",
-      "TheShining1997", "TheStand1994", "Tommyknockers", "SometimesTheyComeBack",
+      "TheWizardOfOz", "MuppetsTreasureIsland", "DisneyGeppetto", "SleepingBeauty",
+      "TheRescuers", "BabyDayOut", "BillTedsExcellentAdventure", "GrumpyOldMen",
+      "ProjectAlf", "ErnestSavesChristmas", "AChristmasStory",
+      "20000LeaguesUnderTheSea",
     ],
   },
   {
@@ -513,12 +554,20 @@ window.CHANNELS = [
       "MonsterVision", "It1990", "StormOfTheCentury", "TheShining1997",
       "TheStand1994", "Tommyknockers", "SometimesTheyComeBack",
     ] }],
-    fallbackPool: ["MonsterVision"],
+    // Was MonsterVision again, so the Sunday block's own premise only ever
+    // reached 2 of 168 hours and the channel was channel 32 the rest of the
+    // week. Now the theatrical horror the block pairs with: same genre, none
+    // of it on 19, 20 or 55.
+    fallbackPool: [
+      "TheExorcist", "TheTexasChainsawMassacre2", "AmericanWerewolfInLondon",
+      "Trucks", "CurseOfTheBlairWitch", "TheDeadZone", "SingleWhiteFemale",
+      "ShallowGrave", "TheBeast",
+    ],
   },
 
   // -- more sitcom channels -------------------------------------------------
   // SITCOM CENTRAL (4) and CLASSIC TV (5) still sweep every Sitcoms/Classic
-  // Sitcoms show automatically and stay as-is — but with 79 shows between
+  // Sitcoms show automatically and stay as-is — but with 77 shows between
   // the two genres shuffled into one undifferentiated pool each, an
   // individual show (The Drew Carey Show, say) has no discoverable identity
   // of its own, just a chance of coming up in rotation. These four are
@@ -543,13 +592,17 @@ window.CHANNELS = [
     number: 59, name: "80s SITCOMS", kind: "curated",
     tagline: "Shoulder pads and setups.",
     daypart: [],
+    // LeaveIttoBeavertheSeries (1957-63) dropped -- it was this channel's
+    // single largest title by airtime at 9.7%, on an 80s channel, while also
+    // sitting on BLACK & WHITE HOUR (49) where it actually belongs.
+    // SavedByTheBell, FamilyMatters, LifeGoesOn and HeyDude moved to 90s
+    // SITCOMS (60): all four premiered in 1989 and ran the bulk of their
+    // episodes in the 90s.
     fallbackPool: [
-      "FamilyMatters", "GrowingPains", "PunkyBrewster", "SavedByTheBell",
-      "FactsofLife", "DesigningWomen", "ALFtheSeries", "NightCourt",
-      "Newhart", "MurphyBrown", "MarriedWithChildren",
-      "BosomBuddies", "CosbyShow", "ArchieBunkersPlace", "MamasFamily",
-      "HeyDude", "TheHoganFamily", "LifeGoesOn", "JusttheTenofUs",
-      "ItsYourMove", "LeaveIttoBeavertheSeries",
+      "GrowingPains", "PunkyBrewster", "FactsofLife", "DesigningWomen",
+      "ALFtheSeries", "NightCourt", "Newhart", "MurphyBrown",
+      "MarriedWithChildren", "BosomBuddies", "CosbyShow", "ArchieBunkersPlace",
+      "MamasFamily", "TheHoganFamily", "JusttheTenofUs", "ItsYourMove",
     ],
   },
   {
@@ -564,16 +617,26 @@ window.CHANNELS = [
       "SaluteYourShorts", "DharmaAndGreg", "EverybodyLovesRaymond", "KingofQueens",
       "DrewCareyShow", "ZoeDuncanJackJane", "Popular", "Action",
       "RudeAwakening",
+      // Moved off 80s SITCOMS (59): 1989 premieres that ran into the mid-90s.
+      "SavedByTheBell", "FamilyMatters", "LifeGoesOn", "HeyDude",
+      // Moved off 2000s SITCOMS (61): 1999.
+      "ShastaMcNasty",
     ],
   },
   {
     number: 61, name: "2000s SITCOMS", kind: "curated",
     tagline: "The last sitcoms before the mockumentary took over.",
     daypart: [],
+    // Four titles dropped as out-of-decade, which had made the tagline below
+    // literally false: Mulaney (2014) and Ted (2024) both post-date the
+    // mockumentary era this channel claims to precede, AreWeThereYet ran
+    // 2010-13 (and was 13% of the channel's airtime), ShastaMcNasty was 1999
+    // and moved to 90s SITCOMS (60). Mulaney and Ted keep their real home on
+    // CULT & CANCELLED (54), which is where short-run series belong
+    // regardless of decade.
     fallbackPool: [
       "MalcolmInTheMiddle", "BernieMacShow", "StillStanding", "Reba",
-      "AreWeThereYet", "Mulaney", "CavemenSeriesSlightlyBetterQuality", "Ted",
-      "Tucker", "WeberShow", "Joey", "ShastaMcNasty",
+      "CavemenSeriesSlightlyBetterQuality", "Tucker", "WeberShow", "Joey",
       "WhatILikeAboutYou", "BacktoYou",
     ],
   },
