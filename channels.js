@@ -46,16 +46,13 @@ window.CHANNELS = [
   { number: VOD_CHANNEL, name: "🎬 VIDEO ON DEMAND", kind: "vod", tagline: "Pick something. Anything." },
 
   // -- genre channels: one per catalog genre, zero curation -----------------
-  { number: 3, name: "TOON CHANNEL", kind: "genre", genre: "Animation",
-    tagline: "Cartoons, all day, every day.",
-    // Adult animation, tagged genre "Animation" same as everything else but
-    // not appropriate for this basic-cable-feel channel — already properly
-    // curated on LATE NIGHT CARTOONS (channel 45).
-    excludeShowIds: [
-      "BigMouth", "Duckman", "DrawnTogether", "Oblongs", "HomeMovies",
-      "BobandMargaret", "Undergrads", "MoralOrel", "AeonFlux",
-      "Boondocks", "PJs", "BeavisButthead",
-    ] },
+  // 3 (TOON CHANNEL, genre "Animation") retired — a flat 92-show sweep with
+  // no structure to it, all of it now placed by age/tone instead: SATURDAY
+  // MORNING/SUNDAY FUNNIES (14/27, general-audience), TEEN ACTION THEATER
+  // (43), LATE NIGHT CARTOONS (45, adult). Every Animation-genre show has
+  // exactly one home now rather than also being swept here with no curation
+  // at all. Left unused rather than renumbering everything above it, same
+  // as channel 1.
   { number: 4, name: "SITCOM CENTRAL", kind: "genre", genre: "Sitcoms",
     tagline: "Laugh track included." },
   { number: 5, name: "CLASSIC TV", kind: "genre", genre: "Classic Sitcoms",
@@ -84,12 +81,23 @@ window.CHANNELS = [
   {
     number: 14, name: "SATURDAY MORNING", kind: "curated",
     tagline: "Cereal not included.",
+    // Elementary-tier cartoons, half of the split (see SUNDAY FUNNIES,
+    // channel 27, for the rest) — general-audience and nonviolent, the
+    // teen-action titles this pool used to also carry (XMen, SpiderManTAS,
+    // TeenageMutantNinjaTurtles, CaptainPlanet) moved to TEEN ACTION
+    // THEATER (43) instead.
     daypart: [{ days: [6], startHour: 8, endHour: 12, pool: [
       "MuppetBabies", "GarfieldandFriendsSeries", "TinyToonAdventures",
-      "Animaniacs", "XMen", "SpiderManTAS", "TeenageMutantNinjaTurtles",
-      "CaptainPlanet", "DuckTalesSeriesWorkinProgress", "DarkwingDucktheSeries",
+      "Animaniacs", "DuckTalesSeriesWorkinProgress", "DarkwingDucktheSeries",
       "LOONEYTUNESSERIES", "RockyandBullwinkleShow", "WackyRacesSeries",
       "PowerpuffGirls", "Recess", "PopeyetheSailorMan",
+      "AceVenturaPetDetectiveSeries", "AdventuresOfSonic", "AlvinandtheChipmunks",
+      "ArchiesWeirdMysteries", "BobbysWorld", "BuzzLightyearofStarCommand",
+      "CampLakebottom", "CaptainN", "CaspersScareSchool",
+      "CaspertheFriendlyGhost", "CelebritysComicolor", "CouragetheCowardlyDog",
+      "DextersLaboratorytheSeries", "DuckDodgers", "EdEddNEddySeriesAllEpisodesandSpecials",
+      "FairlyOddParents", "GarbagePailKids", "GravityFalls",
+      "Histeria",
     ] }],
     fallbackPool: [
       "AllInTheFamily", "GreenAcres", "MaryTylerMooreShow", "Newhart",
@@ -205,24 +213,29 @@ window.CHANNELS = [
     fallbackPool: ["PokemonIndigoLeague", "PokemonOrangeIslands", "PokmonChronicles",
       "Digimon", "MonsterRancher"],
   },
-  {
-    number: 26, name: "NICKTOONS AFTER DARK", kind: "curated",
-    tagline: "Slime included.",
-    daypart: [{ days: [0, 1, 2, 3, 4, 5, 6], startHour: 19, endHour: 21, pool: [
-      "RockosModernLife", "RenAndStimpy", "CouragetheCowardlyDog", "InvaderZIM",
-      "EdEddNEddySeriesAllEpisodesandSpecials", "HeyDude", "SaluteYourShorts",
-      "AllegrasWindow", "GUTS",
-    ] }],
-    fallbackPool: ["CaptainN", "Beetlejuice"],
-  },
+  // 26 (NICKTOONS AFTER DARK) retired — most of its pool was live-action
+  // Nickelodeon shows (HeyDude, SaluteYourShorts, AllegrasWindow, GUTS), not
+  // cartoons at all, and already reachable via their own genres (Classic
+  // Sitcoms/Kids & Educational). Its two real teen-tier cartoons
+  // (RockosModernLife, InvaderZIM) moved to TEEN ACTION THEATER (43);
+  // CouragetheCowardlyDog and EdEddNEddy... moved to the elementary tier
+  // (14); RenAndStimpy was already on LATE NIGHT CARTOONS (45) as adult.
+  // Left unused rather than renumbering everything above it, same as
+  // channel 1.
   {
     number: 27, name: "SUNDAY FUNNIES", kind: "curated",
     tagline: "The other Saturday morning (on a Sunday).",
+    // Elementary-tier cartoons, the other half of the split (see SATURDAY
+    // MORNING, channel 14).
     daypart: [{ days: [0], startHour: 8, endHour: 12, pool: [
-      "CaptainN", "Beetlejuice", "GummiBears", "InspectorGadget",
-      "HeathcliffandtheCatillacCatsTVSeries", "CattanoogaCatstheSeries",
-      "PoliceAcademyTheAnimatedSeries", "EagleRiders", "MightyMousetheNewAdventures",
-      "PolePosition", "CampCandy",
+      "Beetlejuice", "CattanoogaCatstheSeries", "HeathcliffandtheCatillacCatsTVSeries",
+      "InspectorGadget", "MightyMousetheNewAdventures", "PolePosition",
+      "PoliceAcademyTheAnimatedSeries", "CampCandy", "HermanandKatnip",
+      "Houndcats", "JosieandthePussycatsTVseries", "KaBlam",
+      "LandBeforeTime", "LippytheLionandHardyHarHar", "MorphFiles",
+      "MotormouseandAutocat", "PeabodysImprobableHistory", "SonictheHedgehog",
+      "SpongeBobSquarePants", "SwanBoy", "WallyGator",
+      "TheWorldofDavidtheGnome",
     ] }],
     fallbackPool: ["LOONEYTUNESSERIES", "RockyandBullwinkleShow"],
   },
@@ -299,12 +312,26 @@ window.CHANNELS = [
     fallbackPool: ["Jackass", "CelebrityDeathmatch", "WhitestKidsUKnow", "InsomniacwithDaveAttell"],
   },
   {
-    number: 43, name: "SUPERHERO SQUAD", kind: "curated",
-    tagline: "Truth, justice, and reruns.",
+    number: 43, name: "TEEN ACTION THEATER", kind: "curated",
+    tagline: "Capes, transformations, and turtle power.",
+    // Teen-tier cartoons — action-adventure, not aimed at little kids but
+    // not the adult-humor tier of LATE NIGHT CARTOONS (45) either. Absorbs
+    // the old SUPERHERO SQUAD/ACTION TOONS/GUNDAM & GIANT ROBOTS-adjacent
+    // titles that used to be scattered across several channels, plus the
+    // teen-leaning titles pulled out of the elementary tier (14/27) and the
+    // retired NICKTOONS AFTER DARK (RockosModernLife, InvaderZIM). "Tick"
+    // (2001 live-action), PowerRangers, and RoboCopliveactionTVseries
+    // dropped — live action, genre "Drama & Adventure", not actually
+    // cartoons despite sitting in this pool before; still reachable via
+    // ADVENTURE NETWORK (channel 6).
     daypart: [],
     fallbackPool: ["BatmanTAS", "BatmanBeyond", "XMen", "SpiderManTAS",
-      "TeenTitansSeries", "TheMaskAnimatedSeries", "TheTick", "Tick",
-      "CaptainPlanet", "PowerRangers", "RoboCopliveactionTVseries"],
+      "TeenTitansSeries", "TheMaskAnimatedSeries", "TheTick",
+      "BeastWarsTransformers", "BikerMiceFromMars", "CaptainPlanet", "EagleRiders",
+      "Godzilla", "InvaderZIM", "KarateKid", "MightyMax", "MotorcityTVseries",
+      "MutantLeague", "RamboTheForceofFreedom", "RockosModernLife",
+      "StarcomtheUSSpaceForceSeries", "TMNTNextMutation", "TeenageMutantNinjaTurtles",
+      "TransformersPrime"],
   },
   {
     number: 44, name: "THE AGENCY", kind: "curated",
@@ -319,14 +346,19 @@ window.CHANNELS = [
       { days: [0, 1, 2, 3, 4, 5, 6], startHour: 22, endHour: 24, pool: [
         "Duckman", "DrawnTogether", "BigMouth", "Oblongs", "HomeMovies",
         "BobandMargaret", "Undergrads", "MoralOrel", "AeonFlux", "Boondocks",
-        "PJs", "BeavisButthead",
+        "PJs", "BeavisButthead", "BrakShowSeries", "SpawntheAnimatedSeriesSeries480x480",
       ] },
       { days: [0, 1, 2, 3, 4, 5, 6], startHour: 0, endHour: 1, pool: [
         "Duckman", "DrawnTogether", "BigMouth", "Oblongs", "HomeMovies",
         "BobandMargaret", "Undergrads", "MoralOrel", "AeonFlux", "Boondocks",
-        "PJs", "BeavisButthead",
+        "PJs", "BeavisButthead", "BrakShowSeries", "SpawntheAnimatedSeriesSeries480x480",
       ] },
     ],
+    // BrakShowSeries and Spawn were previously only reachable via the
+    // now-retired TOON CHANNEL's genre sweep — both are genuinely adult
+    // content (Adult Swim / HBO-era dark and violent) that TOON CHANNEL's
+    // excludeShowIds list never actually caught, so this also fixes a real
+    // pre-existing miscategorization, not just a reshuffle.
     fallbackPool: ["Simpsons", "RenAndStimpy"],
   },
   {
@@ -347,33 +379,16 @@ window.CHANNELS = [
     fallbackPool: ["DragonBallZ", "Digimon"],
   },
 
-  // -- channels 47-54: built from what the curated lineup above never picked --
+  // -- channels 49-54: built from what the curated lineup above never picked --
   // The genre channels already sweep every show in the catalog, so nothing
   // here is about coverage — these are themed pools drawn from the ~125 shows
   // no curated channel had claimed, which is where the leftovers happened to
   // cluster once they were sorted by era and tone.
-  {
-    number: 47, name: "MODERN TOONS", kind: "curated",
-    tagline: "The cartoons your little brother taped over yours.",
-    daypart: [],
-    fallbackPool: [
-      "SpongeBobSquarePants", "FairlyOddParents", "DextersLaboratorytheSeries",
-      "CampLakebottom", "GravityFalls", "Histeria", "KaBlam", "BobbysWorld",
-      "AceVenturaPetDetectiveSeries", "ArchiesWeirdMysteries", "BrakShowSeries",
-    ],
-  },
-  {
-    number: 48, name: "ACTION TOONS", kind: "curated",
-    tagline: "Every vehicle transforms into something.",
-    daypart: [],
-    fallbackPool: [
-      "BikerMiceFromMars", "RamboTheForceofFreedom", "TransformersPrime",
-      "SonictheHedgehog", "AdventuresOfSonic", "MutantLeague", "Godzilla",
-      "TMNTNextMutation", "SpawntheAnimatedSeriesSeries480x480", "MightyMax",
-      "StarcomtheUSSpaceForceSeries", "KarateKid", "MotorcityTVseries",
-      "BuzzLightyearofStarCommand", "DuckDodgers",
-    ],
-  },
+  // 47 (MODERN TOONS) and 48 (ACTION TOONS) retired — both entirely
+  // cartoons, redistributed into the elementary tier (14/27) and TEEN
+  // ACTION THEATER (43) by the same age/tone split the rest of the animated
+  // lineup got. Left unused rather than renumbering everything above them,
+  // same as channel 1.
   {
     number: 49, name: "BLACK & WHITE HOUR", kind: "curated",
     tagline: "Before color, and none the worse.",
@@ -493,5 +508,77 @@ window.CHANNELS = [
       "TheStand1994", "Tommyknockers", "SometimesTheyComeBack",
     ] }],
     fallbackPool: ["MonsterVision"],
+  },
+
+  // -- more sitcom channels -------------------------------------------------
+  // SITCOM CENTRAL (4) and CLASSIC TV (5) still sweep every Sitcoms/Classic
+  // Sitcoms show automatically and stay as-is — but with 79 shows between
+  // the two genres shuffled into one undifferentiated pool each, an
+  // individual show (The Drew Carey Show, say) has no discoverable identity
+  // of its own, just a chance of coming up in rotation. These four are
+  // organized by era, plus one by tone (screwball/slapstick shows share a
+  // sensibility that cuts across every decade, so it gets its own channel
+  // rather than being split four ways). None of this retires the genre
+  // channels the way the cartoon reorg retired TOON CHANNEL — every show
+  // below is already reachable there too; this just gives more of them a
+  // proper home.
+  {
+    number: 58, name: "60s & 70s SITCOM HOUR", kind: "curated",
+    tagline: "Before the laugh track needed subtitles.",
+    daypart: [],
+    fallbackPool: [
+      "DickVanDyke", "TheLucyShow", "HeresLucy", "GreenAcres",
+      "PetticoatJunction", "MisterEd", "TheMonkees", "McHalesNavySeries",
+      "AllInTheFamily", "Jeffersons", "MaryTylerMooreShow", "GetSmart",
+      "Taxi1978", "WkrpinCincinnati", "MASH",
+    ],
+  },
+  {
+    number: 59, name: "80s SITCOMS", kind: "curated",
+    tagline: "Shoulder pads and setups.",
+    daypart: [],
+    fallbackPool: [
+      "FamilyMatters", "GrowingPains", "PunkyBrewster", "SavedByTheBell",
+      "FactsofLife", "DesigningWomen", "ALFtheSeries", "NightCourt",
+      "Newhart", "MurphyBrown", "Roseanne", "MarriedWithChildren",
+      "BosomBuddies", "CosbyShow", "ArchieBunkersPlace", "MamasFamily",
+      "HeyDude", "TheHoganFamily", "LifeGoesOn", "JusttheTenofUs",
+      "ItsYourMove", "LeaveIttoBeavertheSeries",
+    ],
+  },
+  {
+    number: 60, name: "90s SITCOMS", kind: "curated",
+    tagline: "Must-see, whenever you tune in.",
+    daypart: [],
+    fallbackPool: [
+      "MadAboutYou", "HomeImprovement", "Seinfeld", "NewsRadio",
+      "Nanny", "VeronicasCloset", "NedAndStacey", "StepByStep",
+      "ParkerLewis", "TeenAngel", "YouWish", "UnhappilyEverAfter",
+      "JeffFoxworthyShow", "SoulMan", "BakersfieldPD", "AlexMack",
+      "SaluteYourShorts", "DharmaAndGreg", "EverybodyLovesRaymond", "KingofQueens",
+      "DrewCareyShow", "ZoeDuncanJackJane", "Popular", "Action",
+      "RudeAwakening",
+    ],
+  },
+  {
+    number: 61, name: "2000s SITCOMS", kind: "curated",
+    tagline: "The last sitcoms before the mockumentary took over.",
+    daypart: [],
+    fallbackPool: [
+      "MalcolmInTheMiddle", "BernieMacShow", "StillStanding", "Reba",
+      "AreWeThereYet", "Mulaney", "CavemenSeriesSlightlyBetterQuality", "Ted",
+      "Tucker", "WeberShow", "Joey", "ShastaMcNasty",
+      "WhatILikeAboutYou", "BacktoYou",
+    ],
+  },
+  {
+    number: 62, name: "SLAPSTICK & SCREWBALL", kind: "curated",
+    tagline: "Nobody here keeps a straight face.",
+    daypart: [],
+    fallbackPool: [
+      "GetSmart", "MisterEd", "GreenAcres", "MarriedWithChildren", "Woops",
+      "TeenAngel", "CavemenSeriesSlightlyBetterQuality", "ShastaMcNasty",
+      "McHalesNavySeries", "PetticoatJunction",
+    ],
   },
 ];
