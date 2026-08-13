@@ -635,6 +635,8 @@ window.CHANNELS = [
       "Coach",
       // 1990 premiere; only its first two seasons exist here, both 1990-91.
       "Wings",
+      // 1995-99, complete run, squarely 90s.
+      "CarolineInTheCity",
       // Moved off 2000s SITCOMS (61): 1999.
       "ShastaMcNasty",
     ],
