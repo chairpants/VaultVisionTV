@@ -38,15 +38,25 @@ DEAD_ITEMS = {
     "stephen-kings-the-langoliers-1995-hd",  # The Langoliers (1995), 3.00h
 }
 
-# Whole shows VaultVision lists but this app deliberately doesn't carry, for
-# reasons that have nothing to do with the files being broken (that's
-# DEAD_ITEMS above). Excluding the show here -- rather than just leaving it
-# off every channel's pool -- means it structurally can't resurface: a genre
-# channel sweeps every show of its genre with no per-show opt-out list to
-# remember to update, so a show excluded only at the channel layer stays one
-# future genre-channel addition away from quietly coming back.
+# Whole shows VaultVision lists but this app deliberately doesn't carry.
+# Excluding the show here -- rather than just leaving it off every channel's
+# pool -- means it structurally can't resurface: a genre channel sweeps every
+# show of its genre with no per-show opt-out list to remember to update, so a
+# show excluded only at the channel layer stays one future genre-channel
+# addition away from quietly coming back.
+#
+# DEAD_ITEMS above is the other exclusion list, and the difference is how the
+# breakage shows up: DEAD_ITEMS is for items whose /metadata/<id> itself
+# errors. An item can answer metadata perfectly and still be unplayable, which
+# is a whole-show problem and belongs here instead.
 EXCLUDED_SHOWS = {
     "USAUpAllNight",  # leaned heavily on tasteless content with no redeeming value
+    # Every file needs an archive.org login: the item is in the "loggedin"
+    # collection with access-restricted-item true, so /metadata answers 200
+    # with all 37 files listed while /download/<item>/<file> answers 401 to
+    # anonymous requests -- nothing the player can do with that. Verify with:
+    #   curl -sIL -r 0-1 "https://archive.org/download/live-pd-complete-series_202311/Live%20PD_S01E01_10.28.16%20%28720p%2030FPS%29.mp4"
+    "LivePDSeriesNotDoneYet",
 }
 
 # Fallback runtime (seconds) for episodes with no entry in a show's
