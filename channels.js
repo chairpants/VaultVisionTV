@@ -627,6 +627,9 @@ window.CHANNELS = [
       "RudeAwakening",
       // Moved off 80s SITCOMS (59): 1989 premieres that ran into the mid-90s.
       "SavedByTheBell", "FamilyMatters", "LifeGoesOn", "HeyDude",
+      // Same rule: premiered Feb 1989, but ran nine seasons to 1997, so all
+      // but the first are 90s.
+      "Coach",
       // Moved off 2000s SITCOMS (61): 1999.
       "ShastaMcNasty",
     ],
