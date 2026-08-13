@@ -1,5 +1,5 @@
 window.CATALOG = {
- "generatedAt": "2026-08-11T01:43:54Z",
+ "generatedAt": "2026-08-13T02:04:25Z",
  "genres": [
   "Animation",
   "Anime",
@@ -14,6 +14,30 @@ window.CATALOG = {
   "TV Movies"
  ],
  "shows": {
+  "20000LeaguesUnderTheSea": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/20000LeaguesUnderTheSea.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 14331,
+     "fileHint": "20000_Leagues_Under_The_Sea_ABC_WOC_1997-05.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "20000_Leagues_Under_The_Sea_ABC_WOC_1997-05",
+     "key": "20000_Leagues_Under_The_Sea_ABC_WOC_1997-05::20000_Leagues_Under_The_Sea_ABC_WOC_1997-05.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "20000 LEAGUES UNDER THE SEA - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "20000LeaguesUnderTheSea",
+   "title": "20000 Leagues Under The Sea",
+   "totalDurationSec": 14331
+  },
   "666ParkAvenueSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/666ParkAvenueSeries.jpg",
    "episodes": [
@@ -733,6 +757,30 @@ window.CATALOG = {
    "id": "ABCsFridays",
    "title": "ABC's Fridays",
    "totalDurationSec": 124821
+  },
+  "AChristmasStory": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AChristmasStory.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7252,
+     "fileHint": "A_Christmas_Story_TBS_WOC_1994-11-2x.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "A_Christmas_Story_TBS_WOC_1994-11-2x",
+     "key": "A_Christmas_Story_TBS_WOC_1994-11-2x::A_Christmas_Story_TBS_WOC_1994-11-2x.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "A CHRISTMAS STORY - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "AChristmasStory",
+   "title": "A Christmas Story",
+   "totalDurationSec": 7252
   },
   "ALFtheSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/ALFtheSeries.jpg",
@@ -17313,6 +17361,54 @@ window.CATALOG = {
    "title": "American Gothic",
    "totalDurationSec": 60138
   },
+  "AmericanWerewolfInLondon": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AmericanWerewolfInLondon.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5200,
+     "fileHint": "American_Werewolf_In_London_1988-11_USA_Network_WOC_incomplete.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "American_Werewolf_In_London_1988-11_USA_Network_WOC_incomplete",
+     "key": "American_Werewolf_In_London_1988-11_USA_Network_WOC_incomplete::American_Werewolf_In_London_1988-11_USA_Network_WOC_incomplete.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "AMERICAN WEREWOLF IN LONDON - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "AmericanWerewolfInLondon",
+   "title": "American Werewolf In London",
+   "totalDurationSec": 5200
+  },
+  "AnimalFarm": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AnimalFarm.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6844,
+     "fileHint": "Animal_Farm_TNT_WOC_1999-10-03.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Animal_Farm_TNT_WOC_1999-10-03",
+     "key": "Animal_Farm_TNT_WOC_1999-10-03::Animal_Farm_TNT_WOC_1999-10-03.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ANIMAL FARM - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "AnimalFarm",
+   "title": "Animal Farm",
+   "totalDurationSec": 6844
+  },
   "Animaniacs": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Animaniacs.jpg",
    "episodes": [
@@ -19096,6 +19192,30 @@ window.CATALOG = {
    "id": "Animorphs",
    "title": "Animorphs",
    "totalDurationSec": 38155
+  },
+  "ArabianNights": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ArabianNights.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 14606,
+     "fileHint": "Arabian_Nights_ABC_Movie_WOC_2000-05.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Arabian_Nights_ABC_Movie_WOC_2000-05",
+     "key": "Arabian_Nights_ABC_Movie_WOC_2000-05::Arabian_Nights_ABC_Movie_WOC_2000-05.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ARABIAN NIGHTS - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "ArabianNights",
+   "title": "Arabian Nights",
+   "totalDurationSec": 14606
   },
   "ArchieBunkersPlace": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/ArchieBunkersPlace.jpg",
@@ -23729,6 +23849,30 @@ window.CATALOG = {
    "title": "Are You Afraid of the Dark?",
    "totalDurationSec": 132989
   },
+  "Armageddon": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Armageddon.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 10787,
+     "fileHint": "Armageddon_ABC_WOC_2001-04-30.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Armageddon_ABC_WOC_2001-04-30",
+     "key": "Armageddon_ABC_WOC_2001-04-30::Armageddon_ABC_WOC_2001-04-30.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ARMAGEDDON - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "Armageddon",
+   "title": "Armageddon",
+   "totalDurationSec": 10787
+  },
   "AshvsEvilDead": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/AshvsEvilDead.jpg",
    "episodes": [
@@ -24158,6 +24302,30 @@ window.CATALOG = {
    "id": "AshvsEvilDead",
    "title": "Ash vs Evil Dead",
    "totalDurationSec": 51519
+  },
+  "AssaultOnDevilsIsland": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AssaultOnDevilsIsland.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7248,
+     "fileHint": "Assault_on_Devils_Island_TNT_WOC_1997-10-28.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Assault_on_Devils_Island_TNT_WOC_1997-10-28",
+     "key": "Assault_on_Devils_Island_TNT_WOC_1997-10-28::Assault_on_Devils_Island_TNT_WOC_1997-10-28.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ASSAULT ON DEVILS ISLAND - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "AssaultOnDevilsIsland",
+   "title": "Assault on Devils Island",
+   "totalDurationSec": 7248
   },
   "Asteroid1997": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Asteroid1997.jpg",
@@ -24720,6 +24888,30 @@ window.CATALOG = {
    "id": "Automan",
    "title": "Automan",
    "totalDurationSec": 40729
+  },
+  "BabyDayOut": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BabyDayOut.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7155,
+     "fileHint": "Baby_Day_Out_UPN33_WOC_2000-08.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Baby_Day_Out_UPN33_WOC_2000-08.mkv",
+     "key": "Baby_Day_Out_UPN33_WOC_2000-08.mkv::Baby_Day_Out_UPN33_WOC_2000-08.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BABY DAY OUT - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "BabyDayOut",
+   "title": "Baby Day Out",
+   "totalDurationSec": 7155
   },
   "BacktoYou": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BacktoYou.jpg",
@@ -25422,6 +25614,30 @@ window.CATALOG = {
    "id": "BarbaryCoast",
    "title": "Barbary Coast",
    "totalDurationSec": 44998
+  },
+  "BatmanAndRobin": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BatmanAndRobin.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 10817,
+     "fileHint": "Batman_and_Robin_CBS_WOC_2001-05-18.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Batman_and_Robin_CBS_WOC_2001-05-18.mkv",
+     "key": "Batman_and_Robin_CBS_WOC_2001-05-18.mkv::Batman_and_Robin_CBS_WOC_2001-05-18.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BATMAN AND ROBIN - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "BatmanAndRobin",
+   "title": "Batman and Robin",
+   "totalDurationSec": 10817
   },
   "BatmanBeyond": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BatmanBeyond.jpg",
@@ -41679,6 +41895,30 @@ window.CATALOG = {
    "title": "Bill Nye the Science Guy",
    "totalDurationSec": 137824
   },
+  "BillTedsExcellentAdventure": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BillTedsExcellentAdventure.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7129,
+     "fileHint": "Bill_Teds_Excellent_Adventure_WB39_WOC_2000-08.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Bill_Teds_Excellent_Adventure_WB39_WOC_2000-08",
+     "key": "Bill_Teds_Excellent_Adventure_WB39_WOC_2000-08::Bill_Teds_Excellent_Adventure_WB39_WOC_2000-08.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BILL TEDS EXCELLENT ADVENTURE - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "BillTedsExcellentAdventure",
+   "title": "Bill Teds Excellent Adventure",
+   "totalDurationSec": 7129
+  },
   "BlessThisHouse": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BlessThisHouse.jpg",
    "episodes": [
@@ -46424,6 +46664,30 @@ window.CATALOG = {
    "id": "BrakShowSeries",
    "title": "the Brak Show Series",
    "totalDurationSec": 19159
+  },
+  "BraveNewWorld": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BraveNewWorld.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7195,
+     "fileHint": "Brave_New_World_NBC_WOC_1998-04-19.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Brave_New_World_NBC_WOC_1998-04-19",
+     "key": "Brave_New_World_NBC_WOC_1998-04-19::Brave_New_World_NBC_WOC_1998-04-19.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BRAVE NEW WORLD - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "BraveNewWorld",
+   "title": "Brave New World",
+   "totalDurationSec": 7195
   },
   "BriscoCountyJr": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BriscoCountyJr.jpg",
@@ -64686,6 +64950,30 @@ window.CATALOG = {
    "id": "CouragetheCowardlyDog",
    "title": "Courage the Cowardly Dog",
    "totalDurationSec": 68457
+  },
+  "CurseOfTheBlairWitch": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/CurseOfTheBlairWitch.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 3533,
+     "fileHint": "Curse_Of_The_Blair_Witch_Sci-Fi_Channel_WOC_1999-10-30.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Curse_Of_The_Blair_Witch_Sci-Fi_Channel_WOC_1999-10-30",
+     "key": "Curse_Of_The_Blair_Witch_Sci-Fi_Channel_WOC_1999-10-30::Curse_Of_The_Blair_Witch_Sci-Fi_Channel_WOC_1999-10-30.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CURSE OF THE BLAIR WITCH - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "CurseOfTheBlairWitch",
+   "title": "Curse of the Blair Witch",
+   "totalDurationSec": 3533
   },
   "DallastheSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/DallastheSeries.jpg",
@@ -83519,6 +83807,54 @@ window.CATALOG = {
    "title": "Darkwing Duck the Series",
    "totalDurationSec": 124090
   },
+  "DeadPresidents": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DeadPresidents.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7212,
+     "fileHint": "Dead_Presidents_FOX_WOC_2000-09-07.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Dead_Presidents_FOX_WOC_2000-09-07",
+     "key": "Dead_Presidents_FOX_WOC_2000-09-07::Dead_Presidents_FOX_WOC_2000-09-07.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DEAD PRESIDENTS - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "DeadPresidents",
+   "title": "Dead Presidents",
+   "totalDurationSec": 7212
+  },
+  "DeepImpact": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DeepImpact.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 9397,
+     "fileHint": "Deep_Impact_CBS_WOC_2001-04-15.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Deep_Impact_CBS_WOC_2001-04-15",
+     "key": "Deep_Impact_CBS_WOC_2001-04-15::Deep_Impact_CBS_WOC_2001-04-15.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DEEP IMPACT - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "DeepImpact",
+   "title": "Deep Impact",
+   "totalDurationSec": 9397
+  },
   "DesigningWomen": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/DesigningWomen.jpg",
    "episodes": [
@@ -91450,6 +91786,30 @@ window.CATALOG = {
    "id": "Digimon",
    "title": "Digimon: Digital Monsters",
    "totalDurationSec": 125420
+  },
+  "DisneyGeppetto": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DisneyGeppetto.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7277,
+     "fileHint": "Disney_Geppetto_ABC_WOC_2000-05-07.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Disney_Geppetto_ABC_WOC_2000-05-07",
+     "key": "Disney_Geppetto_ABC_WOC_2000-05-07::Disney_Geppetto_ABC_WOC_2000-05-07.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DISNEY GEPPETTO - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "DisneyGeppetto",
+   "title": "Disney Geppetto",
+   "totalDurationSec": 7277
   },
   "DoctorWho": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/DoctorWho.jpg",
@@ -121175,6 +121535,30 @@ window.CATALOG = {
    "title": "Eerie, Indiana",
    "totalDurationSec": 27715
   },
+  "ErnestSavesChristmas": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ErnestSavesChristmas.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7011,
+     "fileHint": "Ernest_Saves_Christmas_ABC_WOC_1993-12-11.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Ernest_Saves_Christmas_ABC_WOC_1993-12-11",
+     "key": "Ernest_Saves_Christmas_ABC_WOC_1993-12-11::Ernest_Saves_Christmas_ABC_WOC_1993-12-11.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ERNEST SAVES CHRISTMAS - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "ErnestSavesChristmas",
+   "title": "Ernest Saves Christmas",
+   "totalDurationSec": 7011
+  },
   "Everwood": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Everwood.jpg",
    "episodes": [
@@ -134359,6 +134743,30 @@ window.CATALOG = {
    "title": "Freddy's Nightmares",
    "totalDurationSec": 122281
   },
+  "FrostyReturns": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/FrostyReturns.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 1794,
+     "fileHint": "Frosty_Returns_CBS_WOC_1997-12-12.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Frosty_Returns_CBS_WOC_1997-12-12",
+     "key": "Frosty_Returns_CBS_WOC_1997-12-12::Frosty_Returns_CBS_WOC_1997-12-12.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FROSTY RETURNS - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "FrostyReturns",
+   "title": "Frosty Returns",
+   "totalDurationSec": 1794
+  },
   "GUTS": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/GUTS.jpg",
    "episodes": [
@@ -146805,6 +147213,30 @@ window.CATALOG = {
    "title": "Godzilla",
    "totalDurationSec": 35403
   },
+  "GoodWillHunting": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/GoodWillHunting.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 10550,
+     "fileHint": "Good_Will_Hunting_ABC_WOC_2001-02-19.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Good_Will_Hunting_ABC_WOC_2001-02-19",
+     "key": "Good_Will_Hunting_ABC_WOC_2001-02-19::Good_Will_Hunting_ABC_WOC_2001-02-19.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "GOOD WILL HUNTING - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "GoodWillHunting",
+   "title": "Good Will Hunting",
+   "totalDurationSec": 10550
+  },
   "GravityFalls": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/GravityFalls.jpg",
    "episodes": [
@@ -152056,6 +152488,30 @@ window.CATALOG = {
    "id": "GrowingPains",
    "title": "Growing Pains",
    "totalDurationSec": 233982
+  },
+  "GrumpyOldMen": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/GrumpyOldMen.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7102,
+     "fileHint": "Grumpy_Old_Men_CBS_WOC_1997-05-15.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Grumpy_Old_Men_CBS_WOC_1997-05-15",
+     "key": "Grumpy_Old_Men_CBS_WOC_1997-05-15::Grumpy_Old_Men_CBS_WOC_1997-05-15.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "GRUMPY OLD MEN - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "GrumpyOldMen",
+   "title": "Grumpy Old Men",
+   "totalDurationSec": 7102
   },
   "GummiBears": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/GummiBears.jpg",
@@ -165115,6 +165571,30 @@ window.CATALOG = {
    "title": "The Houndcats",
    "totalDurationSec": 16958
   },
+  "HowTheGrinchStoleChristmas": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/HowTheGrinchStoleChristmas.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 1699,
+     "fileHint": "How the Grinch Stole Christmas! [TBS Superstation airing, December 1992] [WOC].mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "GrinchTBSSuperstationAiring",
+     "key": "GrinchTBSSuperstationAiring::How the Grinch Stole Christmas! [TBS Superstation airing, December 1992] [WOC].mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HOW THE GRINCH STOLE CHRISTMAS! - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "HowTheGrinchStoleChristmas",
+   "title": "How The Grinch Stole Christmas!",
+   "totalDurationSec": 1699
+  },
   "InLivingColor": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/InLivingColor.png",
    "episodes": [
@@ -169980,6 +170460,30 @@ window.CATALOG = {
    "id": "InvaderZIM",
    "title": "Invader ZIM",
    "totalDurationSec": 98700
+  },
+  "Invasion": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Invasion.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 13915,
+     "fileHint": "Invasion_NBC_WOC_1997-05.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Invasion_NBC_WOC_1997-05",
+     "key": "Invasion_NBC_WOC_1997-05::Invasion_NBC_WOC_1997-05.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "INVASION - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "Invasion",
+   "title": "Invasion",
+   "totalDurationSec": 13915
   },
   "It1990": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/It1990.jpg",
@@ -176534,6 +177038,30 @@ window.CATALOG = {
    "id": "JosieandthePussycatsTVseries",
    "title": "Josie and the Pussycats (TV series)",
    "totalDurationSec": 20657
+  },
+  "JudgeDredd": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/JudgeDredd.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7186,
+     "fileHint": "Judge_Dreed_NBC_WOC_2000-08-20.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Judge_Dreed_NBC_WOC_2000-08-20.mkv",
+     "key": "Judge_Dreed_NBC_WOC_2000-08-20.mkv::Judge_Dreed_NBC_WOC_2000-08-20.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "JUDGE DREDD - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "JudgeDredd",
+   "title": "Judge Dredd",
+   "totalDurationSec": 7186
   },
   "JuryDutySeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/JuryDutySeries.png",
@@ -184402,6 +184930,30 @@ window.CATALOG = {
    "id": "LOONEYTUNESSERIES",
    "title": "LOONEY TUNES SERIES",
    "totalDurationSec": 62274
+  },
+  "LaConfidential": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/LaConfidential.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 10756,
+     "fileHint": "LA_Confidential_CBS_WOC_2000-09-24.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "LA_Confidential_CBS_WOC_2000-09-24.mkv",
+     "key": "LA_Confidential_CBS_WOC_2000-09-24.mkv::LA_Confidential_CBS_WOC_2000-09-24.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "LA CONFIDENTIAL - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "LaConfidential",
+   "title": "LA Confidential",
+   "totalDurationSec": 10756
   },
   "LandBeforeTime": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/LandBeforeTime.jpg",
@@ -212305,6 +212857,54 @@ window.CATALOG = {
    "title": "McHale's Navy Series",
    "totalDurationSec": 147146
   },
+  "MedicineMan": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MedicineMan.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7141,
+     "fileHint": "Medicine_Man_WB39_WOC_1995-07.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Medicine_Man_WB39_WOC_1995-07",
+     "key": "Medicine_Man_WB39_WOC_1995-07::Medicine_Man_WB39_WOC_1995-07.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MEDICINE MAN - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "MedicineMan",
+   "title": "Medicine Man",
+   "totalDurationSec": 7141
+  },
+  "MemoirsOfAnInvisibleMan": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MemoirsOfAnInvisibleMan.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7187,
+     "fileHint": "Memoirs_Of_An_Invisible_Man_UPN33_WOC_2001-07.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Memoirs_Of_An_Invisible_Man_UPN33_WOC_2001-07",
+     "key": "Memoirs_Of_An_Invisible_Man_UPN33_WOC_2001-07::Memoirs_Of_An_Invisible_Man_UPN33_WOC_2001-07.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MEMOIRS OF AN INVISIBLE MAN - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "MemoirsOfAnInvisibleMan",
+   "title": "Memoirs Of An Invisible Man",
+   "totalDurationSec": 7187
+  },
   "Meteorites1998": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Meteorites1998.jpg",
    "episodes": [
@@ -212328,6 +212928,30 @@ window.CATALOG = {
    "id": "Meteorites1998",
    "title": "Meteorites! (1998)",
    "totalDurationSec": 7091
+  },
+  "MickeyChristmasCarol": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MickeyChristmasCarol.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 3485,
+     "fileHint": "Mickey_Christmas_Carol_NBC_WOC_1988-12-04.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Mickey_Christmas_Carol_NBC_WOC_1988-12-04",
+     "key": "Mickey_Christmas_Carol_NBC_WOC_1988-12-04::Mickey_Christmas_Carol_NBC_WOC_1988-12-04.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MICKEY CHRISTMAS CAROL - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "MickeyChristmasCarol",
+   "title": "Mickey Christmas Carol",
+   "totalDurationSec": 3485
   },
   "Middleman": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Middleman.jpg",
@@ -226526,6 +227150,54 @@ window.CATALOG = {
    "id": "MuppetBabies",
    "title": "Muppet Babies",
    "totalDurationSec": 150804
+  },
+  "MuppetFamilyChristmas": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MuppetFamilyChristmas.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 3509,
+     "fileHint": "Muppet_Family_Christmas_ABC_WOC_1988-12-02.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Muppet_Family_Christmas_ABC_WOC_1988-12-02",
+     "key": "Muppet_Family_Christmas_ABC_WOC_1988-12-02::Muppet_Family_Christmas_ABC_WOC_1988-12-02.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MUPPET FAMILY CHRISTMAS - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "MuppetFamilyChristmas",
+   "title": "Muppet Family Christmas",
+   "totalDurationSec": 3509
+  },
+  "MuppetsTreasureIsland": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MuppetsTreasureIsland.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7176,
+     "fileHint": "Muppets_Treasure_Island_ABC_WOC_2001-05-27.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Muppets_Treasure_Island_ABC_WOC_2001-05-27",
+     "key": "Muppets_Treasure_Island_ABC_WOC_2001-05-27::Muppets_Treasure_Island_ABC_WOC_2001-05-27.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MUPPETS TREASURE ISLAND - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "MuppetsTreasureIsland",
+   "title": "Muppets Treasure Island",
+   "totalDurationSec": 7176
   },
   "MurphyBrown": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/MurphyBrown.jpg",
@@ -246751,6 +247423,30 @@ window.CATALOG = {
    "title": "Night Court",
    "totalDurationSec": 237172
   },
+  "NoahArk": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/NoahArk.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 14414,
+     "fileHint": "Noah_Ark_NBC_WOC_1999-03.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Noah_Ark_NBC_WOC_1999-03",
+     "key": "Noah_Ark_NBC_WOC_1999-03::Noah_Ark_NBC_WOC_1999-03.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "NOAH ARK - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "NoahArk",
+   "title": "Noah Ark",
+   "totalDurationSec": 14414
+  },
   "NorthernExposure": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/NorthernExposure.jpg",
    "episodes": [
@@ -248300,6 +248996,30 @@ window.CATALOG = {
    "id": "NorthernExposure",
    "title": "Northern Exposure",
    "totalDurationSec": 304433
+  },
+  "OBrotherWhereArtThou": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/OBrotherWhereArtThou.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5356,
+     "fileHint": "L1T5V1 - O' Brother Where Art Thou (April 2004)(TBS)(Incomplete).ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "l-1-t-5-v-1-o-brother-where-art-thou-april-2004-tbs-incomplete",
+     "key": "l-1-t-5-v-1-o-brother-where-art-thou-april-2004-tbs-incomplete::L1T5V1 - O' Brother Where Art Thou (April 2004)(TBS)(Incomplete).ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "O BROTHER, WHERE ART THOU? - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "OBrotherWhereArtThou",
+   "title": "O Brother, Where Art Thou?",
+   "totalDurationSec": 5356
   },
   "Oblongs": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Oblongs.png",
@@ -269401,6 +270121,54 @@ window.CATALOG = {
    "title": "The Powerpuff Girls",
    "totalDurationSec": 146791
   },
+  "PrideAndPrejudice": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/PrideAndPrejudice.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 22127,
+     "fileHint": "Pride_and_Prejudice_AE_WOC_Incomplete_1996-01.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Pride_and_Prejudice_AE_WOC_Incomplete_1996-01",
+     "key": "Pride_and_Prejudice_AE_WOC_Incomplete_1996-01::Pride_and_Prejudice_AE_WOC_Incomplete_1996-01.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PRIDE AND PREJUDICE - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "PrideAndPrejudice",
+   "title": "Pride and Prejudice",
+   "totalDurationSec": 22127
+  },
+  "ProjectAlf": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ProjectAlf.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7397,
+     "fileHint": "Project_ALF_ABC_WOC_1996-02-17.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Project_ALF_ABC_WOC_1996-02-17",
+     "key": "Project_ALF_ABC_WOC_1996-02-17::Project_ALF_ABC_WOC_1996-02-17.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PROJECT ALF - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "ProjectAlf",
+   "title": "Project ALF",
+   "totalDurationSec": 7397
+  },
   "PunkyBrewster": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/PunkyBrewster.jpg",
    "episodes": [
@@ -271520,6 +272288,30 @@ window.CATALOG = {
    "id": "RamboTheForceofFreedom",
    "title": "Rambo: The Force of Freedom",
    "totalDurationSec": 85502
+  },
+  "Rapture": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Rapture.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7212,
+     "fileHint": "Rapture_1993_TV_Movie_UPN33_WOC_2000-09.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Rapture_1993_TV_Movie_UPN33_WOC_2000-09",
+     "key": "Rapture_1993_TV_Movie_UPN33_WOC_2000-09::Rapture_1993_TV_Movie_UPN33_WOC_2000-09.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "RAPTURE - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "Rapture",
+   "title": "Rapture",
+   "totalDurationSec": 7212
   },
   "Reba": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Reba.jpg",
@@ -283605,6 +284397,30 @@ window.CATALOG = {
    "title": "Rude Awakening",
    "totalDurationSec": 87478
   },
+  "RumbleInTheBronx": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/RumbleInTheBronx.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7222,
+     "fileHint": "Rumble_In_The_Bronx_FOX_WOC_2001-03-15.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Rumble_In_The_Bronx_FOX_WOC_2001-03-15",
+     "key": "Rumble_In_The_Bronx_FOX_WOC_2001-03-15::Rumble_In_The_Bronx_FOX_WOC_2001-03-15.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "RUMBLE IN THE BRONX - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "RumbleInTheBronx",
+   "title": "Rumble In The Bronx",
+   "totalDurationSec": 7222
+  },
   "SNICK": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/SNICK.png",
    "episodes": [
@@ -284996,6 +285812,30 @@ window.CATALOG = {
    "id": "SaluteYourShorts",
    "title": "Salute Your Shorts",
    "totalDurationSec": 38054
+  },
+  "SantaClausTheMovie": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SantaClausTheMovie.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7081,
+     "fileHint": "Santa_Claus_The_Movie_ABC_WOC_1988-12-24.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Santa_Claus_The_Movie_ABC_WOC_1988-12-24",
+     "key": "Santa_Claus_The_Movie_ABC_WOC_1988-12-24::Santa_Claus_The_Movie_ABC_WOC_1988-12-24.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SANTA CLAUS: THE MOVIE - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "SantaClausTheMovie",
+   "title": "Santa Claus: The Movie",
+   "totalDurationSec": 7081
   },
   "SapphireandSteel": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/SapphireandSteel.jpg",
@@ -288470,6 +289310,30 @@ window.CATALOG = {
    "id": "SavedByTheBell",
    "title": "Saved by the Bell",
    "totalDurationSec": 294925
+  },
+  "SchindlersList": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SchindlersList.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 12244,
+     "fileHint": "Schindlers_List_NBC_WOC_1997-02-23.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Schindlers_List_NBC_WOC_1997-02-23",
+     "key": "Schindlers_List_NBC_WOC_1997-02-23::Schindlers_List_NBC_WOC_1997-02-23.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SCHINDLERS LIST - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "SchindlersList",
+   "title": "Schindlers List",
+   "totalDurationSec": 12244
   },
   "SchoolhouseRock": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/SchoolhouseRock.jpg",
@@ -292183,6 +293047,30 @@ window.CATALOG = {
    "title": "Seinfeld",
    "totalDurationSec": 260981
   },
+  "ShallowGrave": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ShallowGrave.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7282,
+     "fileHint": "Shallow_Grave_UPN33_WOC_2000-03.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Shallow_Grave_UPN33_WOC_2000-03",
+     "key": "Shallow_Grave_UPN33_WOC_2000-03::Shallow_Grave_UPN33_WOC_2000-03.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SHALLOW GRAVE - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "ShallowGrave",
+   "title": "Shallow Grave",
+   "totalDurationSec": 7282
+  },
   "ShastaMcNasty": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/ShastaMcNasty.jpg",
    "episodes": [
@@ -292790,6 +293678,54 @@ window.CATALOG = {
    "id": "Simpsons",
    "title": "The Simpsons",
    "totalDurationSec": 28506
+  },
+  "SingleWhiteFemale": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SingleWhiteFemale.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 8446,
+     "fileHint": "Single White Female.ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "single-white-female",
+     "key": "single-white-female::Single White Female.ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SINGLE WHITE FEMALE - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "SingleWhiteFemale",
+   "title": "Single White Female",
+   "totalDurationSec": 8446
+  },
+  "SleepingBeauty": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SleepingBeauty.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7312,
+     "fileHint": "wonderful-world-of-disney-sleeping-beauty-abc-woc-1998-11-15.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "wonderful-world-of-disney-sleeping-beauty-abc-woc-1998-11-15",
+     "key": "wonderful-world-of-disney-sleeping-beauty-abc-woc-1998-11-15::wonderful-world-of-disney-sleeping-beauty-abc-woc-1998-11-15.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SLEEPING BEAUTY - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "SleepingBeauty",
+   "title": "Sleeping Beauty",
+   "totalDurationSec": 7312
   },
   "SometimesTheyComeBack": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/SometimesTheyComeBack.jpg",
@@ -294492,6 +295428,30 @@ window.CATALOG = {
    "id": "SpawntheAnimatedSeriesSeries480x480",
    "title": "Spawn: The Animated Series",
    "totalDurationSec": 24739
+  },
+  "Speed2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Speed2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 10819,
+     "fileHint": "Speed_2_ABC_WOC_2001-05-12.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Speed_2_ABC_WOC_2001-05-12.mkv",
+     "key": "Speed_2_ABC_WOC_2001-05-12.mkv::Speed_2_ABC_WOC_2001-05-12.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SPEED 2 - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "Speed2",
+   "title": "Speed 2",
+   "totalDurationSec": 10819
   },
   "SpiderManTAS": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/SpiderManTAS.png",
@@ -319683,6 +320643,78 @@ window.CATALOG = {
    "title": "TekWar",
    "totalDurationSec": 71375
   },
+  "TheBeast": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheBeast.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 14328,
+     "fileHint": "The_Beast_NBC_WOC_1996-04.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "The_Beast_NBC_WOC_1996-04",
+     "key": "The_Beast_NBC_WOC_1996-04::The_Beast_NBC_WOC_1996-04.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE BEAST - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "TheBeast",
+   "title": "The Beast",
+   "totalDurationSec": 14328
+  },
+  "TheDeadZone": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheDeadZone.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7124,
+     "fileHint": "The_Dead_Zone_UPN33_WOC_2001-03.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "The_Dead_Zone_UPN33_WOC_2001-03",
+     "key": "The_Dead_Zone_UPN33_WOC_2001-03::The_Dead_Zone_UPN33_WOC_2001-03.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE DEAD ZONE - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "TheDeadZone",
+   "title": "The Dead Zone",
+   "totalDurationSec": 7124
+  },
+  "TheExorcist": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheExorcist.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 9055,
+     "fileHint": "CBS Primetime 05-09-1981 The Exorcist WOC merged.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "cbs-primetime-05-09-1981-the-exorcist-woc-merged",
+     "key": "cbs-primetime-05-09-1981-the-exorcist-woc-merged::CBS Primetime 05-09-1981 The Exorcist WOC merged.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE EXORCIST - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "TheExorcist",
+   "title": "The Exorcist",
+   "totalDurationSec": 9055
+  },
   "TheHoganFamily": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheHoganFamily.jpg",
    "episodes": [
@@ -326631,6 +327663,54 @@ window.CATALOG = {
    "title": "The O.C.",
    "totalDurationSec": 241066
   },
+  "TheOdyssey": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheOdyssey.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 14106,
+     "fileHint": "The_Odyssey_NBC_WOC_1997-05.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "The_Odyssey_NBC_WOC_1997-05",
+     "key": "The_Odyssey_NBC_WOC_1997-05::The_Odyssey_NBC_WOC_1997-05.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE ODYSSEY - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "TheOdyssey",
+   "title": "The Odyssey",
+   "totalDurationSec": 14106
+  },
+  "TheRescuers": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheRescuers.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7340,
+     "fileHint": "The_Rescuers_TBS_WOC_1995-11-21.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "The_Rescuers_TBS_WOC_1995-11-21",
+     "key": "The_Rescuers_TBS_WOC_1995-11-21::The_Rescuers_TBS_WOC_1995-11-21.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE RESCUERS - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "TheRescuers",
+   "title": "The Rescuers",
+   "totalDurationSec": 7340
+  },
   "TheShining1997": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheShining1997.jpg",
    "episodes": [
@@ -326683,6 +327763,30 @@ window.CATALOG = {
    "title": "Stephen King's The Shining (1997)",
    "totalDurationSec": 15887
   },
+  "TheSpecialist": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheSpecialist.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7210,
+     "fileHint": "The Specialist UPN33 WOC 2001-05.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "The_Specialist_UPN33_WOC_2001-05",
+     "key": "The_Specialist_UPN33_WOC_2001-05::The Specialist UPN33 WOC 2001-05.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE SPECIALIST - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "TheSpecialist",
+   "title": "The Specialist",
+   "totalDurationSec": 7210
+  },
   "TheStand1994": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheStand1994.jpg",
    "episodes": [
@@ -326706,6 +327810,54 @@ window.CATALOG = {
    "id": "TheStand1994",
    "title": "Stephen King's The Stand (1994)",
    "totalDurationSec": 21543
+  },
+  "TheStoryOfSantaClaus": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheStoryOfSantaClaus.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 3510,
+     "fileHint": "The_Story_Of_Santa_Claus_CBS_WOC_1997-12-12.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "The_Story_Of_Santa_Claus_CBS_WOC_1997-12-12",
+     "key": "The_Story_Of_Santa_Claus_CBS_WOC_1997-12-12::The_Story_Of_Santa_Claus_CBS_WOC_1997-12-12.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE STORY OF SANTA CLAUS - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "TheStoryOfSantaClaus",
+   "title": "The Story Of Santa Claus",
+   "totalDurationSec": 3510
+  },
+  "TheTexasChainsawMassacre2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheTexasChainsawMassacre2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6628,
+     "fileHint": "The_Texas_Chainsaw_Massacre_2_FOX_WOC_1992-10-13.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "The_Texas_Chainsaw_Massacre_2_FOX_WOC_1992-10-13",
+     "key": "The_Texas_Chainsaw_Massacre_2_FOX_WOC_1992-10-13::The_Texas_Chainsaw_Massacre_2_FOX_WOC_1992-10-13.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE TEXAS CHAINSAW MASSACRE 2 - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "TheTexasChainsawMassacre2",
+   "title": "The Texas Chainsaw Massacre 2",
+   "totalDurationSec": 6628
   },
   "TheTick": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheTick.png",
@@ -327221,6 +328373,54 @@ window.CATALOG = {
    "title": "The Tick",
    "totalDurationSec": 43662
   },
+  "TheUsualSuspects": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheUsualSuspects.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6681,
+     "fileHint": "The Usual Suspects UPN33 WOC 2001-06.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "The_Usual_Suspects_UPN33_WOC_2001-06",
+     "key": "The_Usual_Suspects_UPN33_WOC_2001-06::The Usual Suspects UPN33 WOC 2001-06.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE USUAL SUSPECTS - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "TheUsualSuspects",
+   "title": "The Usual Suspects",
+   "totalDurationSec": 6681
+  },
+  "TheWizardOfOz": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheWizardOfOz.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6865,
+     "fileHint": "Wizard_of_Oz_CBS_WNEV_7_Boston_WOC_1988-02-24.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Wizard_of_Oz_CBS_WNEV_7_Boston_WOC_1988-02-24",
+     "key": "Wizard_of_Oz_CBS_WNEV_7_Boston_WOC_1988-02-24::Wizard_of_Oz_CBS_WNEV_7_Boston_WOC_1988-02-24.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE WIZARD OF OZ - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "TheWizardOfOz",
+   "title": "The Wizard of Oz",
+   "totalDurationSec": 6865
+  },
   "TheWorldofDavidtheGnome": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheWorldofDavidtheGnome.jpg",
    "episodes": [
@@ -327594,6 +328794,30 @@ window.CATALOG = {
    "id": "TheWorldofDavidtheGnome",
    "title": "The World of David the Gnome",
    "totalDurationSec": 39587
+  },
+  "TheresSomethingAboutMary": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheresSomethingAboutMary.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 9050,
+     "fileHint": "Theres_Something_About_Mary_FOX_WOC_2001-05-18.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Theres_Something_About_Mary_FOX_WOC_2001-05-18.mkv",
+     "key": "Theres_Something_About_Mary_FOX_WOC_2001-05-18.mkv::Theres_Something_About_Mary_FOX_WOC_2001-05-18.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THERES SOMETHING ABOUT MARY - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "TheresSomethingAboutMary",
+   "title": "Theres Something About Mary",
+   "totalDurationSec": 9050
   },
   "Tick": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Tick.jpg",
@@ -330136,6 +331360,30 @@ window.CATALOG = {
    "id": "TransformersPrime",
    "title": "Transformers: Prime",
    "totalDurationSec": 86248
+  },
+  "Trucks": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Trucks.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7147,
+     "fileHint": "Trucks_USA_Network_WOC_1997-10-29.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Trucks_USA_Network_WOC_1997-10-29",
+     "key": "Trucks_USA_Network_WOC_1997-10-29::Trucks_USA_Network_WOC_1997-10-29.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TRUCKS - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "Trucks",
+   "title": "Trucks",
+   "totalDurationSec": 7147
   },
   "Tucker": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Tucker.jpg",
@@ -347534,6 +348782,30 @@ window.CATALOG = {
    "grouping": "flat",
    "id": "Y2KTheMovie",
    "title": "Y2K: The Movie (1999)",
+   "totalDurationSec": 7026
+  },
+  "Y2k": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Y2k.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7026,
+     "fileHint": "Y2K_The_Movie_NBC_WOC_1999-11-21.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Y2K_The_Movie_NBC_WOC_1999-11-21",
+     "key": "Y2K_The_Movie_NBC_WOC_1999-11-21::Y2K_The_Movie_NBC_WOC_1999-11-21.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "Y2K - Movie"
+    }
+   ],
+   "genre": "TV Movies",
+   "grouping": "flat",
+   "id": "Y2k",
+   "title": "Y2K",
    "totalDurationSec": 7026
   },
   "YouWish": {
