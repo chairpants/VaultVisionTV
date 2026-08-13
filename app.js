@@ -1,10 +1,10 @@
-// Glue: wire the remote, the player, and the guide together around one
+// Glue: wire the remote, the player, the guide, and VOD together around one
 // piece of state — which channel number is tuned.
 //
 // Plain script, not a module (see scheduler.js's header) — CHANNELS,
-// GUIDE_CHANNEL, CATALOG, createPlayer, createGuide, and initRemote all come
-// from earlier <script src> tags in index.html loading into the shared
-// top-level scope; order matters there.
+// GUIDE_CHANNEL, VOD_CHANNEL, CATALOG, createPlayer, createGuide, createVod,
+// and initRemote all come from earlier <script src> tags in index.html
+// loading into the shared top-level scope; order matters there.
 const DEFAULT_CHANNEL = 3; // TOON CHANNEL
 const VOLUME_STEP = 0.1;
 
@@ -14,10 +14,11 @@ const sortedNumbers = CHANNELS.map((c) => c.number).sort((a, b) => a - b);
 function main() {
   const catalog = window.CATALOG;
   const video = document.getElementById("screen");
+  const osd = document.getElementById("osd");
 
   const player = createPlayer({
     video,
-    osd: document.getElementById("osd"),
+    osd,
     osdCh: document.getElementById("osd-ch"),
     osdTagline: document.getElementById("osd-tagline"),
     osdShow: document.getElementById("osd-show"),
@@ -30,14 +31,23 @@ function main() {
     chyronTitle: document.getElementById("chyron-title"),
     chyronSub: document.getElementById("chyron-sub"),
     chyronClock: document.getElementById("chyron-clock"),
+    vodSeek: document.getElementById("vod-seek"),
+    vodSeekFill: document.getElementById("vod-seek-fill"),
+    vodSeekDirEl: document.getElementById("vod-seek-dir"),
+    vodSeekTimeEl: document.getElementById("vod-seek-time"),
   });
 
   // currentNumber is always a real content channel — the guide is a toggled
   // overlay, not something tuned into, so the video underneath it keeps
   // playing (and the drift loop below keeps it live) the whole time it's up.
+  // VOD is different: it really is a channel (see tuneTo), so currentNumber
+  // does become VOD_CHANNEL for as long as it's open or playing.
   let currentNumber = DEFAULT_CHANNEL;
   let lastNumber = DEFAULT_CHANNEL; // what RETURN flips back to
   let guideOpen = false;
+  let vodOpen = false; // the browse overlay (sections/shows/episodes) is up
+  let vodPlaying = false; // an on-demand episode is actively playing (overlay hidden)
+
   const guide = createGuide({
     root: document.getElementById("guide"),
     channels: CHANNELS,
@@ -46,9 +56,34 @@ function main() {
     getCurrentNumber: () => currentNumber,
   });
 
+  const vod = createVod({
+    root: document.getElementById("vod"),
+    catalog,
+    playEpisode: async (show, episode) => {
+      vodOpen = false;
+      vod.hide();
+      const ok = await player.playEpisode(show, episode);
+      if (ok) {
+        vodPlaying = true;
+      } else {
+        returnToVodMenu(); // no playable file — nothing to fail over to, just back to the list
+      }
+    },
+    // Top level of the browse overlay, Back pressed -> exit VOD entirely.
+    onExit: () => {
+      vodOpen = false;
+      vod.hide();
+      tuneTo(lastNumber);
+    },
+  });
+
   function tuneTo(number) {
     if (number === GUIDE_CHANNEL) {
       toggleGuide();
+      return;
+    }
+    if (number === VOD_CHANNEL) {
+      enterVod();
       return;
     }
     const channel = byNumber[number];
@@ -62,6 +97,11 @@ function main() {
     guideOpen = false;
     guide.hide();
     player.setGuideMode(false);
+    if (vodOpen || vodPlaying) {
+      vodOpen = false;
+      vodPlaying = false;
+      vod.hide();
+    }
     player.tune(channel, catalog);
   }
 
@@ -81,6 +121,35 @@ function main() {
       // OSD banner so it's obvious what you've come back to
       player.tune(byNumber[currentNumber], catalog);
     }
+  }
+
+  // Unlike the guide (a pure overlay — currentNumber never actually becomes
+  // its number), VOD really is a channel: it takes over the screen and
+  // participates in channel-step rotation like any other, it just shows a
+  // browsable menu instead of a scheduled position. Always resets to the
+  // top (sections) level, even if VOD was already open (e.g. re-dialing 2).
+  function enterVod() {
+    if (currentNumber !== VOD_CHANNEL) lastNumber = currentNumber;
+    currentNumber = VOD_CHANNEL;
+    guideOpen = false;
+    guide.hide();
+    player.setGuideMode(false);
+    video.pause();
+    video.removeAttribute("src");
+    osd.classList.add("hidden");
+    vodPlaying = false;
+    vodOpen = true;
+    vod.show();
+  }
+
+  // Drops back into the browse overlay at whatever level it was left at
+  // (vod.js's own nav stack is untouched by hide()) — used for Back-while-
+  // playing, natural end-of-title, and a selection with no playable file.
+  function returnToVodMenu() {
+    vodPlaying = false;
+    video.pause();
+    vodOpen = true;
+    vod.resume();
   }
 
   function step(direction) {
@@ -112,6 +181,10 @@ function main() {
     onVolumeStep: stepVolume,
     onMute: toggleMute,
     onLastChannel: () => tuneTo(lastNumber),
+    // Only meaningful during VOD playback — live channels never get
+    // trick-play (see player.js's applyPositionToVideo), a no-op otherwise.
+    onSeekStart: (dir) => { if (vodPlaying) player.vodSeekBegin(dir); },
+    onSeekEnd: () => { if (vodPlaying) player.vodSeekCommit(); },
     // Whatever's on screen right now — an episode or a commercial — came from
     // some archive.org item; the WEB key opens that item's page.
     onWeb: () => {
@@ -119,6 +192,20 @@ function main() {
       if (!itemId) return; // nothing loaded yet
       window.open(`https://archive.org/details/${itemId}`, "_blank", "noopener");
     },
+  });
+
+  // Natural end of an on-demand title (no scheduled "next" to fail over to,
+  // unlike a live channel's pool) — drop back to the episode list it came
+  // from rather than sitting on a frozen last frame.
+  video.addEventListener("ended", () => {
+    if (vodPlaying) returnToVodMenu();
+  });
+
+  // An on-demand title is playing full-screen (the browse overlay itself is
+  // hidden at this point, so vod.js's own Escape/Backspace listener is a
+  // no-op) — Back returns to the menu it was launched from.
+  document.addEventListener("keydown", (e) => {
+    if ((e.key === "Escape" || e.key === "Backspace") && vodPlaying) returnToVodMenu();
   });
 
   player.startDriftLoop(() => byNumber[currentNumber], catalog);
