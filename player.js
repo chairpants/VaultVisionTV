@@ -577,7 +577,22 @@ function createPlayer(els) {
   // file (1993-wsb-tv-abc-saturday-morning) needs no special case here. It also
   // warms archive.org's edge node, which is what actually makes the real tune
   // fast; the browser's own media cache is capped and evicts these happily.
-  const WARM_OVER_SEC = 3 * 3600;
+  // Measured moov sizes, since runtime is only a rough proxy for index size:
+  // a 23-min sitcom is ~1.1-1.5MB, but Twin Peaks' 47-min DVD rips are 5.5MB —
+  // 4x the header for 2x the runtime, because the index is sized by sample
+  // count and those rips carry far more samples per minute. At the old 3h
+  // threshold nothing under a multi-hour tape was warmed, so those 47-minute
+  // episodes took the full cold hit (~5s of header on a good node, much worse
+  // on a flaky one) every time.
+  //
+  // 45 min is where that class gets caught. Cost, sampled every 5 min across a
+  // week: channels airing something over the threshold at once goes from 3.6
+  // (max 8) to 19.8 (max 26), and the eligible slice of the catalog from 0.1%
+  // to 9.3%. That's affordable only because of the two throttles below — one
+  // warm in flight at a time, and never while the picture is still buffering —
+  // so it drains slowly in the background instead of racing the viewer. Raise
+  // it back toward 3600 if that bandwidth ever matters more than the tune-in.
+  const WARM_OVER_SEC = 45 * 60;
   const WARM_TIMEOUT_MS = 90000; // a 44MB index on a slow node, then give up
   const warmAttempted = new Set();
   let warmEl = null;
