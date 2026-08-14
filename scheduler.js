@@ -92,7 +92,12 @@ function shuffled(arr, seedStr) {
 // timestamp can be located in it with a binary search.
 // `slotted`: programs occupy whole half-hour slots (the broadcast grid);
 // commercials pack back-to-back with no padding of their own.
-function buildPool(showIds, catalog, seedStr, { slotted = true } = {}) {
+// `ordered`: skip the shuffle and keep catalog order, for serials that only
+// make sense front-to-back (Dark Shadows is 1,239 continuous chapters).
+// windowElapsedSec already carries a daypart across nights and locate() wraps
+// at the end of the pool, so "ordered" gets episode 1 -> last -> episode 1
+// for free.
+function buildPool(showIds, catalog, seedStr, { slotted = true, ordered = false } = {}) {
   const flat = [];
   for (const id of showIds) {
     const show = catalog.shows[id];
@@ -102,16 +107,16 @@ function buildPool(showIds, catalog, seedStr, { slotted = true } = {}) {
     }
     for (const episode of show.episodes) flat.push({ showId: id, show, episode });
   }
-  const ordered = shuffled(flat, seedStr);
-  const cumulative = new Array(ordered.length);
+  const sequence = ordered ? flat : shuffled(flat, seedStr);
+  const cumulative = new Array(sequence.length);
   let acc = 0;
-  for (let i = 0; i < ordered.length; i++) {
+  for (let i = 0; i < sequence.length; i++) {
     cumulative[i] = acc;
     // Commercials pack by their true length; programmes by the slot their
     // airable content rounds up to.
-    acc += slotted ? slotFor(playableSec(ordered[i].episode)) : ordered[i].episode.durationSec;
+    acc += slotted ? slotFor(playableSec(sequence[i].episode)) : sequence[i].episode.durationSec;
   }
-  return { pool: ordered, cumulative, totalSec: acc, slotted };
+  return { pool: sequence, cumulative, totalSec: acc, slotted };
 }
 
 // -- broken files -------------------------------------------------------------
@@ -295,7 +300,8 @@ function getPositionAt(channel, catalog, timestampMs) {
     const match = matchingWindow(channel, timestampMs);
     if (match) {
       const cacheKey = `curated:${channel.number}:w${match.index}`;
-      const info = cachedPool(cacheKey, match.win.pool, catalog, cacheKey);
+      const info = cachedPool(cacheKey, match.win.pool, catalog, cacheKey,
+                              { ordered: !!match.win.ordered });
       return locate(info, windowElapsedSec(match.win, timestampMs));
     }
     // Outside every window: plain continuous loop, same formula as a genre
