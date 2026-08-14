@@ -416,14 +416,10 @@ html, body {
 .rockers { display: flex; gap: 8px; }
 .rocker { flex: 1; display: flex; flex-direction: column; gap: 4px; }
 .remote-row { display: flex; gap: 6px; }
-.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.key-zero { grid-column: 2; }
-.key-web { grid-column: 3; }
-.key-enter { grid-column: 1 / -1; }
-/* currentColor so the globe tracks the key's own text colour */
-.key-web svg {
-  display: block; margin: 0 auto; width: 1.35em; height: 1.35em;
-  fill: none; stroke: currentColor; stroke-width: 1.4;
+/* currentColor so the globe tracks the button's own text colour */
+.fn-web svg {
+  display: inline-block; vertical-align: -3px; width: 1.15em; height: 1.15em;
+  margin-right: 4px; fill: none; stroke: currentColor; stroke-width: 1.4;
   stroke-linecap: round;
 }
 
@@ -433,12 +429,11 @@ html, body {
   padding: 8px 0; font: inherit; font-size: .78em; letter-spacing: 1px; cursor: pointer;
   box-shadow: 0 2px 0 #0d0d0f, inset 0 1px 0 rgba(255,255,255,.16);
 }
-.keypad button { font-size: 1em; letter-spacing: 0; }
-.key-enter { font-size: .78em !important; letter-spacing: 2px; }
 .fn-guide { color: #fff700; }
 .fn-vod { color: #7fff9f; }
 .fn-last { color: #7fe8ff; }
 .fn-mute { color: #ff8b7a; }
+.fn-web { color: #c9a8ff; }
 #remote button:active, #remote button.pressed {
   transform: translateY(2px); background: linear-gradient(#232327, #37373c);
   box-shadow: inset 0 2px 5px rgba(0,0,0,.65);

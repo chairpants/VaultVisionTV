@@ -125,7 +125,6 @@ function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide, onVo
     if (!btn) return;
     btn.classList.add("pressed");
     setTimeout(() => btn.classList.remove("pressed"), 120);
-    if (btn.dataset.digit !== undefined) { pressDigit(btn.dataset.digit); return; }
     switch (btn.dataset.action) {
       case "ch-up": onChannelStep(1); break;
       case "ch-down": onChannelStep(-1); break;
@@ -136,7 +135,6 @@ function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide, onVo
       case "web": onWeb(); break;
       case "guide": onGuide(); break;
       case "vod": onVod(); break;
-      case "enter": commit(); break;
     }
   });
 
