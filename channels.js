@@ -181,6 +181,8 @@ window.CHANNELS = [
       "LoneGunmen", "FireflySeries",
     ],
   },
+  // -- literal recorded broadcast blocks, each its own channel
+  // ----------------
   {
     number: 14, name: "FOX KIDS", kind: "curated",
     tagline: "Weekday afternoons, permanently.",
@@ -227,6 +229,17 @@ window.CHANNELS = [
       "SaluteYourShorts", "Animorphs",
     ],
   },
+  // Elementary-tier cartoons, 1980-onward half of the split — SUNDAY FUNNIES
+  // (36) takes everything pre-1980. The split used to be Saturday-vs-Sunday
+  // with no content axis at all, which put Popeye and 1960s Hanna-Barbera in
+  // the same rotation as Gravity Falls and SpongeBob; era is the axis now,
+  // and the day each block airs is just flavor on top of it. The teen-action
+  // titles this pool used to also carry (XMen, SpiderManTAS,
+  // TeenageMutantNinjaTurtles, CaptainPlanet) moved to TEEN ACTION THEATER
+  // (44). Was eight 1960s/70s classic sitcoms — i.e. this "cartoon channel"
+  // was a 60s-sitcom channel 164 of every 168 hours, since a dayparted
+  // channel plays its fallback every hour outside the window. Same era, same
+  // tier, still cartoons: the rest of the 1980+ pool.
   {
     number: 16, name: "SATURDAY MORNING", kind: "curated",
     tagline: "Eat your cereal.",
@@ -328,6 +341,14 @@ window.CHANNELS = [
     tagline: "Live from a soundstage somewhere." },
   { number: 24, name: "MOVIE VAULT", kind: "genre", genre: "TV Movies",
     tagline: "Feature presentation, every hour." },
+  // Live PD used to be excluded here by id, because every file in the item
+  // VaultVision sources it from needs an archive.org login (401 anonymously).
+  // That was the wrong layer — it hid the show from this one channel while
+  // vod.js, which reads the catalog directly, still offered all 37 dead
+  // episodes. The unplayable item is now dropped in build-catalog.py's
+  // DEAD_ITEMS, and the 13 episodes that do exist on open items come from
+  // data/local-shows/LivePD, so this sweep picks them up with no opt-out
+  // list.
   { number: 25, name: "REALITY CHECK", kind: "genre", genre: "Reality TV",
     tagline: "Unscripted. Mostly." },
   {
@@ -383,6 +404,10 @@ window.CHANNELS = [
       "SometimesTheyComeBack",
     ],
   },
+  // Was AreYouAfraidOfTheDark + EerieIndiana, which is EERIE AFTER SCHOOL's
+  // (22) whole premise and meant this adult anthology channel ran kids'
+  // horror 92% of the week. The three deepest classics from its own window
+  // instead.
   {
     number: 31, name: "TWILIGHT HOUR", kind: "curated",
     tagline: "Expect the unexpected, on schedule.",
@@ -434,6 +459,14 @@ window.CHANNELS = [
       "PokemonOrangeIslands", "PokmonChronicles",
     ],
   },
+  // Elementary-tier cartoons, the pre-1980 half of the split (see SATURDAY
+  // MORNING, channel 14, for 1980-onward). Theatrical shorts and the
+  // Hanna-Barbera TV era — the name still fits, it just means the vintage
+  // funny pages now instead of "the other Saturday". TheWorldofDavidtheGnome
+  // (1985) dropped: wrong era for this pool and already the youngest-tier
+  // anchor of STORYTIME (51). The shorter vintage pools, plus the two deepest
+  // titles from the window for volume — these run 164 h/week, so they carry
+  // the channel.
   {
     number: 36, name: "SUNDAY FUNNIES", kind: "curated",
     tagline: "Ink, paint, and nothing after 1979.",
@@ -492,6 +525,10 @@ window.CHANNELS = [
       "PlanetEarth", "MartyStouffersWildAmerica",
     ],
   },
+  // LivePD is back after being pulled for being unplayable: its old source
+  // item needs an archive.org login, but 13 episodes exist on two open items
+  // (see data/local-shows/LivePD), and a ride-along is the most on-theme
+  // thing this channel could possibly air.
   {
     number: 42, name: "TRUE CRIME TONIGHT", kind: "curated",
     tagline: "Real cops, real stunts, real reruns.",
@@ -511,6 +548,15 @@ window.CHANNELS = [
       "InsomniacwithDaveAttell", "Jackass",
     ],
   },
+  // Teen-tier cartoons — action-adventure, not aimed at little kids but not
+  // the adult-humor tier of LATE NIGHT CARTOONS (46) either. Absorbs the old
+  // SUPERHERO SQUAD/ACTION TOONS/GUNDAM & GIANT ROBOTS-adjacent titles that
+  // used to be scattered across several channels, plus the teen-leaning
+  // titles pulled out of the elementary tier (14/27) and the retired
+  // NICKTOONS AFTER DARK (RockosModernLife, InvaderZIM). "Tick" (2001
+  // live-action), PowerRangers, and RoboCopliveactionTVseries dropped — live
+  // action, genre "Drama & Adventure", not actually cartoons despite sitting
+  // in this pool before; still reachable via ADVENTURE NETWORK (channel 6).
   {
     number: 44, name: "TEEN ACTION THEATER", kind: "curated",
     tagline: "Capes, transformations, and turtle power.",
@@ -533,6 +579,13 @@ window.CHANNELS = [
       "GetSmart", "Persuaders", "TekWar", "MaxHeadroom",
     ],
   },
+  // Spun off from BeavisButthead, which is already the anchor here. Spun off
+  // from BeavisButthead, which is already the anchor here. BrakShowSeries and
+  // Spawn were previously only reachable via the now-retired TOON CHANNEL's
+  // genre sweep — both are genuinely adult content (Adult Swim / HBO-era dark
+  // and violent) that TOON CHANNEL's excludeShowIds list never actually
+  // caught, so this also fixes a real pre-existing miscategorization, not
+  // just a reshuffle.
   {
     number: 46, name: "LATE NIGHT CARTOONS", kind: "curated",
     tagline: "Not for the kids' table.",
@@ -555,6 +608,15 @@ window.CHANNELS = [
       "MobileSuitGundam0083", "BubblegumCrisistheSeriesDualAudioHD",
     ],
   },
+  // Six of the ten titles this pool used to carry were shot in color --
+  // HeresLucy, TheMonkees, and the four Hanna-Barbera/Famous Studios cartoons
+  // (Peabody, Lippy, WallyGator, HermanandKatnip) -- so the channel's one
+  // stated rule was the one thing its pool didn't honor. Now monochrome
+  // live-action only; the cartoons went to SUNDAY FUNNIES (36), which is the
+  // pre-1980 cartoon channel and where they belong anyway. MisterEd added
+  // (b&w for its whole run, and this is a better home for it than a cartoon
+  // channel's filler). TheLucyShow is the one compromise: seasons 1-3 are
+  // b&w, 4-6 are color, and pools are whole-show only.
   {
     number: 48, name: "BLACK & WHITE HOUR", kind: "curated",
     tagline: "Before color, and none the worse.",
@@ -564,6 +626,8 @@ window.CHANNELS = [
       "MisterEd", "McHalesNavySeries",
     ],
   },
+  // The 8-10pm family block real networks actually ran; outside it the
+  // channel keeps to the same era rather than going somewhere else entirely.
   {
     number: 49, name: "FAMILY HOUR", kind: "curated",
     tagline: "A lesson learned before the credits.",
@@ -586,6 +650,8 @@ window.CHANNELS = [
       "SoulMan", "BernieMacShow",
     ],
   },
+  // A real weekday pre-school block: mornings for the youngest end of the
+  // pool, with the after-school-aged shows as the rest of the day's filler.
   {
     number: 51, name: "STORYTIME", kind: "curated",
     tagline: "Read along if you like.",
@@ -599,6 +665,9 @@ window.CHANNELS = [
       "WonderPetsEpisodeswithMissingEpisodes",
     ],
   },
+  // WhoseLineIsItAnyway is improv rather than sketch, but it's the same
+  // half-hour studio-comedy shape and it nearly doubles the channel's depth
+  // on its own (173.5h against the other five's 114.5h).
   {
     number: 52, name: "SKETCH VAULT", kind: "curated",
     tagline: "Bits, and nothing but.",
@@ -608,6 +677,9 @@ window.CHANNELS = [
       "ABCsFridays", "BenStillerShow", "HeyVernIt",
     ],
   },
+  // Short-run and burned-off series — the pool is deliberately made of shows
+  // that never got a second season, which is the whole premise of the channel
+  // rather than an accident of what was left over.
   {
     number: 53, name: "CULT & CANCELLED", kind: "curated",
     tagline: "Thirteen episodes, no more.",
@@ -620,6 +692,13 @@ window.CHANNELS = [
       "YouWish", "Mulaney", "LifeAsWeKnowIt", "Middleman", "Woops",
     ],
   },
+  // Sunday 8-10pm horror block, the same slot CATASTROPHE CHANNEL uses for
+  // disaster movies -- this is its monster-movie counterpart, pairing
+  // MonsterVision with every King TV movie at once (NIGHTMARE ALLEY never
+  // runs Sundays, so this doesn't just duplicate it). Was MonsterVision
+  // again, so the Sunday block's own premise only ever reached 2 of 168 hours
+  // and the channel was channel 32 the rest of the week. Now the theatrical
+  // horror the block pairs with: same genre, none of it on 19, 20 or 55.
   {
     number: 54, name: "CREATURE DOUBLE FEATURE", kind: "curated",
     tagline: "Monsters, madmen, and made-for-TV mayhem.",
@@ -643,6 +722,12 @@ window.CHANNELS = [
       "WkrpinCincinnati", "AllInTheFamily", "TheMonkees",
     ],
   },
+  // LeaveIttoBeavertheSeries (1957-63) dropped -- it was this channel's
+  // single largest title by airtime at 9.7%, on an 80s channel, while also
+  // sitting on BLACK & WHITE HOUR (48) where it actually belongs.
+  // SavedByTheBell, FamilyMatters, LifeGoesOn and HeyDude moved to 90s
+  // SITCOMS (57): all four premiered in 1989 and ran the bulk of their
+  // episodes in the 90s.
   {
     number: 56, name: "80s SITCOMS", kind: "curated",
     tagline: "Shoulder pads and setups.",
@@ -655,6 +740,11 @@ window.CHANNELS = [
       "ItsYourMove",
     ],
   },
+  // Moved off 80s SITCOMS (56): 1989 premieres that ran into the mid-90s.
+  // Same rule: premiered Feb 1989, but ran nine seasons to 1997, so all but
+  // the first are 90s. 1990 premiere; only its first two seasons exist here,
+  // both 1990-91. 1995-99, complete run, squarely 90s. Moved off 2000s
+  // SITCOMS (58): 1999.
   {
     number: 57, name: "90s SITCOMS", kind: "curated",
     tagline: "Must-see, whenever you tune in.",
@@ -671,6 +761,13 @@ window.CHANNELS = [
       "StepByStep",
     ],
   },
+  // Four titles dropped as out-of-decade, which had made the tagline below
+  // literally false: Mulaney (2014) and Ted (2024) both post-date the
+  // mockumentary era this channel claims to precede, AreWeThereYet ran
+  // 2010-13 (and was 13% of the channel's airtime), ShastaMcNasty was 1999
+  // and moved to 90s SITCOMS (57). Mulaney and Ted keep their real home on
+  // CULT & CANCELLED (53), which is where short-run series belong regardless
+  // of decade.
   {
     number: 58, name: "2000s SITCOMS", kind: "curated",
     tagline: "The last sitcoms before the mockumentary took over.",
