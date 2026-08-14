@@ -47,7 +47,10 @@ function main() {
   const slotMinutes = SLOT_SEC / 60;
   let gridChecked = 0, gridOff = [];
   for (const c of CHANNELS) {
-    if (c.kind === "guide") continue;
+    // "vod" has no schedule either — getPositionAt returns null for it by
+    // design (it's a browsable menu, see vod.js), so sweeping it counts a
+    // deliberate null as a broken channel.
+    if (c.kind === "guide" || c.kind === "vod") continue;
     for (const t of [t0, t0 + 3.7e6, t0 + 5 * 864e5 + 1234]) {
       const pos = getPositionAt(c, catalog, t);
       if (!pos) continue;
@@ -131,7 +134,10 @@ function main() {
   let breaksChecked = 0;
   const breakProblems = [];
   for (const c of CHANNELS) {
-    if (c.kind === "guide") continue;
+    // "vod" has no schedule either — getPositionAt returns null for it by
+    // design (it's a browsable menu, see vod.js), so sweeping it counts a
+    // deliberate null as a broken channel.
+    if (c.kind === "guide" || c.kind === "vod") continue;
     let t = t0, p = getPositionAt(c, catalog, t), hops = 0;
     while (p && p.padding && hops++ < 50) {
       t += (p.slotEndsInSec + 1) * 1000;
@@ -176,7 +182,10 @@ function main() {
   ];
   let channelsChecked = 0, sweepFailures = 0;
   for (const c of CHANNELS) {
-    if (c.kind === "guide") continue;
+    // "vod" has no schedule either — getPositionAt returns null for it by
+    // design (it's a browsable menu, see vod.js), so sweeping it counts a
+    // deliberate null as a broken channel.
+    if (c.kind === "guide" || c.kind === "vod") continue;
     channelsChecked++;
     for (const t of sampleTimes) {
       const pos = getPositionAt(c, catalog, t);
@@ -223,6 +232,27 @@ function main() {
     exhausted && schedInternal.brokenKeys.has(exhausted.episode.key),
     JSON.stringify(exhausted && exhausted.episode.key));
 
+  // -- ordered pools: serials play front-to-back, then loop ----------------
+  // A shuffled pool is the default; `ordered` keeps catalog order so a serial
+  // (Dark Shadows) runs 1 -> last -> 1 rather than scattering its chapters.
+  const serialCatalog = { shows: { s: { id: "s", genre: "S", episodes:
+    Array.from({ length: 8 }, (_, i) => (
+      { key: `s${i}`, itemId: "i", fileHint: `${i}.mp4`, durationSec: 1500 })) } } };
+  const inOrder = schedInternal.buildPool(["s"], serialCatalog, "seed", { ordered: true });
+  check("ordered pool keeps catalog order",
+    inOrder.pool.map((p) => p.episode.key).join() === "s0,s1,s2,s3,s4,s5,s6,s7",
+    inOrder.pool.map((p) => p.episode.key).join());
+  // One slot past the last episode must wrap to the first, not stall or repeat.
+  const lastStart = inOrder.cumulative[inOrder.pool.length - 1];
+  check("ordered pool wraps from the last episode back to the first",
+    schedInternal.locate(inOrder, lastStart).episode.key === "s7" &&
+    schedInternal.locate(inOrder, inOrder.totalSec).episode.key === "s0",
+    JSON.stringify({ last: schedInternal.locate(inOrder, lastStart).episode.key,
+                     wrapped: schedInternal.locate(inOrder, inOrder.totalSec).episode.key }));
+  check("without `ordered` the same pool is shuffled",
+    schedInternal.buildPool(["s"], serialCatalog, "seed").pool
+      .map((p) => p.episode.key).join() !== "s0,s1,s2,s3,s4,s5,s6,s7");
+
   // -- guide timeline ------------------------------------------------------
   // programsBetween (guide.js) walks the same schedule to find the boundaries
   // the guide draws its vertical lines at. Two properties matter: the blocks
@@ -237,7 +267,10 @@ function main() {
   const windowEnd = windowStart + 3 * HALF_HOUR;
   let tiled = 0, blockCount = 0, tileBad = [];
   for (const c of CHANNELS) {
-    if (c.kind === "guide") continue;
+    // "vod" has no schedule either — getPositionAt returns null for it by
+    // design (it's a browsable menu, see vod.js), so sweeping it counts a
+    // deliberate null as a broken channel.
+    if (c.kind === "guide" || c.kind === "vod") continue;
     const blocks = programsBetween(catalog, c, windowStart, windowEnd);
     if (blocks.length === 0) { tileBad.push(`ch${c.number}: no blocks`); continue; }
     tiled++;
@@ -269,7 +302,10 @@ function main() {
   // are typed by hand, so check them.
   let poolRefs = 0, unknownRefs = [], emptyChannels = [];
   for (const c of CHANNELS) {
-    if (c.kind === "guide") continue;
+    // "vod" has no schedule either — getPositionAt returns null for it by
+    // design (it's a browsable menu, see vod.js), so sweeping it counts a
+    // deliberate null as a broken channel.
+    if (c.kind === "guide" || c.kind === "vod") continue;
     const ids = [...(c.fallbackPool || []), ...(c.daypart || []).flatMap((w) => w.pool || []),
                  ...(c.excludeShowIds || [])];
     for (const id of ids) {
@@ -329,7 +365,10 @@ function main() {
     const at = t0 + m * 60 * 1000;
     let n = 0;
     for (const c of CHANNELS) {
-      if (c.kind === "guide") continue;
+      // "vod" has no schedule either — getPositionAt returns null for it by
+    // design (it's a browsable menu, see vod.js), so sweeping it counts a
+    // deliberate null as a broken channel.
+    if (c.kind === "guide" || c.kind === "vod") continue;
       const p = getPositionAt(c, catalog, at);
       if (p && p.episode.durationSec > WARM_OVER_SEC) { n++; longItems.add(p.episode.key); }
     }
