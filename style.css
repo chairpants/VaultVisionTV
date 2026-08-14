@@ -90,17 +90,25 @@ html, body {
 /* Top-right, same corner #digit-osd anchors to below it — offset down out of
    its way (see #digit-osd's own top) rather than the other way around, since
    this button is a permanent fixture and the digit echo is only ever up
-   briefly. */
+   briefly.
+   No background/border of its own — just the glyph, floating directly on the
+   picture — so app.js's mousemove/touchstart listener fades it in/out (the
+   .visible class) rather than leaving a box parked over the video at all
+   times. pointer-events follows the same toggle: invisible also means
+   click-through, so a stray tap while it's faded out lands on the video
+   underneath instead of an invisible hitbox. The drop-shadow is what keeps a
+   plain white glyph legible with no box behind it, over whatever's playing. */
 #fullscreen-btn {
   position: absolute; top: 20px; right: 20px; z-index: 8;
   width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;
-  background: rgba(0,0,0,.55); border: 2px solid rgba(255,255,255,.25); border-radius: 4px;
-  color: #fff; cursor: pointer;
+  background: none; border: none; color: #fff; cursor: pointer;
+  opacity: 0; pointer-events: none; transition: opacity 400ms ease;
 }
-#fullscreen-btn:hover { background: rgba(0,0,0,.75); border-color: rgba(255,255,255,.45); }
+#fullscreen-btn.visible, #fullscreen-btn:focus-visible { opacity: 1; pointer-events: auto; }
 #fullscreen-btn svg {
   width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2;
   stroke-linecap: round; stroke-linejoin: round;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,.85));
 }
 /* app.js's fullscreenchange listener toggles this — swaps the glyph rather
    than rotating it (unlike the remote's chevron) since expand/compress
