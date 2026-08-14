@@ -347,6 +347,13 @@ html, body {
    inline style, so a tap opens/closes instantly instead of waiting out the
    3s hover-leave timeout. */
 #remote.open { transform: translateY(0); transition-delay: 0s; }
+/* .closed is .open's twin for a mouse: clicking the chevron to close it
+   happens while the cursor is still necessarily inside #remote (you just
+   clicked something in it), so :hover above is still matching and would
+   otherwise keep the panel open no matter what .open's removal did. The
+   !important makes the click win anyway; remote.js drops the class again on
+   the panel's own "mouseleave" so the next hover cycle isn't left stuck shut. */
+#remote.closed { transform: translateY(calc(100% - 40px)) !important; transition-delay: 0s !important; }
 /* :focus-visible rather than :focus-within — clicking a button focuses it,
    which would otherwise pin the remote open indefinitely. Keyboard tabbing
    still reveals it. Kept as its own rule so a browser without :has() drops
@@ -381,6 +388,7 @@ html, body {
 }
 #remote.open #remote-toggle svg,
 #remote:has(:focus-visible) #remote-toggle svg { transform: rotate(180deg); }
+#remote.closed #remote-toggle svg { transform: rotate(0deg) !important; }
 
 .rockers { display: flex; gap: 8px; }
 .rocker { flex: 1; display: flex; flex-direction: column; gap: 4px; }
