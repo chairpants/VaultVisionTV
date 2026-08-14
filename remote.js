@@ -53,6 +53,18 @@ function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide, onVo
     render();
   }
 
+  // Whether the panel is actually rendered open right now — reads the real
+  // transform rather than trusting the .open class alone, because :hover can
+  // also be the thing holding it open (a mouse has to be hovering #remote to
+  // click anything inside it in the first place). Toggling off of the class
+  // instead would make the first click while hovering a no-op: .open would
+  // go from absent to present with nothing visibly changing, since :hover
+  // was already rendering it open.
+  function isRenderedOpen() {
+    const m = getComputedStyle(root).transform.match(/matrix\(([^)]+)\)/);
+    return !m || Math.abs(parseFloat(m[1].split(",")[5])) < 5;
+  }
+
   // Touch devices have no :hover, so #remote-toggle (see style.css) is their
   // only way to open the remote. transitionDelay is set inline rather than
   // via a class because the panel's CSS deliberately delays *closing* by 3s
@@ -61,9 +73,15 @@ function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide, onVo
   // transition finishes so hover on a device that has both input types keeps
   // its own idle-close behavior.
   function toggleOpen() {
-    const open = !root.classList.contains("open");
+    const open = !isRenderedOpen();
     root.style.transitionDelay = "0s";
     root.classList.toggle("open", open);
+    // On a mouse, clicking the chevron closed happens while still hovering
+    // #remote (the cursor has to be over it to click something inside it),
+    // which would otherwise keep :hover's own open rule in charge — .closed
+    // overrides that (see style.css); "mouseleave" below drops it again once
+    // the cursor actually leaves, so the next hover cycle isn't stuck shut.
+    root.classList.toggle("closed", !open);
     toggleBtn.setAttribute("aria-expanded", String(open));
     toggleBtn.setAttribute("aria-label", open ? "Hide remote controls" : "Show remote controls");
     clearTimeout(openDelayResetTimer);
@@ -74,6 +92,8 @@ function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide, onVo
     // remote open via the rule below, undoing whatever this tap just did.
     toggleBtn.blur();
   }
+
+  root.addEventListener("mouseleave", () => root.classList.remove("closed"));
 
   document.addEventListener("keydown", (e) => {
     if (e.key >= "0" && e.key <= "9") { pressDigit(e.key); return; }
