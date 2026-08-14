@@ -86,9 +86,32 @@ html, body {
 #osd-bar { margin-top: 8px; height: 6px; background: rgba(255,255,255,.2); }
 #osd-bar-fill { height: 100%; width: 0%; background: #fff700; }
 
+/* -- fullscreen toggle -------------------------------------------------------- */
+/* Top-right, same corner #digit-osd anchors to below it — offset down out of
+   its way (see #digit-osd's own top) rather than the other way around, since
+   this button is a permanent fixture and the digit echo is only ever up
+   briefly. */
+#fullscreen-btn {
+  position: absolute; top: 20px; right: 20px; z-index: 8;
+  width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.55); border: 2px solid rgba(255,255,255,.25); border-radius: 4px;
+  color: #fff; cursor: pointer;
+}
+#fullscreen-btn:hover { background: rgba(0,0,0,.75); border-color: rgba(255,255,255,.45); }
+#fullscreen-btn svg {
+  width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+/* app.js's fullscreenchange listener toggles this — swaps the glyph rather
+   than rotating it (unlike the remote's chevron) since expand/compress
+   aren't the same shape turned upside down. */
+#fullscreen-btn .icon-compress { display: none; }
+#fullscreen-btn.is-fullscreen .icon-expand { display: none; }
+#fullscreen-btn.is-fullscreen .icon-compress { display: block; }
+
 /* -- direct channel-entry echo ---------------------------------------------- */
 #digit-osd {
-  position: absolute; top: 24px; right: 24px; z-index: 8;
+  position: absolute; top: 76px; right: 24px; z-index: 8;
   background: rgba(0,0,0,.72); border: 2px solid rgba(255,255,255,.25);
   padding: 10px 22px; font-size: 2.4em; letter-spacing: 6px; color: #fff700;
 }
