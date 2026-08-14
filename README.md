@@ -1,5 +1,7 @@
 # VaultVisionTV
 
+[![Live demo](https://img.shields.io/badge/live%20demo-chairpants.github.io%2FVaultVisionTV-ff2d95?style=flat-square)](https://chairpants.github.io/VaultVisionTV/)
+
 A simulated 90s cable box. Flip channels and land mid-show, exactly like real
 broadcast TV — because every channel's schedule is computed deterministically
 from wall-clock time, not chosen by you. Come back an hour later and it's
