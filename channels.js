@@ -158,7 +158,7 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "ATeam", "HighwayToHeaven", "KnightRider", "Baywatch",
-      "BuckRogers", "V1983", "Chase",
+      "BuckRogers", "V1983", "Chase", "QuantumLeap",
     ],
   },
   {
@@ -333,6 +333,7 @@ window.CHANNELS = [
       "BarbaryCoast", "FireflySeries", "LogansRun", "MaxHeadroom",
       "Automan", "DallastheSeries", "HandmaidsTaleSeries",
       "LifeAsWeKnowIt", "Middleman", "BlueThunder", "CopRock", "Tick",
+      "QuantumLeap",
     ],
   },
   { number: 22, name: "ANIME ZONE", kind: "genre", genre: "Anime",
@@ -595,7 +596,7 @@ window.CHANNELS = [
       "BobandMargaret", "RenAndStimpy", "MoralOrel", "PJs",
       "DrawnTogether", "BrakShowSeries", "Simpsons", "Oblongs",
       "SpawntheAnimatedSeriesSeries480x480", "Undergrads", "HomeMovies",
-      "AeonFlux",
+      "AeonFlux", "CommonSideEffects",
     ],
   },
   {
