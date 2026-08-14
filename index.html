@@ -58,9 +58,16 @@
 </div>
 
 <!-- Sits mostly off the bottom edge; only #remote-head shows until you
-     mouse over it (CSS :hover, see style.css). -->
+     mouse over it (CSS :hover, see style.css), or on touch devices (no
+     hover) tap #remote-toggle — its chevron flips to point the other way
+     while open, see remote.js's toggleOpen(). -->
 <div id="remote">
-  <div id="remote-head"><span>VAULTVISION</span></div>
+  <div id="remote-head">
+    <span>VAULTVISION</span>
+    <button id="remote-toggle" type="button" aria-label="Show remote controls" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15l8-8 8 8"/></svg>
+    </button>
+  </div>
 
   <div class="rockers">
     <div class="rocker">

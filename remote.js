@@ -14,6 +14,8 @@ function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide, onVo
   let idleTimer = null;
   let flashText = ""; // transient status (VOL 70, MUTE) borrowing the same corner
   let flashTimer = null;
+  let openDelayResetTimer = null;
+  const toggleBtn = root.querySelector("#remote-toggle");
 
   function render() {
     const text = buffer || flashText;
@@ -51,6 +53,28 @@ function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide, onVo
     render();
   }
 
+  // Touch devices have no :hover, so #remote-toggle (see style.css) is their
+  // only way to open the remote. transitionDelay is set inline rather than
+  // via a class because the panel's CSS deliberately delays *closing* by 3s
+  // on hover-leave (so a mouse brushing past doesn't snap it shut) — a tap
+  // shouldn't inherit that delay in either direction. Cleared again after the
+  // transition finishes so hover on a device that has both input types keeps
+  // its own idle-close behavior.
+  function toggleOpen() {
+    const open = !root.classList.contains("open");
+    root.style.transitionDelay = "0s";
+    root.classList.toggle("open", open);
+    toggleBtn.setAttribute("aria-expanded", String(open));
+    toggleBtn.setAttribute("aria-label", open ? "Hide remote controls" : "Show remote controls");
+    clearTimeout(openDelayResetTimer);
+    openDelayResetTimer = setTimeout(() => { root.style.transitionDelay = ""; }, 450);
+    // A tap focuses the button same as a click would. Left focused, a later
+    // keydown anywhere (e.g. the "g"/"v" hotkeys) can promote that focus to
+    // :focus-visible, which — same as real keyboard tabbing — pins the
+    // remote open via the rule below, undoing whatever this tap just did.
+    toggleBtn.blur();
+  }
+
   document.addEventListener("keydown", (e) => {
     if (e.key >= "0" && e.key <= "9") { pressDigit(e.key); return; }
     if (e.key === "Enter") { commit(); return; }
@@ -76,6 +100,7 @@ function initRemote({ root, digitOsd, onTuneNumber, onChannelStep, onGuide, onVo
   });
 
   root.addEventListener("click", (e) => {
+    if (e.target.closest("#remote-toggle")) { toggleOpen(); return; }
     const btn = e.target.closest("button");
     if (!btn) return;
     btn.classList.add("pressed");
