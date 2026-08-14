@@ -234,9 +234,26 @@ function main() {
   // inside it. webkit-prefixed fallbacks are Safari's, which still doesn't
   // expose the unprefixed names.
   (function initFullscreen() {
+    const REVEAL_MS = 2500;
     const btn = document.getElementById("fullscreen-btn");
     const tv = document.getElementById("tv");
     const fsElement = () => document.fullscreenElement || document.webkitFullscreenElement;
+
+    // No permanent box drawn for this button (see style.css) — it only
+    // exists on screen while the mouse is actually moving (or, on a touch
+    // device, just got tapped), fading out again after a short idle spell
+    // like a video player's own controls rather than sitting over the
+    // picture at all times.
+    let hideTimer = null;
+    function reveal() {
+      btn.classList.add("visible");
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => btn.classList.remove("visible"), REVEAL_MS);
+    }
+    tv.addEventListener("mousemove", reveal);
+    tv.addEventListener("touchstart", reveal, { passive: true });
+    reveal(); // visible on load so it's discoverable at all, then fades same as any other idle spell
+
     btn.addEventListener("click", () => {
       if (fsElement()) {
         (document.exitFullscreen || document.webkitExitFullscreen).call(document);
