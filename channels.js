@@ -35,8 +35,9 @@
 // tools/check-channels.js fails on that.
 //
 // The block recordings (TGIF, SNICK, NickAtNite, FoxKids, SatMorning,
-// MonsterVision, SciFiAnime) are no longer channels of their own. They're
-// dayparts on the network that aired them, which is what they always were.
+// MonsterVision, SciFiAnime, MtvTrl) are no longer channels of their own.
+// They're dayparts on the network that aired them, which is what they
+// always were.
 //
 // KIDS & LEARNING sits on channel 3 — the lowest tunable slot, so it's the
 // front door when tuning up from the bottom. The guide keeps channel 1 (real
@@ -47,9 +48,9 @@
 // <script src="channels.js">, so file:// pages can load it too.
 const GUIDE_CHANNEL = 1;
 const VOD_CHANNEL = 2;
-// Every genre VaultVision files a feature film under -- the VBO tier's whole
-// library (see channel 60 below). Anything not in here is a TV series, which
-// is also how VOD splits its top level (vod.js).
+// Every genre VaultVision files a feature film under -- the whole library of
+// the VBO tier at the bottom of this file. Anything not in here is a TV
+// series, which is also how VOD splits its top level (vod.js).
 const MOVIE_GENRES = [
   "Action & Adventure", "Comedy", "Drama", "Family & Kids", "Holiday",
   "Horror", "Sci-Fi & Fantasy",
@@ -207,18 +208,31 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 15, name: "NICKELODEON", kind: "curated",
+    number: 15, name: "THE LEARNING CHANNEL", kind: "curated",
+    tagline: "Edutainment, on a schedule.",
+    daypart: [],
+    fallbackPool: [
+      "BillNye", "SchoolhouseRock", "CosmosaPersonalVoyage",
+      "PlanetEarth", "MartyStouffersWildAmerica",
+    ],
+  },
+  {
+    number: 16, name: "NICKELODEON", kind: "curated",
     tagline: "Slime not included.",
-    // SNICK on Saturday night and Nick at Nite after 11, same as it aired. The
-    // overnight pads the 5 block recordings with the classic sitcoms Nick at
-    // Nite actually ran -- they live on ch 6/9 too, which is the point of a
-    // rerun channel.
+    // SNICK on Saturday night and Nick at Nite after 11, same as it aired.
+    // The NickAtNite recordings themselves (2-6h each) only go in the 0-5
+    // window, which is wide enough to actually hold one -- the 23-24 hour is
+    // its own separately-tracked window (see channels.js's own header on
+    // midnight-crossing windows), so a tape that ran past its end used to
+    // hand off mid-episode to a window with no memory of where it left off.
+    // 23-24 instead leads in with the classic sitcoms Nick at Nite actually
+    // ran -- they live on ch 6/9 too, which is the point of a rerun channel.
     daypart: [
       { days: [6], startHour: 20, endHour: 22, pool: [
         "SNICK",
       ] },
       { days: [0, 1, 2, 3, 4, 5, 6], startHour: 23, endHour: 24, pool: [
-        "NickAtNite", "LeaveIttoBeavertheSeries", "PetticoatJunction",
+        "LeaveIttoBeavertheSeries", "PetticoatJunction",
         "GreenAcres", "MaryTylerMooreShow", "DickVanDyke", "TheLucyShow",
         "HeresLucy", "MisterEd", "GetSmart", "Taxi1978", "Newhart",
         "TheMonkees", "BosomBuddies",
@@ -249,7 +263,7 @@ window.CHANNELS = [
   // channel plays its fallback every hour outside the window. Same era, same
   // tier, still cartoons: the rest of the 1980+ pool.
   {
-    number: 16, name: "SATURDAY MORNING", kind: "curated",
+    number: 17, name: "SATURDAY MORNING", kind: "curated",
     tagline: "Eat your cereal.",
     // The six SatMorning recordings run 107-365 minutes -- a whole morning each.
     // Gated to Saturday morning so they never interrupt the weekday rotation of
@@ -273,7 +287,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 17, name: "CARTOON CARTOONS", kind: "curated",
+    number: 18, name: "CARTOON CARTOONS", kind: "curated",
     tagline: "Basic cable, drawn by hand.",
     daypart: [],
     fallbackPool: [
@@ -285,7 +299,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 18, name: "TOON AFTERNOON", kind: "curated",
+    number: 19, name: "TOON AFTERNOON", kind: "curated",
     tagline: "Straight from the syndication truck.",
     daypart: [],
     fallbackPool: [
@@ -300,7 +314,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 19, name: "SECTOR 7", kind: "curated",
+    number: 20, name: "SECTOR 7", kind: "curated",
     tagline: "Warp factor rerun.",
     // 11 anime-block tapes, ~2h each: one Saturday night gets 11 weeks of unique
     // programming, where two-a-night would burn through it in five.
@@ -317,7 +331,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 20, name: "ANTHOLOGY", kind: "curated",
+    number: 21, name: "ANTHOLOGY", kind: "curated",
     tagline: "A different story every week.",
     daypart: [],
     fallbackPool: [
@@ -327,7 +341,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 21, name: "ADVENTURE NETWORK", kind: "curated",
+    number: 22, name: "ADVENTURE NETWORK", kind: "curated",
     tagline: "Car chases guaranteed.",
     daypart: [],
     fallbackPool: [
@@ -344,17 +358,17 @@ window.CHANNELS = [
       "QuantumLeap",
     ],
   },
-  { number: 22, name: "ANIME ZONE", kind: "genre", genre: "Anime",
+  { number: 23, name: "ANIME ZONE", kind: "genre", genre: "Anime",
     tagline: "Dubbed, subbed, and everything between." },
-  { number: 23, name: "LAUGH TRACK", kind: "genre", genre: "Sketch Comedy & Late Night",
+  { number: 24, name: "LAUGH TRACK", kind: "genre", genre: "Sketch Comedy & Late Night",
     tagline: "Live from a soundstage somewhere." },
-  // Channel 24 MOVIE VAULT is gone: it swept the "TV Movies" genre, which
+  // Channel 25 MOVIE VAULT is gone: it swept the "TV Movies" genre, which
   // VaultVision has since split into real film genres (Comedy, Drama, Horror,
   // Action & Adventure, Sci-Fi & Fantasy, Family & Kids, Holiday). Those are
-  // the VBO tier on 60-66 now, and 24 stays empty rather than renumbering
-  // every channel below it. The made-for-TV movies themselves didn't go
-  // anywhere -- they're in Horror/Action now, and still on CHILLER (26) and
-  // CREATURE DOUBLE FEATURE (54).
+  // the VBO tier at the bottom of this file now, and 25 stays empty rather
+  // than renumbering every channel below it. The made-for-TV movies
+  // themselves didn't go anywhere -- they're in Horror/Action now, and still
+  // on CHILLER and CREATURE DOUBLE FEATURE.
   // Live PD used to be excluded here by id, because every file in the item
   // VaultVision sources it from needs an archive.org login (401 anonymously).
   // That was the wrong layer — it hid the show from this one channel while
@@ -363,10 +377,10 @@ window.CHANNELS = [
   // DEAD_ITEMS, and the 13 episodes that do exist on open items come from
   // data/local-shows/LivePD, so this sweep picks them up with no opt-out
   // list.
-  { number: 25, name: "REALITY CHECK", kind: "genre", genre: "Reality TV",
+  { number: 26, name: "REALITY CHECK", kind: "genre", genre: "Reality TV",
     tagline: "Unscripted. Mostly." },
   {
-    number: 26, name: "CHILLER", kind: "curated",
+    number: 27, name: "CHILLER", kind: "curated",
     tagline: "Leave a light on.",
     // MonsterVision two a night from 8 -- 76 tapes at a ~2h median fills to
     // midnight and runs 38 nights before repeating.
@@ -382,7 +396,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 27, name: "QUEENS & RAYMOND", kind: "curated",
+    number: 28, name: "QUEENS & RAYMOND", kind: "curated",
     tagline: "Married, with in-laws.",
     daypart: [],
     fallbackPool: [
@@ -390,7 +404,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 28, name: "LATE SHOW", kind: "curated",
+    number: 29, name: "LATE SHOW", kind: "curated",
     tagline: "Past your bedtime.",
     daypart: [],
     fallbackPool: [
@@ -400,7 +414,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 29, name: "MIDNIGHT PRECINCT", kind: "curated",
+    number: 30, name: "MIDNIGHT PRECINCT", kind: "curated",
     tagline: "The city that never reruns.",
     daypart: [],
     fallbackPool: [
@@ -409,7 +423,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 30, name: "NIGHTMARE ALLEY", kind: "curated",
+    number: 31, name: "NIGHTMARE ALLEY", kind: "curated",
     tagline: "Stephen King, wall to wall.",
     daypart: [],
     fallbackPool: [
@@ -423,7 +437,7 @@ window.CHANNELS = [
   // horror 92% of the week. The three deepest classics from its own window
   // instead.
   {
-    number: 31, name: "TWILIGHT HOUR", kind: "curated",
+    number: 32, name: "TWILIGHT HOUR", kind: "curated",
     tagline: "Expect the unexpected, on schedule.",
     daypart: [],
     fallbackPool: [
@@ -435,7 +449,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 32, name: "EERIE AFTER SCHOOL", kind: "curated",
+    number: 33, name: "EERIE AFTER SCHOOL", kind: "curated",
     tagline: "Scary, but you'll still make curfew.",
     daypart: [],
     fallbackPool: [
@@ -445,7 +459,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 33, name: "GUNDAM & GIANT ROBOTS", kind: "curated",
+    number: 34, name: "GUNDAM & GIANT ROBOTS", kind: "curated",
     tagline: "Giant robots, on the hour.",
     daypart: [],
     fallbackPool: [
@@ -456,7 +470,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 34, name: "DBZ MARATHON", kind: "curated",
+    number: 35, name: "DBZ MARATHON", kind: "curated",
     tagline: "It's over 9000 reruns.",
     daypart: [],
     fallbackPool: [
@@ -465,7 +479,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 35, name: "POKEMON ISLAND", kind: "curated",
+    number: 36, name: "POKEMON ISLAND", kind: "curated",
     tagline: "Gotta watch 'em all.",
     daypart: [],
     fallbackPool: [
@@ -482,7 +496,7 @@ window.CHANNELS = [
   // titles from the window for volume — these run 164 h/week, so they carry
   // the channel.
   {
-    number: 36, name: "SUNDAY FUNNIES", kind: "curated",
+    number: 37, name: "SUNDAY FUNNIES", kind: "curated",
     tagline: "Ink, paint, and nothing after 1979.",
     daypart: [],
     fallbackPool: [
@@ -496,7 +510,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 37, name: "PRIME TIME SOAPS", kind: "curated",
+    number: 38, name: "PRIME TIME SOAPS", kind: "curated",
     tagline: "Big hair, bigger drama.",
     daypart: [],
     fallbackPool: [
@@ -505,7 +519,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 38, name: "WILD WEST & SWORDPLAY", kind: "curated",
+    number: 39, name: "WILD WEST & SWORDPLAY", kind: "curated",
     tagline: "Duels, both sword and six-shooter.",
     daypart: [],
     fallbackPool: [
@@ -514,15 +528,35 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 39, name: "BAYWATCH NIGHTS", kind: "curated",
+    number: 40, name: "BAYWATCH NIGHTS", kind: "curated",
     tagline: "Slow motion, fast cars.",
     daypart: [],
     fallbackPool: [
       "ATeam", "KnightRider", "Baywatch", "Automan", "BlueThunder",
     ],
   },
+  // TRL's own weekday-afternoon slot, the only window it ever aired in --
+  // outside it the channel runs the rest of the network's library, including
+  // the MTV originals that already live on other channels (BeavisButthead,
+  // Daria and AeonFlux on LATE NIGHT CARTOONS; Jackass and CelebrityDeathmatch
+  // on STAND-UP & SLAPSTICK) -- same rerun-simulator rule as everywhere else,
+  // a show belongs wherever it aired.
   {
-    number: 40, name: "THE WONDER HOUR", kind: "curated",
+    number: 41, name: "MTV", kind: "curated",
+    tagline: "I want my MTV.",
+    daypart: [
+      { days: [1, 2, 3, 4, 5], startHour: 16, endHour: 17, pool: [
+        "MtvTrl",
+      ] },
+    ],
+    fallbackPool: [
+      "RealWorld", "RoadRules", "Challenge", "Osbournes", "VivaLaBam",
+      "PimpMyRide", "MtvTrueLife", "MTVUnplugged", "BeavisButthead", "Daria",
+      "AeonFlux", "Jackass", "CelebrityDeathmatch",
+    ],
+  },
+  {
+    number: 42, name: "THE WONDER HOUR", kind: "curated",
     tagline: "Growing up, one rerun at a time.",
     daypart: [],
     fallbackPool: [
@@ -530,21 +564,12 @@ window.CHANNELS = [
       "ParkerLewis",
     ],
   },
-  {
-    number: 41, name: "THE LEARNING CHANNEL", kind: "curated",
-    tagline: "Edutainment, on a schedule.",
-    daypart: [],
-    fallbackPool: [
-      "BillNye", "SchoolhouseRock", "CosmosaPersonalVoyage",
-      "PlanetEarth", "MartyStouffersWildAmerica",
-    ],
-  },
   // LivePD is back after being pulled for being unplayable: its old source
   // item needs an archive.org login, but 13 episodes exist on two open items
   // (see data/local-shows/LivePD), and a ride-along is the most on-theme
   // thing this channel could possibly air.
   {
-    number: 42, name: "TRUE CRIME TONIGHT", kind: "curated",
+    number: 43, name: "TRUE CRIME TONIGHT", kind: "curated",
     tagline: "Real cops, real stunts, real reruns.",
     daypart: [],
     fallbackPool: [
@@ -554,7 +579,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 43, name: "STAND-UP & SLAPSTICK", kind: "curated",
+    number: 44, name: "STAND-UP & SLAPSTICK", kind: "curated",
     tagline: "Comedy that might need stitches.",
     daypart: [],
     fallbackPool: [
@@ -572,7 +597,7 @@ window.CHANNELS = [
   // action, genre "Drama & Adventure", not actually cartoons despite sitting
   // in this pool before; still reachable via ADVENTURE NETWORK (channel 6).
   {
-    number: 44, name: "TEEN ACTION THEATER", kind: "curated",
+    number: 45, name: "TEEN ACTION THEATER", kind: "curated",
     tagline: "Capes, transformations, and turtle power.",
     daypart: [],
     fallbackPool: [
@@ -586,7 +611,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 45, name: "THE AGENCY", kind: "curated",
+    number: 46, name: "THE AGENCY", kind: "curated",
     tagline: "Trust no one. Except the schedule.",
     daypart: [],
     fallbackPool: [
@@ -601,7 +626,7 @@ window.CHANNELS = [
   // caught, so this also fixes a real pre-existing miscategorization, not
   // just a reshuffle.
   {
-    number: 46, name: "LATE NIGHT CARTOONS", kind: "curated",
+    number: 47, name: "LATE NIGHT CARTOONS", kind: "curated",
     tagline: "Not for the kids' table.",
     daypart: [],
     fallbackPool: [
@@ -613,7 +638,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 47, name: "ANIME MIDNIGHT", kind: "curated",
+    number: 48, name: "ANIME MIDNIGHT", kind: "curated",
     tagline: "Subtitles after dark.",
     daypart: [],
     fallbackPool: [
@@ -632,7 +657,7 @@ window.CHANNELS = [
   // channel's filler). TheLucyShow is the one compromise: seasons 1-3 are
   // b&w, 4-6 are color, and pools are whole-show only.
   {
-    number: 48, name: "BLACK & WHITE HOUR", kind: "curated",
+    number: 49, name: "BLACK & WHITE HOUR", kind: "curated",
     tagline: "Before color, and none the worse.",
     daypart: [],
     fallbackPool: [
@@ -643,7 +668,7 @@ window.CHANNELS = [
   // The 8-10pm family block real networks actually ran; outside it the
   // channel keeps to the same era rather than going somewhere else entirely.
   {
-    number: 49, name: "FAMILY HOUR", kind: "curated",
+    number: 50, name: "FAMILY HOUR", kind: "curated",
     tagline: "A lesson learned before the credits.",
     daypart: [],
     fallbackPool: [
@@ -654,7 +679,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 50, name: "APARTMENT 5B", kind: "curated",
+    number: 51, name: "APARTMENT 5B", kind: "curated",
     tagline: "Nobody here has a real job.",
     daypart: [],
     fallbackPool: [
@@ -667,7 +692,7 @@ window.CHANNELS = [
   // A real weekday pre-school block: mornings for the youngest end of the
   // pool, with the after-school-aged shows as the rest of the day's filler.
   {
-    number: 51, name: "STORYTIME", kind: "curated",
+    number: 52, name: "STORYTIME", kind: "curated",
     tagline: "Read along if you like.",
     daypart: [],
     fallbackPool: [
@@ -683,7 +708,7 @@ window.CHANNELS = [
   // half-hour studio-comedy shape and it nearly doubles the channel's depth
   // on its own (173.5h against the other five's 114.5h).
   {
-    number: 52, name: "SKETCH VAULT", kind: "curated",
+    number: 53, name: "SKETCH VAULT", kind: "curated",
     tagline: "Bits, and nothing but.",
     daypart: [],
     fallbackPool: [
@@ -695,7 +720,7 @@ window.CHANNELS = [
   // that never got a second season, which is the whole premise of the channel
   // rather than an accident of what was left over.
   {
-    number: 53, name: "CULT & CANCELLED", kind: "curated",
+    number: 54, name: "CULT & CANCELLED", kind: "curated",
     tagline: "Thirteen episodes, no more.",
     daypart: [],
     fallbackPool: [
@@ -714,7 +739,7 @@ window.CHANNELS = [
   // and the channel was channel 32 the rest of the week. Now the theatrical
   // horror the block pairs with: same genre, none of it on 19, 20 or 55.
   {
-    number: 54, name: "CREATURE DOUBLE FEATURE", kind: "curated",
+    number: 55, name: "CREATURE DOUBLE FEATURE", kind: "curated",
     tagline: "Monsters, madmen, and made-for-TV mayhem.",
     daypart: [],
     fallbackPool: [
@@ -726,7 +751,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 55, name: "60s & 70s SITCOM HOUR", kind: "curated",
+    number: 56, name: "60s & 70s SITCOM HOUR", kind: "curated",
     tagline: "Before the laugh track needed subtitles.",
     daypart: [],
     fallbackPool: [
@@ -743,7 +768,7 @@ window.CHANNELS = [
   // SITCOMS (57): all four premiered in 1989 and ran the bulk of their
   // episodes in the 90s.
   {
-    number: 56, name: "80s SITCOMS", kind: "curated",
+    number: 57, name: "80s SITCOMS", kind: "curated",
     tagline: "Shoulder pads and setups.",
     daypart: [],
     fallbackPool: [
@@ -760,7 +785,7 @@ window.CHANNELS = [
   // both 1990-91. 1995-99, complete run, squarely 90s. Moved off 2000s
   // SITCOMS (58): 1999.
   {
-    number: 57, name: "90s SITCOMS", kind: "curated",
+    number: 58, name: "90s SITCOMS", kind: "curated",
     tagline: "Must-see, whenever you tune in.",
     daypart: [],
     fallbackPool: [
@@ -783,7 +808,7 @@ window.CHANNELS = [
   // CULT & CANCELLED (53), which is where short-run series belong regardless
   // of decade.
   {
-    number: 58, name: "2000s SITCOMS", kind: "curated",
+    number: 59, name: "2000s SITCOMS", kind: "curated",
     tagline: "The last sitcoms before the mockumentary took over.",
     daypart: [],
     fallbackPool: [
@@ -793,7 +818,7 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 59, name: "SLAPSTICK & SCREWBALL", kind: "curated",
+    number: 60, name: "SLAPSTICK & SCREWBALL", kind: "curated",
     tagline: "Nobody here keeps a straight face.",
     daypart: [],
     fallbackPool: [
@@ -803,7 +828,7 @@ window.CHANNELS = [
     ],
   },
 
-  // -- VBO: the movie tier ----------------------------------------------------
+  // -- VBO: the movie tier (61-67) ----------------------------------------------------
   // ~400 feature films came into VaultVision at once, and they don't belong on
   // the rerun channels above -- a 100-minute movie dropped into a sitcom
   // rotation is most of an evening of it. So they get the premium-movie-channel
@@ -815,23 +840,23 @@ window.CHANNELS = [
   // them -- same library, different shuffle, so tuning 60 -> 61 always lands
   // on a different film. That's what the real second feed of a movie channel
   // was: the same month's lineup, offset.
-  { number: 60, name: "VBO", kind: "genre", genre: MOVIE_GENRES,
+  { number: 61, name: "VBO", kind: "genre", genre: MOVIE_GENRES,
     tagline: "It's not TV." },
-  { number: 61, name: "VBO 2", kind: "genre", genre: MOVIE_GENRES, seed: "vbo2",
+  { number: 62, name: "VBO 2", kind: "genre", genre: MOVIE_GENRES, seed: "vbo2",
     tagline: "The other half of the lineup." },
-  { number: 62, name: "VBO FAMILY", kind: "genre",
+  { number: 63, name: "VBO FAMILY", kind: "genre",
     genre: ["Family & Kids", "Holiday"],
     tagline: "Everybody in the room." },
-  { number: 63, name: "VBO DRAMA", kind: "genre", genre: "Drama",
+  { number: 64, name: "VBO DRAMA", kind: "genre", genre: "Drama",
     tagline: "Nobody says a word for two hours." },
-  { number: 64, name: "VBO COMEDY", kind: "genre", genre: "Comedy",
+  { number: 65, name: "VBO COMEDY", kind: "genre", genre: "Comedy",
     tagline: "Uncut, unedited, unaired-on-basic." },
   // Sci-fi rides with action rather than getting its own channel: 37 films is
   // thin for a 24h loop on its own, and the two shelves always shared one
   // anyway.
-  { number: 65, name: "VBO ACTION", kind: "genre",
+  { number: 66, name: "VBO ACTION", kind: "genre",
     genre: ["Action & Adventure", "Sci-Fi & Fantasy"],
     tagline: "Explosions on a schedule." },
-  { number: 66, name: "VBO HORROR", kind: "genre", genre: "Horror",
+  { number: 67, name: "VBO HORROR", kind: "genre", genre: "Horror",
     tagline: "Late enough that it counts." },
 ];

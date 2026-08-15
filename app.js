@@ -228,6 +228,49 @@ function main() {
   // the guide up, click the docked mini picture to bring it back down.
   video.addEventListener("click", () => tuneTo(GUIDE_CHANNEL));
 
+  // Browser fullscreen (the OS-level kind, distinct from the app's own
+  // "full-screen picture vs. docked in the guide" concept above) — fullscreens
+  // #tv rather than the video alone so the OSD/remote/guide keep working
+  // inside it. webkit-prefixed fallbacks are Safari's, which still doesn't
+  // expose the unprefixed names.
+  (function initFullscreen() {
+    const REVEAL_MS = 2500;
+    const btn = document.getElementById("fullscreen-btn");
+    const tv = document.getElementById("tv");
+    const fsElement = () => document.fullscreenElement || document.webkitFullscreenElement;
+
+    // No permanent box drawn for this button (see style.css) — it only
+    // exists on screen while the mouse is actually moving (or, on a touch
+    // device, just got tapped), fading out again after a short idle spell
+    // like a video player's own controls rather than sitting over the
+    // picture at all times.
+    let hideTimer = null;
+    function reveal() {
+      btn.classList.add("visible");
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => btn.classList.remove("visible"), REVEAL_MS);
+    }
+    tv.addEventListener("mousemove", reveal);
+    tv.addEventListener("touchstart", reveal, { passive: true });
+    reveal(); // visible on load so it's discoverable at all, then fades same as any other idle spell
+
+    btn.addEventListener("click", () => {
+      if (fsElement()) {
+        (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+      } else {
+        (tv.requestFullscreen || tv.webkitRequestFullscreen).call(tv);
+      }
+    });
+    ["fullscreenchange", "webkitfullscreenchange"].forEach((ev) =>
+      document.addEventListener(ev, () => {
+        const isFs = !!fsElement();
+        btn.classList.toggle("is-fullscreen", isFs);
+        btn.setAttribute("aria-pressed", String(isFs));
+        btn.setAttribute("aria-label", isFs ? "Exit fullscreen" : "Enter fullscreen");
+      })
+    );
+  })();
+
   player.startDriftLoop(() => byNumber[currentNumber], catalog);
   tuneTo(DEFAULT_CHANNEL);
 }

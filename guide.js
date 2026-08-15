@@ -37,6 +37,14 @@ const WINDOW_MS = 3 * SLOT_MS; // NOW through +60, the span a row draws across
 // the pools are built on, whatever the local UTC offset is.
 const slotStart = (ms) => EPOCH_MS + Math.floor((ms - EPOCH_MS) / SLOT_MS) * SLOT_MS;
 
+// Below this width there isn't room to lay out a proportional NOW/+30/+60
+// timeline per row without every block becoming an unreadable sliver, so
+// renderRows() switches to one row = one "on now" line instead. Matches the
+// breakpoint in style.css's own #guide media query — kept in sync by eye
+// since the two can't share a literal across a stylesheet and a script.
+const MOBILE_GUIDE_MAX_WIDTH = 700;
+const isMobileGuide = () => window.matchMedia(`(max-width: ${MOBILE_GUIDE_MAX_WIDTH}px)`).matches;
+
 const shortTime = (d) => `${d.getHours() % 12 || 12}:${String(d.getMinutes()).padStart(2, "0")}`;
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 // Programme titles come from archive.org metadata, not from us — escape them
@@ -163,14 +171,40 @@ function createGuide({ root, channels, catalog, tuneTo, getCurrentNumber }) {
   // the moment it starts. So a 25-minute cartoon and a 2-hour movie look like
   // what they are, and the vertical lines march across the row at the real
   // programme boundaries instead of only at :00 and :30.
+  // On a phone-width screen, render one row = one "on now" line per channel
+  // instead of the proportional timeline below — there's no room for a
+  // 90-minute window to stay readable, so don't try (see isMobileGuide()).
+  function renderRowsMobile() {
+    const now = Date.now();
+    trackEl.innerHTML = tunableChannels
+      .map((c) => {
+        const hl = c.number === highlightedNumber ? " highlight" : "";
+        return `<div class="guide-row${hl}" data-ch="${c.number}">
+          <span class="ch-col">${c.number} ${c.name}</span>
+          <span class="prog-track now-only"><span class="prog now-only">${esc(programLabel(catalog, c, now))}</span></span>
+        </div>`;
+      })
+      .join("");
+  }
+
+  // Each row is a proportional timeline rather than three equal columns: a
+  // block's width is the airtime it actually occupies, and its left border is
+  // the moment it starts. So a 25-minute cartoon and a 2-hour movie look like
+  // what they are, and the vertical lines march across the row at the real
+  // programme boundaries instead of only at :00 and :30.
   function renderRows() {
-    const s0 = slotStart(Date.now());
-    const nowPct = ((Date.now() - s0) / WINDOW_MS) * 100;
-    const pct = (ms) => ((clamp(ms, s0, s0 + WINDOW_MS) - s0) / WINDOW_MS) * 100;
     // The periodic refresh() rebuilds this from scratch (program labels can
     // have changed), which would otherwise reset the user's own scroll
     // position back to the top — save and restore it around the rebuild.
     const savedScrollTop = rowsWrap.scrollTop;
+    if (isMobileGuide()) {
+      renderRowsMobile();
+      rowsWrap.scrollTop = savedScrollTop;
+      return;
+    }
+    const s0 = slotStart(Date.now());
+    const nowPct = ((Date.now() - s0) / WINDOW_MS) * 100;
+    const pct = (ms) => ((clamp(ms, s0, s0 + WINDOW_MS) - s0) / WINDOW_MS) * 100;
     trackEl.innerHTML = tunableChannels
       .map((c) => {
         const blocks = programsBetween(catalog, c, s0, s0 + WINDOW_MS)
@@ -222,6 +256,15 @@ function createGuide({ root, channels, catalog, tuneTo, getCurrentNumber }) {
   trackEl.addEventListener("mouseover", (e) => {
     const row = e.target.closest(".guide-row");
     if (row) setHighlight(parseInt(row.dataset.ch, 10));
+  });
+
+  // Crossing MOBILE_GUIDE_MAX_WIDTH (a rotation, or resizing a desktop
+  // window) should switch layouts without waiting on the next 60s refresh().
+  let resizeTimer = null;
+  window.addEventListener("resize", () => {
+    if (root.classList.contains("hidden")) return;
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(renderRows, 150);
   });
 
   function show() {
