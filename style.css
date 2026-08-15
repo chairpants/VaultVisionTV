@@ -86,9 +86,40 @@ html, body {
 #osd-bar { margin-top: 8px; height: 6px; background: rgba(255,255,255,.2); }
 #osd-bar-fill { height: 100%; width: 0%; background: #fff700; }
 
+/* -- fullscreen toggle -------------------------------------------------------- */
+/* Top-right, same corner #digit-osd anchors to below it — offset down out of
+   its way (see #digit-osd's own top) rather than the other way around, since
+   this button is a permanent fixture and the digit echo is only ever up
+   briefly.
+   No background/border of its own — just the glyph, floating directly on the
+   picture — so app.js's mousemove/touchstart listener fades it in/out (the
+   .visible class) rather than leaving a box parked over the video at all
+   times. pointer-events follows the same toggle: invisible also means
+   click-through, so a stray tap while it's faded out lands on the video
+   underneath instead of an invisible hitbox. The drop-shadow is what keeps a
+   plain white glyph legible with no box behind it, over whatever's playing. */
+#fullscreen-btn {
+  position: absolute; top: 20px; right: 20px; z-index: 8;
+  width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;
+  background: none; border: none; color: #fff; cursor: pointer;
+  opacity: 0; pointer-events: none; transition: opacity 400ms ease;
+}
+#fullscreen-btn.visible, #fullscreen-btn:focus-visible { opacity: 1; pointer-events: auto; }
+#fullscreen-btn svg {
+  width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,.85));
+}
+/* app.js's fullscreenchange listener toggles this — swaps the glyph rather
+   than rotating it (unlike the remote's chevron) since expand/compress
+   aren't the same shape turned upside down. */
+#fullscreen-btn .icon-compress { display: none; }
+#fullscreen-btn.is-fullscreen .icon-expand { display: none; }
+#fullscreen-btn.is-fullscreen .icon-compress { display: block; }
+
 /* -- direct channel-entry echo ---------------------------------------------- */
 #digit-osd {
-  position: absolute; top: 24px; right: 24px; z-index: 8;
+  position: absolute; top: 76px; right: 24px; z-index: 8;
   background: rgba(0,0,0,.72); border: 2px solid rgba(255,255,255,.25);
   padding: 10px 22px; font-size: 2.4em; letter-spacing: 6px; color: #fff700;
 }
@@ -251,6 +282,24 @@ html, body {
   background: rgba(255,247,0,.75); z-index: 0; pointer-events: none;
 }
 
+/* Narrow-screen guide: guide.js's renderRows() switches to one row = one
+   "on now" line per channel below MOBILE_GUIDE_MAX_WIDTH (kept in sync with
+   that constant by eye) rather than cramming the proportional NOW/+30/+60
+   timeline above into a phone's width. .now-only replaces the absolutely-
+   positioned timeline block with a plain line of text — there's only ever
+   one, so it doesn't need a time axis to sit on. */
+@media (max-width: 700px) {
+  #guide-cols { display: none; }
+  .guide-row .ch-col, #guide-cols .ch-col { flex: 0 0 108px; font-size: .85em; }
+  .guide-row .prog-track.now-only {
+    height: auto; background: none; display: flex; align-items: center;
+  }
+  .guide-row .prog.now-only {
+    position: static; border-left: none; background: none; padding: 0;
+    white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.3;
+  }
+}
+
 /* -- Video On Demand ---------------------------------------------------------- */
 /* Unlike the guide (a translucent overlay over the still-playing picture),
    VOD takes over the whole screen the same way any other channel does — the
@@ -323,35 +372,70 @@ html, body {
   transition: transform 400ms cubic-bezier(.4, 0, .2, 1);
   transition-delay: 3s; /* idle timeout before it rolls away */
 }
-#remote:hover { transform: translateY(0); transition-delay: 0s; }
+/* Gated to real hover-capable pointers (a mouse) rather than a bare :hover —
+   touchscreens report hover:none but still make :hover "sticky" after a tap
+   (it doesn't clear until something else is tapped), which would fight
+   #remote.open below: tapping the chevron closed would toggle the class off
+   while :hover stayed matched, and the panel would never visibly close. */
+@media (hover: hover) and (pointer: fine) {
+  #remote:hover { transform: translateY(0); transition-delay: 0s; }
+}
+/* .open is the tap-driven twin of the rule above, for touch devices that
+   either don't fire :hover at all or make it sticky — remote.js's
+   toggleOpen() sets the class and also clears the idle delay below via an
+   inline style, so a tap opens/closes instantly instead of waiting out the
+   3s hover-leave timeout. */
+#remote.open { transform: translateY(0); transition-delay: 0s; }
+/* .closed is .open's twin for a mouse: clicking the chevron to close it
+   happens while the cursor is still necessarily inside #remote (you just
+   clicked something in it), so :hover above is still matching and would
+   otherwise keep the panel open no matter what .open's removal did. The
+   !important makes the click win anyway; remote.js drops the class again on
+   the panel's own "mouseleave" so the next hover cycle isn't left stuck shut. */
+#remote.closed { transform: translateY(calc(100% - 40px)) !important; transition-delay: 0s !important; }
 /* :focus-visible rather than :focus-within — clicking a button focuses it,
    which would otherwise pin the remote open indefinitely. Keyboard tabbing
    still reveals it. Kept as its own rule so a browser without :has() drops
-   only this line instead of invalidating the :hover rule alongside it. */
+   only this line instead of invalidating the rules above. */
 #remote:has(:focus-visible) { transform: translateY(0); transition-delay: 0s; }
 
 #remote-head {
-  height: 40px; display: flex; align-items: center; justify-content: space-between;
+  height: 40px; display: flex; align-items: center; gap: 8px;
   color: #8d8d92; font-size: .68em; letter-spacing: 4px;
   border-bottom: 1px solid rgba(255,255,255,.07);
 }
+#remote-head span { flex: 1 1 auto; }
 /* IR emitter lamp */
 #remote-head::after {
   content: ""; width: 9px; height: 9px; border-radius: 50%;
   background: #8e2b22; box-shadow: 0 0 7px #e74c3c, inset 0 1px 1px rgba(255,255,255,.4);
 }
 
+/* Chevron toggle — the only way to open the remote on a touch device, since
+   it has no hover to fire the rule above. Same glyph both states: rotating
+   180° turns the "^" into a "v" rather than swapping icons. */
+#remote-toggle {
+  flex: none; background: none; border: none; padding: 6px; margin: 0;
+  color: #8d8d92; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+#remote-toggle svg {
+  width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2;
+  stroke-linecap: round; stroke-linejoin: round; transition: transform 250ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  #remote:hover #remote-toggle svg { transform: rotate(180deg); }
+}
+#remote.open #remote-toggle svg,
+#remote:has(:focus-visible) #remote-toggle svg { transform: rotate(180deg); }
+#remote.closed #remote-toggle svg { transform: rotate(0deg) !important; }
+
 .rockers { display: flex; gap: 8px; }
 .rocker { flex: 1; display: flex; flex-direction: column; gap: 4px; }
 .remote-row { display: flex; gap: 6px; }
-.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.key-zero { grid-column: 2; }
-.key-web { grid-column: 3; }
-.key-enter { grid-column: 1 / -1; }
-/* currentColor so the globe tracks the key's own text colour */
-.key-web svg {
-  display: block; margin: 0 auto; width: 1.35em; height: 1.35em;
-  fill: none; stroke: currentColor; stroke-width: 1.4;
+/* currentColor so the globe tracks the button's own text colour */
+.fn-web svg {
+  display: inline-block; vertical-align: -3px; width: 1.15em; height: 1.15em;
+  margin-right: 4px; fill: none; stroke: currentColor; stroke-width: 1.4;
   stroke-linecap: round;
 }
 
@@ -361,12 +445,11 @@ html, body {
   padding: 8px 0; font: inherit; font-size: .78em; letter-spacing: 1px; cursor: pointer;
   box-shadow: 0 2px 0 #0d0d0f, inset 0 1px 0 rgba(255,255,255,.16);
 }
-.keypad button { font-size: 1em; letter-spacing: 0; }
-.key-enter { font-size: .78em !important; letter-spacing: 2px; }
 .fn-guide { color: #fff700; }
 .fn-vod { color: #7fff9f; }
 .fn-last { color: #7fe8ff; }
 .fn-mute { color: #ff8b7a; }
+.fn-web { color: #c9a8ff; }
 #remote button:active, #remote button.pressed {
   transform: translateY(2px); background: linear-gradient(#232327, #37373c);
   box-shadow: inset 0 2px 5px rgba(0,0,0,.65);

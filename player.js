@@ -35,10 +35,20 @@ function fetchItemMetadata(itemId) {
 // the silent original instead. Check for a derivative naming this fileHint
 // as its `original` first, before falling back to the extension-based guess
 // or the exact-name match.
+//
+// That derivative check must stay narrowed to .mp4 specifically, not any of
+// mp4/webm/ogv — archive.org's standard derive pipeline stamps an .ogv (and
+// sometimes a .webm) alongside *every* video item regardless of whether the
+// original needed fixing at all, not just as a replacement for a bad one.
+// Matching all three meant a fine original .mp4 kept losing to its own
+// unrelated .ogv sibling (Theora video Chrome can't decode, only the Vorbis
+// audio — the exact "picture's gone, sound's fine" bug this was chasing).
+// .mp4 is the one format IA's pipeline actually generates *as a fix*, so
+// it's the only derivative name worth preferring over the original.
 async function resolveEpisodeUrl(itemId, fileHint) {
   const meta = await fetchItemMetadata(itemId);
   const files = meta.files || [];
-  const derivative = fileHint && files.find((f) => f.original === fileHint && /\.(mp4|webm|ogv)$/i.test(f.name));
+  const derivative = fileHint && files.find((f) => f.original === fileHint && /\.mp4$/i.test(f.name));
   const needsDerivative = fileHint && !/\.(mp4|webm|ogv)$/i.test(fileHint);
   const derivativeName = needsDerivative && fileHint.replace(/\.[^./]+$/, ".mp4");
   const file = derivative || (fileHint

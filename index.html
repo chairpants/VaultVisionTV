@@ -12,6 +12,20 @@
        player.js's layoutCrop() sizes this to the exact picture rect. -->
   <div id="guide-video-frame" class="hidden"></div>
 
+  <!-- Same "readout" z-index tier as #osd/#digit-osd/#chyron below (see
+       style.css's stacking-order comment), so it's covered by the guide/VOD
+       overlays same as those — no need to hide it by hand for those states,
+       or to dodge the docked picture-in-picture box that lands in this same
+       corner while the guide is up. -->
+  <button id="fullscreen-btn" type="button" aria-label="Enter fullscreen" aria-pressed="false">
+    <svg class="icon-expand" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>
+    </svg>
+    <svg class="icon-compress" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/>
+    </svg>
+  </button>
+
   <div id="osd" class="hidden">
     <div id="osd-ch"></div>
     <div id="osd-tagline"></div>
@@ -58,9 +72,16 @@
 </div>
 
 <!-- Sits mostly off the bottom edge; only #remote-head shows until you
-     mouse over it (CSS :hover, see style.css). -->
+     mouse over it (CSS :hover, see style.css), or on touch devices (no
+     hover) tap #remote-toggle — its chevron flips to point the other way
+     while open, see remote.js's toggleOpen(). -->
 <div id="remote">
-  <div id="remote-head"><span>VAULTVISION</span></div>
+  <div id="remote-head">
+    <span>VAULTVISION</span>
+    <button id="remote-toggle" type="button" aria-label="Show remote controls" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15l8-8 8 8"/></svg>
+    </button>
+  </div>
 
   <div class="rockers">
     <div class="rocker">
@@ -82,25 +103,22 @@
     <button data-action="mute" class="fn-mute">MUTE</button>
   </div>
 
-  <div class="keypad">
-    <button data-digit="1">1</button>
-    <button data-digit="2">2</button>
-    <button data-digit="3">3</button>
-    <button data-digit="4">4</button>
-    <button data-digit="5">5</button>
-    <button data-digit="6">6</button>
-    <button data-digit="7">7</button>
-    <button data-digit="8">8</button>
-    <button data-digit="9">9</button>
-    <button data-digit="0" class="key-zero">0</button>
-    <button data-action="web" class="key-web" title="Open on archive.org" aria-label="Open on archive.org">
+  <!-- Digit entry (0-9, ENTER) dropped from the on-screen panel — it was the
+       tallest part of it by far, and on a phone in portrait pushed the
+       header above the top of the viewport (see remote.js's comment on
+       toggleOpen()). Typing a channel number still works, just from a
+       physical keyboard, which is the only place it was ever actually fast:
+       CH+/CH-/GUIDE cover a touch user's cases. WEB survives on its own row,
+       nothing to do with digit entry. -->
+  <div class="remote-row">
+    <button data-action="web" class="fn-web" title="Open on archive.org" aria-label="Open on archive.org">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="12" r="9"/>
         <ellipse cx="12" cy="12" rx="4.2" ry="9"/>
         <path d="M3 12h18M5.1 6.4h13.8M5.1 17.6h13.8"/>
       </svg>
+      WEB
     </button>
-    <button data-action="enter" class="key-enter">ENTER</button>
   </div>
 </div>
 
