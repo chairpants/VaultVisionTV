@@ -29,8 +29,13 @@ too if you prefer one (`python3 -m http.server 8080`), but isn't required.
 Whenever VaultVision's library grows:
 
 ```bash
-python3 tools/build-catalog.py
+python3 tools/build-catalog.py            # from the live site
+python3 tools/build-catalog.py ../VaultVision   # from a local checkout
 ```
+
+The second form reads `shows.js`/`data.js` off disk, for content that's added
+locally but not pushed yet. Poster URLs still point at the live site either
+way, so new art 404s until VaultVision is pushed.
 
 Fetches `shows.js` + every show's `data.js` from the live VaultVision site,
 parses them with a vendored copy of VaultVisionRoku's `jsdata.py` (the same
@@ -49,6 +54,8 @@ actually loads) and `data/catalog.json` (same data, kept for tooling/diffing).
 | `remote.js` | keyboard + on-screen remote input |
 | `guide.js` | the scrolling TV Guide channel |
 | `app.js` | glue |
+| `tools/check-channels.js` | channel pools vs the catalog (`node tools/check-channels.js`) |
+| `tools/check-vod.js` | walks the VOD menu levels (`node tools/check-vod.js`) |
 
 ## Controls
 

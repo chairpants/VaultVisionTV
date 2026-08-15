@@ -285,6 +285,14 @@ html, body {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .vod-row:hover { background: rgba(10,170,255,.15); }
+/* Sticky so it's still there 300 films into Comedy, opaque so the rows
+   scrolling under it don't show through. */
+.vod-back {
+  position: sticky; top: 0; z-index: 1;
+  background: #001a33; color: #7fe8ff; letter-spacing: 1px;
+  border-bottom: 1px solid rgba(127,232,255,.35);
+}
+.vod-back:hover { background: #00294f; }
 
 /* Hold-to-scrub UI, VOD playback only — player.js owns this directly (see
    its header comment on why it isn't a vod.js concern). Centered over the

@@ -7,6 +7,8 @@
 // Mouse-driven the same way guide.js's listings are (click + native
 // overflow-y scroll, no keyboard row-stepping) -- Escape/Backspace is the
 // only keyboard affordance, popping one level same as the guide's own Back.
+// Every list also carries that same pop as its own first row, so a mouse
+// alone can get all the way back out (see render()).
 //
 // Plain script, not a module (see scheduler.js's header for why).
 
@@ -29,13 +31,21 @@ const vodEsc = (s) => String(s).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<":
 // shows (MonsterVision and the like) only ever have a single value here.
 const vodSeasons = (show) => [...new Set(show.episodes.map((ep) => ep.seasonNum))].sort((a, b) => a - b);
 
+// Series or feature film, off the same MOVIE_GENRES list the VBO channels
+// sweep (channels.js) -- the catalog has no is-a-movie flag of its own, the
+// genre tag is the flag. Anything VaultVision invents a new film genre for
+// gets added there and lands on both the VBO tier and the MOVIES side here.
+const vodIsMovieGenre = (genre) => (window.MOVIE_GENRES || []).includes(genre);
+
+const VOD_SECTIONS = ["SHOWS", "MOVIES"];
+
 function createVod({ root, catalog, playEpisode, onExit }) {
-  // Nav stack: [] section list, [genre] shows, [genre, show] seasons-or-
-  // episodes (episodes directly if the show only has one season), [genre,
-  // show, season] episodes filtered to that season. Selecting an episode
-  // calls playEpisode and leaves the stack alone, so Back from playback
-  // (see app.js) drops right back into the same episode list without
-  // re-navigating.
+  // Nav stack: [] SHOWS/MOVIES, [section] genres on that side, [section,
+  // genre] shows, [section, genre, show] seasons-or-episodes (episodes
+  // directly if the show only has one season), [section, genre, show, season]
+  // episodes filtered to that season. Selecting an episode calls playEpisode
+  // and leaves the stack alone, so Back from playback (see app.js) drops
+  // right back into the same episode list without re-navigating.
   let stack = [];
   let currentItems = [];
 
@@ -49,27 +59,46 @@ function createVod({ root, catalog, playEpisode, onExit }) {
   const breadcrumbEl = root.querySelector("#vod-breadcrumb");
   const rowsEl = root.querySelector("#vod-rows");
 
+  const genresIn = (section) =>
+    catalog.genres.filter((g) => vodIsMovieGenre(g) === (section === "MOVIES"));
+  const countIn = (genre) =>
+    Object.values(catalog.shows).filter((s) => s.genre === genre).length;
+
   function itemsForLevel() {
     if (stack.length === 0) {
-      return catalog.genres.map((genre) => ({
-        label: `${genre}  (${Object.values(catalog.shows).filter((s) => s.genre === genre).length})`,
-        onSelect: () => { stack = [genre]; render(); },
+      return VOD_SECTIONS.map((section) => ({
+        label: `${section}  (${genresIn(section).reduce((n, g) => n + countIn(g), 0)})`,
+        onSelect: () => { stack = [section]; render(); },
       }));
     }
     if (stack.length === 1) {
-      const [genre] = stack;
+      const [section] = stack;
+      return genresIn(section).map((genre) => ({
+        label: `${genre}  (${countIn(genre)})`,
+        onSelect: () => { stack = [section, genre]; render(); },
+      }));
+    }
+    if (stack.length === 2) {
+      const [section, genre] = stack;
       return Object.values(catalog.shows)
         .filter((s) => s.genre === genre)
         .sort((a, b) => a.title.localeCompare(b.title))
-        .map((show) => ({ label: show.title, onSelect: () => { stack = [genre, show]; render(); } }));
+        // A feature film is a one-episode show, and a list of one row labelled
+        // "Movie" is a click that asks nothing -- play it straight from here.
+        .map((show) => ({
+          label: show.title,
+          onSelect: show.episodes.length === 1
+            ? () => playEpisode(show, show.episodes[0])
+            : () => { stack = [section, genre, show]; render(); },
+        }));
     }
-    if (stack.length === 2) {
-      const [genre, show] = stack;
+    if (stack.length === 3) {
+      const show = stack[2];
       const seasons = vodSeasons(show);
       if (seasons.length > 1) {
         return seasons.map((season) => ({
           label: `Season ${season}  (${show.episodes.filter((ep) => ep.seasonNum === season).length})`,
-          onSelect: () => { stack = [genre, show, season]; render(); },
+          onSelect: () => { stack = [...stack, season]; render(); },
         }));
       }
       // Single season/flat show -- nothing to choose between, straight to episodes.
@@ -78,21 +107,28 @@ function createVod({ root, catalog, playEpisode, onExit }) {
         onSelect: () => playEpisode(show, episode),
       }));
     }
-    const [, show, season] = stack;
+    const [, , show, season] = stack;
     return show.episodes
       .filter((ep) => ep.seasonNum === season)
       .map((episode) => ({ label: vodEpisodeLabel(episode), onSelect: () => playEpisode(show, episode) }));
   }
 
   function render() {
-    breadcrumbEl.textContent =
-      stack.length === 0 ? "" :
-      stack.length === 1 ? stack[0] :
-      stack.length === 2 ? `${stack[0]}   /   ${stack[1].title}` :
-      `${stack[0]}   /   ${stack[1].title}   /   Season ${stack[2]}`;
-    currentItems = itemsForLevel();
+    // section / genre are plain strings, the show is an object, the season a
+    // number -- one map beats a rung per depth now that there are five of them.
+    breadcrumbEl.textContent = stack
+      .map((entry) => (entry.title ? entry.title : typeof entry === "number" ? `Season ${entry}` : entry))
+      .join("   /   ");
+    // Row 0 is always the same affordance Escape/Backspace already is -- one
+    // level up, or out of VOD entirely at the top. It's a real row rather than
+    // a header button so the existing click delegation covers it for free;
+    // `back: true` only marks it for the sticky styling.
+    currentItems = [
+      { label: stack.length ? "‹ BACK" : "‹ EXIT TO TV", back: true, onSelect: back },
+      ...itemsForLevel(),
+    ];
     rowsEl.innerHTML = currentItems
-      .map((it, i) => `<div class="vod-row" data-idx="${i}">${vodEsc(it.label)}</div>`)
+      .map((it, i) => `<div class="vod-row${it.back ? " vod-back" : ""}" data-idx="${i}">${vodEsc(it.label)}</div>`)
       .join("");
     rowsEl.scrollTop = 0;
   }
