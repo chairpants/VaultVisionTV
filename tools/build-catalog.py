@@ -58,6 +58,21 @@ DEAD_ITEMS = {
     # with no episodes left — the playable Live PD episodes come from the two
     # opensource_movies items in data/local-shows/LivePD instead.
     "live-pd-complete-series_202311",
+    # Found by tools/check-items.py, which sweeps every item the catalog
+    # points at rather than waiting for a viewer to hit one.
+    "murphy-brown-s09E17-blind-date",  # GONE. 1 of Murphy Brown's 245.
+    "dragon-ball-HD-remastered-2022",  # GATED. 1 of Dragon Ball's 153.
+    # GATED, and it was Mutant League's whole first season plus a badly named
+    # duplicate of its second. Upstream now sources the show from
+    # mutant-league_20250130 instead (all 40 episodes, real titles), so this
+    # is belt-and-braces in case the old rows ever come back.
+    "mutant-league-s-1-e-4",
+    # DARK, and each was the *only* source for its show, so both shows leave
+    # the catalog entirely until a replacement item is found. That's the
+    # honest outcome: better a missing show than a channel that airs 159
+    # episodes of nothing.
+    "berserk-1997-complete",               # 25 episodes, all of Berserk (1997)
+    "designing-women-the-complete-series",  # 159 episodes, all of Designing Women
 }
 
 # Whole shows VaultVision lists but this app deliberately doesn't carry, for
