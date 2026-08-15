@@ -24,6 +24,12 @@ sys.path.insert(0, str(Path(__file__).parent))
 from jsdata import JsParseError, parse_show  # noqa: E402
 
 BASE = "https://chairpants.github.io/VaultVision"
+# Where the shows.js/data.js get *read* from. Defaults to the live site; pass a
+# path to a local VaultVision checkout to build from content that isn't pushed
+# yet (`python3 tools/build-catalog.py ../VaultVision`). Poster URLs still point
+# at BASE either way — art is served from the live site, not from here, so a
+# local build just means the newest posters 404 until VaultVision is pushed.
+SOURCE = sys.argv[1] if len(sys.argv) > 1 else BASE
 OUT_JSON = Path(__file__).parent.parent / "data" / "catalog.json"
 OUT_JS = Path(__file__).parent.parent / "data" / "catalog.js"
 
@@ -91,13 +97,23 @@ GENRE_DEFAULT_SEC = {
     "Reality TV": 44 * 60,
     "TV Movies": 90 * 60,
     "Broadcast Blocks": 60 * 60,
+    # Movie genres (VaultVision's feature-film sections). Every movie so far
+    # ships a real duration, so this only covers a future one that doesn't.
+    "Action & Adventure": 100 * 60,
+    "Comedy": 100 * 60,
+    "Drama": 100 * 60,
+    "Family & Kids": 100 * 60,
+    "Holiday": 90 * 60,
+    "Horror": 95 * 60,
+    "Sci-Fi & Fantasy": 100 * 60,
 }
 FALLBACK_DEFAULT_SEC = 22 * 60
 
 
 def fetch(path):
-    url = f"{BASE}/{path}"
-    with urllib.request.urlopen(url, timeout=30) as r:
+    if not SOURCE.startswith("http"):
+        return (Path(SOURCE) / path).read_text(encoding="utf-8")
+    with urllib.request.urlopen(f"{SOURCE}/{path}", timeout=30) as r:
         return r.read().decode("utf-8")
 
 
@@ -250,7 +266,7 @@ def build_show_entry(row, text=None):
 
 
 def main():
-    print(f"fetching show list from {BASE}/shows.js ...")
+    print(f"fetching show list from {SOURCE}/shows.js ...")
     rows = load_shows_csv()
     print(f"{len(rows)} shows listed")
 
@@ -280,7 +296,7 @@ def main():
     total_eps = sum(len(s["episodes"]) for s in shows.values())
     catalog = {
         "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "sourceBase": BASE,
+        "sourceBase": SOURCE,
         "genres": sorted(genres),
         "shows": shows,
     }
