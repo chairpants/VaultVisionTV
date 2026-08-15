@@ -74,7 +74,7 @@ window.CHANNELS = [
       "Wishbone", "MouseFactory", "MrMen", "JimHensonHour",
       "CosmosaPersonalVoyage", "PlanetEarth",
       "WonderPetsEpisodeswithMissingEpisodes",
-      "MartyStouffersWildAmerica",
+      "MartyStouffersWildAmerica", "WhereInTheWorldIsCarmenSandiego",
     ],
   },
   {
@@ -139,7 +139,7 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "NorthernExposure", "DueSouth", "Jericho", "BrooklynSouth",
-      "LogansRun", "DallastheSeries",
+      "LogansRun", "DallastheSeries", "MurderSheWrote",
     ],
   },
   {
@@ -158,7 +158,7 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "MadAboutYou", "NewsRadio", "CarolineInTheCity", "VeronicasCloset",
-      "Joey", "Wings", "WeberShow", "Tucker",
+      "Joey", "Wings", "WeberShow", "Tucker", "WillAndGrace",
     ],
   },
   {
@@ -178,7 +178,7 @@ window.CHANNELS = [
       "MADtv", "MalcolmInTheMiddle", "InLivingColor", "ParkerLewis",
       "NedAndStacey", "PJs", "MarriedWithChildren", "BernieMacShow",
       "Simpsons", "BacktoYou", "BakersfieldPD", "Action", "Mulaney",
-      "BenStillerShow", "Woops", "Tick",
+      "BenStillerShow", "Woops", "Tick", "That70sShow",
     ],
   },
   {
@@ -204,7 +204,7 @@ window.CHANNELS = [
     ],
     fallbackPool: [
       "Digimon", "Animaniacs", "BobbysWorld", "TheTick", "Godzilla",
-      "TMNTNextMutation",
+      "TMNTNextMutation", "Goosebumps",
     ],
   },
   {
@@ -214,6 +214,7 @@ window.CHANNELS = [
     fallbackPool: [
       "BillNye", "SchoolhouseRock", "CosmosaPersonalVoyage",
       "PlanetEarth", "MartyStouffersWildAmerica",
+      "WhereInTheWorldIsCarmenSandiego",
     ],
   },
   {
@@ -283,7 +284,7 @@ window.CHANNELS = [
       "SonictheHedgehog", "LandOfTheLost1991",
       "MightyMousetheNewAdventures", "CattanoogaCatstheSeries",
       "JosieandthePussycatsTVseries", "PolePosition", "GarbagePailKids",
-      "KarateKid", "Houndcats",
+      "KarateKid", "Houndcats", "CaliforniaDreams", "TheJetsons",
     ],
   },
   {
@@ -310,7 +311,7 @@ window.CHANNELS = [
       "EagleRiders", "BuzzLightyearofStarCommand",
       "BeastWarsTransformers", "LippytheLionandHardyHarHar",
       "WallyGator", "MightyMax", "PoliceAcademyTheAnimatedSeries",
-      "StarcomtheUSSpaceForceSeries",
+      "StarcomtheUSSpaceForceSeries", "TheJetsons",
     ],
   },
   {
@@ -337,7 +338,7 @@ window.CHANNELS = [
     fallbackPool: [
       "AlfredHitchcockPresents", "TwilightZone1959",
       "AreYouAfraidOfTheDark", "NewAlfredHitchcockPresents",
-      "AmazingStories",
+      "AmazingStories", "NightGallery",
     ],
   },
   {
@@ -355,7 +356,7 @@ window.CHANNELS = [
       "BarbaryCoast", "FireflySeries", "LogansRun", "MaxHeadroom",
       "Automan", "DallastheSeries", "HandmaidsTaleSeries",
       "LifeAsWeKnowIt", "Middleman", "BlueThunder", "CopRock", "Tick",
-      "QuantumLeap",
+      "QuantumLeap", "BuffyTheVampireSlayer",
     ],
   },
   { number: 23, name: "ANIME ZONE", kind: "genre", genre: "Anime",
@@ -445,7 +446,7 @@ window.CHANNELS = [
       "TwilightZone1959", "NewAlfredHitchcockPresents", "Millennium",
       "AmazingStories", "FreddysNightmares", "SapphireandSteel",
       "AshvsEvilDead", "AmericanGothic1995", "HammerHouseofHorror",
-      "666ParkAvenueSeries",
+      "666ParkAvenueSeries", "BuffyTheVampireSlayer", "NightGallery",
     ],
   },
   {
@@ -455,7 +456,7 @@ window.CHANNELS = [
     fallbackPool: [
       "AreYouAfraidOfTheDark", "CaspersScareSchool",
       "CaspertheFriendlyGhost", "BeyondReality", "Spooksville",
-      "EerieIndiana",
+      "EerieIndiana", "Goosebumps",
     ],
   },
   {
@@ -797,7 +798,7 @@ window.CHANNELS = [
       "NedAndStacey", "Popular", "JeffFoxworthyShow", "Wings",
       "SaluteYourShorts", "ZoeDuncanJackJane", "SoulMan",
       "ShastaMcNasty", "TeenAngel", "BakersfieldPD", "YouWish", "Action",
-      "StepByStep",
+      "StepByStep", "CaliforniaDreams",
     ],
   },
   // Four titles dropped as out-of-decade, which had made the tagline below
@@ -814,7 +815,8 @@ window.CHANNELS = [
     fallbackPool: [
       "MalcolmInTheMiddle", "Reba", "StillStanding", "WhatILikeAboutYou",
       "Joey", "BernieMacShow", "WeberShow", "BacktoYou",
-      "CavemenSeriesSlightlyBetterQuality", "Tucker",
+      "CavemenSeriesSlightlyBetterQuality", "Tucker", "That70sShow",
+      "WillAndGrace",
     ],
   },
   {
