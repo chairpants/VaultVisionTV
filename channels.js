@@ -47,6 +47,14 @@
 // <script src="channels.js">, so file:// pages can load it too.
 const GUIDE_CHANNEL = 1;
 const VOD_CHANNEL = 2;
+// Every genre VaultVision files a feature film under -- the VBO tier's whole
+// library (see channel 60 below). Anything not in here is a TV series, which
+// is also how VOD splits its top level (vod.js).
+const MOVIE_GENRES = [
+  "Action & Adventure", "Comedy", "Drama", "Family & Kids", "Holiday",
+  "Horror", "Sci-Fi & Fantasy",
+];
+window.MOVIE_GENRES = MOVIE_GENRES;
 window.GUIDE_CHANNEL = GUIDE_CHANNEL;
 window.VOD_CHANNEL = VOD_CHANNEL;
 
@@ -340,8 +348,13 @@ window.CHANNELS = [
     tagline: "Dubbed, subbed, and everything between." },
   { number: 23, name: "LAUGH TRACK", kind: "genre", genre: "Sketch Comedy & Late Night",
     tagline: "Live from a soundstage somewhere." },
-  { number: 24, name: "MOVIE VAULT", kind: "genre", genre: "TV Movies",
-    tagline: "Feature presentation, every hour." },
+  // Channel 24 MOVIE VAULT is gone: it swept the "TV Movies" genre, which
+  // VaultVision has since split into real film genres (Comedy, Drama, Horror,
+  // Action & Adventure, Sci-Fi & Fantasy, Family & Kids, Holiday). Those are
+  // the VBO tier on 60-66 now, and 24 stays empty rather than renumbering
+  // every channel below it. The made-for-TV movies themselves didn't go
+  // anywhere -- they're in Horror/Action now, and still on CHILLER (26) and
+  // CREATURE DOUBLE FEATURE (54).
   // Live PD used to be excluded here by id, because every file in the item
   // VaultVision sources it from needs an archive.org login (401 anonymously).
   // That was the wrong layer — it hid the show from this one channel while
@@ -789,4 +802,36 @@ window.CHANNELS = [
       "TeenAngel", "CavemenSeriesSlightlyBetterQuality", "Woops",
     ],
   },
+
+  // -- VBO: the movie tier ----------------------------------------------------
+  // ~400 feature films came into VaultVision at once, and they don't belong on
+  // the rerun channels above -- a 100-minute movie dropped into a sitcom
+  // rotation is most of an evening of it. So they get the premium-movie-channel
+  // treatment instead: a flagship pair carrying everything, then one channel
+  // per genre, all of them `kind: "genre"` sweeps that pick up new films with
+  // no curation the moment tools/build-catalog.py runs again.
+  //
+  // VBO and VBO 2 share one pool, and `seed` is the only thing separating
+  // them -- same library, different shuffle, so tuning 60 -> 61 always lands
+  // on a different film. That's what the real second feed of a movie channel
+  // was: the same month's lineup, offset.
+  { number: 60, name: "VBO", kind: "genre", genre: MOVIE_GENRES,
+    tagline: "It's not TV." },
+  { number: 61, name: "VBO 2", kind: "genre", genre: MOVIE_GENRES, seed: "vbo2",
+    tagline: "The other half of the lineup." },
+  { number: 62, name: "VBO FAMILY", kind: "genre",
+    genre: ["Family & Kids", "Holiday"],
+    tagline: "Everybody in the room." },
+  { number: 63, name: "VBO DRAMA", kind: "genre", genre: "Drama",
+    tagline: "Nobody says a word for two hours." },
+  { number: 64, name: "VBO COMEDY", kind: "genre", genre: "Comedy",
+    tagline: "Uncut, unedited, unaired-on-basic." },
+  // Sci-fi rides with action rather than getting its own channel: 37 films is
+  // thin for a 24h loop on its own, and the two shelves always shared one
+  // anyway.
+  { number: 65, name: "VBO ACTION", kind: "genre",
+    genre: ["Action & Adventure", "Sci-Fi & Fantasy"],
+    tagline: "Explosions on a schedule." },
+  { number: 66, name: "VBO HORROR", kind: "genre", genre: "Horror",
+    tagline: "Late enough that it counts." },
 ];

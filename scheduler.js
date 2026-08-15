@@ -237,13 +237,19 @@ function genrePool(channel, catalog) {
     // catalog altogether. Kept for the case this was meant for: a show that
     // plays fine but doesn't belong on one particular channel.
     const excluded = new Set(channel.excludeShowIds || []);
+    // `genre` is one tag or a list of them — the movie channels sweep several
+    // (VBO ACTION is "Action & Adventure" + "Sci-Fi & Fantasy").
+    const wanted = new Set([].concat(channel.genre));
     ids = Object.values(catalog.shows)
-      .filter((s) => s.genre === channel.genre && !excluded.has(s.id))
+      .filter((s) => wanted.has(s.genre) && !excluded.has(s.id))
       .map((s) => s.id)
       .sort();
     poolCache.set(cacheKey + ":ids", ids);
   }
-  return cachedPool(cacheKey, ids, catalog, `genre:${channel.genre}`);
+  // `seed` overrides the shuffle key so two channels can carry the same pool
+  // and still never be showing the same thing (VBO / VBO 2).
+  return cachedPool(cacheKey, ids, catalog,
+                    channel.seed || `genre:${[].concat(channel.genre).join("+")}`);
 }
 
 // -- dayparting ---------------------------------------------------------------
