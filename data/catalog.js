@@ -1,5 +1,5 @@
 window.CATALOG = {
- "generatedAt": "2026-08-15T18:26:39Z",
+ "generatedAt": "2026-08-15T18:41:35Z",
  "genres": [
   "Action & Adventure",
   "Animation",

@@ -126,6 +126,8 @@ published site either way, so new art 404s until that side is pushed.
 | `guide.js` | the scrolling TV Guide channel |
 | `vod.js` | the Video On Demand browse menu |
 | `app.js` | glue |
+| `tools/check-items.py` | asks archive.org whether every item still plays (`python3 tools/check-items.py`) |
+| `data/removals.md` | log of shows dropped from the catalog, and why — written by the rebuild |
 | `tools/check-channels.js` | channel pools vs the catalog (`node tools/check-channels.js`) |
 | `tools/check-vod.js` | walks the VOD menu levels (`node tools/check-vod.js`) |
 

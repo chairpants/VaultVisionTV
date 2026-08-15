@@ -96,6 +96,44 @@ EXCLUDED_SHOWS = {
 # definition, so they have to be part of the repo to survive one.
 LOCAL_SHOWS_DIR = Path(__file__).parent.parent / "data" / "local-shows"
 
+# Shows dropped by this run, and why -- appended to data/removals.md so a
+# show leaving the lineup leaves a record instead of just quietly not being
+# there. Sources rot: archive.org darkens items, uploaders rename files, and
+# a show whose every item is gone has nothing left to air. That's routine, not
+# a crisis; log it and move on.
+REMOVALS_MD = Path(__file__).parent.parent / "data" / "removals.md"
+SKIPPED = []
+
+
+def skip(show_id, title, reason):
+    SKIPPED.append((show_id, title, reason))
+    print(f"  SKIP {show_id}: {reason}", file=sys.stderr)
+
+
+def write_removals():
+    """Append this run's drops, ignoring ones already on the list -- a
+    permanently dead show is skipped on every rebuild, and its removal is one
+    event, not one per rebuild."""
+    header = (
+        "# Removed shows\n\n"
+        "Shows VaultVision lists that this catalog can't carry, logged by\n"
+        "tools/build-catalog.py on the rebuild that first dropped each one.\n"
+        "Run tools/check-items.py to see exactly which items died.\n"
+    )
+    existing = REMOVALS_MD.read_text(encoding="utf-8") if REMOVALS_MD.exists() else header
+    new = [(i, ti, r) for i, ti, r in SKIPPED if f"(`{i}`)" not in existing]
+    if not new:
+        return
+    day = time.strftime("%Y-%m-%d")
+    lines = "".join(f"- {day} **{ti}** (`{i}`): {r}\n" for i, ti, r in sorted(new))
+    body = existing.rstrip("\n")
+    # Blank line before the first entry (markdown needs one to start a list),
+    # none between entries.
+    sep = "\n" if body.splitlines()[-1].startswith("- ") else "\n\n"
+    REMOVALS_MD.write_text(body + sep + lines, encoding="utf-8")
+    print(f"logged {len(new)} removal(s) to {REMOVALS_MD}")
+
+
 # Fallback runtime (seconds) for episodes with no entry in a show's
 # `durations` map — 22 of VaultVision's shows ship an empty durations map
 # entirely (see ADDING_A_SHOW.md), and individual rows can be missing even in
@@ -201,7 +239,7 @@ def load_local_shows():
         title, show_id, genre, ext = (c.strip() for c in row)
         data = LOCAL_SHOWS_DIR / show_id / "data.js"
         if not data.exists():
-            print(f"  SKIP {show_id}: no {data}", file=sys.stderr)
+            skip(show_id, title, f"no {data}")
             continue
         out.append(({
             "title": title, "id": show_id, "genre": genre, "ext": ext,
@@ -217,12 +255,12 @@ def build_show_entry(row, text=None):
         try:
             text = fetch(f"shows/{show_id}/data.js")
         except Exception as e:
-            print(f"  SKIP {show_id}: fetch failed ({e})", file=sys.stderr)
+            skip(show_id, row["title"], f"fetch failed ({e})")
             return None
     try:
         d = parse_show(text)
     except JsParseError as e:
-        print(f"  SKIP {show_id}: parse failed ({e})", file=sys.stderr)
+        skip(show_id, row["title"], f"parse failed ({e})")
         return None
 
     genre = row["genre"]
@@ -266,7 +304,7 @@ def build_show_entry(row, text=None):
         })
 
     if not episodes:
-        print(f"  SKIP {show_id}: no usable episodes", file=sys.stderr)
+        skip(show_id, row["title"], "no usable episodes -- every item it points at is dead")
         return None
 
     return {
@@ -327,6 +365,7 @@ def main():
     OUT_JS.write_text(f"window.CATALOG = {payload};\n")
     print(f"wrote {OUT_JSON} and {OUT_JS} — {len(shows)} shows, {total_eps} episodes, "
           f"{len(genres)} genres, {time.time() - t0:.1f}s")
+    write_removals()
 
 
 if __name__ == "__main__":
