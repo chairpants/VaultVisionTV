@@ -211,16 +211,20 @@ window.CHANNELS = [
   {
     number: 16, name: "NICKELODEON", kind: "curated",
     tagline: "Slime not included.",
-    // SNICK on Saturday night and Nick at Nite after 11, same as it aired. The
-    // overnight pads the 5 block recordings with the classic sitcoms Nick at
-    // Nite actually ran -- they live on ch 6/9 too, which is the point of a
-    // rerun channel.
+    // SNICK on Saturday night and Nick at Nite after 11, same as it aired.
+    // The NickAtNite recordings themselves (2-6h each) only go in the 0-5
+    // window, which is wide enough to actually hold one -- the 23-24 hour is
+    // its own separately-tracked window (see channels.js's own header on
+    // midnight-crossing windows), so a tape that ran past its end used to
+    // hand off mid-episode to a window with no memory of where it left off.
+    // 23-24 instead leads in with the classic sitcoms Nick at Nite actually
+    // ran -- they live on ch 6/9 too, which is the point of a rerun channel.
     daypart: [
       { days: [6], startHour: 20, endHour: 22, pool: [
         "SNICK",
       ] },
       { days: [0, 1, 2, 3, 4, 5, 6], startHour: 23, endHour: 24, pool: [
-        "NickAtNite", "LeaveIttoBeavertheSeries", "PetticoatJunction",
+        "LeaveIttoBeavertheSeries", "PetticoatJunction",
         "GreenAcres", "MaryTylerMooreShow", "DickVanDyke", "TheLucyShow",
         "HeresLucy", "MisterEd", "GetSmart", "Taxi1978", "Newhart",
         "TheMonkees", "BosomBuddies",
