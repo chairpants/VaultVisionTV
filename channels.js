@@ -430,7 +430,7 @@ window.CHANNELS = [
     fallbackPool: [
       "AlfredHitchcockPresents", "TwilightZone1959", "TheShining1997",
       "Tommyknockers", "It1990", "StormOfTheCentury", "TheStand1994",
-      "SometimesTheyComeBack",
+      "SometimesTheyComeBack", "Langoliers",
     ],
   },
   // Was AreYouAfraidOfTheDark + EerieIndiana, which is EERIE AFTER SCHOOL's
@@ -748,7 +748,7 @@ window.CHANNELS = [
       "TheTexasChainsawMassacre2", "AmericanWerewolfInLondon", "Trucks",
       "CurseOfTheBlairWitch", "TheDeadZone", "SingleWhiteFemale",
       "ShallowGrave", "TheBeast", "It1990", "StormOfTheCentury",
-      "TheStand1994", "SometimesTheyComeBack",
+      "TheStand1994", "SometimesTheyComeBack", "Langoliers",
     ],
   },
   {
