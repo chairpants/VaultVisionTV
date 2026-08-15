@@ -130,7 +130,7 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "MurphyBrown", "EverybodyLovesRaymond", "KingofQueens",
-      "DesigningWomen", "Nanny", "StillStanding", "BlessThisHouse",
+      "Nanny", "StillStanding", "BlessThisHouse",
     ],
   },
   {
@@ -643,7 +643,7 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "DragonBallZ", "Digimon", "LodossWarSeriesEnglishDub",
-      "NeonGenesisEvangelion", "Berserk1997", "AttackonTitan",
+      "NeonGenesisEvangelion", "AttackonTitan",
       "MobileSuitGundam0083", "BubblegumCrisistheSeriesDualAudioHD",
     ],
   },
@@ -672,7 +672,7 @@ window.CHANNELS = [
     tagline: "A lesson learned before the credits.",
     daypart: [],
     fallbackPool: [
-      "CosbyShow", "FactsofLife", "DesigningWomen", "MamasFamily",
+      "CosbyShow", "FactsofLife", "MamasFamily",
       "TheHoganFamily", "HighwayToHeaven", "ALFtheSeries",
       "ArchieBunkersPlace", "LifeGoesOn", "HarryandtheHendersons",
       "BlessThisHouse", "JusttheTenofUs", "BosomBuddies", "ItsYourMove",
@@ -773,7 +773,7 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "MurphyBrown", "CosbyShow", "FactsofLife", "Newhart", "NightCourt",
-      "GrowingPains", "DesigningWomen", "MamasFamily", "TheHoganFamily",
+      "GrowingPains", "MamasFamily", "TheHoganFamily",
       "ALFtheSeries", "ArchieBunkersPlace", "PunkyBrewster",
       "JusttheTenofUs", "BosomBuddies", "MarriedWithChildren",
       "ItsYourMove",
