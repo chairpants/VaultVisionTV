@@ -70,7 +70,8 @@ const reachable = new Set();
 for (const ch of CH) {
   if (ch.kind === 'genre') {
     for (const [id, show] of Object.entries(cat.shows)) {
-      if (show.genre === ch.genre && !(ch.excludeShowIds || []).includes(id)) reachable.add(id);
+      if ([].concat(ch.genre).includes(show.genre) &&
+          !(ch.excludeShowIds || []).includes(id)) reachable.add(id);
     }
   }
   for (const id of allIds(ch)) reachable.add(id);
