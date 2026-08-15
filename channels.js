@@ -35,8 +35,9 @@
 // tools/check-channels.js fails on that.
 //
 // The block recordings (TGIF, SNICK, NickAtNite, FoxKids, SatMorning,
-// MonsterVision, SciFiAnime) are no longer channels of their own. They're
-// dayparts on the network that aired them, which is what they always were.
+// MonsterVision, SciFiAnime, MtvTrl) are no longer channels of their own.
+// They're dayparts on the network that aired them, which is what they
+// always were.
 //
 // KIDS & LEARNING sits on channel 3 — the lowest tunable slot, so it's the
 // front door when tuning up from the bottom. The guide keeps channel 1 (real
@@ -787,6 +788,26 @@ window.CHANNELS = [
       "PetticoatJunction", "GreenAcres", "MisterEd", "GetSmart",
       "McHalesNavySeries", "ShastaMcNasty", "MarriedWithChildren",
       "TeenAngel", "CavemenSeriesSlightlyBetterQuality", "Woops",
+    ],
+  },
+  // TRL's own weekday-afternoon slot, the only window it ever aired in --
+  // outside it the channel runs the rest of the network's library, including
+  // the MTV originals that already live on other channels (BeavisButthead,
+  // Daria and AeonFlux on LATE NIGHT CARTOONS; Jackass and CelebrityDeathmatch
+  // on STAND-UP & SLAPSTICK) -- same rerun-simulator rule as everywhere else,
+  // a show belongs wherever it aired.
+  {
+    number: 60, name: "MTV", kind: "curated",
+    tagline: "I want my MTV.",
+    daypart: [
+      { days: [1, 2, 3, 4, 5], startHour: 16, endHour: 17, pool: [
+        "MtvTrl",
+      ] },
+    ],
+    fallbackPool: [
+      "RealWorld", "RoadRules", "Challenge", "Osbournes", "VivaLaBam",
+      "PimpMyRide", "MTVUnplugged", "BeavisButthead", "Daria", "AeonFlux",
+      "Jackass", "CelebrityDeathmatch",
     ],
   },
 ];
