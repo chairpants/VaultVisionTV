@@ -23,11 +23,11 @@ show already in progress, and the only way to "catch it from the beginning"
 is to have been there when it started.
 
 VaultVisionTV rebuilds that feeling on top of a library of classic TV and
-movies streamed straight from the Internet Archive. **57 channels** —
+movies streamed straight from the Internet Archive. **60 channels** —
 organized by original broadcast network (ABC, CBS, NBC, Fox, Nickelodeon,
-first-run syndication) as well as by genre and era — each run their own
+MTV, first-run syndication) as well as by genre and era — each run their own
 independent, deterministic schedule computed from the current time, spanning
-**379 shows** and **~25,000 episodes**. There's no "state" to keep in sync
+**387 shows** and **~26,000 episodes**. There's no "state" to keep in sync
 between sessions or devices: the schedule is pure math over the clock, so any
 two people tuned to the same channel at the same moment see the same thing,
 automatically.
@@ -37,7 +37,7 @@ automatically.
 - **Deterministic scheduling** — every channel's lineup is derived purely
   from wall-clock time. No server, no database, no per-viewer state; the
   schedule is the same for everyone, all the time, forever.
-- **A real channel lineup** — 57 channels split between network-affiliate
+- **A real channel lineup** — 60 channels split between network-affiliate
   style channels and genre/theme channels (sitcoms by decade, anime,
   anthology/horror, kids' programming, and more), each with its own on-screen
   identity and tagline.
