@@ -51,6 +51,15 @@ for (const ch of CH) {
   }
 }
 
+// Two channels on one number: app.js keys its lineup by number, so the second
+// one silently wins and the first is untunable. Easy to do by hand when a
+// block of channels gets renumbered and something appended below it doesn't.
+const numbers = new Map();
+for (const ch of CH) {
+  if (numbers.has(ch.number)) fail(`ch${ch.number} is both "${numbers.get(ch.number)}" and "${ch.name}"`);
+  numbers.set(ch.number, ch.name);
+}
+
 // Windows on one channel must not overlap; the scheduler takes the first match.
 for (const ch of CH) {
   const seen = new Map();
