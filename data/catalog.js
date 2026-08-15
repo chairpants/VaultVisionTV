@@ -1,17 +1,23 @@
 window.CATALOG = {
- "generatedAt": "2026-08-14T05:15:49Z",
+ "generatedAt": "2026-08-15T17:16:28Z",
  "genres": [
+  "Action & Adventure",
   "Animation",
   "Anime",
   "Broadcast Blocks",
   "Classic Sitcoms",
+  "Comedy",
+  "Drama",
   "Drama & Adventure",
+  "Family & Kids",
+  "Holiday",
+  "Horror",
   "Horror & Anthology",
   "Kids & Educational",
   "Reality TV",
+  "Sci-Fi & Fantasy",
   "Sitcoms",
-  "Sketch Comedy & Late Night",
-  "TV Movies"
+  "Sketch Comedy & Late Night"
  ],
  "shows": {
   "20000LeaguesUnderTheSea": {
@@ -32,7 +38,7 @@ window.CATALOG = {
      "title": "20000 LEAGUES UNDER THE SEA - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Family & Kids",
    "grouping": "flat",
    "id": "20000LeaguesUnderTheSea",
    "title": "20000 Leagues Under The Sea",
@@ -776,11 +782,59 @@ window.CATALOG = {
      "title": "A CHRISTMAS STORY - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Holiday",
    "grouping": "flat",
    "id": "AChristmasStory",
    "title": "A Christmas Story",
    "totalDurationSec": 7252
+  },
+  "ACinderellaStory": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ACinderellaStory.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5676,
+     "fileHint": "A Cinderella Story (2004).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::A Cinderella Story (2004).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "A CINDERELLA STORY - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "ACinderellaStory",
+   "title": "A Cinderella Story",
+   "totalDurationSec": 5676
+  },
+  "AFishCalledWanda": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AFishCalledWanda.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6215,
+     "fileHint": "Fish Called Wanda, A (1988).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Fish Called Wanda, A (1988).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "A FISH CALLED WANDA - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "AFishCalledWanda",
+   "title": "A Fish Called Wanda",
+   "totalDurationSec": 6215
   },
   "ALFtheSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/ALFtheSeries.jpg",
@@ -2219,6 +2273,30 @@ window.CATALOG = {
    "id": "ALFtheSeries",
    "title": "ALF the Series",
    "totalDurationSec": 153986
+  },
+  "ALittlePrincess": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ALittlePrincess.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5841,
+     "fileHint": "A Little Princess (1995).ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::A Little Princess (1995).ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "A LITTLE PRINCESS - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "ALittlePrincess",
+   "title": "A Little Princess",
+   "totalDurationSec": 5841
   },
   "ATeam": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/ATeam.jpg",
@@ -3812,6 +3890,54 @@ window.CATALOG = {
    "title": "The A-Team",
    "totalDurationSec": 328734
   },
+  "AWalkToRemember": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AWalkToRemember.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6124,
+     "fileHint": "A Walk To Remember (2002).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::A Walk To Remember (2002).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "A WALK TO REMEMBER - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "AWalkToRemember",
+   "title": "A Walk to Remember",
+   "totalDurationSec": 6124
+  },
+  "AceVenturaPetDetective": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AceVenturaPetDetective.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5144,
+     "fileHint": "Ace Ventura Pet Detective 1994.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Ace Ventura Pet Detective 1994.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ACE VENTURA: PET DETECTIVE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "AceVenturaPetDetective",
+   "title": "Ace Ventura: Pet Detective",
+   "totalDurationSec": 5144
+  },
   "AceVenturaPetDetectiveSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/AceVenturaPetDetectiveSeries.jpg",
    "episodes": [
@@ -4368,6 +4494,30 @@ window.CATALOG = {
    "title": "Ace Ventura Pet Detective Series",
    "totalDurationSec": 48694
   },
+  "AceVenturaWhenNatureCalls": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AceVenturaWhenNatureCalls.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5644,
+     "fileHint": "Ace Ventura When Nature Calls 1995.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Ace Ventura When Nature Calls 1995.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ACE VENTURA: WHEN NATURE CALLS - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "AceVenturaWhenNatureCalls",
+   "title": "Ace Ventura: When Nature Calls",
+   "totalDurationSec": 5644
+  },
   "Action": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Action.jpg",
    "episodes": [
@@ -4559,6 +4709,30 @@ window.CATALOG = {
    "id": "Action",
    "title": "Action",
    "totalDurationSec": 17628
+  },
+  "AdventuresInBabysitting": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AdventuresInBabysitting.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6146,
+     "fileHint": "Adventures in Babysitting (1987).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Adventures in Babysitting (1987).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ADVENTURES IN BABYSITTING - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "AdventuresInBabysitting",
+   "title": "Adventures in Babysitting",
+   "totalDurationSec": 6146
   },
   "AdventuresOfSonic": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/AdventuresOfSonic.png",
@@ -7054,6 +7228,30 @@ window.CATALOG = {
    "title": "Aeon Flux",
    "totalDurationSec": 16681
   },
+  "Airborne": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Airborne.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5417,
+     "fileHint": "Airborne 1993.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "airborne-1993_202604",
+     "key": "airborne-1993_202604::Airborne 1993.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "AIRBORNE - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Airborne",
+   "title": "Airborne",
+   "totalDurationSec": 5417
+  },
   "AlexMack": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/AlexMack.jpg",
    "episodes": [
@@ -8155,6 +8353,30 @@ window.CATALOG = {
    "id": "AlexMack",
    "title": "The Secret World of Alex Mack",
    "totalDurationSec": 112982
+  },
+  "Alexander": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Alexander.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 12408,
+     "fileHint": "Alexander 2004 Ultimate Cut 720p BluRay HEVC H265 BONE.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Alexander 2004 Ultimate Cut 720p BluRay HEVC H265 BONE.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ALEXANDER - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "Alexander",
+   "title": "Alexander",
+   "totalDurationSec": 12408
   },
   "AlfredHitchcockPresents": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/AlfredHitchcockPresents.jpg",
@@ -13125,6 +13347,54 @@ window.CATALOG = {
    "title": "Alfred Hitchcock Presents",
    "totalDurationSec": 412393
   },
+  "AlienNation": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AlienNation.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5396,
+     "fileHint": "Alien Nation (1988).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Alien Nation (1988).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ALIEN NATION - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "AlienNation",
+   "title": "Alien Nation",
+   "totalDurationSec": 5396
+  },
+  "AlienResurrection": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AlienResurrection.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6969,
+     "fileHint": "Alien Resurrection(1997).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Alien Resurrection(1997).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ALIEN RESURRECTION - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "AlienResurrection",
+   "title": "Alien Resurrection",
+   "totalDurationSec": 6969
+  },
   "AllInTheFamily": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/AllInTheFamily.jpg",
    "episodes": [
@@ -14880,6 +15150,30 @@ window.CATALOG = {
    "id": "AllegrasWindow",
    "title": "Allegra's Window",
    "totalDurationSec": 70074
+  },
+  "AlleyCatsStrike": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AlleyCatsStrike.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5347,
+     "fileHint": "Alley Cats Strike (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Alley Cats Strike (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ALLEY CATS STRIKE - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "AlleyCatsStrike",
+   "title": "Alley Cats Strike",
+   "totalDurationSec": 5347
   },
   "AlvinandtheChipmunks": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/AlvinandtheChipmunks.jpg",
@@ -17361,6 +17655,78 @@ window.CATALOG = {
    "title": "American Gothic",
    "totalDurationSec": 60138
   },
+  "AmericanHistoryX": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AmericanHistoryX.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7133,
+     "fileHint": "American History X 1998.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::American History X 1998.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "AMERICAN HISTORY X - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "AmericanHistoryX",
+   "title": "American History X",
+   "totalDurationSec": 7133
+  },
+  "AmericanPie": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AmericanPie.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5738,
+     "fileHint": "american pie 1.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::american pie 1.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "AMERICAN PIE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "AmericanPie",
+   "title": "American Pie",
+   "totalDurationSec": 5738
+  },
+  "AmericanPie3": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AmericanPie3.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6205,
+     "fileHint": "american pie 3.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::american pie 3.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "AMERICAN PIE: THE WEDDING - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "AmericanPie3",
+   "title": "American Pie: The Wedding",
+   "totalDurationSec": 6205
+  },
   "AmericanWerewolfInLondon": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/AmericanWerewolfInLondon.jpg",
    "episodes": [
@@ -17379,7 +17745,7 @@ window.CATALOG = {
      "title": "AMERICAN WEREWOLF IN LONDON - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Horror",
    "grouping": "flat",
    "id": "AmericanWerewolfInLondon",
    "title": "American Werewolf In London",
@@ -17403,7 +17769,7 @@ window.CATALOG = {
      "title": "ANIMAL FARM - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Drama",
    "grouping": "flat",
    "id": "AnimalFarm",
    "title": "Animal Farm",
@@ -19193,6 +19559,78 @@ window.CATALOG = {
    "title": "Animorphs",
    "totalDurationSec": 38155
   },
+  "AnotherCinderellaStory": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AnotherCinderellaStory.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5514,
+     "fileHint": "Another Cinderella Story (2008).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::Another Cinderella Story (2008).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ANOTHER CINDERELLA STORY - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "AnotherCinderellaStory",
+   "title": "Another Cinderella Story",
+   "totalDurationSec": 5514
+  },
+  "ApocalypseNow": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ApocalypseNow.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 11770,
+     "fileHint": "Apocalypse Now.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Apocalypse Now.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "APOCALYPSE NOW - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "ApocalypseNow",
+   "title": "Apocalypse Now",
+   "totalDurationSec": 11770
+  },
+  "Aquamarine": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Aquamarine.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6212,
+     "fileHint": "Aquamarine (2006).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::Aquamarine (2006).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "AQUAMARINE - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Aquamarine",
+   "title": "Aquamarine",
+   "totalDurationSec": 6212
+  },
   "ArabianNights": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/ArabianNights.jpg",
    "episodes": [
@@ -19211,7 +19649,7 @@ window.CATALOG = {
      "title": "ARABIAN NIGHTS - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "ArabianNights",
    "title": "Arabian Nights",
@@ -22565,6 +23003,30 @@ window.CATALOG = {
    "title": "Are We There Yet?",
    "totalDurationSec": 125641
   },
+  "AreWeThereYet2005": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/AreWeThereYet2005.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5681,
+     "fileHint": "Are We There Yet (2005).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Are We There Yet (2005).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ARE WE THERE YET? (2005) - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "AreWeThereYet2005",
+   "title": "Are We There Yet? (2005)",
+   "totalDurationSec": 5681
+  },
   "AreYouAfraidOfTheDark": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/AreYouAfraidOfTheDark.jpg",
    "episodes": [
@@ -23867,7 +24329,7 @@ window.CATALOG = {
      "title": "ARMAGEDDON - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "Armageddon",
    "title": "Armageddon",
@@ -24321,7 +24783,7 @@ window.CATALOG = {
      "title": "ASSAULT ON DEVILS ISLAND - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "AssaultOnDevilsIsland",
    "title": "Assault on Devils Island",
@@ -24345,7 +24807,7 @@ window.CATALOG = {
      "title": "ASTEROID - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "Asteroid1997",
    "title": "Asteroid (1997)",
@@ -24889,6 +25351,30 @@ window.CATALOG = {
    "title": "Automan",
    "totalDurationSec": 40729
   },
+  "Awakenings": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Awakenings.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7241,
+     "fileHint": "Awakenings (1990).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Awakenings (1990).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "AWAKENINGS - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "Awakenings",
+   "title": "Awakenings",
+   "totalDurationSec": 7241
+  },
   "BabyDayOut": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BabyDayOut.jpg",
    "episodes": [
@@ -24907,11 +25393,35 @@ window.CATALOG = {
      "title": "BABY DAY OUT - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Comedy",
    "grouping": "flat",
    "id": "BabyDayOut",
    "title": "Baby Day Out",
    "totalDurationSec": 7155
+  },
+  "BackToTheFuture": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BackToTheFuture.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6967,
+     "fileHint": "Back to the Future (1985).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Back to the Future (1985).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BACK TO THE FUTURE - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "BackToTheFuture",
+   "title": "Back to the Future",
+   "totalDurationSec": 6967
   },
   "BacktoYou": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BacktoYou.jpg",
@@ -25633,7 +26143,7 @@ window.CATALOG = {
      "title": "BATMAN AND ROBIN - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "BatmanAndRobin",
    "title": "Batman and Robin",
@@ -27940,6 +28450,30 @@ window.CATALOG = {
    "id": "BatmanTAS",
    "title": "Batman: The Animated Series",
    "totalDurationSec": 143925
+  },
+  "BatteriesNotIncluded": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BatteriesNotIncluded.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6389,
+     "fileHint": "Batteries Not Included (1987).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Batteries Not Included (1987).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "*BATTERIES NOT INCLUDED - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "BatteriesNotIncluded",
+   "title": "*batteries not included",
+   "totalDurationSec": 6389
   },
   "BattlestarGalactica": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BattlestarGalactica.jpg",
@@ -32937,6 +33471,54 @@ window.CATALOG = {
    "title": "Beavis and Butt-Head",
    "totalDurationSec": 144590
   },
+  "BedOfLies": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BedOfLies.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5159,
+     "fileHint": "Bed of Lies (1992).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Bed of Lies (1992).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BED OF LIES - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "BedOfLies",
+   "title": "Bed of Lies",
+   "totalDurationSec": 5159
+  },
+  "Beethoven": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Beethoven.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5221,
+     "fileHint": "Beethoven   1992.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Beethoven   1992.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BEETHOVEN - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Beethoven",
+   "title": "Beethoven",
+   "totalDurationSec": 5221
+  },
   "Beetlejuice": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Beetlejuice.jpg",
    "episodes": [
@@ -34262,6 +34844,30 @@ window.CATALOG = {
    "id": "Beetlejuice",
    "title": "Beetlejuice",
    "totalDurationSec": 126847
+  },
+  "Beetlejuice1988": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Beetlejuice1988.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5526,
+     "fileHint": "Beetlejuice (1988).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Beetlejuice (1988).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BEETLEJUICE (1988) - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Beetlejuice1988",
+   "title": "Beetlejuice (1988)",
+   "totalDurationSec": 5526
   },
   "BenStillerShow": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BenStillerShow.png",
@@ -38435,6 +39041,30 @@ window.CATALOG = {
    "title": "Beyond Scared Straight 2",
    "totalDurationSec": 152073
   },
+  "BigDaddy": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BigDaddy.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5585,
+     "fileHint": "Big Daddy (1999).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Big Daddy (1999).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BIG DADDY - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "BigDaddy",
+   "title": "Big Daddy",
+   "totalDurationSec": 5585
+  },
   "BigMouth": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BigMouth.jpg",
    "episodes": [
@@ -41901,23 +42531,95 @@ window.CATALOG = {
     {
      "code": "Movie",
      "crop": null,
-     "durationSec": 7129,
-     "fileHint": "Bill_Teds_Excellent_Adventure_WB39_WOC_2000-08.mp4",
+     "durationSec": 5392,
+     "fileHint": "Bill & Ted's - Excellent Adventure.mp4",
      "index": 0,
      "introSkipSec": 0,
-     "itemId": "Bill_Teds_Excellent_Adventure_WB39_WOC_2000-08",
-     "key": "Bill_Teds_Excellent_Adventure_WB39_WOC_2000-08::Bill_Teds_Excellent_Adventure_WB39_WOC_2000-08.mp4",
+     "itemId": "bill-teds-excellent-adventure_202404",
+     "key": "bill-teds-excellent-adventure_202404::Bill & Ted's - Excellent Adventure.mp4",
      "movieTitle": null,
      "name": "",
      "seasonNum": 1,
-     "title": "BILL TEDS EXCELLENT ADVENTURE - Movie"
+     "title": "BILL & TED'S EXCELLENT ADVENTURE - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Comedy",
    "grouping": "flat",
    "id": "BillTedsExcellentAdventure",
-   "title": "Bill Teds Excellent Adventure",
-   "totalDurationSec": 7129
+   "title": "Bill & Ted's Excellent Adventure",
+   "totalDurationSec": 5392
+  },
+  "BillyMadison": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BillyMadison.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5392,
+     "fileHint": "Billy Madison (1995).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Billy Madison (1995).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BILLY MADISON - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "BillyMadison",
+   "title": "Billy Madison",
+   "totalDurationSec": 5392
+  },
+  "BioDome": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BioDome.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5690,
+     "fileHint": "Bio-Dome.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "bio-dome_202404",
+     "key": "bio-dome_202404::Bio-Dome.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BIO-DOME - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "BioDome",
+   "title": "Bio-Dome",
+   "totalDurationSec": 5690
+  },
+  "BirdOnAWire": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BirdOnAWire.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6635,
+     "fileHint": "Bird on a Wire (1990).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Bird on a Wire (1990).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BIRD ON A WIRE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "BirdOnAWire",
+   "title": "Bird on a Wire",
+   "totalDurationSec": 6635
   },
   "BlessThisHouse": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BlessThisHouse.jpg",
@@ -42908,6 +43610,54 @@ window.CATALOG = {
    "id": "BlessThisHouse",
    "title": "Bless This House",
    "totalDurationSec": 103184
+  },
+  "BloodRayne": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BloodRayne.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5694,
+     "fileHint": "Bloodrayne _ Full Movie _ Midnight Pulp.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Bloodrayne _ Full Movie _ Midnight Pulp.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BLOODRAYNE - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "BloodRayne",
+   "title": "BloodRayne",
+   "totalDurationSec": 5694
+  },
+  "BloodRayne2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BloodRayne2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5953,
+     "fileHint": "BloodRayne 2 _ Deliverance (2007) 1080p _ Action, Fantasy _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::BloodRayne 2 _ Deliverance (2007) 1080p _ Action, Fantasy _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BLOODRAYNE II: DELIVERANCE - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "BloodRayne2",
+   "title": "BloodRayne II: Deliverance",
+   "totalDurationSec": 5953
   },
   "BlueThunder": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BlueThunder.jpg",
@@ -46263,6 +47013,30 @@ window.CATALOG = {
    "title": "Bosom Buddies",
    "totalDurationSec": 55669
   },
+  "BoyzNTheHood": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BoyzNTheHood.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6728,
+     "fileHint": "Boyz n The Hood (1991).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Boyz n The Hood (1991).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BOYZ N THE HOOD - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "BoyzNTheHood",
+   "title": "Boyz n the Hood",
+   "totalDurationSec": 6728
+  },
   "BrakShowSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BrakShowSeries.png",
    "episodes": [
@@ -46665,6 +47439,30 @@ window.CATALOG = {
    "title": "the Brak Show Series",
    "totalDurationSec": 19159
   },
+  "Bratz": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Bratz.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6107,
+     "fileHint": "Bratz (2007).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::Bratz (2007).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BRATZ - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Bratz",
+   "title": "Bratz",
+   "totalDurationSec": 6107
+  },
   "BraveNewWorld": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BraveNewWorld.jpg",
    "episodes": [
@@ -46683,11 +47481,59 @@ window.CATALOG = {
      "title": "BRAVE NEW WORLD - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Sci-Fi & Fantasy",
    "grouping": "flat",
    "id": "BraveNewWorld",
    "title": "Brave New World",
    "totalDurationSec": 7195
+  },
+  "BringItOn": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BringItOn.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5919,
+     "fileHint": "clowniebob.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "clowniebob",
+     "key": "clowniebob::clowniebob.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BRING IT ON - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "BringItOn",
+   "title": "Bring It On",
+   "totalDurationSec": 5919
+  },
+  "Brink": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Brink.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5413,
+     "fileHint": "Brink!.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Brink!.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BRINK! - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Brink",
+   "title": "Brink!",
+   "totalDurationSec": 5413
   },
   "BriscoCountyJr": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BriscoCountyJr.jpg",
@@ -47988,6 +48834,30 @@ window.CATALOG = {
    "id": "BuckRogers",
    "title": "Buck Rogers in the 25th Century",
    "totalDurationSec": 107861
+  },
+  "BuffyTheVampireSlayer1992": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BuffyTheVampireSlayer1992.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5131,
+     "fileHint": "8738805647941.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "8738805647941",
+     "key": "8738805647941::8738805647941.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BUFFY THE VAMPIRE SLAYER (1992) - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "BuffyTheVampireSlayer1992",
+   "title": "Buffy the Vampire Slayer (1992)",
+   "totalDurationSec": 5131
   },
   "BuzzLightyearofStarCommand": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BuzzLightyearofStarCommand.jpg",
@@ -51196,6 +52066,54 @@ window.CATALOG = {
    "id": "CampLakebottom",
    "title": "Camp Lakebottom",
    "totalDurationSec": 89438
+  },
+  "CampRock": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/CampRock.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5916,
+     "fileHint": "Camp Rock (2008).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::Camp Rock (2008).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CAMP ROCK - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "CampRock",
+   "title": "Camp Rock",
+   "totalDurationSec": 5916
+  },
+  "CanOfWorms": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/CanOfWorms.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5049,
+     "fileHint": "Can of Worms (1999).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Can of Worms (1999).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CAN OF WORMS - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "CanOfWorms",
+   "title": "Can of Worms",
+   "totalDurationSec": 5049
   },
   "CaptainN": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/CaptainN.jpg",
@@ -56231,6 +57149,30 @@ window.CATALOG = {
    "title": "Casper the Friendly Ghost",
    "totalDurationSec": 18867
   },
+  "CastAway": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/CastAway.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 8627,
+     "fileHint": "Cast Away (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Cast Away (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CAST AWAY - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "CastAway",
+   "title": "Cast Away",
+   "totalDurationSec": 8627
+  },
   "CattanoogaCatstheSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/CattanoogaCatstheSeries.jpg",
    "episodes": [
@@ -59133,6 +60075,78 @@ window.CATALOG = {
    "title": "Chase",
    "totalDurationSec": 45450
   },
+  "ChildrenOfTheCorn": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ChildrenOfTheCorn.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5528,
+     "fileHint": "Children Of The Corn (1984) 1080p _ Horror, Thriller _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Children Of The Corn (1984) 1080p _ Horror, Thriller _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CHILDREN OF THE CORN - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "ChildrenOfTheCorn",
+   "title": "Children of the Corn",
+   "totalDurationSec": 5528
+  },
+  "ChoppingMall": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ChoppingMall.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4588,
+     "fileHint": "Chopping Mall (1986) 720p _ Comedy , Horror , Sci Fi _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Chopping Mall (1986) 720p _ Comedy , Horror , Sci Fi _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CHOPPING MALL - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "ChoppingMall",
+   "title": "Chopping Mall",
+   "totalDurationSec": 4588
+  },
+  "Click": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Click.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6452,
+     "fileHint": "Click (2006).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Click (2006).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CLICK - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Click",
+   "title": "Click",
+   "totalDurationSec": 6452
+  },
   "CliffordtheBigRedDogSeriesSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/CliffordtheBigRedDogSeriesSeries.png",
    "episodes": [
@@ -60052,6 +61066,54 @@ window.CATALOG = {
    "id": "CliffordtheBigRedDogSeriesSeries",
    "title": "Clifford the Big Red Dog ( Series) Series",
    "totalDurationSec": 101676
+  },
+  "Clockstoppers": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Clockstoppers.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5636,
+     "fileHint": "Clockstoppers 2002 DvDrip[Eng]-greenbud1969.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Clockstoppers 2002 DvDrip[Eng]-greenbud1969.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CLOCKSTOPPERS - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Clockstoppers",
+   "title": "Clockstoppers",
+   "totalDurationSec": 5636
+  },
+  "Clue": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Clue.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5810,
+     "fileHint": "Clue (1985 Es).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Clue (1985 Es).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CLUE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Clue",
+   "title": "Clue",
+   "totalDurationSec": 5810
   },
   "Coach": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Coach.jpg",
@@ -69279,6 +70341,126 @@ window.CATALOG = {
    "title": "Courage the Cowardly Dog",
    "totalDurationSec": 68457
   },
+  "Creepshow": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Creepshow.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7218,
+     "fileHint": "Creepshow  1 1982.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Creepshow  1 1982.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CREEPSHOW - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Creepshow",
+   "title": "Creepshow",
+   "totalDurationSec": 7218
+  },
+  "Creepshow2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Creepshow2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5446,
+     "fileHint": "Creepshow  2.  1987.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Creepshow  2.  1987.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CREEPSHOW 2 - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Creepshow2",
+   "title": "Creepshow 2",
+   "totalDurationSec": 5446
+  },
+  "Creepshow3": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Creepshow3.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6270,
+     "fileHint": "Creepshow  3.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Creepshow  3.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CREEPSHOW 3 - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Creepshow3",
+   "title": "Creepshow 3",
+   "totalDurationSec": 6270
+  },
+  "Crossroads": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Crossroads.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5611,
+     "fileHint": "Crossroads (2002).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::Crossroads (2002).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CROSSROADS - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "Crossroads",
+   "title": "Crossroads",
+   "totalDurationSec": 5611
+  },
+  "CurlySue": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/CurlySue.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6121,
+     "fileHint": "Curly Sue (1991).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Curly Sue (1991).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "CURLY SUE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "CurlySue",
+   "title": "Curly Sue",
+   "totalDurationSec": 6121
+  },
   "CurseOfTheBlairWitch": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/CurseOfTheBlairWitch.jpg",
    "episodes": [
@@ -69297,7 +70479,7 @@ window.CATALOG = {
      "title": "CURSE OF THE BLAIR WITCH - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Horror",
    "grouping": "flat",
    "id": "CurseOfTheBlairWitch",
    "title": "Curse of the Blair Witch",
@@ -69494,6 +70676,30 @@ window.CATALOG = {
    "id": "DallastheSeries",
    "title": "Dallas (the Series)",
    "totalDurationSec": 37092
+  },
+  "DanceWithMe": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DanceWithMe.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7615,
+     "fileHint": "Dance With Me (1998).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Dance With Me (1998).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DANCE WITH ME - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "DanceWithMe",
+   "title": "Dance with Me",
+   "totalDurationSec": 7615
   },
   "Daria": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Daria.jpg",
@@ -89055,6 +90261,78 @@ window.CATALOG = {
    "title": "Darkwing Duck the Series",
    "totalDurationSec": 124090
   },
+  "Dave": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Dave.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6595,
+     "fileHint": "Dave\u00a0(1993).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Dave\u00a0(1993).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DAVE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Dave",
+   "title": "Dave",
+   "totalDurationSec": 6595
+  },
+  "DazedAndConfused": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DazedAndConfused.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6148,
+     "fileHint": "Dazed and Confused[8090].mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "dazed-and-confused-1993-cc",
+     "key": "dazed-and-confused-1993-cc::Dazed and Confused[8090].mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DAZED AND CONFUSED - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "DazedAndConfused",
+   "title": "Dazed and Confused",
+   "totalDurationSec": 6148
+  },
+  "DeadPoetsSociety": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DeadPoetsSociety.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7809,
+     "fileHint": "Dead Poets Society (1989).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Dead Poets Society (1989).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DEAD POETS SOCIETY - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "DeadPoetsSociety",
+   "title": "Dead Poets Society",
+   "totalDurationSec": 7809
+  },
   "DeadPresidents": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/DeadPresidents.jpg",
    "episodes": [
@@ -89073,7 +90351,7 @@ window.CATALOG = {
      "title": "DEAD PRESIDENTS - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Drama",
    "grouping": "flat",
    "id": "DeadPresidents",
    "title": "Dead Presidents",
@@ -89097,7 +90375,7 @@ window.CATALOG = {
      "title": "DEEP IMPACT - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "DeepImpact",
    "title": "Deep Impact",
@@ -91338,6 +92616,30 @@ window.CATALOG = {
    "id": "DesigningWomen",
    "title": "Designing Women",
    "totalDurationSec": 230619
+  },
+  "DetroitRockCity": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DetroitRockCity.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5676,
+     "fileHint": "Detroit Rock City.ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "detroit-rock-city_202602",
+     "key": "detroit-rock-city_202602::Detroit Rock City.ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DETROIT ROCK CITY - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "DetroitRockCity",
+   "title": "Detroit Rock City",
+   "totalDurationSec": 5676
   },
   "DextersLaboratorytheSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/DextersLaboratorytheSeries.png",
@@ -97053,11 +98355,35 @@ window.CATALOG = {
      "title": "DISNEY GEPPETTO - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Family & Kids",
    "grouping": "flat",
    "id": "DisneyGeppetto",
    "title": "Disney Geppetto",
    "totalDurationSec": 7277
+  },
+  "DocHollywood": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DocHollywood.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6201,
+     "fileHint": "Doc Hollywood\u00a0(1991).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Doc Hollywood\u00a0(1991).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DOC HOLLYWOOD - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "DocHollywood",
+   "title": "Doc Hollywood",
+   "totalDurationSec": 6201
   },
   "DoctorWho": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/DoctorWho.jpg",
@@ -104755,6 +106081,102 @@ window.CATALOG = {
    "title": "Doctor Who",
    "totalDurationSec": 1170763
   },
+  "DoloresClaiborne": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DoloresClaiborne.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7570,
+     "fileHint": "Dolores Claiborne (1995).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Dolores Claiborne (1995).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DOLORES CLAIBORNE - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "DoloresClaiborne",
+   "title": "Dolores Claiborne",
+   "totalDurationSec": 7570
+  },
+  "DontLookUnderTheBed": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DontLookUnderTheBed.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5562,
+     "fileHint": "Don't Look Under the Bed (1999).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Don't Look Under the Bed (1999).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DON'T LOOK UNDER THE BED - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "DontLookUnderTheBed",
+   "title": "Don't Look Under the Bed",
+   "totalDurationSec": 5562
+  },
+  "DontTellHerItsMe": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DontTellHerItsMe.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6151,
+     "fileHint": "Don't Tell Her It's Me (1990).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Don't Tell Her It's Me (1990).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DON'T TELL HER IT'S ME - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "DontTellHerItsMe",
+   "title": "Don't Tell Her It's Me",
+   "totalDurationSec": 6151
+  },
+  "DontTellMomTheBabysittersDead": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DontTellMomTheBabysittersDead.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6035,
+     "fileHint": "Don't Tell Mom The Babysitter's Dead (1991).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "dont-tell-mom-the-babysitters-dead-1991",
+     "key": "dont-tell-mom-the-babysitters-dead-1991::Don't Tell Mom The Babysitter's Dead (1991).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DON'T TELL MOM THE BABYSITTER'S DEAD - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "DontTellMomTheBabysittersDead",
+   "title": "Don't Tell Mom the Babysitter's Dead",
+   "totalDurationSec": 6035
+  },
   "DoogieHowserMD": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/DoogieHowserMD.jpg",
    "episodes": [
@@ -106122,6 +107544,54 @@ window.CATALOG = {
    "id": "DoogieHowserMD",
    "title": "Doogie Howser, M.D.",
    "totalDurationSec": 135651
+  },
+  "Doom": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Doom.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6763,
+     "fileHint": "Doom (2005).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Doom (2005).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DOOM - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "Doom",
+   "title": "Doom",
+   "totalDurationSec": 6763
+  },
+  "DoubleTeamed": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DoubleTeamed.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5577,
+     "fileHint": "Double Teamed (2002).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Double Teamed (2002).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DOUBLE TEAMED - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "DoubleTeamed",
+   "title": "Double Teamed",
+   "totalDurationSec": 5577
   },
   "DragonBall": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/DragonBall.jpg",
@@ -120175,6 +121645,30 @@ window.CATALOG = {
    "title": "The Drew Carey Show",
    "totalDurationSec": 293330
   },
+  "DropDeadFred": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DropDeadFred.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5955,
+     "fileHint": "Drop Dead Fred\u00a0(1991).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Drop Dead Fred\u00a0(1991).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DROP DEAD FRED - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "DropDeadFred",
+   "title": "Drop Dead Fred",
+   "totalDurationSec": 5955
+  },
   "DuckDodgers": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/DuckDodgers.jpg",
    "episodes": [
@@ -124597,6 +126091,78 @@ window.CATALOG = {
    "title": "Due South",
    "totalDurationSec": 181426
   },
+  "DumbAndDumber": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DumbAndDumber.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6771,
+     "fileHint": "Dumb and Dumber (1994).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Dumb and Dumber (1994).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DUMB AND DUMBER - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "DumbAndDumber",
+   "title": "Dumb and Dumber",
+   "totalDurationSec": 6771
+  },
+  "DyingYoung": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/DyingYoung.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6682,
+     "fileHint": "Dying Young (1991).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Dying Young (1991).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "DYING YOUNG - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "DyingYoung",
+   "title": "Dying Young",
+   "totalDurationSec": 6682
+  },
+  "ETTheExtraTerrestrial": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ETTheExtraTerrestrial.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6901,
+     "fileHint": "E.T. l'Extra-Terrestre (1982).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "e.-t.-l-extra-terrestre-1982",
+     "key": "e.-t.-l-extra-terrestre-1982::E.T. l'Extra-Terrestre (1982).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "E.T. THE EXTRA-TERRESTRIAL - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "ETTheExtraTerrestrial",
+   "title": "E.T. the Extra-Terrestrial",
+   "totalDurationSec": 6901
+  },
   "EagleRiders": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/EagleRiders.jpg",
    "episodes": [
@@ -126783,6 +128349,78 @@ window.CATALOG = {
    "title": "Eerie, Indiana",
    "totalDurationSec": 27715
   },
+  "EightMile": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/EightMile.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6628,
+     "fileHint": "8 Mile (2002).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::8 Mile (2002).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "8 MILE - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "EightMile",
+   "title": "8 Mile",
+   "totalDurationSec": 6628
+  },
+  "Elf": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Elf.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5803,
+     "fileHint": "Elf (2003).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Elf (2003).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ELF - Movie"
+    }
+   ],
+   "genre": "Holiday",
+   "grouping": "flat",
+   "id": "Elf",
+   "title": "Elf",
+   "totalDurationSec": 5803
+  },
+  "EncinoMan": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/EncinoMan.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5306,
+     "fileHint": "Encino.Man.1992.720p.WEBRip.x264.AAC-[YTS.MX].mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "encino.-man.-1992.720p.-webrip.x-264.-aac-yts.-mx",
+     "key": "encino.-man.-1992.720p.-webrip.x-264.-aac-yts.-mx::Encino.Man.1992.720p.WEBRip.x264.AAC-[YTS.MX].mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ENCINO MAN - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "EncinoMan",
+   "title": "Encino Man",
+   "totalDurationSec": 5306
+  },
   "ErnestSavesChristmas": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/ErnestSavesChristmas.jpg",
    "episodes": [
@@ -126801,11 +128439,35 @@ window.CATALOG = {
      "title": "ERNEST SAVES CHRISTMAS - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Holiday",
    "grouping": "flat",
    "id": "ErnestSavesChristmas",
    "title": "Ernest Saves Christmas",
    "totalDurationSec": 7011
+  },
+  "EscapeFromNewYork": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/EscapeFromNewYork.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5936,
+     "fileHint": "Escape.From.New.York.1981.1080p.BrRip.x264.BOKUTOX.YIFY.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "escape-from-new-york-1981-john-carpenter-1080p",
+     "key": "escape-from-new-york-1981-john-carpenter-1080p::Escape.From.New.York.1981.1080p.BrRip.x264.BOKUTOX.YIFY.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ESCAPE FROM NEW YORK - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "EscapeFromNewYork",
+   "title": "Escape from New York",
+   "totalDurationSec": 5936
   },
   "Everwood": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Everwood.jpg",
@@ -130998,6 +132660,78 @@ window.CATALOG = {
    "id": "EverybodyLovesRaymond",
    "title": "Everybody Loves Raymond",
    "totalDurationSec": 280572
+  },
+  "Evita": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Evita.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 8086,
+     "fileHint": "Evita (1996).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Evita (1996).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "EVITA - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "Evita",
+   "title": "Evita",
+   "totalDurationSec": 8086
+  },
+  "Excalibur": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Excalibur.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 8447,
+     "fileHint": "Excalibur (1981).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Excalibur (1981).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "EXCALIBUR - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Excalibur",
+   "title": "Excalibur",
+   "totalDurationSec": 8447
+  },
+  "FX": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/FX.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6517,
+     "fileHint": "F\u2044X (1986).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::F\u2044X (1986).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "F/X - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "FX",
+   "title": "F/X",
+   "totalDurationSec": 6517
   },
   "FactsofLife": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/FactsofLife.jpg",
@@ -136073,6 +137807,30 @@ window.CATALOG = {
    "title": "The Fairly OddParents",
    "totalDurationSec": 269544
   },
+  "FallingDown": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/FallingDown.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6757,
+     "fileHint": "Falling Down (1993).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "falling-down-1993_202511",
+     "key": "falling-down-1993_202511::Falling Down (1993).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FALLING DOWN - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "FallingDown",
+   "title": "Falling Down",
+   "totalDurationSec": 6757
+  },
   "FamilyMatters": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/FamilyMatters.jpg",
    "episodes": [
@@ -139037,6 +140795,102 @@ window.CATALOG = {
    "title": "Family Matters",
    "totalDurationSec": 268965
   },
+  "FerrisBuellersDayOff": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/FerrisBuellersDayOff.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6180,
+     "fileHint": "Ferris.Buellers.Day.Off.1986.1080p.BluRay.x264.YIFY.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "ferrisbuellersdayoff_202606",
+     "key": "ferrisbuellersdayoff_202606::Ferris.Buellers.Day.Off.1986.1080p.BluRay.x264.YIFY.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FERRIS BUELLER'S DAY OFF - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "FerrisBuellersDayOff",
+   "title": "Ferris Bueller's Day Off",
+   "totalDurationSec": 6180
+  },
+  "FightClub": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/FightClub.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 8348,
+     "fileHint": "Fight Club (1999).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Fight Club (1999).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FIGHT CLUB - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "FightClub",
+   "title": "Fight Club",
+   "totalDurationSec": 8348
+  },
+  "FinalDestination": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/FinalDestination.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5883,
+     "fileHint": "Final Destination (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Final Destination (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FINAL DESTINATION - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "FinalDestination",
+   "title": "Final Destination",
+   "totalDurationSec": 5883
+  },
+  "FireAndIceTheDragonChronicles": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/FireAndIceTheDragonChronicles.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5153,
+     "fileHint": "Fire And Ice The Dragon Chronicles 2008.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Fire And Ice The Dragon Chronicles 2008.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FIRE & ICE: THE DRAGON CHRONICLES - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "FireAndIceTheDragonChronicles",
+   "title": "Fire & Ice: The Dragon Chronicles",
+   "totalDurationSec": 5153
+  },
   "FireflySeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/FireflySeries.jpg",
    "episodes": [
@@ -139243,6 +141097,198 @@ window.CATALOG = {
    "title": "Firefly Series",
    "totalDurationSec": 39113
   },
+  "FirstBlood": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/FirstBlood.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5590,
+     "fileHint": "Rambo I.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Rambo I.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FIRST BLOOD - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "FirstBlood",
+   "title": "First Blood",
+   "totalDurationSec": 5590
+  },
+  "Flashdance": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Flashdance.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5684,
+     "fileHint": "Flashdance (1983).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Flashdance (1983).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FLASHDANCE - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "Flashdance",
+   "title": "Flashdance",
+   "totalDurationSec": 5684
+  },
+  "FleshGordon2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/FleshGordon2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6142,
+     "fileHint": "Flesh Gordon meets the Cosmic Cheerleaders.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Flesh Gordon meets the Cosmic Cheerleaders.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FLESH GORDON MEETS THE COSMIC CHEERLEADERS - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "FleshGordon2",
+   "title": "Flesh Gordon Meets the Cosmic Cheerleaders",
+   "totalDurationSec": 6142
+  },
+  "FlightOfTheNavigator": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/FlightOfTheNavigator.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5374,
+     "fileHint": "Flight.of.the.Navigator.1986.1080p.BrRip.x264.YIFY.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Flight.of.the.Navigator.1986.1080p.BrRip.x264.YIFY.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FLIGHT OF THE NAVIGATOR - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "FlightOfTheNavigator",
+   "title": "Flight of the Navigator",
+   "totalDurationSec": 5374
+  },
+  "Footloose": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Footloose.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6432,
+     "fileHint": "Footloose (1984).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Footloose (1984).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FOOTLOOSE - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "Footloose",
+   "title": "Footloose",
+   "totalDurationSec": 6432
+  },
+  "ForeverYoung": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ForeverYoung.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6094,
+     "fileHint": "Forever Young (1992).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Forever Young (1992).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FOREVER YOUNG - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "ForeverYoung",
+   "title": "Forever Young",
+   "totalDurationSec": 6094
+  },
+  "ForrestGump": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ForrestGump.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 8529,
+     "fileHint": "Forrest Gump (1994).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Forrest Gump (1994).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FORREST GUMP - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "ForrestGump",
+   "title": "Forrest Gump",
+   "totalDurationSec": 8529
+  },
+  "Fourteen08": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Fourteen08.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6746,
+     "fileHint": "1408 (2007).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::1408 (2007).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "1408 - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Fourteen08",
+   "title": "1408",
+   "totalDurationSec": 6746
+  },
   "FoxKids": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/FoxKids.png",
    "episodes": [
@@ -139364,6 +141410,54 @@ window.CATALOG = {
    "id": "FoxKids",
    "title": "Fox Kids Saturday Morning",
    "totalDurationSec": 73056
+  },
+  "FreakyFriday": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/FreakyFriday.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5584,
+     "fileHint": "Freaky Friday (2003).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::Freaky Friday (2003).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FREAKY FRIDAY - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "FreakyFriday",
+   "title": "Freaky Friday",
+   "totalDurationSec": 5584
+  },
+  "FreddyGotFingered": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/FreddyGotFingered.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5223,
+     "fileHint": "Freddy Got Fingered (2001).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Freddy Got Fingered (2001).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FREDDY GOT FINGERED - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "FreddyGotFingered",
+   "title": "Freddy Got Fingered",
+   "totalDurationSec": 5223
   },
   "FreddysNightmares": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/FreddysNightmares.png",
@@ -139991,6 +142085,54 @@ window.CATALOG = {
    "title": "Freddy's Nightmares",
    "totalDurationSec": 122281
   },
+  "FreeWilly": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/FreeWilly.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6704,
+     "fileHint": "Free Willy (1993).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Free Willy (1993).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FREE WILLY - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "FreeWilly",
+   "title": "Free Willy",
+   "totalDurationSec": 6704
+  },
+  "Friday": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Friday.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5826,
+     "fileHint": "Friday (1995).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Friday (1995).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "FRIDAY - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Friday",
+   "title": "Friday",
+   "totalDurationSec": 5826
+  },
   "FrostyReturns": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/FrostyReturns.jpg",
    "episodes": [
@@ -140009,7 +142151,7 @@ window.CATALOG = {
      "title": "FROSTY RETURNS - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Holiday",
    "grouping": "flat",
    "id": "FrostyReturns",
    "title": "Frosty Returns",
@@ -149085,6 +151227,30 @@ window.CATALOG = {
    "title": "Gene Roddenberry's Andromeda",
    "totalDurationSec": 283250
   },
+  "Genius1999": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Genius1999.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5130,
+     "fileHint": "Genius (1999).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Genius (1999).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "GENIUS - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Genius1999",
+   "title": "Genius",
+   "totalDurationSec": 5130
+  },
   "GetSmart": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/GetSmart.gif",
    "episodes": [
@@ -151027,6 +153193,30 @@ window.CATALOG = {
    "title": "Get Smart",
    "totalDurationSec": 207120
   },
+  "GhostRider": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/GhostRider.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7405,
+     "fileHint": "Ghost Rider 2007.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Ghost Rider 2007.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "GHOST RIDER - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "GhostRider",
+   "title": "Ghost Rider",
+   "totalDurationSec": 7405
+  },
   "Ghostwriter": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Ghostwriter.png",
    "episodes": [
@@ -152087,6 +154277,30 @@ window.CATALOG = {
    "title": "Ghostwriter",
    "totalDurationSec": 119651
   },
+  "GiAnts": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/GiAnts.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5955,
+     "fileHint": "GiAnts (2008).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::GiAnts (2008).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "GIANTS - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "GiAnts",
+   "title": "GiAnts",
+   "totalDurationSec": 5955
+  },
   "Godzilla": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Godzilla.jpg",
    "episodes": [
@@ -152461,6 +154675,54 @@ window.CATALOG = {
    "title": "Godzilla",
    "totalDurationSec": 35403
   },
+  "GoodBurger": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/GoodBurger.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5718,
+     "fileHint": "Good Burger (1997).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Good Burger (1997).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "GOOD BURGER - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "GoodBurger",
+   "title": "Good Burger",
+   "totalDurationSec": 5718
+  },
+  "GoodMorningVietnam": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/GoodMorningVietnam.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7261,
+     "fileHint": "Good Morning, Vietnam (1987).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Good Morning, Vietnam (1987).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "GOOD MORNING, VIETNAM - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "GoodMorningVietnam",
+   "title": "Good Morning, Vietnam",
+   "totalDurationSec": 7261
+  },
   "GoodWillHunting": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/GoodWillHunting.jpg",
    "episodes": [
@@ -152479,11 +154741,35 @@ window.CATALOG = {
      "title": "GOOD WILL HUNTING - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Drama",
    "grouping": "flat",
    "id": "GoodWillHunting",
    "title": "Good Will Hunting",
    "totalDurationSec": 10550
+  },
+  "GorillasInTheMist": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/GorillasInTheMist.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7758,
+     "fileHint": "Gorillas in The Mist (1988).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Gorillas in The Mist (1988).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "GORILLAS IN THE MIST - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "GorillasInTheMist",
+   "title": "Gorillas in the Mist",
+   "totalDurationSec": 7758
   },
   "GravityFalls": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/GravityFalls.jpg",
@@ -153054,6 +155340,54 @@ window.CATALOG = {
    "id": "GravityFalls",
    "title": "Gravity Falls",
    "totalDurationSec": 55134
+  },
+  "Grease": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Grease.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6629,
+     "fileHint": "Grease (1978).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Grease (1978).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "GREASE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Grease",
+   "title": "Grease",
+   "totalDurationSec": 6629
+  },
+  "GreatBallsOfFire": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/GreatBallsOfFire.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6474,
+     "fileHint": "Great Balls of Fire (1989).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Great Balls of Fire (1989).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "GREAT BALLS OF FIRE! - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "GreatBallsOfFire",
+   "title": "Great Balls of Fire!",
+   "totalDurationSec": 6474
   },
   "GreenAcres": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/GreenAcres.jpg",
@@ -155431,6 +157765,54 @@ window.CATALOG = {
    "title": "Green Acres",
    "totalDurationSec": 222957
   },
+  "Gremlins": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Gremlins.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6376,
+     "fileHint": "GREMLINS.1984.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::GREMLINS.1984.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "GREMLINS - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Gremlins",
+   "title": "Gremlins",
+   "totalDurationSec": 6376
+  },
+  "Gremlins2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Gremlins2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6385,
+     "fileHint": "GREMLINS 2 THE NEW BATCH.1990.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::GREMLINS 2 THE NEW BATCH.1990.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "GREMLINS 2: THE NEW BATCH - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Gremlins2",
+   "title": "Gremlins 2: The New Batch",
+   "totalDurationSec": 6385
+  },
   "GrowingPains": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/GrowingPains.jpg",
    "episodes": [
@@ -157755,11 +160137,35 @@ window.CATALOG = {
      "title": "GRUMPY OLD MEN - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Comedy",
    "grouping": "flat",
    "id": "GrumpyOldMen",
    "title": "Grumpy Old Men",
    "totalDurationSec": 7102
+  },
+  "GuardingTess": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/GuardingTess.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5734,
+     "fileHint": "Guarding Tess (1994).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Guarding Tess (1994).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "GUARDING TESS - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "GuardingTess",
+   "title": "Guarding Tess",
+   "totalDurationSec": 5734
   },
   "GummiBears": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/GummiBears.jpg",
@@ -159087,6 +161493,150 @@ window.CATALOG = {
    "title": "Adventures of the Gummi Bears",
    "totalDurationSec": 85741
   },
+  "HEDoubleHockeySticks": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/HEDoubleHockeySticks.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5274,
+     "fileHint": "H E Double Hockey Sticks.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::H E Double Hockey Sticks.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "H-E DOUBLE HOCKEY STICKS - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "HEDoubleHockeySticks",
+   "title": "H-E Double Hockey Sticks",
+   "totalDurationSec": 5274
+  },
+  "Hackers": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Hackers.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6319,
+     "fileHint": "Hackers (1995).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "hackers-1995_202501",
+     "key": "hackers-1995_202501::Hackers (1995).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HACKERS - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "Hackers",
+   "title": "Hackers",
+   "totalDurationSec": 6319
+  },
+  "HalfBaked": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/HalfBaked.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4937,
+     "fileHint": "Half Baked (1998).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "half-baked-1998_202608",
+     "key": "half-baked-1998_202608::Half Baked (1998).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HALF BAKED - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "HalfBaked",
+   "title": "Half Baked",
+   "totalDurationSec": 4937
+  },
+  "Halloweentown": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Halloweentown.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5059,
+     "fileHint": "Halloweentown [1998].ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Halloweentown [1998].ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HALLOWEENTOWN - Movie"
+    }
+   ],
+   "genre": "Holiday",
+   "grouping": "flat",
+   "id": "Halloweentown",
+   "title": "Halloweentown",
+   "totalDurationSec": 5059
+  },
+  "Halloweentown2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Halloweentown2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4849,
+     "fileHint": "Halloweentown II - Kalabar's Revenge(2001).ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Halloweentown II - Kalabar's Revenge(2001).ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HALLOWEENTOWN II: KALABAR'S REVENGE - Movie"
+    }
+   ],
+   "genre": "Holiday",
+   "grouping": "flat",
+   "id": "Halloweentown2",
+   "title": "Halloweentown II: Kalabar's Revenge",
+   "totalDurationSec": 4849
+  },
+  "HalloweentownHigh": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/HalloweentownHigh.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4930,
+     "fileHint": "Halloweentown High[2004].mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Halloweentown High[2004].mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HALLOWEENTOWN HIGH - Movie"
+    }
+   ],
+   "genre": "Holiday",
+   "grouping": "flat",
+   "id": "HalloweentownHigh",
+   "title": "Halloweentown High",
+   "totalDurationSec": 4930
+  },
   "HammerHouseofHorror": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/HammerHouseofHorror.jpg",
    "episodes": [
@@ -159470,6 +162020,30 @@ window.CATALOG = {
    "id": "HandmaidsTaleSeries",
    "title": "the Handmaid's Tale Series",
    "totalDurationSec": 43096
+  },
+  "HappyGilmore": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/HappyGilmore.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5516,
+     "fileHint": "Happy Gilmore (1996).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Happy Gilmore (1996).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HAPPY GILMORE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "HappyGilmore",
+   "title": "Happy Gilmore",
+   "totalDurationSec": 5516
   },
   "HarryandtheHendersons": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/HarryandtheHendersons.jpg",
@@ -161702,6 +164276,78 @@ window.CATALOG = {
    "id": "HeathcliffandtheCatillacCatsTVSeries",
    "title": "Heathcliff and the Catillac Cats TV Series",
    "totalDurationSec": 71078
+  },
+  "Heavyweights": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Heavyweights.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6368,
+     "fileHint": "Disney's Heavyweights VHS.ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disneys-heavyweights-vhs",
+     "key": "disneys-heavyweights-vhs::Disney's Heavyweights VHS.ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HEAVYWEIGHTS - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Heavyweights",
+   "title": "Heavyweights",
+   "totalDurationSec": 6368
+  },
+  "Hellraiser": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Hellraiser.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5603,
+     "fileHint": "Hellraiser (1987) 720p _  Horror Thriller _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Hellraiser (1987) 720p _  Horror Thriller _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HELLRAISER - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Hellraiser",
+   "title": "Hellraiser",
+   "totalDurationSec": 5603
+  },
+  "Hellraiser2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Hellraiser2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5941,
+     "fileHint": "Hellraiser II (1988).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Hellraiser II (1988).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HELLBOUND: HELLRAISER II - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Hellraiser2",
+   "title": "Hellbound: Hellraiser II",
+   "totalDurationSec": 5941
   },
   "HeresLucy": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/HeresLucy.jpg",
@@ -165243,6 +167889,54 @@ window.CATALOG = {
    "title": "Hey Vern It",
    "totalDurationSec": 25518
   },
+  "HighSchoolMusical": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/HighSchoolMusical.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5875,
+     "fileHint": "High School Musical (2006).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::High School Musical (2006).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HIGH SCHOOL MUSICAL - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "HighSchoolMusical",
+   "title": "High School Musical",
+   "totalDurationSec": 5875
+  },
+  "Highlander2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Highlander2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6611,
+     "fileHint": "Highlander 2 _ Renegade Version The Director s Cut (1991) 1080p _ Action, Adventure, Sci Fi _.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Highlander 2 _ Renegade Version The Director s Cut (1991) 1080p _ Action, Adventure, Sci Fi _.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HIGHLANDER II: THE QUICKENING (RENEGADE CUT) - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Highlander2",
+   "title": "Highlander II: The Quickening (Renegade Cut)",
+   "totalDurationSec": 6611
+  },
   "HighwayToHeaven": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/HighwayToHeaven.jpg",
    "episodes": [
@@ -167624,6 +170318,78 @@ window.CATALOG = {
    "id": "HitchhikersGuidetotheGalaxy",
    "title": "The Hitchhiker's Guide to the Galaxy",
    "totalDurationSec": 11988
+  },
+  "HoldMeThrillMeKissMe": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/HoldMeThrillMeKissMe.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5565,
+     "fileHint": "Hold Me Thrill Me Kiss Me (1992).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Hold Me Thrill Me Kiss Me (1992).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HOLD ME, THRILL ME, KISS ME - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "HoldMeThrillMeKissMe",
+   "title": "Hold Me, Thrill Me, Kiss Me",
+   "totalDurationSec": 5565
+  },
+  "HomeAlone": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/HomeAlone.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6174,
+     "fileHint": "Home Alone (1990).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Home Alone (1990).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HOME ALONE - Movie"
+    }
+   ],
+   "genre": "Holiday",
+   "grouping": "flat",
+   "id": "HomeAlone",
+   "title": "Home Alone",
+   "totalDurationSec": 6174
+  },
+  "HomeAlone2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/HomeAlone2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7201,
+     "fileHint": "Home Alone 2 Lost in New York (1992).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Home Alone 2 Lost in New York (1992).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HOME ALONE 2: LOST IN NEW YORK - Movie"
+    }
+   ],
+   "genre": "Holiday",
+   "grouping": "flat",
+   "id": "HomeAlone2",
+   "title": "Home Alone 2: Lost in New York",
+   "totalDurationSec": 7201
   },
   "HomeImprovement": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/HomeImprovement.jpg",
@@ -170627,6 +173393,78 @@ window.CATALOG = {
    "title": "Home Movies",
    "totalDurationSec": 70679
   },
+  "Honey": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Honey.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5641,
+     "fileHint": "Honey (2003).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::Honey (2003).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HONEY - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "Honey",
+   "title": "Honey",
+   "totalDurationSec": 5641
+  },
+  "Hook": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Hook.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 8506,
+     "fileHint": "Hook (1991).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Hook (1991).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HOOK - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Hook",
+   "title": "Hook",
+   "totalDurationSec": 8506
+  },
+  "HorseSense": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/HorseSense.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5320,
+     "fileHint": "Horse Sense (1999).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Horse Sense (1999).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HORSE SENSE - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "HorseSense",
+   "title": "Horse Sense",
+   "totalDurationSec": 5320
+  },
   "Houndcats": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Houndcats.jpg",
    "episodes": [
@@ -170819,6 +173657,78 @@ window.CATALOG = {
    "title": "The Houndcats",
    "totalDurationSec": 16958
   },
+  "Hounded": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Hounded.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5609,
+     "fileHint": "Hounded (2001).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Hounded (2001).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HOUNDED - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Hounded",
+   "title": "Hounded",
+   "totalDurationSec": 5609
+  },
+  "HouseOf1000Corpses": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/HouseOf1000Corpses.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5337,
+     "fileHint": "House of 1000 Corpses (2003).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::House of 1000 Corpses (2003).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HOUSE OF 1000 CORPSES - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "HouseOf1000Corpses",
+   "title": "House of 1000 Corpses",
+   "totalDurationSec": 5337
+  },
+  "HouseOfD": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/HouseOfD.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5825,
+     "fileHint": "House of D (2004).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::House of D (2004).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HOUSE OF D - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "HouseOfD",
+   "title": "House of D",
+   "totalDurationSec": 5825
+  },
   "HowTheGrinchStoleChristmas": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/HowTheGrinchStoleChristmas.jpg",
    "episodes": [
@@ -170837,11 +173747,59 @@ window.CATALOG = {
      "title": "HOW THE GRINCH STOLE CHRISTMAS! - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Holiday",
    "grouping": "flat",
    "id": "HowTheGrinchStoleChristmas",
    "title": "How The Grinch Stole Christmas!",
    "totalDurationSec": 1699
+  },
+  "HowTheGrinchStoleChristmas2000": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/HowTheGrinchStoleChristmas2000.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6296,
+     "fileHint": "How the Grinch Stole Christmas (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::How the Grinch Stole Christmas (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "HOW THE GRINCH STOLE CHRISTMAS (2000) - Movie"
+    }
+   ],
+   "genre": "Holiday",
+   "grouping": "flat",
+   "id": "HowTheGrinchStoleChristmas2000",
+   "title": "How the Grinch Stole Christmas (2000)",
+   "totalDurationSec": 6296
+  },
+  "IfTheShoeFits": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/IfTheShoeFits.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5457,
+     "fileHint": "If The Shoe Fits (1990).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::If The Shoe Fits (1990).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "IF THE SHOE FITS - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "IfTheShoeFits",
+   "title": "If the Shoe Fits",
+   "totalDurationSec": 5457
   },
   "InLivingColor": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/InLivingColor.png",
@@ -172616,6 +175574,30 @@ window.CATALOG = {
    "id": "InLivingColor",
    "title": "In Living Color",
    "totalDurationSec": 164232
+  },
+  "IndianaJonesAndTheLastCrusade": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/IndianaJonesAndTheLastCrusade.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7613,
+     "fileHint": "Indiana Jones and The Last Crusade (1989).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Indiana Jones and The Last Crusade (1989).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "INDIANA JONES AND THE LAST CRUSADE - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "IndianaJonesAndTheLastCrusade",
+   "title": "Indiana Jones and the Last Crusade",
+   "totalDurationSec": 7613
   },
   "InsomniacwithDaveAttell": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/InsomniacwithDaveAttell.jpg",
@@ -175727,7 +178709,7 @@ window.CATALOG = {
      "title": "INVASION - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Sci-Fi & Fantasy",
    "grouping": "flat",
    "id": "Invasion",
    "title": "Invasion",
@@ -175751,7 +178733,7 @@ window.CATALOG = {
      "title": "IT - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Horror",
    "grouping": "flat",
    "id": "It1990",
    "title": "Stephen King's IT (1990)",
@@ -176379,6 +179361,30 @@ window.CATALOG = {
    "title": "Jackass",
    "totalDurationSec": 32106
   },
+  "JackassTheMovie": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/JackassTheMovie.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5099,
+     "fileHint": "Jackass the Movie (2002).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Jackass the Movie (2002).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "JACKASS: THE MOVIE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "JackassTheMovie",
+   "title": "Jackass: The Movie",
+   "totalDurationSec": 5099
+  },
   "JackofAllTradesTVseries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/JackofAllTradesTVseries.jpg",
    "episodes": [
@@ -176696,6 +179702,30 @@ window.CATALOG = {
    "id": "JackofAllTradesTVseries",
    "title": "Jack of All Trades (TV series)",
    "totalDurationSec": 28881
+  },
+  "Jaws": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Jaws.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7433,
+     "fileHint": "Jaws (1975).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "jaws-1975_202602",
+     "key": "jaws-1975_202602::Jaws (1975).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "JAWS - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Jaws",
+   "title": "Jaws",
+   "totalDurationSec": 7433
   },
   "JeffFoxworthyShow": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/JeffFoxworthyShow.jpg",
@@ -181179,6 +184209,54 @@ window.CATALOG = {
    "title": "Jericho",
    "totalDurationSec": 66458
   },
+  "JerseyGirl": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/JerseyGirl.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6152,
+     "fileHint": "Jersey Girl (2004).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Jersey Girl (2004).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "JERSEY GIRL - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "JerseyGirl",
+   "title": "Jersey Girl",
+   "totalDurationSec": 6152
+  },
+  "JettJacksonTheMovie": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/JettJacksonTheMovie.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5350,
+     "fileHint": "Jett Jackson the Movie (2001).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Jett Jackson the Movie (2001).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "JETT JACKSON: THE MOVIE - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "JettJacksonTheMovie",
+   "title": "Jett Jackson: The Movie",
+   "totalDurationSec": 5350
+  },
   "JimHensonHour": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/JimHensonHour.jpg",
    "episodes": [
@@ -181398,6 +184476,30 @@ window.CATALOG = {
    "id": "JimHensonHour",
    "title": "The Jim Henson Hour",
    "totalDurationSec": 36158
+  },
+  "JoeVersusTheVolcano": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/JoeVersusTheVolcano.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6127,
+     "fileHint": "videoplayback.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "videoplayback_20260511_2115",
+     "key": "videoplayback_20260511_2115::videoplayback.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "JOE VERSUS THE VOLCANO - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "JoeVersusTheVolcano",
+   "title": "Joe Versus the Volcano",
+   "totalDurationSec": 6127
   },
   "Joey": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Joey.png",
@@ -182053,6 +185155,30 @@ window.CATALOG = {
    "title": "Joey",
    "totalDurationSec": 59980
   },
+  "JohnnyTsunami": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/JohnnyTsunami.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5484,
+     "fileHint": "Johnny Tsunami (1999).ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Johnny Tsunami (1999).ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "JOHNNY TSUNAMI - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "JohnnyTsunami",
+   "title": "Johnny Tsunami",
+   "totalDurationSec": 5484
+  },
   "JosieandthePussycatsTVseries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/JosieandthePussycatsTVseries.jpg",
    "episodes": [
@@ -182305,11 +185431,83 @@ window.CATALOG = {
      "title": "JUDGE DREDD - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Sci-Fi & Fantasy",
    "grouping": "flat",
    "id": "JudgeDredd",
    "title": "Judge Dredd",
    "totalDurationSec": 7186
+  },
+  "Jumanji": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Jumanji.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6246,
+     "fileHint": "Jumanji (1995).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Jumanji (1995).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "JUMANJI - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Jumanji",
+   "title": "Jumanji",
+   "totalDurationSec": 6246
+  },
+  "JumpingShip": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/JumpingShip.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5541,
+     "fileHint": "Jumping Ship (2001).ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Jumping Ship (2001).ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "JUMPING SHIP - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "JumpingShip",
+   "title": "Jumping Ship",
+   "totalDurationSec": 5541
+  },
+  "JurassicPark": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/JurassicPark.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7597,
+     "fileHint": "Jurrasic Park (1993).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Jurrasic Park (1993).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "JURASSIC PARK - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "JurassicPark",
+   "title": "Jurassic Park",
+   "totalDurationSec": 7597
   },
   "JuryDutySeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/JuryDutySeries.png",
@@ -184030,6 +187228,30 @@ window.CATALOG = {
    "id": "KarateKid",
    "title": "The Karate Kid",
    "totalDurationSec": 18078
+  },
+  "KindergartenCop": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/KindergartenCop.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6674,
+     "fileHint": "Kindergarten Cop (1990).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Kindergarten Cop (1990).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "KINDERGARTEN COP - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "KindergartenCop",
+   "title": "Kindergarten Cop",
+   "totalDurationSec": 6674
   },
   "KingofQueens": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/KingofQueens.jpg",
@@ -188125,6 +191347,30 @@ window.CATALOG = {
    "title": "Knight Rider",
    "totalDurationSec": 258276
   },
+  "Knowing": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Knowing.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7289,
+     "fileHint": "Knowing (2009).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Knowing (2009).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "KNOWING - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Knowing",
+   "title": "Knowing",
+   "totalDurationSec": 7289
+  },
   "LOONEYTUNESSERIES": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/LOONEYTUNESSERIES.png",
    "episodes": [
@@ -190197,11 +193443,83 @@ window.CATALOG = {
      "title": "LA CONFIDENTIAL - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Drama",
    "grouping": "flat",
    "id": "LaConfidential",
    "title": "LA Confidential",
    "totalDurationSec": 10756
+  },
+  "Labyrinth": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Labyrinth.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6063,
+     "fileHint": "Labyrinth (1986).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Labyrinth (1986).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "LABYRINTH - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Labyrinth",
+   "title": "Labyrinth",
+   "totalDurationSec": 6063
+  },
+  "Ladder49": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Ladder49.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6906,
+     "fileHint": "Ladder 49 (2004).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Ladder 49 (2004).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "LADDER 49 - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "Ladder49",
+   "title": "Ladder 49",
+   "totalDurationSec": 6906
+  },
+  "LadyInTheWater": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/LadyInTheWater.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6579,
+     "fileHint": "Lady in the Water (2006).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "the-village-2004_202606",
+     "key": "the-village-2004_202606::Lady in the Water (2006).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "LADY IN THE WATER - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "LadyInTheWater",
+   "title": "Lady in the Water",
+   "totalDurationSec": 6579
   },
   "LandBeforeTime": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/LandBeforeTime.jpg",
@@ -194293,6 +197611,54 @@ window.CATALOG = {
    "title": "Leave It to Beaver (the Series) [",
    "totalDurationSec": 370443
   },
+  "LesMiserables": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/LesMiserables.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7683,
+     "fileHint": "Les Miserables (1998).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Les Miserables (1998).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "LES MISERABLES - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "LesMiserables",
+   "title": "Les Miserables",
+   "totalDurationSec": 7683
+  },
+  "LicenseToDrive": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/LicenseToDrive.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5391,
+     "fileHint": "License to Drive (1988).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::License to Drive (1988).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "LICENSE TO DRIVE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "LicenseToDrive",
+   "title": "License to Drive",
+   "totalDurationSec": 5391
+  },
   "LifeAsWeKnowIt": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/LifeAsWeKnowIt.jpg",
    "episodes": [
@@ -197328,6 +200694,30 @@ window.CATALOG = {
    "id": "LittleBear",
    "title": "Little Bear",
    "totalDurationSec": 99151
+  },
+  "LittleNicky": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/LittleNicky.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5417,
+     "fileHint": "Little Nicky (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Little Nicky (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "LITTLE NICKY - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "LittleNicky",
+   "title": "Little Nicky",
+   "totalDurationSec": 5417
   },
   "LivePD": {
    "artUrl": "data/local-shows/LivePD/LivePD.jpg",
@@ -207245,6 +210635,30 @@ window.CATALOG = {
    "title": "M*A*S*H",
    "totalDurationSec": 390039
   },
+  "MacAndMe": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MacAndMe.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5967,
+     "fileHint": "Mac and Me (1988).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Mac and Me (1988).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MAC AND ME - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "MacAndMe",
+   "title": "Mac and Me",
+   "totalDurationSec": 5967
+  },
   "MadAboutYou": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/MadAboutYou.jpg",
    "episodes": [
@@ -213449,6 +216863,150 @@ window.CATALOG = {
    "title": "Mama's Family",
    "totalDurationSec": 164236
   },
+  "ManOfTheHouse": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ManOfTheHouse.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5810,
+     "fileHint": "Man of the House (1995).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "man-of-the-house-1995",
+     "key": "man-of-the-house-1995::Man of the House (1995).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MAN OF THE HOUSE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "ManOfTheHouse",
+   "title": "Man of the House",
+   "totalDurationSec": 5810
+  },
+  "Mandroid": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Mandroid.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4943,
+     "fileHint": "Mandroid (1993) _ Action, Sci Fi _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Mandroid (1993) _ Action, Sci Fi _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MANDROID - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Mandroid",
+   "title": "Mandroid",
+   "totalDurationSec": 4943
+  },
+  "ManiacCop": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ManiacCop.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5432,
+     "fileHint": "Maniac Cop (1988) 1080p _ Action, Crime, Horror _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Maniac Cop (1988) 1080p _ Action, Crime, Horror _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MANIAC COP - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "ManiacCop",
+   "title": "Maniac Cop",
+   "totalDurationSec": 5432
+  },
+  "ManiacCop2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ManiacCop2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5243,
+     "fileHint": "Maniac Cop 2 (1990) 1080p _ Crime, Horror, Action _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Maniac Cop 2 (1990) 1080p _ Crime, Horror, Action _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MANIAC COP 2 - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "ManiacCop2",
+   "title": "Maniac Cop 2",
+   "totalDurationSec": 5243
+  },
+  "ManiacCop3": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ManiacCop3.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5083,
+     "fileHint": "Maniac Cop 3 Badge Of Silence (1993).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Maniac Cop 3 Badge Of Silence (1993).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MANIAC COP 3: BADGE OF SILENCE - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "ManiacCop3",
+   "title": "Maniac Cop 3: Badge of Silence",
+   "totalDurationSec": 5083
+  },
+  "Mannequin": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Mannequin.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5424,
+     "fileHint": "Mannequin (1987).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Mannequin (1987).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MANNEQUIN - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Mannequin",
+   "title": "Mannequin",
+   "totalDurationSec": 5424
+  },
   "MarriedWithChildren": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/MarriedWithChildren.jpg",
    "episodes": [
@@ -216223,6 +219781,54 @@ window.CATALOG = {
    "title": "The Mary Tyler Moore Show",
    "totalDurationSec": 259138
   },
+  "Masterminds1997": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Masterminds1997.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6263,
+     "fileHint": "Masterminds.(1997).DvDRip.4kHQ.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "masterminds-1997-dvdrip-4k-hq",
+     "key": "masterminds-1997-dvdrip-4k-hq::Masterminds.(1997).DvDRip.4kHQ.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MASTERMINDS (1997) - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "Masterminds1997",
+   "title": "Masterminds (1997)",
+   "totalDurationSec": 6263
+  },
+  "Matilda": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Matilda.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5889,
+     "fileHint": "Matilda (1996).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "matilda-1996_202405",
+     "key": "matilda-1996_202405::Matilda (1996).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MATILDA - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Matilda",
+   "title": "Matilda",
+   "totalDurationSec": 5889
+  },
   "MaxHeadroom": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/MaxHeadroom.jpg",
    "episodes": [
@@ -217769,6 +221375,30 @@ window.CATALOG = {
    "title": "McHale's Navy Series",
    "totalDurationSec": 147146
   },
+  "MeanGirls": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MeanGirls.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5814,
+     "fileHint": "Mean Girls (2004).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::Mean Girls (2004).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MEAN GIRLS - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "MeanGirls",
+   "title": "Mean Girls",
+   "totalDurationSec": 5814
+  },
   "MedicineMan": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/MedicineMan.jpg",
    "episodes": [
@@ -217787,7 +221417,7 @@ window.CATALOG = {
      "title": "MEDICINE MAN - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Drama",
    "grouping": "flat",
    "id": "MedicineMan",
    "title": "Medicine Man",
@@ -217811,7 +221441,7 @@ window.CATALOG = {
      "title": "MEMOIRS OF AN INVISIBLE MAN - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Comedy",
    "grouping": "flat",
    "id": "MemoirsOfAnInvisibleMan",
    "title": "Memoirs Of An Invisible Man",
@@ -217835,7 +221465,7 @@ window.CATALOG = {
      "title": "METEORITES! - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "Meteorites1998",
    "title": "Meteorites! (1998)",
@@ -217859,7 +221489,7 @@ window.CATALOG = {
      "title": "MICKEY CHRISTMAS CAROL - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Holiday",
    "grouping": "flat",
    "id": "MickeyChristmasCarol",
    "title": "Mickey Christmas Carol",
@@ -218042,6 +221672,30 @@ window.CATALOG = {
    "id": "Middleman",
    "title": "The Middleman",
    "totalDurationSec": 31889
+  },
+  "MidnightWarrior": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MidnightWarrior.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5182,
+     "fileHint": "Midnight Warrior (1989) _ Action, Drama _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Midnight Warrior (1989) _ Action, Drama _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MIDNIGHT WARRIOR - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "MidnightWarrior",
+   "title": "Midnight Warrior",
+   "totalDurationSec": 5182
   },
   "MightyMax": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/MightyMax.jpg",
@@ -219906,6 +223560,78 @@ window.CATALOG = {
    "id": "Millennium",
    "title": "Millennium",
    "totalDurationSec": 184924
+  },
+  "Mindkiller": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Mindkiller.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5207,
+     "fileHint": "Mind.Killer.1987.480i.VHSRip.DD2.0.x264-NoGroup.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Mind.Killer.1987.480i.VHSRip.DD2.0.x264-NoGroup.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MINDKILLER - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Mindkiller",
+   "title": "Mindkiller",
+   "totalDurationSec": 5207
+  },
+  "MiracleInLane2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MiracleInLane2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5144,
+     "fileHint": "Miracle in Lane 2 (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Miracle in Lane 2 (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MIRACLE IN LANE 2 - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "MiracleInLane2",
+   "title": "Miracle in Lane 2",
+   "totalDurationSec": 5144
+  },
+  "Misery": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Misery.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6192,
+     "fileHint": "Misery (1990).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Misery (1990).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MISERY - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Misery",
+   "title": "Misery",
+   "totalDurationSec": 6192
   },
   "MisterEd": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/MisterEd.jpg",
@@ -224079,6 +227805,54 @@ window.CATALOG = {
    "title": "Mobile Suit Gundam Wing",
    "totalDurationSec": 70346
   },
+  "MomsGotADateWithAVampire": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MomsGotADateWithAVampire.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4977,
+     "fileHint": "Mom's Got a Date with a Vampire (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Mom's Got a Date with a Vampire (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MOM'S GOT A DATE WITH A VAMPIRE - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "MomsGotADateWithAVampire",
+   "title": "Mom's Got a Date with a Vampire",
+   "totalDurationSec": 4977
+  },
+  "MonkeyTrouble": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MonkeyTrouble.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5775,
+     "fileHint": "Monkey Trouble (1994).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Monkey Trouble (1994).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MONKEY TROUBLE - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "MonkeyTrouble",
+   "title": "Monkey Trouble",
+   "totalDurationSec": 5775
+  },
   "MonsterRancher": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/MonsterRancher.jpg",
    "episodes": [
@@ -227306,6 +231080,54 @@ window.CATALOG = {
    "id": "MorphFiles",
    "title": "The Morph Files",
    "totalDurationSec": 7277
+  },
+  "MortalKombat": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MortalKombat.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6081,
+     "fileHint": "Mortal.Kombat.1995.1080p.BrRip.x264.YIFY.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Mortal.Kombat.1995.1080p.BrRip.x264.YIFY.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MORTAL KOMBAT - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "MortalKombat",
+   "title": "Mortal Kombat",
+   "totalDurationSec": 6081
+  },
+  "MortalKombat2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MortalKombat2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5686,
+     "fileHint": "Mortal Kombat 2 ANIHILATION.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Mortal Kombat 2 ANIHILATION.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MORTAL KOMBAT: ANNIHILATION - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "MortalKombat2",
+   "title": "Mortal Kombat: Annihilation",
+   "totalDurationSec": 5686
   },
   "MortalKombatConquest": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/MortalKombatConquest.jpg",
@@ -232081,11 +235903,35 @@ window.CATALOG = {
      "title": "MUPPET FAMILY CHRISTMAS - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Holiday",
    "grouping": "flat",
    "id": "MuppetFamilyChristmas",
    "title": "Muppet Family Christmas",
    "totalDurationSec": 3509
+  },
+  "MuppetsFromSpace": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MuppetsFromSpace.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5292,
+     "fileHint": "Muppets from Space (1999).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Muppets from Space (1999).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MUPPETS FROM SPACE - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "MuppetsFromSpace",
+   "title": "Muppets from Space",
+   "totalDurationSec": 5292
   },
   "MuppetsTreasureIsland": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/MuppetsTreasureIsland.jpg",
@@ -232105,7 +235951,7 @@ window.CATALOG = {
      "title": "MUPPETS TREASURE ISLAND - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Family & Kids",
    "grouping": "flat",
    "id": "MuppetsTreasureIsland",
    "title": "Muppets Treasure Island",
@@ -236484,6 +240330,78 @@ window.CATALOG = {
    "id": "MutantLeague",
    "title": "Mutant League",
    "totalDurationSec": 86883
+  },
+  "MyBestFriendsWedding": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MyBestFriendsWedding.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6035,
+     "fileHint": "My Best Friends Wedding (1997).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::My Best Friends Wedding (1997).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MY BEST FRIEND'S WEDDING - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "MyBestFriendsWedding",
+   "title": "My Best Friend's Wedding",
+   "totalDurationSec": 6035
+  },
+  "MyFavoriteMartian1999": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MyFavoriteMartian1999.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5615,
+     "fileHint": "My Favorite Martian\u00a0(1999).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::My Favorite Martian\u00a0(1999).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MY FAVORITE MARTIAN - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "MyFavoriteMartian1999",
+   "title": "My Favorite Martian",
+   "totalDurationSec": 5615
+  },
+  "MyGirl": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/MyGirl.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6136,
+     "fileHint": "My Girl (1991).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::My Girl (1991).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "MY GIRL - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "MyGirl",
+   "title": "My Girl",
+   "totalDurationSec": 6136
   },
   "NYPDBlue": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/NYPDBlue.jpg",
@@ -242161,6 +246079,30 @@ window.CATALOG = {
    "title": "The Nanny",
    "totalDurationSec": 200441
   },
+  "NationalLampoonsVacation": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/NationalLampoonsVacation.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5896,
+     "fileHint": "National Lampoon's Vacation (1983).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::National Lampoon's Vacation (1983).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "NATIONAL LAMPOON'S VACATION - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "NationalLampoonsVacation",
+   "title": "National Lampoon's Vacation",
+   "totalDurationSec": 5896
+  },
   "NedAndStacey": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/NedAndStacey.jpg",
    "episodes": [
@@ -242814,6 +246756,30 @@ window.CATALOG = {
    "id": "NedAndStacey",
    "title": "Ned and Stacey",
    "totalDurationSec": 61409
+  },
+  "NeedfulThings": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/NeedfulThings.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7246,
+     "fileHint": "Needful Things.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "needful-things_202603",
+     "key": "needful-things_202603::Needful Things.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "NEEDFUL THINGS - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "NeedfulThings",
+   "title": "Needful Things",
+   "totalDurationSec": 7246
   },
   "NeonGenesisEvangelion": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/NeonGenesisEvangelion.jpg",
@@ -252335,6 +256301,30 @@ window.CATALOG = {
    "title": "Night Court",
    "totalDurationSec": 237172
   },
+  "NightOfTheDribbler": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/NightOfTheDribbler.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5287,
+     "fileHint": "Night of the Dribbler (1990) _ Comedy, Horror _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Night of the Dribbler (1990) _ Comedy, Horror _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "NIGHT OF THE DRIBBLER - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "NightOfTheDribbler",
+   "title": "Night of the Dribbler",
+   "totalDurationSec": 5287
+  },
   "NoahArk": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/NoahArk.jpg",
    "episodes": [
@@ -252353,7 +256343,7 @@ window.CATALOG = {
      "title": "NOAH ARK - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Drama",
    "grouping": "flat",
    "id": "NoahArk",
    "title": "Noah Ark",
@@ -253909,6 +257899,78 @@ window.CATALOG = {
    "title": "Northern Exposure",
    "totalDurationSec": 304433
   },
+  "NorthernLights": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/NorthernLights.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5402,
+     "fileHint": "Northern Lights (1997).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Northern Lights (1997).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "NORTHERN LIGHTS - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "NorthernLights",
+   "title": "Northern Lights",
+   "totalDurationSec": 5402
+  },
+  "NowAndThen": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/NowAndThen.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6134,
+     "fileHint": "Now And Then (1995).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Now And Then (1995).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "NOW AND THEN - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "NowAndThen",
+   "title": "Now and Then",
+   "totalDurationSec": 6134
+  },
+  "Nukie": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Nukie.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5945,
+     "fileHint": "Nukie - 1992.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Nukie - 1992.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "NUKIE - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Nukie",
+   "title": "Nukie",
+   "totalDurationSec": 5945
+  },
   "OBrotherWhereArtThou": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/OBrotherWhereArtThou.jpg",
    "episodes": [
@@ -253927,7 +257989,7 @@ window.CATALOG = {
      "title": "O BROTHER, WHERE ART THOU? - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Comedy",
    "grouping": "flat",
    "id": "OBrotherWhereArtThou",
    "title": "O Brother, Where Art Thou?",
@@ -254208,6 +258270,78 @@ window.CATALOG = {
    "id": "Oblongs",
    "title": "the Oblongs",
    "totalDurationSec": 26825
+  },
+  "OfMiceAndMen": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/OfMiceAndMen.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6646,
+     "fileHint": "Of Mice and Men (1992).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Of Mice and Men (1992).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "OF MICE AND MEN - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "OfMiceAndMen",
+   "title": "Of Mice and Men",
+   "totalDurationSec": 6646
+  },
+  "OfficeSpace": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/OfficeSpace.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5355,
+     "fileHint": "Office.Space.1999.1080p.BluRay.x264.AAC5.1-[YTS.MX].mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "office.-space.-1999.1080p.-blu-ray.x-264.-aac-5.1-yts.-mx_202606",
+     "key": "office.-space.-1999.1080p.-blu-ray.x-264.-aac-5.1-yts.-mx_202606::Office.Space.1999.1080p.BluRay.x264.AAC5.1-[YTS.MX].mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "OFFICE SPACE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "OfficeSpace",
+   "title": "Office Space",
+   "totalDurationSec": 5355
+  },
+  "OverTheEdge": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/OverTheEdge.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5692,
+     "fileHint": "Over The Edge (1979).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "over-the-edge-1979_202507",
+     "key": "over-the-edge-1979_202507::Over The Edge (1979).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "OVER THE EDGE - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "OverTheEdge",
+   "title": "Over the Edge",
+   "totalDurationSec": 5692
   },
   "PJs": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/PJs.jpg",
@@ -254806,6 +258940,54 @@ window.CATALOG = {
    "id": "PJs",
    "title": "The PJs",
    "totalDurationSec": 56647
+  },
+  "PacificHeights": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/PacificHeights.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6135,
+     "fileHint": "Pacific Heights (1990).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Pacific Heights (1990).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PACIFIC HEIGHTS - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "PacificHeights",
+   "title": "Pacific Heights",
+   "totalDurationSec": 6135
+  },
+  "Parenthood": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Parenthood.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7417,
+     "fileHint": "Parenthood (1989).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Parenthood (1989).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PARENTHOOD - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Parenthood",
+   "title": "Parenthood",
+   "totalDurationSec": 7417
   },
   "ParkerLewis": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/ParkerLewis.jpg",
@@ -257823,6 +262005,30 @@ window.CATALOG = {
    "title": "Party of Five",
    "totalDurationSec": 381522
   },
+  "PatchAdams": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/PatchAdams.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6918,
+     "fileHint": "Patch Adams (1998).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Patch Adams (1998).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PATCH ADAMS - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "PatchAdams",
+   "title": "Patch Adams",
+   "totalDurationSec": 6918
+  },
   "PeabodysImprobableHistory": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/PeabodysImprobableHistory.png",
    "episodes": [
@@ -259092,6 +263298,30 @@ window.CATALOG = {
    "id": "PeabodysImprobableHistory",
    "title": "Peabody's Improbable History",
    "totalDurationSec": 27190
+  },
+  "PeeWeesBigAdventure": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/PeeWeesBigAdventure.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5487,
+     "fileHint": "Pee-wee's Big Adventure (1985).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Pee-wee's Big Adventure (1985).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PEE-WEE'S BIG ADVENTURE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "PeeWeesBigAdventure",
+   "title": "Pee-wee's Big Adventure",
+   "totalDurationSec": 5487
   },
   "Persuaders": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Persuaders.jpg",
@@ -262557,6 +266787,78 @@ window.CATALOG = {
    "title": "Petticoat Junction",
    "totalDurationSec": 339033
   },
+  "Phantasm": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Phantasm.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5350,
+     "fileHint": "Phantasm 1979.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Phantasm 1979.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PHANTASM - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Phantasm",
+   "title": "Phantasm",
+   "totalDurationSec": 5350
+  },
+  "PhantomOfTheMegaplex": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/PhantomOfTheMegaplex.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5299,
+     "fileHint": "Phantom of the Megaplex (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Phantom of the Megaplex (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PHANTOM OF THE MEGAPLEX - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "PhantomOfTheMegaplex",
+   "title": "Phantom of the Megaplex",
+   "totalDurationSec": 5299
+  },
+  "PinkFloydTheWall": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/PinkFloydTheWall.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5707,
+     "fileHint": "Pink Floyd The Wall.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Pink Floyd The Wall.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PINK FLOYD: THE WALL - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "PinkFloydTheWall",
+   "title": "Pink Floyd: The Wall",
+   "totalDurationSec": 5707
+  },
   "PlanetEarth": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/PlanetEarth.jpg",
    "episodes": [
@@ -264930,6 +269232,30 @@ window.CATALOG = {
    "id": "PolePosition",
    "title": "Pole Position",
    "totalDurationSec": 18859
+  },
+  "PoliceAcademy": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/PoliceAcademy.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5785,
+     "fileHint": "Police Academy 1984 720p BrRip x264 YIFY.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "Police_Academy_-_1984",
+     "key": "Police_Academy_-_1984::Police Academy 1984 720p BrRip x264 YIFY.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "POLICE ACADEMY - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "PoliceAcademy",
+   "title": "Police Academy",
+   "totalDurationSec": 5785
   },
   "PoliceAcademyTheAnimatedSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/PoliceAcademyTheAnimatedSeries.jpg",
@@ -269314,6 +273640,78 @@ window.CATALOG = {
    "id": "Popular",
    "title": "Popular",
    "totalDurationSec": 113835
+  },
+  "Porkys": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Porkys.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5909,
+     "fileHint": "Porky's (1981).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Porky's (1981).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PORKY'S - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Porkys",
+   "title": "Porky's",
+   "totalDurationSec": 5909
+  },
+  "PostcardsFromTheEdge": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/PostcardsFromTheEdge.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6100,
+     "fileHint": "Postcards from the Edge (1990).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Postcards from the Edge (1990).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "POSTCARDS FROM THE EDGE - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "PostcardsFromTheEdge",
+   "title": "Postcards from the Edge",
+   "totalDurationSec": 6100
+  },
+  "Powder": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Powder.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6697,
+     "fileHint": "Powder (1995).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Powder (1995).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "POWDER - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "Powder",
+   "title": "Powder",
+   "totalDurationSec": 6697
   },
   "PowerRangers": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/PowerRangers.jpg",
@@ -275051,11 +279449,107 @@ window.CATALOG = {
      "title": "PRIDE AND PREJUDICE - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Drama",
    "grouping": "flat",
    "id": "PrideAndPrejudice",
    "title": "Pride and Prejudice",
    "totalDurationSec": 22127
+  },
+  "PrivateResort": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/PrivateResort.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4913,
+     "fileHint": "PrivateResort.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::PrivateResort.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PRIVATE RESORT - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "PrivateResort",
+   "title": "Private Resort",
+   "totalDurationSec": 4913
+  },
+  "PrivateSchool": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/PrivateSchool.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5309,
+     "fileHint": "PRIVATE SCHOOL.1983.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::PRIVATE SCHOOL.1983.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PRIVATE SCHOOL - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "PrivateSchool",
+   "title": "Private School",
+   "totalDurationSec": 5309
+  },
+  "ProblemChild": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ProblemChild.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4649,
+     "fileHint": "Problem Child.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Problem Child.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PROBLEM CHILD - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "ProblemChild",
+   "title": "Problem Child",
+   "totalDurationSec": 4649
+  },
+  "ProblemChild2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ProblemChild2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5211,
+     "fileHint": "Problem Child 2.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Problem Child 2.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PROBLEM CHILD 2 - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "ProblemChild2",
+   "title": "Problem Child 2",
+   "totalDurationSec": 5211
   },
   "ProjectAlf": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/ProjectAlf.jpg",
@@ -275075,11 +279569,35 @@ window.CATALOG = {
      "title": "PROJECT ALF - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Comedy",
    "grouping": "flat",
    "id": "ProjectAlf",
    "title": "Project ALF",
    "totalDurationSec": 7397
+  },
+  "PulpFiction": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/PulpFiction.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 9298,
+     "fileHint": "Pump Fiction (1994).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Pump Fiction (1994).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "PULP FICTION - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "PulpFiction",
+   "title": "Pulp Fiction",
+   "totalDurationSec": 9298
   },
   "PunkyBrewster": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/PunkyBrewster.jpg",
@@ -277635,6 +282153,174 @@ window.CATALOG = {
    "title": "Quantum Leap",
    "totalDurationSec": 274184
   },
+  "QueensLogic": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/QueensLogic.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6833,
+     "fileHint": "Queens Logic (1991).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Queens Logic (1991).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "QUEENS LOGIC - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "QueensLogic",
+   "title": "Queens Logic",
+   "totalDurationSec": 6833
+  },
+  "Quints": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Quints.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4780,
+     "fileHint": "Quints (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Quints (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "QUINTS - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Quints",
+   "title": "Quints",
+   "totalDurationSec": 4780
+  },
+  "RV": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/RV.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5928,
+     "fileHint": "RV (2006).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::RV (2006).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "RV - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "RV",
+   "title": "RV",
+   "totalDurationSec": 5928
+  },
+  "RadioFlyer": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/RadioFlyer.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6846,
+     "fileHint": "Radio Flyer (1992).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Radio Flyer (1992).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "RADIO FLYER - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "RadioFlyer",
+   "title": "Radio Flyer",
+   "totalDurationSec": 6846
+  },
+  "Rambo3": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Rambo3.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6091,
+     "fileHint": "Rambo III.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Rambo III.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "RAMBO III - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "Rambo3",
+   "title": "Rambo III",
+   "totalDurationSec": 6091
+  },
+  "Rambo4": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Rambo4.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5475,
+     "fileHint": "Rambo IV.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Rambo IV.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "RAMBO (2008) - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "Rambo4",
+   "title": "Rambo (2008)",
+   "totalDurationSec": 5475
+  },
+  "RamboFirstBloodPart2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/RamboFirstBloodPart2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5736,
+     "fileHint": "Rambo II.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Rambo II.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "RAMBO: FIRST BLOOD PART II - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "RamboFirstBloodPart2",
+   "title": "Rambo: First Blood Part II",
+   "totalDurationSec": 5736
+  },
   "RamboTheForceofFreedom": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/RamboTheForceofFreedom.jpg",
    "episodes": [
@@ -278573,11 +283259,35 @@ window.CATALOG = {
      "title": "RAPTURE - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Drama",
    "grouping": "flat",
    "id": "Rapture",
    "title": "Rapture",
    "totalDurationSec": 7212
+  },
+  "ReadyToRun": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ReadyToRun.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5431,
+     "fileHint": "Ready to Run (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Ready to Run (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "READY TO RUN - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "ReadyToRun",
+   "title": "Ready to Run",
+   "totalDurationSec": 5431
   },
   "Reba": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Reba.jpg",
@@ -282267,6 +286977,30 @@ window.CATALOG = {
    "title": "Recess",
    "totalDurationSec": 98759
   },
+  "ReignOfFire": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ReignOfFire.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6118,
+     "fileHint": "Reign Of  Fire..mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Reign Of  Fire..mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "REIGN OF FIRE - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "ReignOfFire",
+   "title": "Reign of Fire",
+   "totalDurationSec": 6118
+  },
   "RenAndStimpy": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/RenAndStimpy.png",
    "episodes": [
@@ -282934,6 +287668,126 @@ window.CATALOG = {
    "id": "RenAndStimpy",
    "title": "The Ren & Stimpy Show",
    "totalDurationSec": 56203
+  },
+  "RescueFromGilligansIsland": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/RescueFromGilligansIsland.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5689,
+     "fileHint": "Gilligan's Island Rescue From Gilligans Island 1978.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Gilligan's Island Rescue From Gilligans Island 1978.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "RESCUE FROM GILLIGAN'S ISLAND - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "RescueFromGilligansIsland",
+   "title": "Rescue from Gilligan's Island",
+   "totalDurationSec": 5689
+  },
+  "ReservoirDogs": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ReservoirDogs.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5958,
+     "fileHint": "Reservoir Dogs (1992).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "reservoir-dogs-1992_202608",
+     "key": "reservoir-dogs-1992_202608::Reservoir Dogs (1992).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "RESERVOIR DOGS - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "ReservoirDogs",
+   "title": "Reservoir Dogs",
+   "totalDurationSec": 5958
+  },
+  "ReturnToHalloweentown": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ReturnToHalloweentown.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5268,
+     "fileHint": "Return To Halloweentown[2006].mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Return To Halloweentown[2006].mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "RETURN TO HALLOWEENTOWN - Movie"
+    }
+   ],
+   "genre": "Holiday",
+   "grouping": "flat",
+   "id": "ReturnToHalloweentown",
+   "title": "Return to Halloweentown",
+   "totalDurationSec": 5268
+  },
+  "RipGirls": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/RipGirls.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5236,
+     "fileHint": "Rip Girls (2000).ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Rip Girls (2000).ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "RIP GIRLS - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "RipGirls",
+   "title": "Rip Girls",
+   "totalDurationSec": 5236
+  },
+  "RobinHoodMenInTights": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/RobinHoodMenInTights.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6263,
+     "fileHint": "Robin Hood-Men in Tights (1993).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Robin Hood-Men in Tights (1993).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ROBIN HOOD: MEN IN TIGHTS - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "RobinHoodMenInTights",
+   "title": "Robin Hood: Men in Tights",
+   "totalDurationSec": 6263
   },
   "RoboCopliveactionTVseries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/RoboCopliveactionTVseries.jpg",
@@ -283626,6 +288480,126 @@ window.CATALOG = {
    "id": "RockosModernLife",
    "title": "Rocko's Modern Life",
    "totalDurationSec": 37099
+  },
+  "Rocky": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Rocky.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7175,
+     "fileHint": "Rocky (1976).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Rocky (1976).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ROCKY - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "Rocky",
+   "title": "Rocky",
+   "totalDurationSec": 7175
+  },
+  "Rocky2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Rocky2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7151,
+     "fileHint": "Rocky 2 (1979).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Rocky 2 (1979).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ROCKY II - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "Rocky2",
+   "title": "Rocky II",
+   "totalDurationSec": 7151
+  },
+  "Rocky3": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Rocky3.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5712,
+     "fileHint": "Rocky III (1982).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Rocky III (1982).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ROCKY III - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "Rocky3",
+   "title": "Rocky III",
+   "totalDurationSec": 5712
+  },
+  "Rocky4": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Rocky4.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5265,
+     "fileHint": "Rocky IV (1985).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Rocky IV (1985).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ROCKY IV - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "Rocky4",
+   "title": "Rocky IV",
+   "totalDurationSec": 5265
+  },
+  "RockyHorrorPictureShow": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/RockyHorrorPictureShow.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6009,
+     "fileHint": "rocky-horror-picture-show_360.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "rocky-horror-picture-show_360",
+     "key": "rocky-horror-picture-show_360::rocky-horror-picture-show_360.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE ROCKY HORROR PICTURE SHOW - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "RockyHorrorPictureShow",
+   "title": "The Rocky Horror Picture Show",
+   "totalDurationSec": 6009
   },
   "RockyandBullwinkleShow": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/RockyandBullwinkleShow.jpg",
@@ -285723,6 +290697,30 @@ window.CATALOG = {
    "title": "The Rocky and Bullwinkle Show",
    "totalDurationSec": 203149
   },
+  "RomyAndMichelesHighSchoolReunion": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/RomyAndMichelesHighSchoolReunion.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5543,
+     "fileHint": "20200101_005129B.ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "20200101-005129-b",
+     "key": "20200101-005129-b::20200101_005129B.ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ROMY AND MICHELE'S HIGH SCHOOL REUNION - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "RomyAndMichelesHighSchoolReunion",
+   "title": "Romy and Michele's High School Reunion",
+   "totalDurationSec": 5543
+  },
   "Rookies": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Rookies.jpg",
    "episodes": [
@@ -287577,11 +292575,35 @@ window.CATALOG = {
      "title": "RUMBLE IN THE BRONX - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "RumbleInTheBronx",
    "title": "Rumble In The Bronx",
    "totalDurationSec": 7222
+  },
+  "SLCPunk": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SLCPunk.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5869,
+     "fileHint": "SLC.Punk!.1998.1080p.WEBRip.x264-[YTS.AM].mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "slc.-punk.-1998.1080p.-webrip.x-264-yts.-am",
+     "key": "slc.-punk.-1998.1080p.-webrip.x-264-yts.-am::SLC.Punk!.1998.1080p.WEBRip.x264-[YTS.AM].mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SLC PUNK! - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "SLCPunk",
+   "title": "SLC Punk!",
+   "totalDurationSec": 5869
   },
   "SNICK": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/SNICK.png",
@@ -288993,7 +294015,7 @@ window.CATALOG = {
      "title": "SANTA CLAUS: THE MOVIE - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Holiday",
    "grouping": "flat",
    "id": "SantaClausTheMovie",
    "title": "Santa Claus: The Movie",
@@ -292473,6 +297495,54 @@ window.CATALOG = {
    "title": "Saved by the Bell",
    "totalDurationSec": 294925
   },
+  "SavingPrivateRyan": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SavingPrivateRyan.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 10101,
+     "fileHint": "Saving Private Ryan (1998).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Saving Private Ryan (1998).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SAVING PRIVATE RYAN - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "SavingPrivateRyan",
+   "title": "Saving Private Ryan",
+   "totalDurationSec": 10101
+  },
+  "ScentOfAWoman": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ScentOfAWoman.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 9384,
+     "fileHint": "Scent of a Woman (1992).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Scent of a Woman (1992).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SCENT OF A WOMAN - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "ScentOfAWoman",
+   "title": "Scent of a Woman",
+   "totalDurationSec": 9384
+  },
   "SchindlersList": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/SchindlersList.jpg",
    "episodes": [
@@ -292491,11 +297561,35 @@ window.CATALOG = {
      "title": "SCHINDLERS LIST - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Drama",
    "grouping": "flat",
    "id": "SchindlersList",
    "title": "Schindlers List",
    "totalDurationSec": 12244
+  },
+  "SchoolOfRock": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SchoolOfRock.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6556,
+     "fileHint": "The School of Rock (2003).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::The School of Rock (2003).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SCHOOL OF ROCK - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "SchoolOfRock",
+   "title": "School of Rock",
+   "totalDurationSec": 6556
   },
   "SchoolhouseRock": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/SchoolhouseRock.jpg",
@@ -293693,6 +298787,102 @@ window.CATALOG = {
    "title": "Sci-Fi Saturday Anime",
    "totalDurationSec": 114179
   },
+  "ScoobyDoo2002": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ScoobyDoo2002.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5195,
+     "fileHint": "Scooby-Doo (2002).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Scooby-Doo (2002).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SCOOBY-DOO - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "ScoobyDoo2002",
+   "title": "Scooby-Doo",
+   "totalDurationSec": 5195
+  },
+  "ScoobyDoo2MonstersUnleashed": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ScoobyDoo2MonstersUnleashed.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5569,
+     "fileHint": "Scooby-Doo 2 Monsters Unleashed.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Scooby-Doo 2 Monsters Unleashed.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SCOOBY-DOO 2: MONSTERS UNLEASHED - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "ScoobyDoo2MonstersUnleashed",
+   "title": "Scooby-Doo 2: Monsters Unleashed",
+   "totalDurationSec": 5569
+  },
+  "Scream": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Scream.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6662,
+     "fileHint": "Scream (1996).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Scream (1996).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SCREAM - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Scream",
+   "title": "Scream",
+   "totalDurationSec": 6662
+  },
+  "SenseAndSensibility": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SenseAndSensibility.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 8177,
+     "fileHint": "Sense and Sensibility (1995).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Sense and Sensibility (1995).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SENSE AND SENSIBILITY - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "SenseAndSensibility",
+   "title": "Sense and Sensibility",
+   "totalDurationSec": 8177
+  },
   "ShallowGrave": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/ShallowGrave.jpg",
    "episodes": [
@@ -293711,7 +298901,7 @@ window.CATALOG = {
      "title": "SHALLOW GRAVE - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Drama",
    "grouping": "flat",
    "id": "ShallowGrave",
    "title": "Shallow Grave",
@@ -294049,6 +299239,102 @@ window.CATALOG = {
    "title": "Shasta McNasty",
    "totalDurationSec": 29563
   },
+  "ShaunOfTheDead": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ShaunOfTheDead.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5967,
+     "fileHint": "Shaun of the Dead.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Shaun of the Dead.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SHAUN OF THE DEAD - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "ShaunOfTheDead",
+   "title": "Shaun of the Dead",
+   "totalDurationSec": 5967
+  },
+  "ShesTheMan": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ShesTheMan.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6303,
+     "fileHint": "She's the Man (2006).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::She's the Man (2006).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SHE'S THE MAN - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "ShesTheMan",
+   "title": "She's the Man",
+   "totalDurationSec": 6303
+  },
+  "ShootingElizabeth": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ShootingElizabeth.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5501,
+     "fileHint": "Shooting Elizabeth (1992).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Shooting Elizabeth (1992).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SHOOTING ELIZABETH - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "ShootingElizabeth",
+   "title": "Shooting Elizabeth",
+   "totalDurationSec": 5501
+  },
+  "Signs": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Signs.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6391,
+     "fileHint": "Signs (2002).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "the-village-2004_202606",
+     "key": "the-village-2004_202606::Signs (2002).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SIGNS - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Signs",
+   "title": "Signs",
+   "totalDurationSec": 6391
+  },
   "Simpsons": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Simpsons.jpg",
    "episodes": [
@@ -294343,11 +299629,59 @@ window.CATALOG = {
      "title": "SINGLE WHITE FEMALE - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Drama",
    "grouping": "flat",
    "id": "SingleWhiteFemale",
    "title": "Single White Female",
    "totalDurationSec": 8446
+  },
+  "SisterAct2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SisterAct2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6168,
+     "fileHint": "Sister Act 2.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "sister-act-2",
+     "key": "sister-act-2::Sister Act 2.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SISTER ACT 2: BACK IN THE HABIT - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "SisterAct2",
+   "title": "Sister Act 2: Back in the Habit",
+   "totalDurationSec": 6168
+  },
+  "SixteenWishes": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SixteenWishes.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5408,
+     "fileHint": "16 Wishes (2010).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::16 Wishes (2010).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "16 WISHES - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "SixteenWishes",
+   "title": "16 Wishes",
+   "totalDurationSec": 5408
   },
   "SleepingBeauty": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/SleepingBeauty.jpg",
@@ -294367,11 +299701,83 @@ window.CATALOG = {
      "title": "SLEEPING BEAUTY - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Family & Kids",
    "grouping": "flat",
    "id": "SleepingBeauty",
    "title": "Sleeping Beauty",
    "totalDurationSec": 7312
+  },
+  "SlumberPartyMassacre2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SlumberPartyMassacre2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5094,
+     "fileHint": "Slumber Party Massacre II (1987) _ Comedy, Horror, Music _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Slumber Party Massacre II (1987) _ Comedy, Horror, Music _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SLUMBER PARTY MASSACRE II - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "SlumberPartyMassacre2",
+   "title": "Slumber Party Massacre II",
+   "totalDurationSec": 5094
+  },
+  "SmartHouse": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SmartHouse.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4910,
+     "fileHint": "Smart House (1999).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Smart House (1999).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SMART HOUSE - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "SmartHouse",
+   "title": "Smart House",
+   "totalDurationSec": 4910
+  },
+  "Snatch": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Snatch.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6166,
+     "fileHint": "Snatch (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "snatch-2000",
+     "key": "snatch-2000::Snatch (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SNATCH - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Snatch",
+   "title": "Snatch",
+   "totalDurationSec": 6166
   },
   "SometimesTheyComeBack": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/SometimesTheyComeBack.jpg",
@@ -294391,7 +299797,7 @@ window.CATALOG = {
      "title": "SOMETIMES THEY COME BACK - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Horror",
    "grouping": "flat",
    "id": "SometimesTheyComeBack",
    "title": "Sometimes They Come Back (1991)",
@@ -295813,6 +301219,78 @@ window.CATALOG = {
    "title": "Space: 1999",
    "totalDurationSec": 142548
   },
+  "SpaceJam": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SpaceJam.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5239,
+     "fileHint": "Space Jam 1996.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Space Jam 1996.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SPACE JAM - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "SpaceJam",
+   "title": "Space Jam",
+   "totalDurationSec": 5239
+  },
+  "Spaceballs": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Spaceballs.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5825,
+     "fileHint": "Spaceballs 1987 Vhs English Film.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Spaceballs 1987 Vhs English Film.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SPACEBALLS - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Spaceballs",
+   "title": "Spaceballs",
+   "totalDurationSec": 5825
+  },
+  "Spawn": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Spawn.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5913,
+     "fileHint": "Spawn.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Spawn.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SPAWN - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "Spawn",
+   "title": "Spawn",
+   "totalDurationSec": 5913
+  },
   "SpawntheAnimatedSeriesSeries480x480": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/SpawntheAnimatedSeriesSeries480x480.jpg",
    "episodes": [
@@ -296093,7 +301571,7 @@ window.CATALOG = {
      "title": "SPEED 2 - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "Speed2",
    "title": "Speed 2",
@@ -304627,6 +310105,30 @@ window.CATALOG = {
    "title": "Spooksville",
    "totalDurationSec": 28618
   },
+  "StandByMe": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/StandByMe.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5324,
+     "fileHint": "Stand by Me (1986).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Stand by Me (1986).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "STAND BY ME - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "StandByMe",
+   "title": "Stand by Me",
+   "totalDurationSec": 5324
+  },
   "StarTrekDS9": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/StarTrekDS9.jpg",
    "episodes": [
@@ -312087,6 +317589,54 @@ window.CATALOG = {
    "title": "Starcom the U. S. Space Force Series",
    "totalDurationSec": 17198
   },
+  "Starman": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Starman.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6899,
+     "fileHint": "Starman (1984).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Starman (1984).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "STARMAN - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Starman",
+   "title": "Starman",
+   "totalDurationSec": 6899
+  },
+  "StepBrothers": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/StepBrothers.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6333,
+     "fileHint": "Step Brothers (2008).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Step Brothers (2008).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "STEP BROTHERS - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "StepBrothers",
+   "title": "Step Brothers",
+   "totalDurationSec": 6333
+  },
   "StepByStep": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/StepByStep.jpg",
    "episodes": [
@@ -312236,6 +317786,54 @@ window.CATALOG = {
    "id": "StepByStep",
    "title": "Step by Step",
    "totalDurationSec": 13761
+  },
+  "StepUp2TheStreets": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/StepUp2TheStreets.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5870,
+     "fileHint": "Step Up 2 The Streets (2008).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::Step Up 2 The Streets (2008).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "STEP UP 2: THE STREETS - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "StepUp2TheStreets",
+   "title": "Step Up 2: The Streets",
+   "totalDurationSec": 5870
+  },
+  "StepsisterFromPlanetWeird": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/StepsisterFromPlanetWeird.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5249,
+     "fileHint": "Stepsister From Planet Weird (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Stepsister From Planet Weird (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "STEPSISTER FROM PLANET WEIRD - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "StepsisterFromPlanetWeird",
+   "title": "Stepsister from Planet Weird",
+   "totalDurationSec": 5249
   },
   "StillStanding": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/StillStanding.jpg",
@@ -313497,11 +319095,83 @@ window.CATALOG = {
      "title": "STORM OF THE CENTURY - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Horror",
    "grouping": "flat",
    "id": "StormOfTheCentury",
    "title": "Stephen King's Storm of the Century (1999)",
    "totalDurationSec": 20872
+  },
+  "Stripes": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Stripes.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7379,
+     "fileHint": "Stripes (1981).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Stripes (1981).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "STRIPES - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Stripes",
+   "title": "Stripes",
+   "totalDurationSec": 7379
+  },
+  "Superbad": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Superbad.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7120,
+     "fileHint": "Superbad (2007).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Superbad (2007).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SUPERBAD - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Superbad",
+   "title": "Superbad",
+   "totalDurationSec": 7120
+  },
+  "SusieQ": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SusieQ.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5310,
+     "fileHint": "Susie Q 1996.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Susie Q 1996.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SUSIE Q - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "SusieQ",
+   "title": "Susie Q",
+   "totalDurationSec": 5310
   },
   "SwanBoy": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/SwanBoy.jpg",
@@ -317318,6 +322988,30 @@ window.CATALOG = {
    "id": "Taxi1978",
    "title": "Taxi",
    "totalDurationSec": 165932
+  },
+  "TaxiDriver": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TaxiDriver.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6828,
+     "fileHint": "Taxi Driver 1976.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Taxi Driver 1976.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TAXI DRIVER - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "TaxiDriver",
+   "title": "Taxi Driver",
+   "totalDurationSec": 6828
   },
   "Ted": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Ted.jpg",
@@ -321289,6 +326983,102 @@ window.CATALOG = {
    "title": "TekWar",
    "totalDurationSec": 71375
   },
+  "TenThingsIHateAboutYou": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TenThingsIHateAboutYou.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5857,
+     "fileHint": "R73,.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "r-73_20251103",
+     "key": "r-73_20251103::R73,.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "10 THINGS I HATE ABOUT YOU - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TenThingsIHateAboutYou",
+   "title": "10 Things I Hate About You",
+   "totalDurationSec": 5857
+  },
+  "TenaciousDInThePickOfDestiny": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TenaciousDInThePickOfDestiny.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5649,
+     "fileHint": "Tenacious D in the Pick of Destinity (2006).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Tenacious D in the Pick of Destinity (2006).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TENACIOUS D IN THE PICK OF DESTINY - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TenaciousDInThePickOfDestiny",
+   "title": "Tenacious D in The Pick of Destiny",
+   "totalDurationSec": 5649
+  },
+  "TheAssociate": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheAssociate.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6518,
+     "fileHint": "The Associate (1996).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::The Associate (1996).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE ASSOCIATE - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TheAssociate",
+   "title": "The Associate",
+   "totalDurationSec": 6518
+  },
+  "TheBasketballDiaries": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheBasketballDiaries.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6120,
+     "fileHint": "The.Basketball.Diaries.1995.1080p.BluRay.x264.YIFY.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "the-basketball-diaries",
+     "key": "the-basketball-diaries::The.Basketball.Diaries.1995.1080p.BluRay.x264.YIFY.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE BASKETBALL DIARIES - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "TheBasketballDiaries",
+   "title": "The Basketball Diaries",
+   "totalDurationSec": 6120
+  },
   "TheBeast": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheBeast.jpg",
    "episodes": [
@@ -321307,11 +327097,299 @@ window.CATALOG = {
      "title": "THE BEAST - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Horror",
    "grouping": "flat",
    "id": "TheBeast",
    "title": "The Beast",
    "totalDurationSec": 14328
+  },
+  "TheBigGreen": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheBigGreen.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6478,
+     "fileHint": "Disney's The Big Green VHS.ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disneys-the-big-green-vhs",
+     "key": "disneys-the-big-green-vhs::Disney's The Big Green VHS.ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE BIG GREEN - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheBigGreen",
+   "title": "The Big Green",
+   "totalDurationSec": 6478
+  },
+  "TheBlairWitchProject": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheBlairWitchProject.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4884,
+     "fileHint": "The Blair Witch Project (1999).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Blair Witch Project (1999).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE BLAIR WITCH PROJECT - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "TheBlairWitchProject",
+   "title": "The Blair Witch Project",
+   "totalDurationSec": 4884
+  },
+  "TheBourneIdentity": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheBourneIdentity.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7117,
+     "fileHint": "The.Bourne.Identity.2002.720p.BrRip.x264.YIFY.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The.Bourne.Identity.2002.720p.BrRip.x264.YIFY.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE BOURNE IDENTITY - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "TheBourneIdentity",
+   "title": "The Bourne Identity",
+   "totalDurationSec": 7117
+  },
+  "TheBourneSupremacy": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheBourneSupremacy.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6512,
+     "fileHint": "The.Bourne.Supremacy.2004.720p.BrRip.x264.YIFY.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The.Bourne.Supremacy.2004.720p.BrRip.x264.YIFY.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE BOURNE SUPREMACY - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "TheBourneSupremacy",
+   "title": "The Bourne Supremacy",
+   "totalDurationSec": 6512
+  },
+  "TheBourneUltimatum": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheBourneUltimatum.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6914,
+     "fileHint": "The.Bourne.Ultimatum.2007.720p.BrRip.x264.YIFY.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The.Bourne.Ultimatum.2007.720p.BrRip.x264.YIFY.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE BOURNE ULTIMATUM - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "TheBourneUltimatum",
+   "title": "The Bourne Ultimatum",
+   "totalDurationSec": 6914
+  },
+  "TheBreakfastClub": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheBreakfastClub.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5824,
+     "fileHint": "The Breakfast Club (1985).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::The Breakfast Club (1985).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE BREAKFAST CLUB - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "TheBreakfastClub",
+   "title": "The Breakfast Club",
+   "totalDurationSec": 5824
+  },
+  "TheCableGuy": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheCableGuy.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5514,
+     "fileHint": "The.Cable.Guy.1996.SWESUB.DVDRip.XviD-andreaspetersson.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The.Cable.Guy.1996.SWESUB.DVDRip.XviD-andreaspetersson.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE CABLE GUY - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TheCableGuy",
+   "title": "The Cable Guy",
+   "totalDurationSec": 5514
+  },
+  "TheCatInTheHat": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheCatInTheHat.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4911,
+     "fileHint": "The Cat In The Hat 2003.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Cat In The Hat 2003.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE CAT IN THE HAT - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheCatInTheHat",
+   "title": "The Cat in the Hat",
+   "totalDurationSec": 4911
+  },
+  "TheCheetahGirls": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheCheetahGirls.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5589,
+     "fileHint": "The Cheetah Girls (2003).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::The Cheetah Girls (2003).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE CHEETAH GIRLS - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheCheetahGirls",
+   "title": "The Cheetah Girls",
+   "totalDurationSec": 5589
+  },
+  "TheColorOfFriendship": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheColorOfFriendship.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4969,
+     "fileHint": "The Color of Friendship (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::The Color of Friendship (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE COLOR OF FRIENDSHIP - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheColorOfFriendship",
+   "title": "The Color of Friendship",
+   "totalDurationSec": 4969
+  },
+  "TheCountOfMonteCristo": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheCountOfMonteCristo.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7874,
+     "fileHint": "The Count of Monte Cristo (2002).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Count of Monte Cristo (2002).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE COUNT OF MONTE CRISTO - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "TheCountOfMonteCristo",
+   "title": "The Count of Monte Cristo",
+   "totalDurationSec": 7874
+  },
+  "TheDayAfter": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheDayAfter.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6530,
+     "fileHint": "The Day After (1983).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::The Day After (1983).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE DAY AFTER - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "TheDayAfter",
+   "title": "The Day After",
+   "totalDurationSec": 6530
   },
   "TheDeadZone": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheDeadZone.jpg",
@@ -321331,11 +327409,83 @@ window.CATALOG = {
      "title": "THE DEAD ZONE - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Horror",
    "grouping": "flat",
    "id": "TheDeadZone",
    "title": "The Dead Zone",
    "totalDurationSec": 7124
+  },
+  "TheDreamTeam": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheDreamTeam.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6742,
+     "fileHint": "The Dream Team (1989).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Dream Team (1989).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE DREAM TEAM - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TheDreamTeam",
+   "title": "The Dream Team",
+   "totalDurationSec": 6742
+  },
+  "TheEvenStevensMovie": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheEvenStevensMovie.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5639,
+     "fileHint": "The Even Stevens Movie (2003).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::The Even Stevens Movie (2003).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE EVEN STEVENS MOVIE - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheEvenStevensMovie",
+   "title": "The Even Stevens Movie",
+   "totalDurationSec": 5639
+  },
+  "TheEvilThatMenDo": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheEvilThatMenDo.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5417,
+     "fileHint": "The Evil That Men Do 1984.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Evil That Men Do 1984.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE EVIL THAT MEN DO - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "TheEvilThatMenDo",
+   "title": "The Evil That Men Do",
+   "totalDurationSec": 5417
   },
   "TheExorcist": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheExorcist.jpg",
@@ -321355,11 +327505,179 @@ window.CATALOG = {
      "title": "THE EXORCIST - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Horror",
    "grouping": "flat",
    "id": "TheExorcist",
    "title": "The Exorcist",
    "totalDurationSec": 9055
+  },
+  "TheFifthElement": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheFifthElement.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7554,
+     "fileHint": "The Fifth Element.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "the-fifth-element_202604",
+     "key": "the-fifth-element_202604::The Fifth Element.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE FIFTH ELEMENT - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "TheFifthElement",
+   "title": "The Fifth Element",
+   "totalDurationSec": 7554
+  },
+  "TheFog": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheFog.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5378,
+     "fileHint": "The Fog (1980)/The.Fog.1980.720p.BluRay.x264.YIFY.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "the.-fog.-1980.720p.-blu-ray.x-264.-yify",
+     "key": "the.-fog.-1980.720p.-blu-ray.x-264.-yify::The Fog (1980)/The.Fog.1980.720p.BluRay.x264.YIFY.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE FOG - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "TheFog",
+   "title": "The Fog",
+   "totalDurationSec": 5378
+  },
+  "TheFullMonty": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheFullMonty.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5491,
+     "fileHint": "The Full Monty (1997).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::The Full Monty (1997).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE FULL MONTY - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TheFullMonty",
+   "title": "The Full Monty",
+   "totalDurationSec": 5491
+  },
+  "TheGoonies": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheGoonies.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6835,
+     "fileHint": "Goonies (1985).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Goonies (1985).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE GOONIES - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheGoonies",
+   "title": "The Goonies",
+   "totalDurationSec": 6835
+  },
+  "TheGreatSantini": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheGreatSantini.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6926,
+     "fileHint": "The Great Santini.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Great Santini.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE GREAT SANTINI - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "TheGreatSantini",
+   "title": "The Great Santini",
+   "totalDurationSec": 6926
+  },
+  "TheGreenMile": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheGreenMile.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 11318,
+     "fileHint": "The Green Mile   1999.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Green Mile   1999.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE GREEN MILE - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "TheGreenMile",
+   "title": "The Green Mile",
+   "totalDurationSec": 11318
+  },
+  "TheHarlemGlobetrottersOnGilligansIsland": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheHarlemGlobetrottersOnGilligansIsland.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5678,
+     "fileHint": "Gilligan's Island and the Harlem Globetrotters.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Gilligan's Island and the Harlem Globetrotters.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE HARLEM GLOBETROTTERS ON GILLIGAN'S ISLAND - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TheHarlemGlobetrottersOnGilligansIsland",
+   "title": "The Harlem Globetrotters on Gilligan's Island",
+   "totalDurationSec": 5678
   },
   "TheHoganFamily": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheHoganFamily.jpg",
@@ -322910,6 +329228,126 @@ window.CATALOG = {
    "id": "TheHoganFamily",
    "title": "The Hogan Family",
    "totalDurationSec": 156921
+  },
+  "TheHuntForRedOctober": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheHuntForRedOctober.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 8109,
+     "fileHint": "The Hunt For The Red October (1990).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Hunt For The Red October (1990).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE HUNT FOR RED OCTOBER - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "TheHuntForRedOctober",
+   "title": "The Hunt for Red October",
+   "totalDurationSec": 8109
+  },
+  "TheLakeHouse": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheLakeHouse.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5914,
+     "fileHint": "The Lake House (2006).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Lake House (2006).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE LAKE HOUSE - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "TheLakeHouse",
+   "title": "The Lake House",
+   "totalDurationSec": 5914
+  },
+  "TheLizzieMcGuireMovie": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheLizzieMcGuireMovie.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5634,
+     "fileHint": "The Lizzie McGuire Movie (2003).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::The Lizzie McGuire Movie (2003).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE LIZZIE MCGUIRE MOVIE - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheLizzieMcGuireMovie",
+   "title": "The Lizzie McGuire Movie",
+   "totalDurationSec": 5634
+  },
+  "TheLostBoys": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheLostBoys.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5846,
+     "fileHint": "The.Lost.Boys.1987.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "thelostboys1987",
+     "key": "thelostboys1987::The.Lost.Boys.1987.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE LOST BOYS - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "TheLostBoys",
+   "title": "The Lost Boys",
+   "totalDurationSec": 5846
+  },
+  "TheLuckOfTheIrish": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheLuckOfTheIrish.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5155,
+     "fileHint": "The Luck of the Irish (2001).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::The Luck of the Irish (2001).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE LUCK OF THE IRISH - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheLuckOfTheIrish",
+   "title": "The Luck of the Irish",
+   "totalDurationSec": 5155
   },
   "TheLucyShow": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheLucyShow.jpg",
@@ -325105,6 +331543,30 @@ window.CATALOG = {
    "title": "The Lucy Show",
    "totalDurationSec": 239942
   },
+  "TheMarryingMan": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheMarryingMan.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6960,
+     "fileHint": "The Marrying Man (1991).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::The Marrying Man (1991).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE MARRYING MAN - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TheMarryingMan",
+   "title": "The Marrying Man",
+   "totalDurationSec": 6960
+  },
   "TheMaskAnimatedSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheMaskAnimatedSeries.png",
    "episodes": [
@@ -325870,6 +332332,54 @@ window.CATALOG = {
    "id": "TheMaskAnimatedSeries",
    "title": "TheMask Animated Series",
    "totalDurationSec": 72851
+  },
+  "TheMightyDucks": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheMightyDucks.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6214,
+     "fileHint": "The Mighty Ducks (1992).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::The Mighty Ducks (1992).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE MIGHTY DUCKS - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheMightyDucks",
+   "title": "The Mighty Ducks",
+   "totalDurationSec": 6214
+  },
+  "TheMoneyPit": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheMoneyPit.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5454,
+     "fileHint": "The Money Pit (1986).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::The Money Pit (1986).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE MONEY PIT - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TheMoneyPit",
+   "title": "The Money Pit",
+   "totalDurationSec": 5454
   },
   "TheMonkees": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheMonkees.jpg",
@@ -327010,6 +333520,102 @@ window.CATALOG = {
    "id": "TheNetAmericanTVseries",
    "title": "The Net (American TV series)",
    "totalDurationSec": 56719
+  },
+  "TheNeverEndingStory": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheNeverEndingStory.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5637,
+     "fileHint": "The Neverending Story [1984] 720p.Bluray.x264.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Neverending Story [1984] 720p.Bluray.x264.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE NEVERENDING STORY - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheNeverEndingStory",
+   "title": "The NeverEnding Story",
+   "totalDurationSec": 5637
+  },
+  "TheNeverEndingStory2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheNeverEndingStory2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5722,
+     "fileHint": "The Neverending Story II The Next Chapter.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Neverending Story II The Next Chapter.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE NEVERENDING STORY II: THE NEXT CHAPTER - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheNeverEndingStory2",
+   "title": "The NeverEnding Story II: The Next Chapter",
+   "totalDurationSec": 5722
+  },
+  "TheNeverEndingStory3": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheNeverEndingStory3.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6115,
+     "fileHint": "The Neverending Story III.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Neverending Story III.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE NEVERENDING STORY III - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheNeverEndingStory3",
+   "title": "The NeverEnding Story III",
+   "totalDurationSec": 6115
+  },
+  "TheNuttyProfessor": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheNuttyProfessor.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5710,
+     "fileHint": "The Nutty Professor (1996).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::The Nutty Professor (1996).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE NUTTY PROFESSOR - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TheNuttyProfessor",
+   "title": "The Nutty Professor",
+   "totalDurationSec": 5710
   },
   "TheOC": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheOC.jpg",
@@ -328327,11 +334933,155 @@ window.CATALOG = {
      "title": "THE ODYSSEY - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "TheOdyssey",
    "title": "The Odyssey",
    "totalDurationSec": 14106
+  },
+  "TheOne": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheOne.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5025,
+     "fileHint": "The One Jet Li (2001) -  Full Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The One Jet Li (2001) -  Full Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE ONE - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "TheOne",
+   "title": "The One",
+   "totalDurationSec": 5025
+  },
+  "TheOtherMe": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheOtherMe.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5262,
+     "fileHint": "The Other Me (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::The Other Me (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE OTHER ME - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheOtherMe",
+   "title": "The Other Me",
+   "totalDurationSec": 5262
+  },
+  "TheOutsiders": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheOutsiders.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6896,
+     "fileHint": "The Outsiders (1983).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::The Outsiders (1983).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE OUTSIDERS - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "TheOutsiders",
+   "title": "The Outsiders",
+   "totalDurationSec": 6896
+  },
+  "ThePerfectMan": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ThePerfectMan.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5080,
+     "fileHint": "The Perfect Man (2005).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::The Perfect Man (2005).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE PERFECT MAN - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "ThePerfectMan",
+   "title": "The Perfect Man",
+   "totalDurationSec": 5080
+  },
+  "ThePrincessDiaries": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ThePrincessDiaries.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6928,
+     "fileHint": "The Princess Diaries (2001).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::The Princess Diaries (2001).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE PRINCESS DIARIES - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "ThePrincessDiaries",
+   "title": "The Princess Diaries",
+   "totalDurationSec": 6928
+  },
+  "TheRealMcCoy": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheRealMcCoy.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6081,
+     "fileHint": "The Real McCoy (1993).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::The Real McCoy (1993).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE REAL MCCOY - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "TheRealMcCoy",
+   "title": "The Real McCoy",
+   "totalDurationSec": 6081
   },
   "TheRescuers": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheRescuers.jpg",
@@ -328351,11 +335101,107 @@ window.CATALOG = {
      "title": "THE RESCUERS - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Family & Kids",
    "grouping": "flat",
    "id": "TheRescuers",
    "title": "The Rescuers",
    "totalDurationSec": 7340
+  },
+  "TheRiverWild": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheRiverWild.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6727,
+     "fileHint": "The River Wild (1994).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::The River Wild (1994).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE RIVER WILD - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "TheRiverWild",
+   "title": "The River Wild",
+   "totalDurationSec": 6727
+  },
+  "TheRocketeer": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheRocketeer.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6518,
+     "fileHint": "The Rocketeer 1991.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Rocketeer 1991.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE ROCKETEER - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "TheRocketeer",
+   "title": "The Rocketeer",
+   "totalDurationSec": 6518
+  },
+  "TheSandlot": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheSandlot.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6068,
+     "fileHint": "The Sandlot (1993).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::The Sandlot (1993).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE SANDLOT - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheSandlot",
+   "title": "The Sandlot",
+   "totalDurationSec": 6068
+  },
+  "TheSecretOfMySuccess": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheSecretOfMySuccess.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6611,
+     "fileHint": "The Secret of My Success (1987).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::The Secret of My Success (1987).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE SECRET OF MY SUCCESS - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TheSecretOfMySuccess",
+   "title": "The Secret of My Success",
+   "totalDurationSec": 6611
   },
   "TheShining1997": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheShining1997.jpg",
@@ -328403,11 +335249,59 @@ window.CATALOG = {
      "title": "THE SHINING - Part 3"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Horror",
    "grouping": "flat",
    "id": "TheShining1997",
    "title": "Stephen King's The Shining (1997)",
    "totalDurationSec": 15887
+  },
+  "TheSixthSense": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheSixthSense.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6443,
+     "fileHint": "The Sixth Sense (1999).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "the-village-2004_202606",
+     "key": "the-village-2004_202606::The Sixth Sense (1999).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE SIXTH SENSE - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "TheSixthSense",
+   "title": "The Sixth Sense",
+   "totalDurationSec": 6443
+  },
+  "TheSlumberPartyMassacre": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheSlumberPartyMassacre.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4575,
+     "fileHint": "The Slumber Party Massacre REMASTERED  1080p (1982 ) _ Horror _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::The Slumber Party Massacre REMASTERED  1080p (1982 ) _ Horror _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE SLUMBER PARTY MASSACRE - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "TheSlumberPartyMassacre",
+   "title": "The Slumber Party Massacre",
+   "totalDurationSec": 4575
   },
   "TheSpecialist": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheSpecialist.jpg",
@@ -328427,7 +335321,7 @@ window.CATALOG = {
      "title": "THE SPECIALIST - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "TheSpecialist",
    "title": "The Specialist",
@@ -328451,7 +335345,7 @@ window.CATALOG = {
      "title": "THE STAND - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Horror",
    "grouping": "flat",
    "id": "TheStand1994",
    "title": "Stephen King's The Stand (1994)",
@@ -328475,11 +335369,59 @@ window.CATALOG = {
      "title": "THE STORY OF SANTA CLAUS - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Holiday",
    "grouping": "flat",
    "id": "TheStoryOfSantaClaus",
    "title": "The Story Of Santa Claus",
    "totalDurationSec": 3510
+  },
+  "TheStupids": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheStupids.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5600,
+     "fileHint": "THE STUPIDS.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::THE STUPIDS.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE STUPIDS - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TheStupids",
+   "title": "The Stupids",
+   "totalDurationSec": 5600
+  },
+  "TheTerminator": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheTerminator.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6445,
+     "fileHint": "The Terminator (1984).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::The Terminator (1984).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE TERMINATOR - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "TheTerminator",
+   "title": "The Terminator",
+   "totalDurationSec": 6445
   },
   "TheTexasChainsawMassacre2": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheTexasChainsawMassacre2.jpg",
@@ -328499,11 +335441,35 @@ window.CATALOG = {
      "title": "THE TEXAS CHAINSAW MASSACRE 2 - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Horror",
    "grouping": "flat",
    "id": "TheTexasChainsawMassacre2",
    "title": "The Texas Chainsaw Massacre 2",
    "totalDurationSec": 6628
+  },
+  "TheThirteenthYear": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheThirteenthYear.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5328,
+     "fileHint": "The Thirteenth Year (1999).ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::The Thirteenth Year (1999).ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE THIRTEENTH YEAR - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "TheThirteenthYear",
+   "title": "The Thirteenth Year",
+   "totalDurationSec": 5328
   },
   "TheTick": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheTick.png",
@@ -329019,6 +335985,78 @@ window.CATALOG = {
    "title": "The Tick",
    "totalDurationSec": 43662
   },
+  "TheToy": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheToy.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6118,
+     "fileHint": "The Toy (1982).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::The Toy (1982).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE TOY - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TheToy",
+   "title": "The Toy",
+   "totalDurationSec": 6118
+  },
+  "TheTrumanShow": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheTrumanShow.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6177,
+     "fileHint": "The Truman Show (1998).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::The Truman Show (1998).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE TRUMAN SHOW - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "TheTrumanShow",
+   "title": "The Truman Show",
+   "totalDurationSec": 6177
+  },
+  "TheUltimateChristmasPresent": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheUltimateChristmasPresent.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4853,
+     "fileHint": "The Ultimate Christmas Present (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::The Ultimate Christmas Present (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE ULTIMATE CHRISTMAS PRESENT - Movie"
+    }
+   ],
+   "genre": "Holiday",
+   "grouping": "flat",
+   "id": "TheUltimateChristmasPresent",
+   "title": "The Ultimate Christmas Present",
+   "totalDurationSec": 4853
+  },
   "TheUsualSuspects": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheUsualSuspects.jpg",
    "episodes": [
@@ -329037,11 +336075,35 @@ window.CATALOG = {
      "title": "THE USUAL SUSPECTS - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Drama",
    "grouping": "flat",
    "id": "TheUsualSuspects",
    "title": "The Usual Suspects",
    "totalDurationSec": 6681
+  },
+  "TheVillage": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TheVillage.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6468,
+     "fileHint": "The Village (2004).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "the-village-2004_202606",
+     "key": "the-village-2004_202606::The Village (2004).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE VILLAGE - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "TheVillage",
+   "title": "The Village",
+   "totalDurationSec": 6468
   },
   "TheWizardOfOz": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TheWizardOfOz.jpg",
@@ -329061,7 +336123,7 @@ window.CATALOG = {
      "title": "THE WIZARD OF OZ - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Family & Kids",
    "grouping": "flat",
    "id": "TheWizardOfOz",
    "title": "The Wizard of Oz",
@@ -329459,11 +336521,131 @@ window.CATALOG = {
      "title": "THERES SOMETHING ABOUT MARY - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Comedy",
    "grouping": "flat",
    "id": "TheresSomethingAboutMary",
    "title": "Theres Something About Mary",
    "totalDurationSec": 9050
+  },
+  "ThirteenGhosts2001": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ThirteenGhosts2001.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5442,
+     "fileHint": "13 Ghosts.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::13 Ghosts.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THIR13EN GHOSTS - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "ThirteenGhosts2001",
+   "title": "Thir13en Ghosts",
+   "totalDurationSec": 5442
+  },
+  "ThreeAmigos": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ThreeAmigos.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6183,
+     "fileHint": "Three Amigos (1986).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Three Amigos (1986).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THREE AMIGOS! - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "ThreeAmigos",
+   "title": "Three Amigos!",
+   "totalDurationSec": 6183
+  },
+  "ThreeMenAndABaby": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ThreeMenAndABaby.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6146,
+     "fileHint": "Three Men and a Baby (1987).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Three Men and a Baby (1987).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THREE MEN AND A BABY - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "ThreeMenAndABaby",
+   "title": "Three Men and a Baby",
+   "totalDurationSec": 6146
+  },
+  "ThreeMenAndALittleLady": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ThreeMenAndALittleLady.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5972,
+     "fileHint": "Three Men and a Little Lady (1990).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Three Men and a Little Lady (1990).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THREE MEN AND A LITTLE LADY - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "ThreeMenAndALittleLady",
+   "title": "Three Men and a Little Lady",
+   "totalDurationSec": 5972
+  },
+  "ThreeNinjasKickBack": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ThreeNinjasKickBack.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5608,
+     "fileHint": "3 Ninjas Kick Back (1994).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::3 Ninjas Kick Back (1994).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "3 NINJAS KICK BACK - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "ThreeNinjasKickBack",
+   "title": "3 Ninjas Kick Back",
+   "totalDurationSec": 5608
   },
   "Tick": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Tick.jpg",
@@ -331025,6 +338207,30 @@ window.CATALOG = {
    "title": "Tiny Toon Adventures",
    "totalDurationSec": 138306
   },
+  "Tombstone": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Tombstone.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7778,
+     "fileHint": "Tombstone.1993.1080p.BrRip.x264.YIFY.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "tombstone.-1993.1080p.-br-rip.x-264.-yify",
+     "key": "tombstone.-1993.1080p.-br-rip.x-264.-yify::Tombstone.1993.1080p.BrRip.x264.YIFY.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TOMBSTONE - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "Tombstone",
+   "title": "Tombstone",
+   "totalDurationSec": 7778
+  },
   "Tommyknockers": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Tommyknockers.jpg",
    "episodes": [
@@ -331057,7 +338263,7 @@ window.CATALOG = {
      "title": "THE TOMMYKNOCKERS - Part 2"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Horror",
    "grouping": "flat",
    "id": "Tommyknockers",
    "title": "Stephen King's The Tommyknockers (1993)",
@@ -331081,11 +338287,203 @@ window.CATALOG = {
      "title": "TORNADO! - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "Tornado1996",
    "title": "Tornado! (1996)",
    "totalDurationSec": 5222
+  },
+  "Trainspotting": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Trainspotting.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5631,
+     "fileHint": "Trainspotting.1996.1080p.BrRip.x264.BOKUTOX.YIFY.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "trainspotting.-1996.1080p.-br-rip.x-264.-bokutox.-yify",
+     "key": "trainspotting.-1996.1080p.-br-rip.x-264.-bokutox.-yify::Trainspotting.1996.1080p.BrRip.x264.BOKUTOX.YIFY.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TRAINSPOTTING - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "Trainspotting",
+   "title": "Trainspotting",
+   "totalDurationSec": 5631
+  },
+  "Trancers": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Trancers.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4575,
+     "fileHint": "Trancers.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Trancers.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TRANCERS - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Trancers",
+   "title": "Trancers",
+   "totalDurationSec": 4575
+  },
+  "Trancers2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Trancers2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5311,
+     "fileHint": "Trancers II (1991) 720p _ Action, Horror, Sci Fi _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Trancers II (1991) 720p _ Action, Horror, Sci Fi _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TRANCERS II - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Trancers2",
+   "title": "Trancers II",
+   "totalDurationSec": 5311
+  },
+  "Trancers3": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Trancers3.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4449,
+     "fileHint": "Trancers III (1992) 1080p _ Action, Sci Fi _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Trancers III (1992) 1080p _ Action, Sci Fi _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TRANCERS III - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Trancers3",
+   "title": "Trancers III",
+   "totalDurationSec": 4449
+  },
+  "Trancers4": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Trancers4.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4470,
+     "fileHint": "Trancers 4 _ Jack of Swords (1994) _ Action, Horror, Sci Fi _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Trancers 4 _ Jack of Swords (1994) _ Action, Horror, Sci Fi _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TRANCERS 4: JACK OF SWORDS - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Trancers4",
+   "title": "Trancers 4: Jack of Swords",
+   "totalDurationSec": 4470
+  },
+  "Trancers5": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Trancers5.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4353,
+     "fileHint": "Trancers 5 _ Sudden Deth (1994) _ Action, Comedy, Sci Fi _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Trancers 5 _ Sudden Deth (1994) _ Action, Comedy, Sci Fi _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TRANCERS 5: SUDDEN DETH - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Trancers5",
+   "title": "Trancers 5: Sudden Deth",
+   "totalDurationSec": 4353
+  },
+  "Trancers6": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Trancers6.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4804,
+     "fileHint": "Trancers 6 (2002) _ Action, Horror, Sci Fi _ Complete Movie.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Trancers 6 (2002) _ Action, Horror, Sci Fi _ Complete Movie.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TRANCERS 6 - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Trancers6",
+   "title": "Trancers 6",
+   "totalDurationSec": 4804
+  },
+  "Transformers2007": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Transformers2007.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 8607,
+     "fileHint": "Transformers (2007).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Transformers (2007).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TRANSFORMERS (2007) - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "Transformers2007",
+   "title": "Transformers (2007)",
+   "totalDurationSec": 8607
   },
   "TransformersPrime": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TransformersPrime.jpg",
@@ -332025,7 +339423,7 @@ window.CATALOG = {
      "title": "TRUCKS - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Horror",
    "grouping": "flat",
    "id": "Trucks",
    "title": "Trucks",
@@ -332222,6 +339620,78 @@ window.CATALOG = {
    "id": "Tucker",
    "title": "Tucker",
    "totalDurationSec": 16154
+  },
+  "TurnerAndHooch": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TurnerAndHooch.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5972,
+     "fileHint": "Turner and Hooch (1989).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Turner and Hooch (1989).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TURNER & HOOCH - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "TurnerAndHooch",
+   "title": "Turner & Hooch",
+   "totalDurationSec": 5972
+  },
+  "TwentyEightDaysLater": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TwentyEightDaysLater.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6786,
+     "fileHint": "28 days later.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::28 days later.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "28 DAYS LATER - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "TwentyEightDaysLater",
+   "title": "28 Days Later",
+   "totalDurationSec": 6786
+  },
+  "TwentyEightWeeksLater": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/TwentyEightWeeksLater.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6006,
+     "fileHint": "28 Weeks Later 2007.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::28 Weeks Later 2007.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "28 WEEKS LATER - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "TwentyEightWeeksLater",
+   "title": "28 Weeks Later",
+   "totalDurationSec": 6006
   },
   "TwilightZone1959": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/TwilightZone1959.jpg",
@@ -334618,6 +342088,30 @@ window.CATALOG = {
    "title": "Twin Peaks",
    "totalDurationSec": 81671
   },
+  "Twins": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Twins.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6401,
+     "fileHint": "Twins (1988).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Twins (1988).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "TWINS - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Twins",
+   "title": "Twins",
+   "totalDurationSec": 6401
+  },
   "UltimateMuscleSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/UltimateMuscleSeries.jpg",
    "episodes": [
@@ -335705,6 +343199,78 @@ window.CATALOG = {
    "id": "UltimateMuscleSeries",
    "title": "Ultimate Muscle Series",
    "totalDurationSec": 97787
+  },
+  "Unbreakable": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Unbreakable.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6407,
+     "fileHint": "Unbreakable (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "the-village-2004_202606",
+     "key": "the-village-2004_202606::Unbreakable (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "UNBREAKABLE - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "Unbreakable",
+   "title": "Unbreakable",
+   "totalDurationSec": 6407
+  },
+  "UncleBuck": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/UncleBuck.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5985,
+     "fileHint": "Uncle Buck (1989).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Uncle Buck (1989).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "UNCLE BUCK - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "UncleBuck",
+   "title": "Uncle Buck",
+   "totalDurationSec": 5985
+  },
+  "UnderWraps": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/UnderWraps.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5476,
+     "fileHint": "Under Wraps (1997).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Under Wraps (1997).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "UNDER WRAPS - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "UnderWraps",
+   "title": "Under Wraps",
+   "totalDurationSec": 5476
   },
   "Undergrads": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Undergrads.jpg",
@@ -337294,6 +344860,54 @@ window.CATALOG = {
    "title": "Unhappily Ever After",
    "totalDurationSec": 132566
   },
+  "United93": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/United93.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6651,
+     "fileHint": "United 93 (2006).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::United 93 (2006).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "UNITED 93 - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "United93",
+   "title": "United 93",
+   "totalDurationSec": 6651
+  },
+  "UpUpAndAway": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/UpUpAndAway.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4657,
+     "fileHint": "Up Up and Away (2000).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Up Up and Away (2000).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "UP, UP AND AWAY - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "UpUpAndAway",
+   "title": "Up, Up and Away",
+   "totalDurationSec": 4657
+  },
   "V1983": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/V1983.jpg",
    "episodes": [
@@ -337625,6 +345239,30 @@ window.CATALOG = {
    "id": "V1983",
    "title": "V (1983)",
    "totalDurationSec": 79689
+  },
+  "ValleyGirl": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/ValleyGirl.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5966,
+     "fileHint": "Valley Girl (1983).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Valley Girl (1983).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "VALLEY GIRL - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "ValleyGirl",
+   "title": "Valley Girl",
+   "totalDurationSec": 5966
   },
   "VeronicasCloset": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/VeronicasCloset.jpg",
@@ -338578,7 +346216,7 @@ window.CATALOG = {
      "title": "VOLCANO: FIRE ON THE MOUNTAIN - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "VolcanoFireOnTheMountain",
    "title": "Volcano: Fire on the Mountain (1997)",
@@ -339069,6 +346707,30 @@ window.CATALOG = {
    "id": "WackyRacesSeries",
    "title": "WackyRaces Series",
    "totalDurationSec": 24331
+  },
+  "WagTheDog": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/WagTheDog.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5815,
+     "fileHint": "Wag the Dog (1997).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::Wag the Dog (1997).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "WAG THE DOG - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "WagTheDog",
+   "title": "Wag the Dog",
+   "totalDurationSec": 5815
   },
   "WallyGator": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/WallyGator.jpg",
@@ -339808,6 +347470,30 @@ window.CATALOG = {
    "title": "Wally Gator",
    "totalDurationSec": 16095
   },
+  "WarGames": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/WarGames.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6763,
+     "fileHint": "WarGames (1983).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::WarGames (1983).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "WARGAMES - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "WarGames",
+   "title": "WarGames",
+   "totalDurationSec": 6763
+  },
   "WeberShow": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/WeberShow.jpg",
    "episodes": [
@@ -340055,6 +347741,78 @@ window.CATALOG = {
    "id": "WeberShow",
    "title": "The Weber Show",
    "totalDurationSec": 25367
+  },
+  "WeekendAtBernies": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/WeekendAtBernies.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5904,
+     "fileHint": "Weekend at Bernie's (1989).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "never-cry-wolf-1983",
+     "key": "never-cry-wolf-1983::Weekend at Bernie's (1989).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "WEEKEND AT BERNIE'S - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "WeekendAtBernies",
+   "title": "Weekend at Bernie's",
+   "totalDurationSec": 5904
+  },
+  "WhatAGirlWants": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/WhatAGirlWants.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6296,
+     "fileHint": "What a Girl Wants (2003).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "freaky-friday-2003_202307",
+     "key": "freaky-friday-2003_202307::What a Girl Wants (2003).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "WHAT A GIRL WANTS - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "WhatAGirlWants",
+   "title": "What a Girl Wants",
+   "totalDurationSec": 6296
+  },
+  "WhatDreamsMayCome": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/WhatDreamsMayCome.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6814,
+     "fileHint": "What Dreams May Come (1998).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "90s_20250812",
+     "key": "90s_20250812::What Dreams May Come (1998).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "WHAT DREAMS MAY COME - Movie"
+    }
+   ],
+   "genre": "Drama",
+   "grouping": "flat",
+   "id": "WhatDreamsMayCome",
+   "title": "What Dreams May Come",
+   "totalDurationSec": 6814
   },
   "WhatILikeAboutYou": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/WhatILikeAboutYou.jpg",
@@ -348654,6 +356412,54 @@ window.CATALOG = {
    "title": "Whose Line Is It Anyway?",
    "totalDurationSec": 624616
   },
+  "WideAwake": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/WideAwake.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5243,
+     "fileHint": "Wide Awake (1998) (MIRAMAX).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "the-village-2004_202606",
+     "key": "the-village-2004_202606::Wide Awake (1998) (MIRAMAX).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "WIDE AWAKE - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "WideAwake",
+   "title": "Wide Awake",
+   "totalDurationSec": 5243
+  },
+  "WildWildWest": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/WildWildWest.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7190,
+     "fileHint": "Wild Wild West.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "28-days-later_202505",
+     "key": "28-days-later_202505::Wild Wild West.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "WILD WILD WEST - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "WildWildWest",
+   "title": "Wild Wild West",
+   "totalDurationSec": 7190
+  },
   "Wings": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Wings.jpg",
    "episodes": [
@@ -349055,6 +356861,30 @@ window.CATALOG = {
    "id": "Wings",
    "title": "Wings",
    "totalDurationSec": 38627
+  },
+  "WishUponAStar": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/WishUponAStar.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5382,
+     "fileHint": "wish upon a star (1996).ia.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "wish-upon-a-star-1996",
+     "key": "wish-upon-a-star-1996::wish upon a star (1996).ia.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "WISH UPON A STAR - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "WishUponAStar",
+   "title": "Wish Upon a Star",
+   "totalDurationSec": 5382
   },
   "Wishbone": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Wishbone.png",
@@ -349784,7 +357614,7 @@ window.CATALOG = {
      "title": "WITHOUT WARNING - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Sci-Fi & Fantasy",
    "grouping": "flat",
    "id": "WithoutWarning1994",
    "title": "Without Warning (1994)",
@@ -356500,7 +364330,7 @@ window.CATALOG = {
      "title": "Y2K: THE MOVIE - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "Y2KTheMovie",
    "title": "Y2K: The Movie (1999)",
@@ -356524,11 +364354,35 @@ window.CATALOG = {
      "title": "Y2K - Movie"
     }
    ],
-   "genre": "TV Movies",
+   "genre": "Action & Adventure",
    "grouping": "flat",
    "id": "Y2k",
    "title": "Y2K",
    "totalDurationSec": 7026
+  },
+  "YouLuckyDog": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/YouLuckyDog.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5294,
+     "fileHint": "You Lucky Dog (1998).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::You Lucky Dog (1998).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "YOU LUCKY DOG - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "YouLuckyDog",
+   "title": "You Lucky Dog",
+   "totalDurationSec": 5294
   },
   "YouWish": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/YouWish.jpg",
@@ -356721,6 +364575,126 @@ window.CATALOG = {
    "id": "YouWish",
    "title": "You Wish",
    "totalDurationSec": 16393
+  },
+  "YoungGuns": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/YoungGuns.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6404,
+     "fileHint": "Young Guns (1988).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "YOUNG-GUNS-1988-YOUNG-GUNS-II-1990-DVD-RIP",
+     "key": "YOUNG-GUNS-1988-YOUNG-GUNS-II-1990-DVD-RIP::Young Guns (1988).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "YOUNG GUNS - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "YoungGuns",
+   "title": "Young Guns",
+   "totalDurationSec": 6404
+  },
+  "YoungGuns2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/YoungGuns2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6243,
+     "fileHint": "Young Guns II (1990).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "YOUNG-GUNS-1988-YOUNG-GUNS-II-1990-DVD-RIP",
+     "key": "YOUNG-GUNS-1988-YOUNG-GUNS-II-1990-DVD-RIP::Young Guns II (1990).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "YOUNG GUNS II - Movie"
+    }
+   ],
+   "genre": "Action & Adventure",
+   "grouping": "flat",
+   "id": "YoungGuns2",
+   "title": "Young Guns II",
+   "totalDurationSec": 6243
+  },
+  "Zenon": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Zenon.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5577,
+     "fileHint": "Zenon Girl of the 21st Century.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Zenon Girl of the 21st Century.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ZENON: GIRL OF THE 21ST CENTURY - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Zenon",
+   "title": "Zenon: Girl of the 21st Century",
+   "totalDurationSec": 5577
+  },
+  "Zenon2": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Zenon2.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5083,
+     "fileHint": "Zenon The Zequel.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Zenon The Zequel.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ZENON: THE ZEQUEL - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Zenon2",
+   "title": "Zenon: The Zequel",
+   "totalDurationSec": 5083
+  },
+  "Zenon3": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Zenon3.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4615,
+     "fileHint": "Zenon Z3.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "disney-channel-original-movies",
+     "key": "disney-channel-original-movies::Zenon Z3.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ZENON: Z3 - Movie"
+    }
+   ],
+   "genre": "Family & Kids",
+   "grouping": "flat",
+   "id": "Zenon3",
+   "title": "Zenon: Z3",
+   "totalDurationSec": 4615
   },
   "Zoboomafoo": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/Zoboomafoo.jpg",
@@ -358015,7 +365989,31 @@ window.CATALOG = {
    "id": "ZoeDuncanJackJane",
    "title": "Zoe, Duncan, Jack and Jane",
    "totalDurationSec": 34159
+  },
+  "Zoolander": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Zoolander.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5352,
+     "fileHint": "Zoolander (2001).mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "transformers-2007_202602",
+     "key": "transformers-2007_202602::Zoolander (2001).mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "ZOOLANDER - Movie"
+    }
+   ],
+   "genre": "Comedy",
+   "grouping": "flat",
+   "id": "Zoolander",
+   "title": "Zoolander",
+   "totalDurationSec": 5352
   }
  },
- "sourceBase": "https://chairpants.github.io/VaultVision"
+ "sourceBase": "../VaultVision"
 };
