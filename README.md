@@ -27,7 +27,7 @@ movies streamed straight from the Internet Archive. **60 channels** —
 organized by original broadcast network (ABC, CBS, NBC, Fox, Nickelodeon,
 MTV, first-run syndication) as well as by genre and era — each run their own
 independent, deterministic schedule computed from the current time, spanning
-**387 shows** and **~26,000 episodes**. There's no "state" to keep in sync
+**388 shows** and **~26,000 episodes**. There's no "state" to keep in sync
 between sessions or devices: the schedule is pure math over the clock, so any
 two people tuned to the same channel at the same moment see the same thing,
 automatically.
