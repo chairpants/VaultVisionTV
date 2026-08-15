@@ -1,5 +1,5 @@
 window.CATALOG = {
- "generatedAt": "2026-08-15T18:59:44Z",
+ "generatedAt": "2026-08-15T19:46:52Z",
  "genres": [
   "Action & Adventure",
   "Animation",
@@ -196263,6 +196263,30 @@ window.CATALOG = {
    "id": "LandOfTheLost1991",
    "title": "Land of the Lost (1991)",
    "totalDurationSec": 35914
+  },
+  "Langoliers": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/Langoliers.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 10802,
+     "fileHint": "The Langoliers.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "are-you-alone-in-the-house",
+     "key": "are-you-alone-in-the-house::The Langoliers.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "THE LANGOLIERS - Movie"
+    }
+   ],
+   "genre": "Horror",
+   "grouping": "flat",
+   "id": "Langoliers",
+   "title": "Stephen King's The Langoliers (1995)",
+   "totalDurationSec": 10802
   },
   "LeaveIttoBeavertheSeries": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/LeaveIttoBeavertheSeries.jpg",
