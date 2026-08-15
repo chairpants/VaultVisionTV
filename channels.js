@@ -538,8 +538,8 @@ window.CHANNELS = [
     ],
     fallbackPool: [
       "RealWorld", "RoadRules", "Challenge", "Osbournes", "VivaLaBam",
-      "PimpMyRide", "MTVUnplugged", "BeavisButthead", "Daria", "AeonFlux",
-      "Jackass", "CelebrityDeathmatch",
+      "PimpMyRide", "MtvTrueLife", "MTVUnplugged", "BeavisButthead", "Daria",
+      "AeonFlux", "Jackass", "CelebrityDeathmatch",
     ],
   },
   {
