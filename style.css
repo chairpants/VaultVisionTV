@@ -135,6 +135,34 @@ html, body {
   animation: flicker 1.2s steps(2) infinite;
 }
 
+/* -- service outage: SMPTE color bars ---------------------------------------- */
+/* archive.org itself down (see player.js's resolveOrOutage), not one dead
+   file — sits above the picture/pad-card tier (5) so it wins regardless of
+   what state the video was in when the outage hit, but below the readouts
+   (8/9) and guide (10), which player.js hides explicitly anyway before
+   showing this. The classic 7-bar pattern (white/yellow/cyan/green/magenta/
+   red/blue, 75% intensity) — the thing an actual station puts up when the
+   feed drops, not a styled error page. */
+#outage-card {
+  position: absolute; inset: 0; z-index: 6; background: #000;
+  display: flex; flex-direction: column;
+}
+#outage-bars { flex: 1; display: flex; }
+#outage-bars span { flex: 1; }
+#outage-bars span:nth-child(1) { background: #c0c0c0; }
+#outage-bars span:nth-child(2) { background: #c0c000; }
+#outage-bars span:nth-child(3) { background: #00c0c0; }
+#outage-bars span:nth-child(4) { background: #00c000; }
+#outage-bars span:nth-child(5) { background: #c000c0; }
+#outage-bars span:nth-child(6) { background: #c00000; }
+#outage-bars span:nth-child(7) { background: #0000c0; }
+#outage-caption {
+  flex: none; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 18px; background: #000; animation: flicker 1.2s steps(2) infinite;
+}
+#outage-title { font-size: 1.6em; letter-spacing: 6px; color: #fff700; }
+#outage-sub { font-size: .8em; letter-spacing: 1px; color: #888; }
+
 /* Lower third. Its measured height is what the video is shrunk by, so the
    size lives here in CSS and player.js just reads offsetHeight — no shared
    magic number to keep in sync. */

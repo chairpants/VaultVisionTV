@@ -68,6 +68,23 @@
   </div>
 
   <div id="blank-msg" class="hidden">NO SIGNAL</div>
+
+  <!-- Whole-service takeover: archive.org itself is unreachable or showing
+       its own maintenance page, not just one dead file — see player.js's
+       resolveOrOutage. Every channel would fail the same way right now, so
+       this replaces the picture on all of them with the thing a real station
+       puts up when there's no feed, rather than #blank-msg's per-file
+       NO SIGNAL. -->
+  <div id="outage-card" class="hidden">
+    <div id="outage-bars">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div id="outage-caption">
+      <span id="outage-title">SIGNAL UNAVAILABLE</span>
+      <span id="outage-sub">archive.org is offline or unreachable — retrying automatically</span>
+    </div>
+  </div>
+
   <div id="start-hint" class="hidden">CLICK OR PRESS ANY KEY TO START</div>
 </div>
 
