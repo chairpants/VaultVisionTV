@@ -32,6 +32,7 @@ function main() {
     blankMsg: document.getElementById("blank-msg"),
     startHint: document.getElementById("start-hint"),
     padCard: document.getElementById("pad-card"),
+    outageCard: document.getElementById("outage-card"),
     chyron: document.getElementById("chyron"),
     chyronTitle: document.getElementById("chyron-title"),
     chyronSub: document.getElementById("chyron-sub"),

@@ -14,9 +14,43 @@ const encodePath = (p) => p.split("/").map(encodeURIComponent).join("/");
 // every episode that lives in that item — cheap since items rarely change
 // mid-session and several shows keep dozens of episodes in one item.
 const metaCache = new Map();
+
+// A dead/renamed item still answers with valid JSON (an empty-ish object, no
+// files) — that's a per-item problem, and the existing broken-file failover
+// already handles it. This is for the other kind: archive.org itself not
+// answering at all (offline, rate-limited, mid-maintenance), where every
+// item would look dead at once. Distinguishing the two matters because the
+// failover response is wrong for an outage — cycling through the whole
+// catalog marking perfectly good episodes "broken" over one downed service.
+class ArchiveUnavailableError extends Error {}
+
+// archive.org's maintenance banner is served as an HTML page in place of the
+// JSON API response — sometimes still with a 200, so the status check alone
+// wouldn't catch it. The JSON.parse fallback below is the real safety net
+// (it catches any HTML page, worded however); this regex just gives a
+// cleaner diagnostic when it's the known one.
+const MAINTENANCE_RE = /temporarily offline|undergoing maintenance/i;
+
 function fetchItemMetadata(itemId) {
   if (!metaCache.has(itemId)) {
-    metaCache.set(itemId, fetch(`https://archive.org/metadata/${itemId}`).then((r) => r.json()));
+    const p = fetch(`https://archive.org/metadata/${itemId}`)
+      .catch(() => { throw new ArchiveUnavailableError("network"); })
+      .then(async (r) => {
+        if (!r.ok) throw new ArchiveUnavailableError(`http ${r.status}`);
+        const text = await r.text();
+        if (MAINTENANCE_RE.test(text)) throw new ArchiveUnavailableError("maintenance page");
+        try {
+          return JSON.parse(text);
+        } catch {
+          throw new ArchiveUnavailableError("non-JSON response");
+        }
+      });
+    // Only an outage-shaped failure gets evicted, so it's retried once
+    // service is back — every rejection this chain can produce is one of
+    // those (a dead item resolves fine, just with no usable file), so an
+    // unconditional delete-on-reject is safe.
+    p.catch(() => metaCache.delete(itemId));
+    metaCache.set(itemId, p);
   }
   return metaCache.get(itemId);
 }
@@ -134,7 +168,7 @@ const GUIDE_VIDEO_H_FRAC = 0.4;
 
 function createPlayer(els) {
   const { video, osd, osdCh, osdTagline, osdShow, osdEpisode, osdBarFill, blankMsg, startHint,
-          padCard, chyron, chyronTitle, chyronSub, chyronClock,
+          padCard, chyron, chyronTitle, chyronSub, chyronClock, outageCard,
           vodSeek, vodSeekFill, vodSeekDirEl, vodSeekTimeEl } = els;
 
   let loadedEpisodeKey = null;
@@ -148,6 +182,55 @@ function createPlayer(els) {
   let currentCrop = null; // {x,y,w,h} of the episode currently loaded, or null
   let guideMode = false; // true while the TV Guide is up — see setGuideMode
   const frame = document.getElementById("guide-video-frame");
+
+  // -- service outage ---------------------------------------------------------
+  // archive.org unreachable or in maintenance mode -- every channel would
+  // fail the same fetch the same way right now, so this replaces the picture
+  // outright instead of running the normal broken-file failover (which would
+  // just cycle the whole catalog into the broken set for no reason). Retried
+  // on a fixed cadence rather than every call site's own tick rate (a
+  // commercial break's pad ticker alone would otherwise hit the network twice
+  // a second) — piggybacks the drift loop's own 15s cadence, since that's
+  // what re-tries it in practice.
+  const OUTAGE_RETRY_MS = DRIFT_CHECK_MS;
+  const OUTAGE = Symbol("archive-outage");
+  let serviceDown = false;
+  let nextProbeAt = 0;
+
+  function showOutage() {
+    stopPad();
+    video.pause();
+    osd.classList.add("hidden");
+    blankMsg.classList.add("hidden");
+    outageCard.classList.remove("hidden");
+  }
+
+  function hideOutage() {
+    outageCard.classList.add("hidden");
+  }
+
+  // Every resolveEpisodeUrl call in this file goes through here instead of
+  // calling it directly, so the outage flag and its retry throttle are
+  // enforced in one place regardless of which caller (tune, a commercial
+  // spot, VOD) hit the failure. Returns the OUTAGE sentinel (never null or a
+  // real URL) so callers can tell "archive.org is down" apart from "this one
+  // file has no usable copy," which still goes through the ordinary
+  // broken-file failover.
+  async function resolveOrOutage(itemId, fileHint) {
+    if (serviceDown && Date.now() < nextProbeAt) return OUTAGE;
+    try {
+      const url = await resolveEpisodeUrl(itemId, fileHint);
+      if (serviceDown) { serviceDown = false; hideOutage(); }
+      return url;
+    } catch (err) {
+      if (!(err instanceof ArchiveUnavailableError)) throw err;
+      serviceDown = true;
+      nextProbeAt = Date.now() + OUTAGE_RETRY_MS;
+      console.warn(`archive.org unavailable (${err.message}), showing outage card`);
+      showOutage();
+      return OUTAGE;
+    }
+  }
 
   // Sizes the <video> box itself to the cropped picture's true aspect ratio
   // (letterboxed within its container), then applies the crop transform —
@@ -327,9 +410,10 @@ function createPlayer(els) {
     if (spot.key === pendingSpotKey) return;
     pendingSpotKey = spot.key;
     const myToken = ++tuneToken;
-    const url = await resolveEpisodeUrl(spot.itemId, spot.fileHint);
+    const url = await resolveOrOutage(spot.itemId, spot.fileHint);
     pendingSpotKey = null;
     if (myToken !== tuneToken) return; // channel flipped, or the break moved on
+    if (url === OUTAGE) return; // outage card already up; nothing to load
     if (!url) return; // bad spot — the next tick just tries the following one
     loadedEpisodeKey = spot.key;
     loadedItemId = spot.itemId;
@@ -413,6 +497,17 @@ function createPlayer(els) {
   async function tune(channel, catalog, { silent = false } = {}) {
     const myToken = ++tuneToken;
     lastTuned = { channel, catalog };
+
+    // Known down and not yet due for a retry: every channel would hit the
+    // same fetch and fail the same way, so skip straight to keeping the card
+    // up rather than re-running the whole tune (and every 15s drift-loop
+    // call, and every channel flip) into a network attempt that's throttled
+    // to fail anyway.
+    if (serviceDown && Date.now() < nextProbeAt) {
+      showOutage();
+      return;
+    }
+
     clearTimeout(substituteTimer);
     blankMsg.classList.add("hidden");
     blankMsg.textContent = NO_SIGNAL_TEXT;
@@ -447,8 +542,9 @@ function createPlayer(els) {
 
     const isNewEpisode = position.episode.key !== loadedEpisodeKey;
     if (isNewEpisode) {
-      const url = await resolveEpisodeUrl(position.episode.itemId, position.episode.fileHint);
+      const url = await resolveOrOutage(position.episode.itemId, position.episode.fileHint);
       if (myToken !== tuneToken) return; // superseded by a later tune while we awaited
+      if (url === OUTAGE) return; // outage card already up
       if (!url) {
         // Metadata lists no playable file for this episode at all — same
         // outcome as a file that won't decode, so treat it the same way.
@@ -548,9 +644,9 @@ function createPlayer(els) {
     stopPad();
     blankMsg.classList.add("hidden");
 
-    const url = await resolveEpisodeUrl(episode.itemId, episode.fileHint);
+    const url = await resolveOrOutage(episode.itemId, episode.fileHint);
     if (myToken !== tuneToken) return false; // superseded by a later tune/VOD selection while we awaited
-    if (!url) return false;
+    if (!url || url === OUTAGE) return false; // OUTAGE: card is already up behind the VOD menu
 
     loadedEpisodeKey = episode.key;
     loadedItemId = episode.itemId;
@@ -610,6 +706,9 @@ function createPlayer(els) {
 
   async function warmTick(catalog) {
     if (warming) return;
+    // archive.org already isn't answering -- don't spend the background
+    // warming budget on fetches that are just going to join the same outage.
+    if (serviceDown) return;
     // Never race the picture for bandwidth: if the real video is still filling
     // its buffer, what the viewer is actually watching wins.
     if (!video.paused && video.readyState < 3 /* HAVE_FUTURE_DATA */) return;
@@ -625,8 +724,8 @@ function createPlayer(els) {
       warmAttempted.add(key);
 
       warming = true;
-      const url = await resolveEpisodeUrl(pos.episode.itemId, pos.episode.fileHint);
-      if (!url) { warming = false; return; }
+      const url = await resolveOrOutage(pos.episode.itemId, pos.episode.fileHint);
+      if (!url || url === OUTAGE) { warming = false; return; }
       if (!warmEl) {
         // Kept on this closure so it isn't collected mid-load. Never attached
         // to the document — it exists only to make the browser do the fetch.
