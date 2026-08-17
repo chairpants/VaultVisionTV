@@ -145,7 +145,19 @@ window.CHANNELS = [
   {
     number: 9, name: "NBC CLASSIC", kind: "curated",
     tagline: "Peacock, full plumage.",
-    daypart: [],
+    // SNL's own Saturday 10pm-2am slot, same as it aired -- crosses
+    // midnight, so it's two windows (22-24, 0-2), per this file's own
+    // header comment. Also airs genre-swept on LAUGH TRACK (Sketch Comedy &
+    // Late Night); this is its dedicated network-timeslot home on top of
+    // that, same "a show belongs wherever it aired" rule as everywhere else.
+    daypart: [
+      { days: [6], startHour: 22, endHour: 24, pool: [
+        "SaturdayNightLive",
+      ] },
+      { days: [0], startHour: 0, endHour: 2, pool: [
+        "SaturdayNightLive",
+      ] },
+    ],
     fallbackPool: [
       "SavedByTheBell", "CosbyShow", "FactsofLife", "NightCourt",
       "GetSmart", "MamasFamily", "TheHoganFamily", "ALFtheSeries",
@@ -329,6 +341,7 @@ window.CHANNELS = [
       "GeneRoddenberrysAndromeda", "Xena", "Space1999", "TekWar",
       "RoboCopliveactionTVseries", "JackofAllTradesTVseries",
       "MortalKombatConquest", "HitchhikersGuidetotheGalaxy",
+      "BattlestarGalactica2004",
     ],
   },
   {
@@ -351,7 +364,7 @@ window.CHANNELS = [
       "DoogieHowserMD", "TheOC", "Everwood", "KnightRider", "Baywatch",
       "DueSouth", "CharmedtheSeries", "BuckRogers", "IntotheBadlands",
       "TwinPeaks", "Jericho", "BriscoCountyJr", "Animorphs",
-      "BattlestarGalactica", "Persuaders", "Rookies", "V1983",
+      "BattlestarGalactica", "BattlestarGalactica2004", "Persuaders", "Rookies", "V1983",
       "BrooklynSouth", "TheNetAmericanTVseries", "Chase", "LoneGunmen",
       "BarbaryCoast", "FireflySeries", "LogansRun", "MaxHeadroom",
       "Automan", "DallastheSeries", "HandmaidsTaleSeries",
@@ -421,6 +434,7 @@ window.CHANNELS = [
     fallbackPool: [
       "NYPDBlue", "NorthernExposure", "TwinPeaks", "Rookies",
       "BrooklynSouth", "Chase", "DallastheSeries", "CopRock",
+      "LawOrderSVU",
     ],
   },
   {
