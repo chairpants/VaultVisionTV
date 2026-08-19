@@ -199,7 +199,7 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "PartyOfFive", "TheOC", "Millennium", "BriscoCountyJr",
-      "LoneGunmen", "FireflySeries",
+      "LoneGunmen", "FireflySeries", "Sliders",
     ],
   },
   // -- literal recorded broadcast blocks, each its own channel
@@ -341,7 +341,7 @@ window.CHANNELS = [
       "GeneRoddenberrysAndromeda", "Xena", "Space1999", "TekWar",
       "RoboCopliveactionTVseries", "JackofAllTradesTVseries",
       "MortalKombatConquest", "HitchhikersGuidetotheGalaxy",
-      "BattlestarGalactica2004",
+      "BattlestarGalactica2004", "Sliders",
     ],
   },
   {
