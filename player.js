@@ -144,6 +144,17 @@ const mmss = (sec) => {
 };
 
 const DRIFT_CHECK_MS = 15000;
+
+// How long a "waiting" may last before we treat it as a stall rather than
+// ordinary buffering, and how many re-tunes to spend before giving up on the
+// file. Pure, so tools/check-stall.js can exercise it — keep it that way.
+const STALL_MS = 12000;
+const STALL_RETUNES = 2;
+function stallActionDue(now, s) {
+  if (!s.stalledSince || s.paused || !s.hasEpisode || s.padding) return null;
+  if (now - s.stalledSince < STALL_MS) return null;
+  return s.stallRetunes < STALL_RETUNES ? "retune" : "substitute";
+}
 // Must stay comfortably above what a seek actually costs, or the correction
 // becomes the problem: on a multi-gigabyte item (Storm of the Century is
 // 2.2GB / 5.8h with a 17.7MB moov) a tune-in seek lands hours into the file
@@ -490,6 +501,33 @@ function createPlayer(els) {
 
   video.addEventListener("error", onMediaError);
 
+  // A file that stalls instead of failing is the case onMediaError can't see:
+  // archive.org accepts the request, dribbles enough to decode a frame or two,
+  // then neither recovers nor errors. No "error" event ever fires — and the
+  // 15s resync is no help either, because applyPositionToVideo deliberately
+  // does nothing while readyState is starved (a second seek would just restart
+  // the stall that produced the reading). So nothing re-issues the request and
+  // the channel sits on a frozen picture, no audio, until the slot rolls over.
+  //
+  // Recovery is a re-tune from scratch: dropping loadedEpisodeKey makes the
+  // next tune() treat this as a new episode, so it re-resolves the URL and
+  // sets a fresh src — which can land on a warmer node — then seeks to
+  // wherever the wall clock has reached by then. That last part is what a live
+  // channel should do anyway: the slot kept moving during the stall, so
+  // resuming where playback froze would be wrong.
+  //
+  // Deliberately not markBroken() on the first try. A stall is usually the
+  // node, not the file, and retiring the key for the session would throw away
+  // a good programme over a bad minute. Once re-tuning has failed
+  // STALL_RETUNES times we stop guessing and take the same path a decode error
+  // takes — retire it and let the scheduler substitute — because by then the
+  // channel has been dead for the better part of a minute and getting *a*
+  // picture back matters more than getting this one.
+  let stalledSince = 0;
+  let stallRetunes = 0;
+  video.addEventListener("waiting", () => { if (!stalledSince) stalledSince = Date.now(); });
+  video.addEventListener("playing", () => { stalledSince = 0; stallRetunes = 0; });
+
   // `silent`: the background drift loop calls this every 15s just to keep
   // the picture honest against wall-clock time — that's not a channel
   // change, so it should never pop the OSD banner. Real tune()s (a channel
@@ -753,6 +791,27 @@ function createPlayer(els) {
       // does), so without this a stray tune() every 15s would find "no
       // position" and stop the video out from under VOD.
       if (!channel || channel.kind === "guide" || channel.kind === "vod") return;
+
+      const stallAction = stallActionDue(Date.now(), {
+        stalledSince, paused: video.paused, hasEpisode: !!loadedEpisodeKey,
+        padding: !!padTimer, stallRetunes,
+      });
+      if (stallAction === "substitute") {
+        const key = loadedEpisodeKey;
+        stalledSince = 0;
+        stallRetunes = 0;
+        console.warn(`stalled past ${STALL_RETUNES} re-tunes, substituting: ${key}`);
+        markBroken(key);
+        loadedEpisodeKey = null;
+        failOver();
+        return;
+      }
+      if (stallAction === "retune") {
+        stallRetunes += 1;
+        stalledSince = Date.now(); // restart the clock, don't fire again next tick
+        loadedEpisodeKey = null; // makes the tune() below re-resolve and re-src
+      }
+
       tune(channel, catalog, { silent: true });
       warmTick(catalog); // piggybacks the 15s tick; no timer of its own
     }, DRIFT_CHECK_MS);
@@ -768,3 +827,5 @@ function createPlayer(els) {
     playEpisode, vodSeekBegin, vodSeekCommit,
   };
 }
+
+if (typeof window !== "undefined") window.stallActionDue = stallActionDue;
