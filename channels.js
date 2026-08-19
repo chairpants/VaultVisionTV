@@ -122,6 +122,7 @@ window.CHANNELS = [
       "PetticoatJunction", "Newhart", "GreenAcres", "MaryTylerMooreShow",
       "DickVanDyke", "TheLucyShow", "HeresLucy", "MisterEd",
       "ArchieBunkersPlace", "WkrpinCincinnati", "AllInTheFamily",
+      "GilligansIsland",
     ],
   },
   {
@@ -774,6 +775,7 @@ window.CHANNELS = [
       "MaryTylerMooreShow", "DickVanDyke", "TheLucyShow", "HeresLucy",
       "MisterEd", "GetSmart", "Taxi1978", "McHalesNavySeries",
       "WkrpinCincinnati", "AllInTheFamily", "TheMonkees",
+      "GilligansIsland",
     ],
   },
   // LeaveIttoBeavertheSeries (1957-63) dropped -- it was this channel's
