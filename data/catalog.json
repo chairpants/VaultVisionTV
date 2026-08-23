@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-23T16:04:53Z",
+ "generatedAt": "2026-08-23T16:08:17Z",
  "genres": [
   "Action & Adventure",
   "Animation",
@@ -209499,6 +209499,30 @@
    "id": "LifeGoesOn",
    "title": "Life Goes On",
    "totalDurationSec": 239762
+  },
+  "LilyCat": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/LilyCat.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 4031,
+     "fileHint": "Lily C.A.T.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "lily-c.-a.-t",
+     "key": "lily-c.-a.-t::Lily C.A.T.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "LILY C.A.T. - Movie"
+    }
+   ],
+   "genre": "Anime",
+   "grouping": "flat",
+   "id": "LilyCat",
+   "title": "Lily C.A.T.",
+   "totalDurationSec": 4031
   },
   "LippytheLionandHardyHarHar": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/LippytheLionandHardyHarHar.jpg",
