@@ -31,6 +31,7 @@ function main() {
     osdBarFill: document.getElementById("osd-bar-fill"),
     blankMsg: document.getElementById("blank-msg"),
     startHint: document.getElementById("start-hint"),
+    tuneHint: document.getElementById("tune-hint"),
     padCard: document.getElementById("pad-card"),
     outageCard: document.getElementById("outage-card"),
     chyron: document.getElementById("chyron"),

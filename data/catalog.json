@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-19T04:01:57Z",
+ "generatedAt": "2026-08-23T16:04:53Z",
  "genres": [
   "Action & Adventure",
   "Animation",
@@ -191656,6 +191656,30 @@
    "title": "The Karate Kid",
    "totalDurationSec": 18078
   },
+  "KinDzaDza": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/KinDzaDza.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 7972,
+     "fileHint": "AUtZOl_QxvY.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "youtube-AUtZOl_QxvY",
+     "key": "youtube-AUtZOl_QxvY::AUtZOl_QxvY.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "KIN-DZA-DZA - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "KinDzaDza",
+   "title": "Kin-Dza-Dza",
+   "totalDurationSec": 7972
+  },
   "KindergartenCop": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/KindergartenCop.jpg",
    "episodes": [
@@ -334787,6 +334811,30 @@
    "id": "SpiderManTAS",
    "title": "Spider-Man: The Animated Series",
    "totalDurationSec": 78590
+  },
+  "SplitSecond": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/SplitSecond.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 5387,
+     "fileHint": "Split Second (Full Movie) Action l Crime l Thriller.  Rutger Hauer.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "split-second-full-movie-action-l-crime-l-thriller.-rutger-hauer",
+     "key": "split-second-full-movie-action-l-crime-l-thriller.-rutger-hauer::Split Second (Full Movie) Action l Crime l Thriller.  Rutger Hauer.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "SPLIT SECOND - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "SplitSecond",
+   "title": "Split Second",
+   "totalDurationSec": 5387
   },
   "SpongeBobSquarePants": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/SpongeBobSquarePants.jpg",
