@@ -105,9 +105,22 @@ function buildPool(showIds, catalog, seedStr, { slotted = true, ordered = false 
       console.warn(`scheduler: channel references unknown show "${id}" — skipping`);
       continue;
     }
-    for (const episode of show.episodes) flat.push({ showId: id, show, episode });
+    // `idx` — this episode's position in the show's own `episodes` array —
+    // isn't needed by any scheduling math here, but persistPool below uses
+    // it to store a pool as [showId, idx] pairs instead of duplicating
+    // episode data to localStorage.
+    show.episodes.forEach((episode, idx) => flat.push({ showId: id, show, episode, idx }));
   }
   const sequence = ordered ? flat : shuffled(flat, seedStr);
+  return poolFromSequence(sequence, slotted);
+}
+
+// Shared tail end of pool-building: turns an already-ordered sequence into
+// the {pool, cumulative, totalSec, slotted} shape locate() expects. Split
+// out from buildPool so loadPersistedPool can reuse it — a rehydrated
+// sequence still needs its duration index rebuilt (a plain sum, not the
+// shuffle/hashing work persistence exists to skip).
+function poolFromSequence(sequence, slotted) {
   const cumulative = new Array(sequence.length);
   let acc = 0;
   for (let i = 0; i < sequence.length; i++) {
@@ -181,11 +194,82 @@ function locate(poolInfo, elapsedSec) {
   };
 }
 
-const poolCache = new Map(); // cacheKey -> poolInfo, memoized across calls
+// -- on-device pool cache (localStorage) --------------------------------
+// buildPool's real cost is the shuffle + per-episode walk — cheap once per
+// page load (poolCache below covers that), but redone from scratch on every
+// single reload/app relaunch, since nothing survives a page unload on its
+// own. localStorage does survive both (subject to the browser evicting it
+// under storage pressure) — treated as a pure best-effort cache throughout:
+// any miss, corrupt read, quota error, or disabled storage (private
+// browsing, some file:// contexts) just falls back to a normal
+// from-scratch build, same as before this existed. Mirrors
+// VaultVisionRokuTV's cachefs:/poolcache (source/Scheduler.brs).
+const POOL_CACHE_PREFIX = "vv.poolcache.";
+
+// A cheap fingerprint of exactly what `showIds` currently resolves to —
+// folded from each show's id/episode-count/summed-runtime, deliberately NOT
+// built by walking every episode's individual fields, since avoiding that
+// per-episode walk on a cache hit is the whole point of this cache. Keeps a
+// stored pool honest without invalidating the other 60-odd channels that
+// don't carry whatever show just changed in the catalog.
+function poolSignature(showIds, catalog) {
+  let joined = "";
+  for (const id of showIds) {
+    const show = catalog.shows[id];
+    if (!show) continue;
+    const dur = show.episodes.reduce((a, e) => a + (e.durationSec || 0), 0);
+    joined += (joined ? "|" : "") + `${id}#${show.episodes.length}#${dur}`;
+  }
+  return String(hashSeed(joined));
+}
+
+// Rehydrates a pool stored as [[showId, idx], ...] back into real
+// {showId, show, episode} references against the live catalog — the stored
+// value never duplicates episode data, just where to find it. Returns null
+// on absolutely anything unexpected (missing key, bad JSON, signature
+// mismatch, a showId/idx that no longer resolves) so the caller always has
+// a clean, uniform "just rebuild it" fallback.
+function loadPersistedPool(cacheKey, signature, catalog, slotted) {
+  try {
+    const raw = localStorage.getItem(POOL_CACHE_PREFIX + cacheKey);
+    if (!raw) return null;
+    const stored = JSON.parse(raw);
+    if (stored.signature !== signature || stored.slotted !== slotted || !Array.isArray(stored.seq)) return null;
+    const sequence = new Array(stored.seq.length);
+    for (let i = 0; i < stored.seq.length; i++) {
+      const [showId, idx] = stored.seq[i];
+      const show = catalog.shows[showId];
+      const episode = show && show.episodes[idx];
+      if (!episode) return null; // showId/idx vanished since this was written
+      sequence[i] = { showId, show, episode, idx };
+    }
+    return poolFromSequence(sequence, slotted);
+  } catch {
+    return null;
+  }
+}
+
+function persistPool(cacheKey, signature, info) {
+  try {
+    const seq = info.pool.map((e) => [e.showId, e.idx]);
+    localStorage.setItem(POOL_CACHE_PREFIX + cacheKey, JSON.stringify({ signature, slotted: info.slotted, seq }));
+  } catch {
+    // quota exceeded, storage disabled, etc. — fine, just means no
+    // persistence this time; the in-session poolCache below still applies.
+  }
+}
+
+const poolCache = new Map(); // cacheKey -> poolInfo, memoized for this page load
 function cachedPool(cacheKey, showIds, catalog, seedStr, opts) {
   let info = poolCache.get(cacheKey);
   if (!info) {
-    info = buildPool(showIds, catalog, seedStr, opts);
+    const slotted = opts && "slotted" in opts ? opts.slotted : true;
+    const signature = poolSignature(showIds, catalog);
+    info = loadPersistedPool(cacheKey, signature, catalog, slotted);
+    if (!info) {
+      info = buildPool(showIds, catalog, seedStr, opts);
+      persistPool(cacheKey, signature, info);
+    }
     poolCache.set(cacheKey, info);
   }
   return info;
@@ -325,7 +409,8 @@ function getPositionAt(channel, catalog, timestampMs) {
 // Exposed for the manual test harness and for anything that wants to reason
 // about determinism directly.
 const _internal = { hashSeed, mulberry32, shuffled, buildPool, locate, windowElapsedSec, slotFor,
-                    playableSec, adPool, brokenKeys };
+                    playableSec, adPool, brokenKeys, poolSignature, loadPersistedPool, persistPool,
+                    POOL_CACHE_PREFIX };
 
 window.getPositionAt = getPositionAt;
 window.getAdAt = getAdAt;

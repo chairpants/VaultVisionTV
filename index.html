@@ -34,6 +34,19 @@
     <div id="osd-bar"><div id="osd-bar-fill"></div></div>
   </div>
 
+  <!-- Shown only while a real tune-in (channel change, VOD selection) is
+       waiting on its file to load — see player.js's tune()/playEpisode().
+       There's no real byte-level progress to report (the browser gives one
+       loadedmetadata event and nothing in between), so this doesn't fake
+       one; it's the same indeterminate signal-strength ladder a real
+       satellite receiver shows while it's still searching. -->
+  <div id="tune-hint" class="hidden">
+    <div id="tune-bars">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <span id="tune-label">ACQUIRING SIGNAL</span>
+  </div>
+
   <div id="digit-osd" class="hidden"></div>
 
   <!-- Shown during a break only when no commercial fits the time left (the

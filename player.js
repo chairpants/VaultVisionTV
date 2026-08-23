@@ -179,7 +179,7 @@ const GUIDE_VIDEO_H_FRAC = 0.4;
 
 function createPlayer(els) {
   const { video, osd, osdCh, osdTagline, osdShow, osdEpisode, osdBarFill, blankMsg, startHint,
-          padCard, chyron, chyronTitle, chyronSub, chyronClock, outageCard,
+          tuneHint, padCard, chyron, chyronTitle, chyronSub, chyronClock, outageCard,
           vodSeek, vodSeekFill, vodSeekDirEl, vodSeekTimeEl } = els;
 
   let loadedEpisodeKey = null;
@@ -213,6 +213,7 @@ function createPlayer(els) {
     video.pause();
     osd.classList.add("hidden");
     blankMsg.classList.add("hidden");
+    tuneHint.classList.add("hidden");
     outageCard.classList.remove("hidden");
   }
 
@@ -491,6 +492,7 @@ function createPlayer(els) {
   function failOver() {
     stopPad();
     video.pause();
+    tuneHint.classList.add("hidden");
     blankMsg.textContent = "TECHNICAL DIFFICULTIES";
     blankMsg.classList.remove("hidden");
     clearTimeout(substituteTimer);
@@ -555,6 +557,7 @@ function createPlayer(els) {
       stopPad();
       video.pause();
       video.removeAttribute("src");
+      tuneHint.classList.add("hidden");
       blankMsg.classList.remove("hidden");
       osd.classList.add("hidden");
       loadedEpisodeKey = null;
@@ -568,6 +571,7 @@ function createPlayer(els) {
       stopPad();
       video.pause();
       osd.classList.add("hidden");
+      tuneHint.classList.add("hidden");
       blankMsg.classList.remove("hidden");
       return;
     }
@@ -594,8 +598,10 @@ function createPlayer(els) {
       loadedItemId = position.episode.itemId;
       currentCrop = position.episode.crop || null;
       video.src = url;
+      tuneHint.classList.remove("hidden");
       const onReady = () => {
         video.removeEventListener("loadedmetadata", onReady);
+        tuneHint.classList.add("hidden");
         if (myToken !== tuneToken) return;
         layoutCrop();
         applyPositionToVideo(getPositionAt(channel, catalog, Date.now()), { isNewTune: true });
@@ -691,8 +697,10 @@ function createPlayer(els) {
     currentCrop = episode.crop || null;
     vodSeekEpisode = episode;
     video.src = url;
+    tuneHint.classList.remove("hidden");
     const onReady = () => {
       video.removeEventListener("loadedmetadata", onReady);
+      tuneHint.classList.add("hidden");
       if (myToken !== tuneToken) return;
       layoutCrop();
       video.currentTime = episode.introSkipSec || 0;

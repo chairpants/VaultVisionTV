@@ -86,6 +86,26 @@ html, body {
 #osd-bar { margin-top: 8px; height: 6px; background: rgba(255,255,255,.2); }
 #osd-bar-fill { height: 100%; width: 0%; background: #fff700; }
 
+/* -- tune-in: retro satellite "acquiring signal" meter ----------------------- */
+/* Opposite corner from the OSD/digit-osd/fullscreen readouts, so it never
+   competes with them for space. Indeterminate on purpose (see index.html's
+   comment on #tune-hint) — a chase animation across a signal-strength ladder
+   rather than a percentage, since there's nothing real to put a number to. */
+#tune-hint {
+  position: absolute; left: 24px; top: 24px; z-index: 8;
+  background: rgba(0,0,0,.72); border: 2px solid rgba(255,255,255,.25);
+  padding: 10px 16px; display: flex; align-items: center; gap: 12px;
+}
+#tune-bars { display: flex; align-items: flex-end; gap: 3px; height: 20px; }
+#tune-bars span { width: 5px; background: #7fe8ff; opacity: .25; animation: tune-chase 1s ease-in-out infinite; }
+#tune-bars span:nth-child(1) { height: 30%; animation-delay: 0ms; }
+#tune-bars span:nth-child(2) { height: 50%; animation-delay: 100ms; }
+#tune-bars span:nth-child(3) { height: 70%; animation-delay: 200ms; }
+#tune-bars span:nth-child(4) { height: 90%; animation-delay: 300ms; }
+#tune-bars span:nth-child(5) { height: 100%; animation-delay: 400ms; }
+@keyframes tune-chase { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+#tune-label { color: #fff700; font-size: .85em; letter-spacing: 2px; }
+
 /* -- fullscreen toggle -------------------------------------------------------- */
 /* Top-right, same corner #digit-osd anchors to below it — offset down out of
    its way (see #digit-osd's own top) rather than the other way around, since

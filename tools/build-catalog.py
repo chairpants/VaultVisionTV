@@ -75,6 +75,36 @@ DEAD_ITEMS = {
     "designing-women-the-complete-series",  # 159 episodes, all of Designing Women
 }
 
+# tools/dead-links.py's machine-managed twin of DEAD_ITEMS above. That set
+# stays hand-curated -- every entry carries a reason a person wrote after
+# actually looking at why an item died, and check-items.py's own output is
+# designed to be pasted into it. This file is the fast path: the dead-link
+# tool's Remove/Replace buttons rewrite it wholesale, so it can't carry prose
+# comments the way DEAD_ITEMS does, and isn't meant to replace it -- just to
+# not require editing this script's source for every routine fix.
+#   removedItems:    whole archive.org items (GONE/DARK/GATED) -- same
+#                     treatment as DEAD_ITEMS, just from a different list.
+#   removedEpisodes: single episodes (NOFILE -- the item's fine, this one
+#                     episode's fileHint isn't in it) keyed by the same
+#                     "itemId::fileHint" string episode_key() below produces.
+#   replacements:    "itemId::fileHint" -> {"itemId", "fileHint"} to swap in
+#                     a substitute source for one episode.
+OVERRIDES_JSON = Path(__file__).parent.parent / "data" / "catalog-overrides.json"
+
+
+def load_overrides():
+    if not OVERRIDES_JSON.exists():
+        return {"removedItems": set(), "removedEpisodes": set(), "replacements": {}}
+    data = json.loads(OVERRIDES_JSON.read_text(encoding="utf-8"))
+    return {
+        "removedItems": set(data.get("removedItems") or []),
+        "removedEpisodes": set(data.get("removedEpisodes") or []),
+        "replacements": data.get("replacements") or {},
+    }
+
+
+OVERRIDES = load_overrides()
+
 # Whole shows VaultVision lists but this app deliberately doesn't carry, for
 # reasons that have nothing to do with whether the files play (that's
 # DEAD_ITEMS above -- an unplayable source is a source problem, so it gets
@@ -279,13 +309,24 @@ def build_show_entry(row, text=None):
         if not isinstance(e, list) or len(e) < 2:
             continue
         item_id = e[0]
-        if item_id in DEAD_ITEMS:
+        if item_id in DEAD_ITEMS or item_id in OVERRIDES["removedItems"]:
             continue
         title = e[1]
         file_hint = e[2] if len(e) > 2 else None
+        # Duration/film-title lookups stay on the *original* key regardless of
+        # a replacement below -- that's upstream's real data for this episode,
+        # and a substitute file is standing in for the same content, not
+        # different content that happens to need a fresh duration guess.
+        original_key = episode_key(item_id, file_hint)
+        if original_key in OVERRIDES["removedEpisodes"]:
+            continue
+        repl = OVERRIDES["replacements"].get(original_key)
+        if repl:
+            item_id = repl.get("itemId") or item_id
+            file_hint = repl.get("fileHint")
         key = episode_key(item_id, file_hint)
         code, name, season = season_and_code(title, grouping)
-        duration_sec = durations.get(key)
+        duration_sec = durations.get(original_key)
         if not isinstance(duration_sec, (int, float)) or duration_sec <= 0:
             duration_sec = default_sec
         episodes.append({
@@ -300,7 +341,7 @@ def build_show_entry(row, text=None):
             "index": i,
             "crop": resolve_crop(d, season),
             "introSkipSec": resolve_intro_skip(d, season),
-            "movieTitle": film_map.get(key) if segments == "film" else None,
+            "movieTitle": film_map.get(original_key) if segments == "film" else None,
         })
 
     if not episodes:
