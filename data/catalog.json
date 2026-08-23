@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-23T16:08:17Z",
+ "generatedAt": "2026-08-23T16:49:27Z",
  "genres": [
   "Action & Adventure",
   "Animation",
@@ -43273,6 +43273,30 @@
    "id": "BirdOnAWire",
    "title": "Bird on a Wire",
    "totalDurationSec": 6635
+  },
+  "BladeRunner": {
+   "artUrl": "https://chairpants.github.io/VaultVision/art/BladeRunner.jpg",
+   "episodes": [
+    {
+     "code": "Movie",
+     "crop": null,
+     "durationSec": 6918,
+     "fileHint": "Blade Runner.mp4",
+     "index": 0,
+     "introSkipSec": 0,
+     "itemId": "blade-runner_202411",
+     "key": "blade-runner_202411::Blade Runner.mp4",
+     "movieTitle": null,
+     "name": "",
+     "seasonNum": 1,
+     "title": "BLADE RUNNER - Movie"
+    }
+   ],
+   "genre": "Sci-Fi & Fantasy",
+   "grouping": "flat",
+   "id": "BladeRunner",
+   "title": "Blade Runner",
+   "totalDurationSec": 6918
   },
   "BlessThisHouse": {
    "artUrl": "https://chairpants.github.io/VaultVision/art/BlessThisHouse.jpg",
