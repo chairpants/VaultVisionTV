@@ -339,6 +339,7 @@ window.CHANNELS = [
     ],
     fallbackPool: [
       "DoctorWho", "StarTrekTNG", "StarTrekDS9", "StarTrekVoyager",
+      "Babylon5", "Crusade",
       "GeneRoddenberrysAndromeda", "Xena", "Space1999", "TekWar",
       "RoboCopliveactionTVseries", "JackofAllTradesTVseries",
       "MortalKombatConquest", "HitchhikersGuidetotheGalaxy",
@@ -740,7 +741,7 @@ window.CHANNELS = [
     tagline: "Thirteen episodes, no more.",
     daypart: [],
     fallbackPool: [
-      "Jericho", "Animorphs", "TheNetAmericanTVseries",
+      "Jericho", "Animorphs", "TheNetAmericanTVseries", "Crusade",
       "MortalKombatConquest", "BakersfieldPD", "TeenAngel", "WeberShow",
       "LoneGunmen", "Ted", "FireflySeries",
       "CavemenSeriesSlightlyBetterQuality", "Action", "Tucker",
