@@ -67,7 +67,7 @@ window.CHANNELS = [
     tagline: "Homework help, sort of.",
     daypart: [],
     fallbackPool: [
-      "BillNye", "AdventuresinWonderland", "GummiBears",
+      "BillNye", "BeakmansWorld", "AdventuresinWonderland", "GummiBears",
       "BerenstainBears", "Ghostwriter", "SchoolhouseRock", "LittleBear",
       "CliffordtheBigRedDogSeriesSeries", "Zoboomafoo",
       "BertandErniesGreatAdventures", "RoundtheTwist", "AllegrasWindow",
@@ -225,7 +225,7 @@ window.CHANNELS = [
     tagline: "Edutainment, on a schedule.",
     daypart: [],
     fallbackPool: [
-      "BillNye", "SchoolhouseRock", "CosmosaPersonalVoyage",
+      "BillNye", "BeakmansWorld", "SchoolhouseRock", "CosmosaPersonalVoyage",
       "PlanetEarth", "MartyStouffersWildAmerica",
       "WhereInTheWorldIsCarmenSandiego",
     ],
