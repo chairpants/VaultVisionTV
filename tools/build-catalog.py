@@ -14,6 +14,7 @@ Re-run manually whenever VaultVision's library grows:
 import csv
 import io
 import json
+import os
 import re
 import sys
 import time
@@ -200,6 +201,33 @@ def fetch(path):
         return r.read().decode("utf-8")
 
 
+# The scheduled library check's verdicts: archive.org items and single episodes
+# it has found unplayable twice running. VaultVision's "Library check" workflow
+# (check_library.mjs there) keeps library-health.json at the root of that repo,
+# so it's read from wherever the shows themselves are -- the live site, or the
+# checkout passed on the command line. Machine-kept, and it shrinks again when
+# an item comes back; DEAD_ITEMS above is the hand-kept list with the reasons.
+LIBRARY_HEALTH = {"items": frozenset(), "episodes": frozenset()}
+
+
+def load_library_health():
+    """Fill LIBRARY_HEALTH. A missing or unreadable record means "nothing known
+    dead", with a warning -- except under REQUIRE_LIBRARY_HEALTH=1 (the
+    scheduled build), where building without it would quietly put every dead
+    episode back, so that stops instead."""
+    try:
+        data = json.loads(fetch("library-health.json"))
+        LIBRARY_HEALTH["items"] = frozenset(data.get("deadItems") or {})
+        LIBRARY_HEALTH["episodes"] = frozenset(data.get("deadEpisodes") or {})
+    except Exception as e:
+        if os.environ.get("REQUIRE_LIBRARY_HEALTH") == "1":
+            raise SystemExit(f"library-health.json: {e}")
+        print(f"  library-health.json not read ({e}); building without it", file=sys.stderr)
+        return
+    print(f"library check: {len(LIBRARY_HEALTH['items'])} dead item(s), "
+          f"{len(LIBRARY_HEALTH['episodes'])} dead episode(s) to leave out")
+
+
 def load_shows_csv():
     text = fetch("shows.js")
     m = re.search(r"window\.SHOWS_CSV\s*=\s*`(.*)`;\s*$", text, re.S)
@@ -309,7 +337,8 @@ def build_show_entry(row, text=None):
         if not isinstance(e, list) or len(e) < 2:
             continue
         item_id = e[0]
-        if item_id in DEAD_ITEMS or item_id in OVERRIDES["removedItems"]:
+        if (item_id in DEAD_ITEMS or item_id in OVERRIDES["removedItems"]
+                or item_id in LIBRARY_HEALTH["items"]):
             continue
         title = e[1]
         file_hint = e[2] if len(e) > 2 else None
@@ -321,6 +350,9 @@ def build_show_entry(row, text=None):
         if original_key in OVERRIDES["removedEpisodes"]:
             continue
         repl = OVERRIDES["replacements"].get(original_key)
+        # a hand-made replacement is the fix for a dead file, so it wins
+        if not repl and original_key in LIBRARY_HEALTH["episodes"]:
+            continue
         if repl:
             item_id = repl.get("itemId") or item_id
             file_hint = repl.get("fileHint")
@@ -360,6 +392,7 @@ def build_show_entry(row, text=None):
 
 
 def main():
+    load_library_health()
     print(f"fetching show list from {SOURCE}/shows.js ...")
     rows = load_shows_csv()
     print(f"{len(rows)} shows listed")

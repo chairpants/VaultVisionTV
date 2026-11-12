@@ -1,0 +1,74 @@
+# Twice a day, rebuilds data/catalog from VaultVision: picks up whatever the library
+# has added, and leaves out whatever its own scheduled check has found dead on
+# archive.org (library-health.json in that repo; nothing here talks to
+# archive.org). Runs half an hour after that check. A rebuild that changes
+# nothing commits nothing. See tools/library-sync.py for the guards.
+name: Library sync
+
+on:
+  schedule:
+    - cron: "47 5,17 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Accept a rebuild that loses more than 10% of the catalog (only after looking at why)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write   # commit the rebuilt catalog
+  actions: write    # keep the schedule alive
+  pages: write      # ask for the site to be rebuilt
+
+concurrency:
+  group: library-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      # only what the build reads: the show list, each show's data.js, and the
+      # library check's record
+      - name: Fetch the VaultVision library
+        run: |
+          git clone --quiet --depth 1 --filter=blob:none --sparse https://github.com/chairpants/VaultVision.git ../VaultVision
+          git -C ../VaultVision sparse-checkout set --no-cone /shows.js /library-health.json '/shows/*/data.js'
+
+      - name: Rebuild the catalog
+        id: sync
+        run: python3 tools/library-sync.py ../VaultVision ${{ inputs.force && '--force' || '' }}
+
+      - name: Commit the catalog if it changed
+        id: commit
+        if: steps.sync.outputs.changed == 'true'
+        env:
+          MESSAGE: ${{ steps.sync.outputs.message }}
+        run: |
+          git add -u data
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "$MESSAGE"
+          git push
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # The site is served by GitHub Pages straight from this branch. Ask for
+      # the build by name, in case a push made by a workflow does not start one.
+      - name: Publish the site
+        if: steps.commit.outputs.pushed == 'true'
+        continue-on-error: true
+        run: gh api -X POST "repos/$GITHUB_REPOSITORY/pages/builds"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      # GitHub switches a schedule off after 60 days with no repository
+      # activity; re-enabling the workflow resets that clock.
+      - name: Keep the schedule alive
+        if: always()
+        continue-on-error: true
+        run: gh api -X PUT "repos/$GITHUB_REPOSITORY/actions/workflows/library-sync.yml/enable"
+        env:
+          GH_TOKEN: ${{ github.token }}
