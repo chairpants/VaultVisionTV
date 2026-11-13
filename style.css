@@ -8,6 +8,27 @@
   font-display: swap;
 }
 
+/* Late-90s digital cable palette: the royal-blue grid, gold channel tabs and
+   brushed-silver bars of a set-top box's on-screen menus. Every overlay below
+   (guide, VOD, channel banner, break chyron) draws from these, so the whole
+   look can be retuned here. */
+:root {
+  --cable-bg-top: #12298a;     /* menu background, top of the gradient */
+  --cable-bg-bot: #050e3d;     /* ...and bottom; also the gaps between cells */
+  --cable-panel: #0c1c63;      /* channel tabs, info panels, column headers */
+  --cable-cell: #1d42a8;       /* a programme cell */
+  --cable-cell-live: #2450bf;  /* the cell airing right now */
+  --cable-cell-hi: #3a6ae0;    /* hovered / selected row */
+  --cable-edge-dark: #030a2e;  /* hard rules between sections */
+  --cable-rule: rgba(120,160,255,.25);
+  --cable-gold: #ffd21f;       /* channel numbers, highlights, labels */
+  --cable-cyan: #6fe6ff;       /* secondary text: taglines, times */
+  --cable-ink: #071552;        /* dark text on gold or silver */
+  --cable-silver: linear-gradient(#e4e8ef, #aab1c2 55%, #8d95a8);
+  --cable-bevel: inset 1px 1px 0 rgba(255,255,255,.28), inset -1px -1px 0 rgba(0,0,0,.35);
+  --cable-osd: linear-gradient(rgba(18,41,138,.92), rgba(5,14,61,.94));
+}
+
 * { box-sizing: border-box; }
 html, body {
   margin: 0; height: 100%; background: #000; color: #fff;
@@ -42,7 +63,7 @@ html, body {
    overlapping a pixel of it or needing box-sizing math. */
 #guide-video-frame {
   position: absolute; z-index: 11; pointer-events: none;
-  outline: 2px solid rgba(10,170,255,.55); border-radius: 4px;
+  outline: 3px solid var(--cable-gold); border-radius: 0;
   box-shadow: 0 0 24px rgba(0,0,0,.6);
 }
 
@@ -72,19 +93,19 @@ html, body {
 /* -- on-screen display: channel banner, cable-box style -------------------- */
 #osd {
   position: absolute; left: 24px; bottom: 24px; z-index: 8;
-  background: rgba(0,0,0,.72); border: 2px solid rgba(255,255,255,.25);
+  background: var(--cable-osd); border: 2px solid #aab1c2; box-shadow: var(--cable-bevel);
   padding: 10px 18px; min-width: 320px; max-width: 60vw;
   opacity: 1; transition: opacity 500ms ease;
 }
 #osd.fade { opacity: 0; }
 
-#osd-ch { font-size: 1.8em; color: #fff700; letter-spacing: 2px; line-height: 1.1; }
-#osd-tagline { font-size: .75em; color: #999; font-style: italic; margin-top: 1px; }
+#osd-ch { font-size: 1.8em; color: var(--cable-gold); letter-spacing: 2px; line-height: 1.1; }
+#osd-tagline { font-size: .75em; color: #b9c6f5; font-style: italic; margin-top: 1px; }
 #osd-show { font-size: 1.1em; color: #fff; margin-top: 6px; letter-spacing: 1px; }
-#osd-episode { font-size: .85em; color: #7fe8ff; margin-top: 2px; letter-spacing: .5px;
+#osd-episode { font-size: .85em; color: var(--cable-cyan); margin-top: 2px; letter-spacing: .5px;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#osd-bar { margin-top: 8px; height: 6px; background: rgba(255,255,255,.2); }
-#osd-bar-fill { height: 100%; width: 0%; background: #fff700; }
+#osd-bar { margin-top: 8px; height: 6px; background: var(--cable-edge-dark); }
+#osd-bar-fill { height: 100%; width: 0%; background: var(--cable-gold); }
 
 /* -- tune-in: retro satellite "acquiring signal" meter ----------------------- */
 /* Opposite corner from the OSD/digit-osd/fullscreen readouts, so it never
@@ -93,18 +114,18 @@ html, body {
    rather than a percentage, since there's nothing real to put a number to. */
 #tune-hint {
   position: absolute; left: 24px; top: 24px; z-index: 8;
-  background: rgba(0,0,0,.72); border: 2px solid rgba(255,255,255,.25);
+  background: var(--cable-osd); border: 2px solid #aab1c2; box-shadow: var(--cable-bevel);
   padding: 10px 16px; display: flex; align-items: center; gap: 12px;
 }
 #tune-bars { display: flex; align-items: flex-end; gap: 3px; height: 20px; }
-#tune-bars span { width: 5px; background: #7fe8ff; opacity: .25; animation: tune-chase 1s ease-in-out infinite; }
+#tune-bars span { width: 5px; background: var(--cable-cyan); opacity: .25; animation: tune-chase 1s ease-in-out infinite; }
 #tune-bars span:nth-child(1) { height: 30%; animation-delay: 0ms; }
 #tune-bars span:nth-child(2) { height: 50%; animation-delay: 100ms; }
 #tune-bars span:nth-child(3) { height: 70%; animation-delay: 200ms; }
 #tune-bars span:nth-child(4) { height: 90%; animation-delay: 300ms; }
 #tune-bars span:nth-child(5) { height: 100%; animation-delay: 400ms; }
 @keyframes tune-chase { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
-#tune-label { color: #fff700; font-size: .85em; letter-spacing: 2px; }
+#tune-label { color: var(--cable-gold); font-size: .85em; letter-spacing: 2px; }
 
 /* -- fullscreen toggle -------------------------------------------------------- */
 /* Top-right, same corner #digit-osd anchors to below it — offset down out of
@@ -140,8 +161,8 @@ html, body {
 /* -- direct channel-entry echo ---------------------------------------------- */
 #digit-osd {
   position: absolute; top: 76px; right: 24px; z-index: 8;
-  background: rgba(0,0,0,.72); border: 2px solid rgba(255,255,255,.25);
-  padding: 10px 22px; font-size: 2.4em; letter-spacing: 6px; color: #fff700;
+  background: var(--cable-osd); border: 2px solid #aab1c2; box-shadow: var(--cable-bevel);
+  padding: 10px 22px; font-size: 2.4em; letter-spacing: 6px; color: var(--cable-gold);
 }
 
 /* -- commercial break -------------------------------------------------------- */
@@ -193,11 +214,11 @@ html, body {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 9;
   display: flex; align-items: center; justify-content: flex-start; gap: 18px;
   padding: 14px 260px 14px 24px;
-  background: linear-gradient(rgba(0,26,51,.94), rgba(0,0,0,.97));
-  border-top: 2px solid #0af;
+  background: linear-gradient(var(--cable-bg-top), var(--cable-bg-bot));
+  border-top: 3px solid var(--cable-gold);
 }
 #chyron-label {
-  flex: none; background: #fff700; color: #000;
+  flex: none; background: var(--cable-gold); color: var(--cable-ink);
   padding: 5px 10px; font-size: .7em; letter-spacing: 3px;
 }
 #chyron-title {
@@ -205,45 +226,73 @@ html, body {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 #chyron-sub {
-  flex: 0 1 auto; min-width: 0; max-width: 28%; color: #7fe8ff; font-size: .85em;
+  flex: 0 1 auto; min-width: 0; max-width: 28%; color: var(--cable-cyan); font-size: .85em;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 #chyron-clock {
-  flex: none; color: #fff700; font-size: 1.9em; letter-spacing: 4px; text-align: left;
+  flex: none; color: var(--cable-gold); font-size: 1.9em; letter-spacing: 4px; text-align: left;
 }
 
 /* -- TV Guide channel -------------------------------------------------------- */
-/* Mini-guide layout: the live picture docks into a picture-in-picture box in
-   the top-right (#tv.guide-open #screen, above), an info panel in the
-   top-left describes whichever row is currently hovered/highlighted, and the
-   channel listings run the full width of the bottom half with real NOW/+30/
-   +60 column headers. Reads like an actual cable box's guide instead of a
-   tinted overlay parked over the full picture — opaque rather than
-   translucent throughout, since the picture is no longer underneath it. */
+/* Digital-cable interactive guide: silver title bar, royal-blue grid of
+   beveled cells, gold channel tabs, and the selected row lit up in yellow —
+   the late-90s set-top look, not a translucent overlay. Opaque throughout,
+   since the picture is docked into #guide-video-slot rather than underneath.
+
+   #guide-top is a grid of three pieces — the channel heading
+   (#guide-info-head), the docked picture's slot, and what's on now
+   (#guide-info-foot) — so the same markup can be arranged three ways:
+     desktop:          heading / on-now stacked on the left, picture right
+     phone, portrait:  heading above a full-width picture, on-now below it,
+                       listings underneath
+     phone, landscape: listings on the left half; heading / picture / on-now
+                       stacked on the right half
+   The heading and on-now text are clamped to a fixed number of lines on
+   phones: player.js's layoutCrop() only re-measures the slot on resize, so
+   the slot must not move when a different channel's name is shown. */
 #guide {
-  position: absolute; inset: 0; z-index: 10; background: rgba(0,10,20,.94);
+  position: absolute; inset: 0; z-index: 10;
+  background: linear-gradient(var(--cable-bg-top), var(--cable-bg-bot));
   display: flex; flex-direction: column; overflow: hidden; font-size: 1.1em;
 }
 #guide-header {
-  flex: none; display: flex; background: rgba(0,26,51,.7); border-bottom: 2px solid #0af;
-  padding: 8px 16px; color: #0af; letter-spacing: 2px; font-size: 1.1em;
+  flex: none; display: flex; background: var(--cable-silver);
+  border-bottom: 2px solid var(--cable-edge-dark);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+  padding: 7px 16px; color: var(--cable-ink); letter-spacing: 2px; font-size: 1.1em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 /* The picture gets the larger share: a docked 4:3 or 16:9 frame wants the
    height more than the listings do, and the two rows it costs the grid below
    are cheap when that grid scrolls anyway. */
-#guide-top { flex: 1 1 58%; display: flex; min-height: 0; }
-
-#guide-info {
-  flex: 0 0 50%; min-width: 0; padding: 20px 24px; display: flex; flex-direction: column;
-  gap: 6px; border-right: 1px solid rgba(127,232,255,.15);
+#guide-top {
+  flex: 1 1 58%; min-height: 0;
+  display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr auto;
+  grid-template-areas: "head video" "foot video";
 }
-#guide-info-num { color: #fff700; font-size: 1.8em; letter-spacing: 2px; }
+
+#guide-info-head {
+  grid-area: head; min-width: 0; padding: 20px 24px 0;
+  display: flex; flex-direction: column; gap: 6px;
+  border-right: 1px solid var(--cable-rule);
+}
+#guide-info-chline { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+#guide-info-num { color: var(--cable-gold); font-size: 1.8em; letter-spacing: 2px; }
 #guide-info-name { color: #fff; font-size: 1.5em; letter-spacing: 1px; }
-#guide-info-tagline { color: #7fe8ff; font-style: italic; opacity: .85; }
-#guide-info-live-label { margin-top: auto; color: #999; font-size: .75em; letter-spacing: 3px; }
+#guide-info-tagline { color: var(--cable-cyan); font-style: italic; }
+#guide-info-foot {
+  grid-area: foot; min-width: 0; padding: 0 24px 20px;
+  display: flex; flex-direction: column; gap: 6px; align-items: flex-start;
+  border-right: 1px solid var(--cable-rule);
+}
+#guide-info-live-label {
+  background: var(--cable-gold); color: var(--cable-ink);
+  padding: 3px 8px; font-size: .7em; letter-spacing: 3px;
+}
 #guide-info-live {
-  color: #7fff9f; font-size: 1.1em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 100%; color: #fff; font-size: 1.1em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 /* The region the docked picture letterboxes into — an invisible spacer, not a
@@ -251,24 +300,22 @@ html, body {
    element's stacking context) and is never a child of this box, but
    player.js's layoutCrop() measures this element's own getBoundingClientRect()
    every time it lays the picture out in guide mode, so the two stay aligned
-   regardless of how this flexbox layout resolves (font metrics, viewport size,
+   regardless of how this grid resolves (font metrics, viewport size,
    etc.) without duplicating that math in JS.
    The visible outline is #guide-video-frame, which JS sets to the picture's
    own rect — this box is generally a different shape (a 4:3 picture in a wide
    slot leaves pillarbox on both sides), and a border here would frame that
    empty space rather than the programme. */
-#guide-video-slot {
-  flex: 0 0 50%; margin: 20px 20px 20px 0;
-}
+#guide-video-slot { grid-area: video; min-width: 0; min-height: 0; margin: 20px 20px 20px 0; }
 
 #guide-listings {
   flex: 1 1 55%; display: flex; flex-direction: column; min-height: 0;
-  border-top: 1px solid rgba(127,232,255,.2);
+  border-top: 2px solid var(--cable-edge-dark);
 }
 #guide-cols {
-  flex: none; display: flex; padding: 6px 16px; color: #7fe8ff; opacity: .8;
-  background: rgba(0,13,26,.6);
-  border-bottom: 1px solid rgba(127,232,255,.25); font-size: .8em;
+  flex: none; display: flex; padding: 5px 16px; color: var(--cable-gold);
+  background: var(--cable-panel);
+  border-bottom: 2px solid var(--cable-edge-dark); font-size: .8em; letter-spacing: 1px;
 }
 #guide-cols span, .guide-row span { flex: 1 1 0; }
 #guide-cols .ch-col, .guide-row .ch-col { flex: 0 0 220px; }
@@ -277,75 +324,144 @@ html, body {
    auto-scroll cycle — guide.js's show() jumps this to the tuned channel via
    scrollIntoView, then leaves it alone. */
 #guide-rows { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; }
-#guide-rows::-webkit-scrollbar { width: 10px; }
-#guide-rows::-webkit-scrollbar-track { background: rgba(0,13,26,.4); }
-#guide-rows::-webkit-scrollbar-thumb { background: rgba(127,232,255,.35); border-radius: 5px; }
-#guide-rows::-webkit-scrollbar-thumb:hover { background: rgba(127,232,255,.55); }
-
-.guide-row {
-  display: flex; align-items: stretch; padding: 10px 16px; cursor: pointer;
-  border-bottom: 1px solid rgba(255,255,255,.08);
+#guide-rows::-webkit-scrollbar, #vod-rows::-webkit-scrollbar { width: 10px; }
+#guide-rows::-webkit-scrollbar-track, #vod-rows::-webkit-scrollbar-track { background: var(--cable-bg-bot); }
+#guide-rows::-webkit-scrollbar-thumb, #vod-rows::-webkit-scrollbar-thumb {
+  background: var(--cable-cell-hi); border-radius: 5px;
 }
-.guide-row:hover, .guide-row.highlight { background: rgba(10,170,255,.15); }
-.guide-row .ch-col { color: #fff700; letter-spacing: 1px; display: flex; align-items: center; }
+
+/* Each row is a strip of raised cells: a gold-on-indigo channel tab, then the
+   programme blocks. 2px of the dark background shows between rows and
+   between cells, the way the set-top guides drew their grid. */
+.guide-row {
+  display: flex; align-items: stretch; gap: 2px; padding: 0 16px; margin: 2px 0;
+  cursor: pointer;
+}
+.guide-row .ch-col {
+  color: var(--cable-gold); letter-spacing: 1px; display: flex; align-items: center;
+  padding: 0 10px; background: var(--cable-panel); box-shadow: var(--cable-bevel);
+  white-space: nowrap; overflow: hidden;
+}
+.guide-row:hover .ch-col { background: var(--cable-cell); }
+.guide-row.highlight .ch-col { background: var(--cable-gold); color: var(--cable-ink); box-shadow: none; }
 
 /* A row's programmes are laid out on a real time axis: left/width are
    percentages of the 90-minute window, set inline by guide.js, so a block is
-   exactly as wide as the airtime it occupies. The repeating gradient is the
-   :00/:30 ruling underneath (thirds of the window), matching the column
-   headers above. */
+   exactly as wide as the airtime it occupies. */
 .guide-row .prog-track {
-  flex: 1 1 0; position: relative; min-width: 0; height: 2.1em;
-  background: repeating-linear-gradient(
-    to right,
-    rgba(127,232,255,.14) 0 1px, transparent 1px calc(100% / 3));
+  flex: 1 1 0; position: relative; min-width: 0; height: 2.3em;
+  background: var(--cable-bg-bot);
 }
-/* border-left is the programme's start line — the vertical tick at the exact
-   moment it begins, which is also the moment the one before it ends. Two
-   exceptions: `joined` blocks take the channel mid-programme (a daypart
-   switch), so the line goes dotted — the picture does change there, but
-   nothing starts; and `edge`, the leftmost block, butts against the window's
-   own edge rather than a boundary, so it gets no line at all. */
+/* border-left is the programme's start line — the 2px gap between two cells
+   at the exact moment one ends and the next begins. Two exceptions: `joined`
+   blocks take the channel mid-programme (a daypart switch), so the line goes
+   dotted — the picture does change there, but nothing starts; and `edge`, the
+   leftmost block, butts against the window's own edge rather than a
+   boundary, so it gets no line at all. */
 /* Deliberately not a flex box: text-overflow: ellipsis has no effect on a flex
    container's contents, and a narrow block (a 5-minute slot is ~5% of the row)
    depends on ellipsing to stay readable. line-height does the vertical
    centering instead. */
 .guide-row .prog {
-  position: absolute; top: 0; bottom: 0; z-index: 1; line-height: 2.1em;
+  position: absolute; top: 0; bottom: 0; z-index: 1; line-height: 2.3em;
   color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  border-left: 2px solid rgba(127,232,255,.55); padding: 0 8px;
-  background: rgba(0,40,70,.35);
+  border-left: 2px solid var(--cable-bg-bot); padding: 0 8px;
+  background: var(--cable-cell); box-shadow: var(--cable-bevel);
 }
-.guide-row .prog.joined { border-left-style: dotted; border-left-color: rgba(127,232,255,.35); }
+.guide-row .prog.joined { border-left-style: dotted; border-left-color: var(--cable-cell-hi); }
 .guide-row .prog.edge { border-left: none; }
-.guide-row .prog.live { color: #7fff9f; background: rgba(0,60,50,.35); }
-.guide-row .prog-time { color: #7fe8ff; font-weight: normal; opacity: .75; margin-right: 6px; }
+.guide-row .prog.live { background: var(--cable-cell-live); }
+.guide-row:hover .prog { background: var(--cable-cell-hi); }
+.guide-row.highlight .prog { background: var(--cable-cell-hi); color: var(--cable-gold); }
+.guide-row .prog-time { color: var(--cable-cyan); font-weight: normal; margin-right: 6px; }
 
-/* Where we are in the window right now — the same "you are here" line a cable
-   box drew down its grid. Yellow is enough to tell it apart from the cyan
-   programme boundaries; it sits *behind* the blocks (z-index below .prog) and
-   carries no glow, so it never washes out the title text it passes through. */
+/* Where we are in the window right now — the "you are here" line a cable box
+   drew down its grid. Red stands apart from the blue cells and gold tabs, and
+   it sits *above* the cells (z-index 2) but is only 2px wide and translucent,
+   so title text still reads through it. */
 .guide-row .now-line {
-  position: absolute; top: -1px; bottom: -1px; width: 2px; margin-left: -1px;
-  background: rgba(255,247,0,.75); z-index: 0; pointer-events: none;
+  position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px;
+  background: rgba(255,60,60,.8); z-index: 2; pointer-events: none;
 }
 
-/* Narrow-screen guide: guide.js's renderRows() switches to one row = one
-   "on now" line per channel below MOBILE_GUIDE_MAX_WIDTH (kept in sync with
-   that constant by eye) rather than cramming the proportional NOW/+30/+60
-   timeline above into a phone's width. .now-only replaces the absolutely-
-   positioned timeline block with a plain line of text — there's only ever
-   one, so it doesn't need a time axis to sit on. */
-@media (max-width: 700px) {
+/* -- phone guide (portrait and landscape) ------------------------------------- */
+/* guide.js's renderRows() switches to one row = one "on now" line per channel
+   under the same query (MOBILE_GUIDE_QUERY, kept in sync by eye) rather than
+   cramming the proportional NOW/+30/+60 timeline into a phone's width.
+   .now-only replaces the absolutely-positioned timeline block with a plain
+   line of text — there's only ever one, so it doesn't need a time axis. */
+@media (max-width: 700px), (max-height: 500px) and (orientation: landscape) {
+  #guide { font-size: 1em; }
+  #guide-header { padding: 6px 12px; font-size: .85em; letter-spacing: 1px; }
   #guide-cols { display: none; }
-  .guide-row .ch-col, #guide-cols .ch-col { flex: 0 0 108px; font-size: .85em; }
-  .guide-row .prog-track.now-only {
-    height: auto; background: none; display: flex; align-items: center;
+  .guide-row { padding: 0 8px; }
+  .guide-row .ch-col, #guide-cols .ch-col {
+    flex: 0 0 112px; font-size: .8em; white-space: normal; line-height: 1.15; padding: 6px 8px;
   }
+  .guide-row .prog-track.now-only { height: auto; min-height: 2.6em; display: flex; }
   .guide-row .prog.now-only {
-    position: static; border-left: none; background: none; padding: 0;
-    white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.3;
+    position: static; flex: 1 1 auto; border-left: none; padding: 6px 10px;
+    display: flex; align-items: center;
+    white-space: normal; overflow: hidden; text-overflow: clip; line-height: 1.25; font-size: .9em;
   }
+
+  /* Heading and on-now stacked around the picture rather than beside it,
+     each clamped to a fixed height (see the note at the top of this section)
+     so the slot between them never shifts. */
+  #guide-top {
+    grid-template-columns: 1fr; grid-template-rows: auto 1fr auto;
+    grid-template-areas: "head" "video" "foot";
+  }
+  #guide-info-head, #guide-info-foot {
+    border-right: none; padding: 8px 12px; gap: 2px;
+    background: var(--cable-panel);
+  }
+  #guide-info-head { border-bottom: 2px solid var(--cable-edge-dark); }
+  #guide-info-foot {
+    border-top: 2px solid var(--cable-edge-dark);
+    flex-direction: row; align-items: center; gap: 10px;
+  }
+  #guide-info-chline { flex-direction: row; align-items: baseline; gap: 10px; }
+  #guide-info-num { flex: none; font-size: 1.15em; }
+  #guide-info-name, #guide-info-tagline {
+    min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  #guide-info-name { font-size: 1.15em; }
+  #guide-info-tagline { font-size: .8em; }
+  #guide-info-live-label { flex: none; font-size: .6em; }
+  #guide-info-live {
+    flex: 1 1 auto; font-size: .9em; line-height: 1.25em; height: 2.5em;
+    white-space: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+  }
+  #guide-video-slot { margin: 8px; }
+  /* Room under the last channel for the parked remote's head strip, which
+     sits over the bottom of the listings on a phone. */
+  #guide-rows { padding-bottom: 44px; }
+}
+
+/* Portrait: the picture runs the full width at 4:3, capped so the listings
+   underneath always keep at least about half the screen. */
+@media (max-width: 700px) and (orientation: portrait) {
+  #guide-top { flex: none; grid-template-rows: auto min(calc((100vw - 16px) * .75 + 16px), 46vh) auto; }
+  #guide-listings { flex: 1 1 auto; }
+}
+
+/* Landscape: two halves — listings on the left, the picture with its heading
+   above and on-now below on the right. The header bar spans both. */
+@media (max-height: 500px) and (orientation: landscape) {
+  #guide {
+    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr;
+    grid-template-areas: "header header" "listings top";
+  }
+  #guide-header { grid-area: header; }
+  #guide-listings {
+    grid-area: listings; border-top: none; border-right: 2px solid var(--cable-edge-dark);
+  }
+  #guide-top { grid-area: top; }
+  /* The remote normally parks bottom-right, which here is right on top of
+     the on-now line under the picture — park it over the listings instead,
+     whose last row already leaves room for it (#guide-rows padding above). */
+  body:has(#tv.guide-open) #remote { right: auto; left: 24px; }
 }
 
 /* -- Video On Demand ---------------------------------------------------------- */
@@ -354,55 +470,52 @@ html, body {
    picture is simply stopped (app.js's enterVod), so this can be fully
    opaque throughout rather than needing to stay legible over live video. */
 #vod {
-  position: absolute; inset: 0; z-index: 10; background: rgba(0,0,0,.94);
+  position: absolute; inset: 0; z-index: 10;
+  background: linear-gradient(var(--cable-bg-top), var(--cable-bg-bot));
   display: flex; flex-direction: column; overflow: hidden; font-size: 1.1em;
 }
 #vod-header {
   flex: none; display: flex; align-items: center; justify-content: space-between;
-  background: rgba(0,26,51,.7); border-bottom: 2px solid #0af;
+  background: var(--cable-silver); border-bottom: 2px solid var(--cable-edge-dark);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
   padding: 14px 24px; gap: 24px;
 }
-#vod-title { color: #fff700; font-size: 1.3em; letter-spacing: 1px; flex: none; }
+#vod-title { color: var(--cable-ink); font-size: 1.3em; letter-spacing: 1px; flex: none; }
 #vod-breadcrumb {
-  color: #7fe8ff; font-size: .9em; letter-spacing: .5px; text-align: right;
+  color: var(--cable-ink); font-size: .9em; letter-spacing: .5px; text-align: right;
   min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
 /* Free native scrolling, same as #guide-rows — no auto-scroll cycle, no
    keyboard row-stepping (see vod.js's header comment). */
 #vod-rows { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; }
-#vod-rows::-webkit-scrollbar { width: 10px; }
-#vod-rows::-webkit-scrollbar-track { background: rgba(0,13,26,.4); }
-#vod-rows::-webkit-scrollbar-thumb { background: rgba(127,232,255,.35); border-radius: 5px; }
-#vod-rows::-webkit-scrollbar-thumb:hover { background: rgba(127,232,255,.55); }
 
 .vod-row {
-  padding: 12px 24px; cursor: pointer; color: #fff;
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  padding: 12px 24px; margin: 2px 8px; cursor: pointer; color: #fff;
+  background: var(--cable-cell); box-shadow: var(--cable-bevel);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.vod-row:hover { background: rgba(10,170,255,.15); }
+.vod-row:hover { background: var(--cable-gold); color: var(--cable-ink); }
 /* Sticky so it's still there 300 films into Comedy, opaque so the rows
    scrolling under it don't show through. */
 .vod-back {
   position: sticky; top: 0; z-index: 1;
-  background: #001a33; color: #7fe8ff; letter-spacing: 1px;
-  border-bottom: 1px solid rgba(127,232,255,.35);
+  margin-top: 0; background: var(--cable-panel); color: var(--cable-gold); letter-spacing: 1px;
 }
-.vod-back:hover { background: #00294f; }
+.vod-back:hover { background: var(--cable-gold); color: var(--cable-ink); }
 
 /* Hold-to-scrub UI, VOD playback only — player.js owns this directly (see
    its header comment on why it isn't a vod.js concern). Centered over the
    picture, same "readout box" language as #osd/#digit-osd. */
 #vod-seek {
   position: absolute; left: 50%; bottom: 15%; transform: translateX(-50%); z-index: 8;
-  background: rgba(0,0,0,.8); border: 2px solid rgba(255,255,255,.25);
+  background: var(--cable-osd); border: 2px solid #aab1c2; box-shadow: var(--cable-bevel);
   padding: 16px 28px; width: 60vw; max-width: 700px; text-align: center;
 }
-#vod-seek-dir { color: #fff700; font-size: 1.2em; letter-spacing: 2px; }
-#vod-seek-bar { margin-top: 12px; height: 8px; background: rgba(255,255,255,.2); }
-#vod-seek-fill { height: 100%; width: 0%; background: #fff700; }
-#vod-seek-time { margin-top: 8px; color: #7fe8ff; font-size: .95em; letter-spacing: 1px; }
+#vod-seek-dir { color: var(--cable-gold); font-size: 1.2em; letter-spacing: 2px; }
+#vod-seek-bar { margin-top: 12px; height: 8px; background: var(--cable-edge-dark); }
+#vod-seek-fill { height: 100%; width: 0%; background: var(--cable-gold); }
+#vod-seek-time { margin-top: 8px; color: var(--cable-cyan); font-size: .95em; letter-spacing: 1px; }
 
 /* -- on-screen remote -------------------------------------------------------- */
 /* Parked off the bottom edge with only the head strip showing; :hover rolls

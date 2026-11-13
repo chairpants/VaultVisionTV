@@ -37,13 +37,17 @@ const WINDOW_MS = 3 * SLOT_MS; // NOW through +60, the span a row draws across
 // the pools are built on, whatever the local UTC offset is.
 const slotStart = (ms) => EPOCH_MS + Math.floor((ms - EPOCH_MS) / SLOT_MS) * SLOT_MS;
 
-// Below this width there isn't room to lay out a proportional NOW/+30/+60
-// timeline per row without every block becoming an unreadable sliver, so
-// renderRows() switches to one row = one "on now" line instead. Matches the
-// breakpoint in style.css's own #guide media query — kept in sync by eye
-// since the two can't share a literal across a stylesheet and a script.
-const MOBILE_GUIDE_MAX_WIDTH = 700;
-const isMobileGuide = () => window.matchMedia(`(max-width: ${MOBILE_GUIDE_MAX_WIDTH}px)`).matches;
+// Phone layouts, where there isn't room to lay out a proportional
+// NOW/+30/+60 timeline per row without every block becoming an unreadable
+// sliver, so renderRows() switches to one row = one "on now" line instead.
+// Two cases: portrait (narrow), and landscape (short) — a phone on its side
+// is wider than 700px, but the listings only get the left half of it there
+// (see style.css). Matches style.css's #guide media queries — kept in sync
+// by eye since the two can't share a literal across a stylesheet and a
+// script.
+const MOBILE_GUIDE_QUERY =
+  "(max-width: 700px), (max-height: 500px) and (orientation: landscape)";
+const isMobileGuide = () => window.matchMedia(MOBILE_GUIDE_QUERY).matches;
 
 const shortTime = (d) => `${d.getHours() % 12 || 12}:${String(d.getMinutes()).padStart(2, "0")}`;
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
@@ -104,14 +108,18 @@ function createGuide({ root, channels, catalog, tuneTo, getCurrentNumber }) {
   root.innerHTML = `
     <div id="guide-header"></div>
     <div id="guide-top">
-      <div id="guide-info">
-        <div id="guide-info-num"></div>
-        <div id="guide-info-name"></div>
+      <div id="guide-info-head">
+        <div id="guide-info-chline">
+          <span id="guide-info-num"></span>
+          <span id="guide-info-name"></span>
+        </div>
         <div id="guide-info-tagline"></div>
+      </div>
+      <div id="guide-video-slot"></div>
+      <div id="guide-info-foot">
         <div id="guide-info-live-label">ON NOW</div>
         <div id="guide-info-live"></div>
       </div>
-      <div id="guide-video-slot"></div>
     </div>
     <div id="guide-listings">
       <div id="guide-cols">
@@ -258,7 +266,7 @@ function createGuide({ root, channels, catalog, tuneTo, getCurrentNumber }) {
     if (row) setHighlight(parseInt(row.dataset.ch, 10));
   });
 
-  // Crossing MOBILE_GUIDE_MAX_WIDTH (a rotation, or resizing a desktop
+  // Crossing MOBILE_GUIDE_QUERY (a rotation, or resizing a desktop
   // window) should switch layouts without waiting on the next 60s refresh().
   let resizeTimer = null;
   window.addEventListener("resize", () => {
