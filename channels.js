@@ -74,7 +74,7 @@ window.CHANNELS = [
       "Wishbone", "MouseFactory", "MrMen", "JimHensonHour",
       "CosmosaPersonalVoyage", "PlanetEarth",
       "WonderPetsEpisodeswithMissingEpisodes",
-      "MartyStouffersWildAmerica", "WhereInTheWorldIsCarmenSandiego",
+      "WhereInTheWorldIsCarmenSandiego",
       "ReadingRainbow", "BetweenTheLions", "LibertysKids", "KrattsCreatures",
       "ShiningTimeStation", "BluesClues",
       "AceLightning", "Arthur", "BobTheBuilder", "DinoSapien", "FigureItOut",
@@ -93,7 +93,7 @@ window.CHANNELS = [
       ] },
     ],
     fallbackPool: [
-      "DrewCareyShow", "HomeImprovement", "Coach", "Taxi1978",
+      "HomeImprovement", "Coach", "Taxi1978",
       "McHalesNavySeries", "DharmaAndGreg", "JeffFoxworthyShow",
       "BosomBuddies", "SoulMan", "TeenAngel",
       "CavemenSeriesSlightlyBetterQuality", "YouWish",
@@ -129,10 +129,9 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "MASH", "Jeffersons", "LeaveIttoBeavertheSeries",
-      "PetticoatJunction", "Newhart", "GreenAcres", "MaryTylerMooreShow",
+      "PetticoatJunction", "Newhart", "GreenAcres",
       "DickVanDyke", "TheLucyShow", "HeresLucy", "MisterEd",
       "ArchieBunkersPlace", "WkrpinCincinnati", "AllInTheFamily",
-      "GilligansIsland",
       "HaveGunWillTravel", "OurMissBrooks",
       "AllsFair",
     ],
@@ -142,7 +141,7 @@ window.CHANNELS = [
     tagline: "Tiffany network, prime hours.",
     daypart: [],
     fallbackPool: [
-      "MurphyBrown", "EverybodyLovesRaymond", "KingofQueens",
+      "MurphyBrown", "KingofQueens",
       "Nanny", "StillStanding", "BlessThisHouse",
       "YesDear",
     ],
@@ -175,7 +174,7 @@ window.CHANNELS = [
       ] },
     ],
     fallbackPool: [
-      "SavedByTheBell", "CosbyShow", "FactsofLife", "NightCourt",
+      "SavedByTheBell", "CosbyShow", "NightCourt",
       "GetSmart", "MamasFamily", "TheHoganFamily", "ALFtheSeries",
       "PunkyBrewster", "TheMonkees", "EerieIndiana", "ItsYourMove",
       "GoldenGirls",
@@ -249,7 +248,7 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "BillNye", "BeakmansWorld", "SchoolhouseRock", "CosmosaPersonalVoyage",
-      "PlanetEarth", "MartyStouffersWildAmerica",
+      "PlanetEarth",
       "WhereInTheWorldIsCarmenSandiego",
       "ReadingRainbow", "KrattsCreatures", "LibertysKids",
       "HorribleHistories2001", "TimeCommanders",
@@ -272,13 +271,13 @@ window.CHANNELS = [
       ] },
       { days: [0, 1, 2, 3, 4, 5, 6], startHour: 23, endHour: 24, pool: [
         "LeaveIttoBeavertheSeries", "PetticoatJunction",
-        "GreenAcres", "MaryTylerMooreShow", "DickVanDyke", "TheLucyShow",
+        "GreenAcres", "DickVanDyke", "TheLucyShow",
         "HeresLucy", "MisterEd", "GetSmart", "Taxi1978", "Newhart",
         "TheMonkees", "BosomBuddies",
       ] },
       { days: [0, 1, 2, 3, 4, 5, 6], startHour: 0, endHour: 5, pool: [
         "NickAtNite", "LeaveIttoBeavertheSeries", "PetticoatJunction",
-        "GreenAcres", "MaryTylerMooreShow", "DickVanDyke", "TheLucyShow",
+        "GreenAcres", "DickVanDyke", "TheLucyShow",
         "HeresLucy", "MisterEd", "GetSmart", "Taxi1978", "Newhart",
         "TheMonkees", "BosomBuddies",
       ] },
@@ -356,8 +355,8 @@ window.CHANNELS = [
       "InspectorGadget", "DuckTalesSeriesWorkinProgress", "MutantLeague",
       "AdventuresOfSonic", "BikerMiceFromMars", "RamboTheForceofFreedom",
       "EagleRiders", "BuzzLightyearofStarCommand",
-      "BeastWarsTransformers", "LippytheLionandHardyHarHar",
-      "WallyGator", "MightyMax", "PoliceAcademyTheAnimatedSeries",
+      "BeastWarsTransformers",
+      "MightyMax", "PoliceAcademyTheAnimatedSeries",
       "StarcomtheUSSpaceForceSeries", "TheJetsons",
       "JamesBondJr", "Exosquad", "Bonkers", "Jem", "PiratesOfDarkWater",
       "BionicSix", "OzzyAndDrix",
@@ -406,37 +405,46 @@ window.CHANNELS = [
   {
     number: 22, name: "ADVENTURE NETWORK", kind: "curated",
     tagline: "Car chases guaranteed.",
+    // Just the action, spy, cop and western half now. This pool had grown to
+    // 61 shows / ~2,350h -- any one show surfaced every few months -- and was
+    // three channels in one: the sci-fi/supernatural shows moved to STRANGE
+    // SIGNALS (25), and the family/teen dramas (Wonder Years, Party of Five,
+    // The O.C., Doogie Howser...) already air on PRIME TIME SOAPS (38), THE
+    // WONDER HOUR (42) and FAMILY HOUR (50).
     daypart: [],
     fallbackPool: [
-      "NYPDBlue", "PartyOfFive", "WonderYears", "ATeam",
-      "HighwayToHeaven", "NorthernExposure", "SwitchedatBirth",
-      "DoogieHowserMD", "TheOC", "Everwood", "KnightRider", "Baywatch",
-      "DueSouth", "CharmedtheSeries", "BuckRogers", "IntotheBadlands",
-      "TwinPeaks", "Jericho", "BriscoCountyJr", "Animorphs",
-      "BattlestarGalactica", "BattlestarGalactica2004", "Persuaders", "Rookies", "V1983",
-      "BrooklynSouth", "TheNetAmericanTVseries", "Chase", "LoneGunmen",
-      "BarbaryCoast", "FireflySeries", "LogansRun", "MaxHeadroom",
-      "Automan", "DallastheSeries", "HandmaidsTaleSeries",
-      "LifeAsWeKnowIt", "Middleman", "BlueThunder", "CopRock", "Tick",
-      "QuantumLeap", "BuffyTheVampireSlayer",
-      "MacGyver", "TheFugitive", "DangerMan", "ItTakesAThief", "TheChampions",
-      "Earth2", "TheFlash1990", "MisfitsOfScience",
-      "ConanTheAdventurer1997", "Farscape", "NowAndAgain", "Primeval",
-      "TheDresdenFiles", "TheImmortal", "TheMarshal", "VengeanceUnlimited",
-      "Banacek", "PlanetOfTheApes1974", "HardyBoysNancyDrew",
+      "ATeam", "KnightRider", "MacGyver", "TheFugitive", "Baywatch",
+      "DueSouth", "BlueThunder", "IntotheBadlands", "BriscoCountyJr",
+      "BarbaryCoast", "ConanTheAdventurer1997", "TheMarshal",
+      "NYPDBlue", "Rookies", "BrooklynSouth", "Chase", "CopRock",
+      "TheNetAmericanTVseries", "VengeanceUnlimited", "Banacek",
+      "TheImmortal", "HardyBoysNancyDrew",
+      "Persuaders", "DangerMan", "ItTakesAThief", "TheChampions",
     ],
   },
   { number: 23, name: "ANIME ZONE", kind: "genre", genre: "Anime",
     tagline: "Dubbed, subbed, and everything between." },
   { number: 24, name: "LAUGH TRACK", kind: "genre", genre: "Sketch Comedy & Late Night",
     tagline: "Live from a soundstage somewhere." },
-  // Channel 25 MOVIE VAULT is gone: it swept the "TV Movies" genre, which
-  // VaultVision has since split into real film genres (Comedy, Drama, Horror,
-  // Action & Adventure, Sci-Fi & Fantasy, Family & Kids, Holiday). Those are
-  // the VBO tier at the bottom of this file now, and 25 stays empty rather
-  // than renumbering every channel below it. The made-for-TV movies
-  // themselves didn't go anywhere -- they're in Horror/Action now, and still
-  // on CHILLER and CREATURE DOUBLE FEATURE.
+  // Channel 25 used to be MOVIE VAULT, a sweep of the old "TV Movies" genre
+  // (VaultVision has since split that into real film genres -- the VBO tier
+  // at the bottom of this file). The slot sat empty until ADVENTURE NETWORK
+  // (22) got split: its sci-fi and supernatural half lives here now. Space
+  // opera that SECTOR 7 (20) already carries -- BSG 2004, Farscape, Earth 2,
+  // Primeval, Planet of the Apes -- stays there rather than doubling up.
+  {
+    number: 25, name: "STRANGE SIGNALS", kind: "curated",
+    tagline: "Weird science, after dark.",
+    daypart: [],
+    fallbackPool: [
+      "QuantumLeap", "TwinPeaks", "BuffyTheVampireSlayer", "CharmedtheSeries",
+      "TheDresdenFiles", "LoneGunmen", "Jericho", "NowAndAgain",
+      "HandmaidsTaleSeries", "MaxHeadroom", "Middleman", "Tick",
+      "TheFlash1990", "MisfitsOfScience", "Automan", "Animorphs",
+      "BuckRogers", "BattlestarGalactica", "V1983", "LogansRun",
+      "FireflySeries",
+    ],
+  },
   // Live PD used to be excluded here by id, because every file in the item
   // VaultVision sources it from needs an archive.org login (401 anonymously).
   // That was the wrong layer — it hid the show from this one channel while
@@ -466,11 +474,13 @@ window.CHANNELS = [
     ],
   },
   {
-    number: 28, name: "QUEENS & RAYMOND", kind: "curated",
+    // Was QUEENS & RAYMOND until Everybody Loves Raymond's items died on
+    // archive.org (data/removals.md, 2026-11-12).
+    number: 28, name: "KING OF QUEENS & CO.", kind: "curated",
     tagline: "Married, with in-laws.",
     daypart: [],
     fallbackPool: [
-      "EverybodyLovesRaymond", "KingofQueens", "Reba",
+      "KingofQueens", "Reba",
       "YesDear",
     ],
   },
@@ -579,7 +589,6 @@ window.CHANNELS = [
     fallbackPool: [
       "PopeyetheSailorMan", "RockyandBullwinkleShow",
       "LOONEYTUNESSERIES", "PeabodysImprobableHistory",
-      "LippytheLionandHardyHarHar", "WallyGator",
       "CaspertheFriendlyGhost", "MotormouseandAutocat",
       "WackyRacesSeries", "HermanandKatnip", "CelebritysComicolor",
       "CattanoogaCatstheSeries", "JosieandthePussycatsTVseries",
@@ -593,8 +602,8 @@ window.CHANNELS = [
     tagline: "Big hair, bigger drama.",
     daypart: [],
     fallbackPool: [
-      "PartyOfFive", "NorthernExposure", "TheOC", "Everwood",
-      "TwinPeaks", "DallastheSeries",
+      "PartyOfFive", "NorthernExposure", "TheOC",
+      "TwinPeaks", "DallastheSeries", "SwitchedatBirth",
     ],
   },
   {
@@ -685,7 +694,8 @@ window.CHANNELS = [
   // NICKTOONS AFTER DARK (RockosModernLife, InvaderZIM). "Tick" (2001
   // live-action), PowerRangers, and RoboCopliveactionTVseries dropped — live
   // action, genre "Drama & Adventure", not actually cartoons despite sitting
-  // in this pool before; still reachable via ADVENTURE NETWORK (channel 6).
+  // in this pool before; still on the air elsewhere (Tick on STRANGE
+  // SIGNALS 25, RoboCop on SECTOR 7 20, Power Rangers on FOX KIDS 14).
   {
     number: 45, name: "TEEN ACTION THEATER", kind: "curated",
     tagline: "Capes, transformations, and turtle power.",
@@ -731,7 +741,7 @@ window.CHANNELS = [
       "BobandMargaret", "RenAndStimpy", "MoralOrel", "PJs",
       "DrawnTogether", "BrakShowSeries", "Simpsons", "Oblongs",
       "SpawntheAnimatedSeriesSeries480x480", "Undergrads", "HomeMovies",
-      "AeonFlux", "CommonSideEffects",
+      "AeonFlux",
       "MissionHill", "CodeMonkeys",
       "LiquidTelevision", "SlackerCats",
     ],
@@ -741,7 +751,7 @@ window.CHANNELS = [
     tagline: "Subtitles after dark.",
     daypart: [],
     fallbackPool: [
-      "DragonBallZ", "Digimon", "LodossWarSeriesEnglishDub",
+      "DragonBallZ", "Digimon",
       "NeonGenesisEvangelion", "AttackonTitan",
       "MobileSuitGundam0083", "BubblegumCrisistheSeriesDualAudioHD",
     ],
@@ -774,7 +784,7 @@ window.CHANNELS = [
     tagline: "A lesson learned before the credits.",
     daypart: [],
     fallbackPool: [
-      "CosbyShow", "FactsofLife", "MamasFamily",
+      "CosbyShow", "MamasFamily",
       "TheHoganFamily", "HighwayToHeaven", "ALFtheSeries",
       "ArchieBunkersPlace", "LifeGoesOn", "HarryandtheHendersons",
       "BlessThisHouse", "JusttheTenofUs", "BosomBuddies", "ItsYourMove",
@@ -787,7 +797,7 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "Nanny", "Reba", "UnhappilyEverAfter", "AreWeThereYet",
-      "StillStanding", "WhatILikeAboutYou", "VeronicasCloset",
+      "StillStanding", "VeronicasCloset",
       "DharmaAndGreg", "RudeAwakening", "NedAndStacey", "Joey",
       "SoulMan", "BernieMacShow",
       "BostonCommon", "GrownUps", "JPod", "StarkRavingMad",
@@ -871,10 +881,9 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "MASH", "Jeffersons", "PetticoatJunction", "GreenAcres",
-      "MaryTylerMooreShow", "DickVanDyke", "TheLucyShow", "HeresLucy",
+      "DickVanDyke", "TheLucyShow", "HeresLucy",
       "MisterEd", "GetSmart", "Taxi1978", "McHalesNavySeries",
       "WkrpinCincinnati", "AllInTheFamily", "TheMonkees",
-      "GilligansIsland",
       "TheRopers",
       "AllsFair", "Angie", "HelloLarry", "LotsaLuck", "Tabitha",
       "GirlWithSomethingExtra",
@@ -891,7 +900,7 @@ window.CHANNELS = [
     tagline: "Shoulder pads and setups.",
     daypart: [],
     fallbackPool: [
-      "MurphyBrown", "CosbyShow", "FactsofLife", "Newhart", "NightCourt",
+      "MurphyBrown", "CosbyShow", "Newhart", "NightCourt",
       "GrowingPains", "MamasFamily", "TheHoganFamily",
       "ALFtheSeries", "ArchieBunkersPlace", "PunkyBrewster",
       "JusttheTenofUs", "BosomBuddies", "MarriedWithChildren",
@@ -910,7 +919,7 @@ window.CHANNELS = [
     tagline: "Must-see, whenever you tune in.",
     daypart: [],
     fallbackPool: [
-      "DrewCareyShow", "FamilyMatters", "EverybodyLovesRaymond",
+      "FamilyMatters",
       "KingofQueens", "SavedByTheBell", "HomeImprovement", "Coach",
       "MadAboutYou", "Nanny", "UnhappilyEverAfter", "NewsRadio",
       "CarolineInTheCity", "LifeGoesOn", "AlexMack", "ParkerLewis",
@@ -935,7 +944,7 @@ window.CHANNELS = [
     tagline: "The last sitcoms before the mockumentary took over.",
     daypart: [],
     fallbackPool: [
-      "MalcolmInTheMiddle", "Reba", "StillStanding", "WhatILikeAboutYou",
+      "MalcolmInTheMiddle", "Reba", "StillStanding",
       "Joey", "BernieMacShow", "WeberShow", "BacktoYou",
       "CavemenSeriesSlightlyBetterQuality", "Tucker", "That70sShow",
       "WillAndGrace",
@@ -985,4 +994,10 @@ window.CHANNELS = [
     tagline: "Explosions on a schedule." },
   { number: 67, name: "VBO HORROR", kind: "genre", genre: "Horror",
     tagline: "Late enough that it counts." },
+  // 17 films (~26h): the Christmas classics plus the Halloweentown run. They
+  // were only ever on VBO/VBO 2/VBO FAMILY, where one comes up every few
+  // days at best. A sweep like the rest of the tier, so new holiday films
+  // land here with no curation.
+  { number: 68, name: "VBO HOLIDAY", kind: "genre", genre: "Holiday",
+    tagline: "'Tis the season. Every season." },
 ];
