@@ -23,11 +23,11 @@ show already in progress, and the only way to "catch it from the beginning"
 is to have been there when it started.
 
 VaultVisionTV rebuilds that feeling on top of a library of classic TV and
-movies streamed straight from the Internet Archive. **66 channels** —
+movies streamed straight from the Internet Archive. **68 channels** —
 organized by original broadcast network (ABC, CBS, NBC, Fox, Nickelodeon,
 MTV, first-run syndication) as well as by genre, era, and a premium movie
 tier — each run their own independent, deterministic schedule computed from
-the current time, spanning **335 shows**, **398 movies** and **~28,150
+the current time, spanning **510 shows**, **399 movies** and **~36,150
 episodes**. There's no "state" to keep in sync between sessions or devices:
 the schedule is pure math over the clock, so any two people tuned to the same
 channel at the same moment see the same thing, automatically.
@@ -37,13 +37,13 @@ channel at the same moment see the same thing, automatically.
 - **Deterministic scheduling** — every channel's lineup is derived purely
   from wall-clock time. No server, no database, no per-viewer state; the
   schedule is the same for everyone, all the time, forever.
-- **A real channel lineup** — 66 channels split between network-affiliate
+- **A real channel lineup** — 68 channels split between network-affiliate
   style channels, genre/theme channels (sitcoms by decade, anime,
   anthology/horror, kids' programming, and more), and the VBO movie tier,
   each with its own on-screen identity and tagline.
-- **A premium movie tier** — VBO and VBO 2 carry all 398 films, sharing one
+- **A premium movie tier** — VBO and VBO 2 carry all 399 films, sharing one
   library on two different shuffles the way a real movie channel's second
-  feed did, with FAMILY, DRAMA, COMEDY, ACTION and HORROR alongside them.
+  feed did, with FAMILY, DRAMA, COMEDY, ACTION, HORROR and HOLIDAY alongside them.
 - **Dayparted programming blocks** — network channels shift their pool by
   time of day and day of week, recreating blocks like Friday-night sitcom
   lineups or Saturday-morning cartoons the way real affiliates ran them,
