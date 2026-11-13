@@ -75,6 +75,8 @@ window.CHANNELS = [
       "CosmosaPersonalVoyage", "PlanetEarth",
       "WonderPetsEpisodeswithMissingEpisodes",
       "MartyStouffersWildAmerica", "WhereInTheWorldIsCarmenSandiego",
+      "ReadingRainbow", "BetweenTheLions", "LibertysKids", "KrattsCreatures",
+      "ShiningTimeStation", "BluesClues",
     ],
   },
   {
@@ -93,6 +95,7 @@ window.CHANNELS = [
       "McHalesNavySeries", "DharmaAndGreg", "JeffFoxworthyShow",
       "BosomBuddies", "SoulMan", "TeenAngel",
       "CavemenSeriesSlightlyBetterQuality", "YouWish",
+      "MyWifeAndKids", "Benson", "TheRopers",
     ],
   },
   {
@@ -111,6 +114,8 @@ window.CHANNELS = [
       "TwinPeaks", "BattlestarGalactica", "Rookies", "MaxHeadroom",
       "BarbaryCoast", "LifeAsWeKnowIt", "Automan", "666ParkAvenueSeries",
       "CopRock", "BlueThunder",
+      "MacGyver", "TheFugitive", "TheInvaders", "TheOuterLimits",
+      "ItTakesAThief", "AliasSmithAndJones", "TheTimeTunnel",
     ],
   },
   {
@@ -123,6 +128,7 @@ window.CHANNELS = [
       "DickVanDyke", "TheLucyShow", "HeresLucy", "MisterEd",
       "ArchieBunkersPlace", "WkrpinCincinnati", "AllInTheFamily",
       "GilligansIsland",
+      "HaveGunWillTravel", "OurMissBrooks",
     ],
   },
   {
@@ -132,6 +138,7 @@ window.CHANNELS = [
     fallbackPool: [
       "MurphyBrown", "EverybodyLovesRaymond", "KingofQueens",
       "Nanny", "StillStanding", "BlessThisHouse",
+      "YesDear",
     ],
   },
   {
@@ -141,6 +148,7 @@ window.CHANNELS = [
     fallbackPool: [
       "NorthernExposure", "DueSouth", "Jericho", "BrooklynSouth",
       "LogansRun", "DallastheSeries", "MurderSheWrote",
+      "JudgingAmy", "TheFlash1990",
     ],
   },
   {
@@ -163,6 +171,7 @@ window.CHANNELS = [
       "SavedByTheBell", "CosbyShow", "FactsofLife", "NightCourt",
       "GetSmart", "MamasFamily", "TheHoganFamily", "ALFtheSeries",
       "PunkyBrewster", "TheMonkees", "EerieIndiana", "ItsYourMove",
+      "GoldenGirls",
     ],
   },
   {
@@ -181,6 +190,7 @@ window.CHANNELS = [
     fallbackPool: [
       "ATeam", "HighwayToHeaven", "KnightRider", "Baywatch",
       "BuckRogers", "V1983", "Chase", "QuantumLeap",
+      "MisfitsOfScience", "PowersOfMatthewStar", "Earth2",
     ],
   },
   {
@@ -201,6 +211,7 @@ window.CHANNELS = [
     fallbackPool: [
       "PartyOfFive", "TheOC", "Millennium", "BriscoCountyJr",
       "LoneGunmen", "FireflySeries", "Sliders",
+      "JohnDoe", "Brimstone", "FreakyLinks",
     ],
   },
   // -- literal recorded broadcast blocks, each its own channel
@@ -228,6 +239,7 @@ window.CHANNELS = [
       "BillNye", "BeakmansWorld", "SchoolhouseRock", "CosmosaPersonalVoyage",
       "PlanetEarth", "MartyStouffersWildAmerica",
       "WhereInTheWorldIsCarmenSandiego",
+      "ReadingRainbow", "KrattsCreatures", "LibertysKids",
     ],
   },
   {
@@ -263,6 +275,7 @@ window.CHANNELS = [
       "AreYouAfraidOfTheDark", "AlexMack", "NickArcade", "HeyDude",
       "InvaderZIM", "KaBlam", "RenAndStimpy", "RockosModernLife",
       "SaluteYourShorts", "Animorphs",
+      "AsToldByGinger", "YouCantDoThatOnTelevision", "BluesClues",
     ],
   },
   // Elementary-tier cartoons, 1980-onward half of the split — SUNDAY FUNNIES
@@ -298,6 +311,7 @@ window.CHANNELS = [
       "MightyMousetheNewAdventures", "CattanoogaCatstheSeries",
       "JosieandthePussycatsTVseries", "PolePosition", "GarbagePailKids",
       "KarateKid", "Houndcats", "CaliforniaDreams", "TheJetsons",
+      "PeeWeesPlayhouse", "PupNamedScoobyDoo", "DungeonsAndDragons",
     ],
   },
   {
@@ -310,6 +324,7 @@ window.CHANNELS = [
       "EdEddNEddySeriesAllEpisodesandSpecials", "CaspersScareSchool",
       "CouragetheCowardlyDog", "ArchiesWeirdMysteries", "GravityFalls",
       "LandBeforeTime", "MorphFiles", "SwanBoy",
+      "FostersHome", "MegasXLR", "TimeSquad",
     ],
   },
   {
@@ -325,6 +340,8 @@ window.CHANNELS = [
       "BeastWarsTransformers", "LippytheLionandHardyHarHar",
       "WallyGator", "MightyMax", "PoliceAcademyTheAnimatedSeries",
       "StarcomtheUSSpaceForceSeries", "TheJetsons",
+      "JamesBondJr", "Exosquad", "Bonkers", "Jem", "PiratesOfDarkWater",
+      "BionicSix", "OzzyAndDrix",
     ],
   },
   {
@@ -344,6 +361,7 @@ window.CHANNELS = [
       "RoboCopliveactionTVseries", "JackofAllTradesTVseries",
       "MortalKombatConquest", "HitchhikersGuidetotheGalaxy",
       "BattlestarGalactica2004", "Sliders",
+      "TheInvaders", "Lexx", "Earth2", "TheTimeTunnel",
     ],
   },
   {
@@ -354,6 +372,7 @@ window.CHANNELS = [
       "AlfredHitchcockPresents", "TwilightZone1959",
       "AreYouAfraidOfTheDark", "NewAlfredHitchcockPresents",
       "AmazingStories", "NightGallery",
+      "OneStepBeyond", "TheOuterLimits", "PerversionsOfScience",
     ],
   },
   {
@@ -372,6 +391,8 @@ window.CHANNELS = [
       "Automan", "DallastheSeries", "HandmaidsTaleSeries",
       "LifeAsWeKnowIt", "Middleman", "BlueThunder", "CopRock", "Tick",
       "QuantumLeap", "BuffyTheVampireSlayer",
+      "MacGyver", "TheFugitive", "DangerMan", "ItTakesAThief", "TheChampions",
+      "Earth2", "TheFlash1990", "MisfitsOfScience",
     ],
   },
   { number: 23, name: "ANIME ZONE", kind: "genre", genre: "Anime",
@@ -409,6 +430,7 @@ window.CHANNELS = [
       "Millennium", "BeyondReality", "FreddysNightmares",
       "SapphireandSteel", "AshvsEvilDead", "AmericanGothic1995",
       "Spooksville", "HammerHouseofHorror",
+      "Werewolf", "Brimstone", "FreakyLinks",
     ],
   },
   {
@@ -417,6 +439,7 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "EverybodyLovesRaymond", "KingofQueens", "Reba",
+      "YesDear",
     ],
   },
   {
@@ -463,6 +486,7 @@ window.CHANNELS = [
       "AmazingStories", "FreddysNightmares", "SapphireandSteel",
       "AshvsEvilDead", "AmericanGothic1995", "HammerHouseofHorror",
       "666ParkAvenueSeries", "BuffyTheVampireSlayer", "NightGallery",
+      "OneStepBeyond", "TheOuterLimits", "PerversionsOfScience",
     ],
   },
   {
@@ -524,6 +548,7 @@ window.CHANNELS = [
       "WackyRacesSeries", "HermanandKatnip", "CelebritysComicolor",
       "CattanoogaCatstheSeries", "JosieandthePussycatsTVseries",
       "Houndcats",
+      "TopCat", "Batfink", "ClutchCargo", "SpeedRacer",
     ],
   },
   {
@@ -542,6 +567,8 @@ window.CHANNELS = [
     fallbackPool: [
       "Xena", "BriscoCountyJr", "JackofAllTradesTVseries",
       "BarbaryCoast",
+      "HaveGunWillTravel", "WagonTrain", "AliasSmithAndJones", "AnnieOakley",
+      "SergeantPreston",
     ],
   },
   {
@@ -550,6 +577,7 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "ATeam", "KnightRider", "Baywatch", "Automan", "BlueThunder",
+      "MacGyver",
     ],
   },
   // TRL's own weekday-afternoon slot, the only window it ever aired in --
@@ -570,6 +598,7 @@ window.CHANNELS = [
       "RealWorld", "RoadRules", "Challenge", "Osbournes", "VivaLaBam",
       "PimpMyRide", "MtvTrueLife", "MTVUnplugged", "BeavisButthead", "Daria",
       "AeonFlux", "Jackass", "CelebrityDeathmatch",
+      "Wildboyz",
     ],
   },
   {
@@ -579,6 +608,7 @@ window.CHANNELS = [
     fallbackPool: [
       "MalcolmInTheMiddle", "WonderYears", "DoogieHowserMD",
       "ParkerLewis",
+      "AsToldByGinger",
     ],
   },
   // LivePD is back after being pulled for being unplayable: its old source
@@ -625,6 +655,8 @@ window.CHANNELS = [
       "TheMaskAnimatedSeries", "BeastWarsTransformers", "MightyMax",
       "TheTick", "Godzilla", "RockosModernLife", "TMNTNextMutation",
       "MotorcityTVseries", "KarateKid", "StarcomtheUSSpaceForceSeries",
+      "StaticShock", "XiaolinShowdown", "AmericanDragon", "Exosquad",
+      "BionicSix", "MegasXLR",
     ],
   },
   {
@@ -633,6 +665,7 @@ window.CHANNELS = [
     daypart: [],
     fallbackPool: [
       "GetSmart", "Persuaders", "TekWar", "MaxHeadroom",
+      "DangerMan", "ItTakesAThief", "TheChampions",
     ],
   },
   // Spun off from BeavisButthead, which is already the anchor here. Spun off
@@ -652,6 +685,7 @@ window.CHANNELS = [
       "DrawnTogether", "BrakShowSeries", "Simpsons", "Oblongs",
       "SpawntheAnimatedSeriesSeries480x480", "Undergrads", "HomeMovies",
       "AeonFlux", "CommonSideEffects",
+      "MissionHill", "CodeMonkeys",
     ],
   },
   {
@@ -680,6 +714,8 @@ window.CHANNELS = [
     fallbackPool: [
       "LeaveIttoBeavertheSeries", "DickVanDyke", "TheLucyShow",
       "MisterEd", "McHalesNavySeries",
+      "TheFugitive", "AbbottAndCostelloShow", "OurMissBrooks",
+      "HaveGunWillTravel",
     ],
   },
   // The 8-10pm family block real networks actually ran; outside it the
@@ -693,6 +729,7 @@ window.CHANNELS = [
       "TheHoganFamily", "HighwayToHeaven", "ALFtheSeries",
       "ArchieBunkersPlace", "LifeGoesOn", "HarryandtheHendersons",
       "BlessThisHouse", "JusttheTenofUs", "BosomBuddies", "ItsYourMove",
+      "GoldenGirls", "Benson",
     ],
   },
   {
@@ -719,6 +756,7 @@ window.CHANNELS = [
       "Wishbone", "MouseFactory", "MrMen", "LandOfTheLost1991",
       "TheWorldofDavidtheGnome", "JimHensonHour",
       "WonderPetsEpisodeswithMissingEpisodes",
+      "ReadingRainbow", "BetweenTheLions", "BluesClues", "ShiningTimeStation",
     ],
   },
   // WhoseLineIsItAnyway is improv rather than sketch, but it's the same
@@ -731,6 +769,7 @@ window.CHANNELS = [
     fallbackPool: [
       "WhoseLineIsItAnyway", "InLivingColor", "MontyPythonsFlyingCircus",
       "ABCsFridays", "BenStillerShow", "HeyVernIt",
+      "UprightCitizensBrigade", "YouCantDoThatOnTelevision",
     ],
   },
   // Short-run and burned-off series — the pool is deliberately made of shows
@@ -746,6 +785,8 @@ window.CHANNELS = [
       "LoneGunmen", "Ted", "FireflySeries",
       "CavemenSeriesSlightlyBetterQuality", "Action", "Tucker",
       "YouWish", "Mulaney", "LifeAsWeKnowIt", "Middleman", "Woops",
+      "Reaper", "JohnDoe", "MisfitsOfScience", "PowersOfMatthewStar",
+      "FreakyLinks", "Earth2", "Brimstone", "PerversionsOfScience",
     ],
   },
   // Sunday 8-10pm horror block, the same slot CATASTROPHE CHANNEL uses for
@@ -777,6 +818,7 @@ window.CHANNELS = [
       "MisterEd", "GetSmart", "Taxi1978", "McHalesNavySeries",
       "WkrpinCincinnati", "AllInTheFamily", "TheMonkees",
       "GilligansIsland",
+      "TheRopers",
     ],
   },
   // LeaveIttoBeavertheSeries (1957-63) dropped -- it was this channel's
@@ -795,6 +837,7 @@ window.CHANNELS = [
       "ALFtheSeries", "ArchieBunkersPlace", "PunkyBrewster",
       "JusttheTenofUs", "BosomBuddies", "MarriedWithChildren",
       "ItsYourMove",
+      "GoldenGirls", "Benson",
     ],
   },
   // Moved off 80s SITCOMS (56): 1989 premieres that ran into the mid-90s.
@@ -816,6 +859,7 @@ window.CHANNELS = [
       "SaluteYourShorts", "ZoeDuncanJackJane", "SoulMan",
       "ShastaMcNasty", "TeenAngel", "BakersfieldPD", "YouWish", "Action",
       "StepByStep", "CaliforniaDreams",
+      "NewAddamsFamily",
     ],
   },
   // Four titles dropped as out-of-decade, which had made the tagline below
@@ -834,6 +878,7 @@ window.CHANNELS = [
       "Joey", "BernieMacShow", "WeberShow", "BacktoYou",
       "CavemenSeriesSlightlyBetterQuality", "Tucker", "That70sShow",
       "WillAndGrace",
+      "YesDear", "MyWifeAndKids",
     ],
   },
   {
