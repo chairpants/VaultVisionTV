@@ -12,6 +12,7 @@ from a different set of sources entirely:
     python tools/build-commercials.py [ITEM_ID ...]
 """
 import json
+import re
 import sys
 import time
 import urllib.request
@@ -38,16 +39,40 @@ DEFAULT_ITEMS = [
     "Nintendo_-_Super_Mario_64_commercial_USA_1996",
     "Nintendo_64_-_Goldeneye_007_commercial_1998",
     "george-foreman-grill-tv-infomercial-from-1995",
+    # One spot per file, named by year and product — added when breaks moved
+    # inside programmes on a half-hour grid: that takes about 8 minutes of ads
+    # per half hour, and a 160-spot pool that was all 90s came round every few
+    # hours. These span the late 80s to the 2000s, the same years as the library.
+    "commercialpack1",                      # late 80s / early 90s, with station bumpers
+    "tv-commercials-digitized-by-biochao",  # 1980s
+    "1988variouscommercials",
+    "1989VariousCommercialsFull",
+    "1989wrgbbigmoneymoviepromo",
+    "1990variouscommercials",
+    "1993variouscommercials",
+    "1994variouscommercials",
+    "earlyjan1995commercials",
+    "1996VariousCommercials",
+    "1997variouscommercials",
+    "1998variouscommercials",
+    "1999variouscommercials",
+    "2000VariousCommercials",
+    "2001VariousCommercials",
+    "2002variouscommercials",
+    "2003variouscomercials",
+    "2005variouscommercials",
+    "2007VariousCommercials",
 ]
 OUT_JS = Path(__file__).parent.parent / "data" / "commercials.js"
 
 # Spots outside this range are almost certainly bad metadata or a whole-reel
 # upload rather than a single ad. Raised from an original 180s once full-length
 # infomercials (the George Foreman Grill spot runs ~12.7 minutes) got added on
-# purpose, specifically to give getAdAt() something that can fill the longest
-# observed slot-padding windows (some channels' dead air between shows runs
-# into the tens of minutes) instead of falling back to the STAND BY card for
-# lack of anything long enough to fit.
+# purpose, to give a slot's final break something that can fill the longest
+# ad windows (a 31-minute programme in an hour slot) instead of falling back
+# to the STAND BY card for lack of anything long enough to fit. Breaks inside
+# a programme never use anything that long — see scheduler.js's
+# MID_SPOT_MAX_SEC.
 MIN_SEC = 5
 MAX_SEC = 1800
 
@@ -61,6 +86,36 @@ EXCLUDE_TITLES = {
     "1990's INFOMERCIAL HELL #16- Late Night Sex Phone Line 1-800-431-GIRL.mp4",
     "1990's Infomercial Hell #24- Playboy Christmas Subscription Deal - presented by the Playboy Bunnies!.mp4",
 }
+
+# The per-year collections are too big to read through file by file (2,000+
+# spots), but their filenames say what each one is, so those are screened by
+# word instead: adult services, and the uploader's own notes that a capture is
+# damaged or a duplicate. It errs toward dropping — a false positive costs one
+# spot out of thousands. Nobody has watched these, so a spot whose filename
+# gives nothing away can still get through; add it to EXCLUDE_TITLES if so.
+EXCLUDE_WORDS = re.compile(
+    r"adult|hot ?line|phone ?sex|\bsex|playboy|penthouse|lingerie|party ?line|chat ?line|"
+    r"\b900\b|1-900|escort|strip|xxx|condom|kill|suicide|"
+    r"bad (video|audio|quality)|static video|no (audio|sound|video)|"
+    r"incomplete|partial|paratial|half ?clip|tape end|cut ?off|\bdup\b",
+    re.IGNORECASE)
+
+# The same collections also hold taped stretches of the programmes themselves
+# ("1994 NBC Dateline Clip", seven minutes of it). A "clip" that isn't billed
+# as a commercial or a promo is one of those.
+PROGRAMME_CLIP = re.compile(r"\bclips?\b", re.IGNORECASE)
+AD_OR_PROMO = re.compile(r"commercial|promo|psa\b|bumper", re.IGNORECASE)
+
+# Only the infomercial sources are meant to supply long-form spots; anything
+# over this from an ordinary collection is a reel or a programme, not an ad.
+LONG_FORM_ITEMS = {
+    "youtube-collection-1990s-infomercial-hell",
+    "george-foreman-grill-tv-infomercial-from-1995",
+    "PhilipsCDIInfomercial",
+    "westwood-promotions-pure-moods-commercial",
+    "Collectionof90sCommercials",  # hand-picked; its one long entry is a real spot
+}
+ORDINARY_MAX_SEC = 130
 
 
 def spots_for_item(item):
@@ -78,7 +133,9 @@ def spots_for_item(item):
         if not name.lower().endswith(".mp4"):
             continue
         base_name = name[:-len(".ia.mp4")] + ".mp4" if name.lower().endswith(".ia.mp4") else name
-        if base_name in EXCLUDE_TITLES:
+        if base_name in EXCLUDE_TITLES or EXCLUDE_WORDS.search(base_name):
+            continue
+        if PROGRAMME_CLIP.search(base_name) and not AD_OR_PROMO.search(base_name):
             continue
         try:
             duration = float(f.get("length", 0))
@@ -92,8 +149,9 @@ def spots_for_item(item):
 
     spots = []
     skipped = 0
+    max_sec = MAX_SEC if item in LONG_FORM_ITEMS else ORDINARY_MAX_SEC
     for c in candidates.values():
-        if not MIN_SEC <= c["duration"] <= MAX_SEC:
+        if not MIN_SEC <= c["duration"] <= max_sec:
             skipped += 1
             continue
         spots.append({
@@ -109,6 +167,7 @@ def main():
     items = sys.argv[1:] if len(sys.argv) > 1 else DEFAULT_ITEMS
 
     all_spots = []
+    seen_names = set()
     total_skipped = 0
     failed = []
     for item in items:
@@ -119,8 +178,18 @@ def main():
             failed.append(item)
             continue
         total_skipped += skipped
-        all_spots.extend(spots)
-        print(f"  {item}: {len(spots)} spots, {skipped} skipped as out-of-range/duplicate")
+        # The same capture turns up in more than one collection under the same
+        # filename (the two 1989 items overlap); the first item listed keeps it.
+        fresh = []
+        for spot in spots:
+            name = spot["fileHint"].rsplit("/", 1)[-1].lower()
+            if name in seen_names:
+                total_skipped += 1
+                continue
+            seen_names.add(name)
+            fresh.append(spot)
+        all_spots.extend(fresh)
+        print(f"  {item}: {len(fresh)} spots, {skipped + len(spots) - len(fresh)} skipped as out-of-range/duplicate")
 
     all_spots.sort(key=lambda s: (s["itemId"], s["fileHint"]))  # stable input order; the scheduler shuffles
     succeeded = [i for i in items if i not in failed]
