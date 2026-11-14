@@ -22,3 +22,4 @@ Run tools/check-items.py to see exactly which items died.
 - 2026-11-12 **Reservoir Dogs** (`ReservoirDogs`): no usable episodes -- every item it points at is dead
 - 2026-11-12 **Wally Gator** (`WallyGator`): no usable episodes -- every item it points at is dead
 - 2026-11-12 **What I Like About You** (`WhatILikeAboutYou`): no usable episodes -- every item it points at is dead
+- 2026-11-14 **Bubblegum Crisis the Series (Dual Audio) (HD)** (`BubblegumCrisistheSeriesDualAudioHD`): no usable episodes -- every item it points at is dead
