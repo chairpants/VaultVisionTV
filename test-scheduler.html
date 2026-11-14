@@ -7,6 +7,7 @@
      works with no server. -->
 <script src="data/catalog.js"></script>
 <script src="data/commercials.js"></script>
+<script src="data/cuts.js"></script>
 <script src="channels.js"></script>
 <script src="scheduler.js"></script>
 <!-- Defines functions only, nothing runs at load — pulled in for
@@ -64,18 +65,41 @@ function main() {
   check(`all ${gridChecked} sampled slot boundaries land on a ${slotMinutes}-minute grid mark`,
     gridOff.length === 0, gridOff.slice(0, 5).join(", "));
 
-  // -- padding: the tail of a slot after a short episode -------------------
-  // Pick a channel position, jump to one second past the episode's end. If
-  // the episode doesn't exactly fill its slot, that must be padding, and the
-  // countdown must be positive and shorter than a whole slot.
-  const short = getPositionAt(toon, catalog, t0);
-  const afterEnd = t0 + (playableSec(short.episode) - short.offsetSec + 1) * 1000;
-  const padPos = getPositionAt(toon, catalog, afterEnd);
-  const fillsSlot = schedInternal.slotFor(playableSec(short.episode)) === playableSec(short.episode);
-  check("one second past a short episode's end is padding, counting down",
-    fillsSlot || (padPos.padding && padPos.slotEndsInSec > 0 && padPos.slotEndsInSec < SLOT_SEC &&
-      padPos.next && padPos.next.episode),
-    JSON.stringify({ playable: playableSec(short.episode), padding: padPos.padding, left: padPos.slotEndsInSec }));
+  // -- the slot's last second: its final break, billing the next programme --
+  // Unless the bill fills its slot to the second, the slot closes on a break
+  // that isn't coming back to the programme, counting down to the next one.
+  const billTotal = a.bill.reduce((sec, ep) => sec + playableSec(ep), 0);
+  const fillsSlot = schedInternal.slotFor(billTotal) === billTotal;
+  const lastSec = getPositionAt(toon, catalog, t0 + (a.slotEndsInSec - 1) * 1000);
+  check("the last second of a slot is its final break, counting down to the next programme",
+    fillsSlot || (lastSec.padding && lastSec.break.final && !lastSec.break.returning &&
+      lastSec.slotEndsInSec > 0 && lastSec.slotEndsInSec <= 1.001 && lastSec.next && lastSec.next.episode),
+    JSON.stringify({ billTotal, padding: lastSec.padding, left: lastSec.slotEndsInSec }));
+
+  // -- breaks are spread through the programme, not stacked at the end ------
+  // A single episode with at least four minutes of ads to carry must take
+  // some of them inside the programme, and come back to itself afterwards.
+  let spreadChecked = 0, spreadBad = [];
+  for (const c of CHANNELS) {
+    if (c.kind === "guide" || c.kind === "vod") continue;
+    const start = getPositionAt(c, catalog, t0);
+    if (!start || start.show.genre === "Broadcast Blocks" || start.bill.length !== 1) continue;
+    const slotSec = start.slotOffsetSec + start.slotEndsInSec;
+    if (slotSec - playableSec(start.episode) < 240 || playableSec(start.episode) < 900) continue;
+    const slotStartMs = t0 - start.slotOffsetSec * 1000;
+    const breaks = new Map();
+    for (let s = 0.5; s < slotSec; s += 5) {
+      const p = getPositionAt(c, catalog, slotStartMs + s * 1000);
+      if (p.padding) breaks.set(p.break.index, p.break);
+    }
+    spreadChecked++;
+    const inside = [...breaks.values()].filter((b) => !b.final);
+    if (inside.length < 1 || inside.some((b) => !b.returning || b.returning.episode.key !== start.episode.key)) {
+      spreadBad.push(`ch${c.number}: ${breaks.size} break(s), ${inside.length} inside`);
+    }
+  }
+  check(`breaks fall inside the programme on all ${spreadChecked} channels airing one with 4+ minutes of ads`,
+    spreadChecked > 0 && spreadBad.length === 0, spreadBad.slice(0, 5).join("; "));
 
   // -- genre pool covers every episode of every show in that genre --------
   const animationShows = Object.values(catalog.shows).filter((s) => s.genre === "Animation");
@@ -83,9 +107,17 @@ function main() {
   // walk the internal pool builder directly to check coverage without relying on timing
   const ids = animationShows.map((s) => s.id).sort();
   const info = schedInternal.buildPool(ids, catalog, "genre:Animation");
+  // A pool entry is a bill — one slot's worth, which for shorts is several
+  // episodes — so coverage is counted in episodes, not entries.
+  const pooledEpisodes = info.pool.reduce((n, bill) => n + bill.eps.length, 0);
   check("genre pool includes every Animation episode exactly once",
-    info.pool.length === expectedEpisodeCount,
-    `pool=${info.pool.length} expected=${expectedEpisodeCount}`);
+    pooledEpisodes === expectedEpisodeCount &&
+      new Set(info.pool.flatMap((bill) => bill.eps.map((e) => e.key))).size === expectedEpisodeCount,
+    `pool=${pooledEpisodes} expected=${expectedEpisodeCount}`);
+  check("shorts share a slot: no bill of several episodes runs past 25 minutes",
+    info.pool.some((bill) => bill.eps.length > 1) &&
+      info.pool.every((bill) => bill.eps.length === 1 || schedInternal.billSec(bill) <= 25 * 60),
+    `shared bills=${info.pool.filter((bill) => bill.eps.length > 1).length}`);
 
   // -- reproducibility across process boundary (re-shuffle same seed) -----
   const reshuffled = schedInternal.shuffled([1, 2, 3, 4, 5], "seed-x");
@@ -126,11 +158,12 @@ function main() {
     Math.abs((el2 - el1) - windowLenSec) < 1,
     `el1=${el1} el2=${el2} windowLenSec=${windowLenSec}`);
 
-  // -- commercial breaks fill the pad ---------------------------------------
-  // Walk each channel's next break second by second: it must open at the top
-  // of a spot (regression — the safe-mod in locate() used to undershoot an
-  // exact cumulative boundary by an ULP and join the *previous* spot at ~100%
-  // of its duration), and no spot may still be running when the slot rolls.
+  // -- commercial breaks ----------------------------------------------------
+  // Walk each channel's current slot second by second, from its first mark:
+  // every break must open at the top of a spot (the walk samples each second
+  // on the second, so the first sample of a break is under a second into
+  // it), no spot may still be running when its break ends, and no spot may
+  // air twice in the slot.
   let breaksChecked = 0;
   const breakProblems = [];
   for (const c of CHANNELS) {
@@ -138,40 +171,44 @@ function main() {
     // design (it's a browsable menu, see vod.js), so sweeping it counts a
     // deliberate null as a broken channel.
     if (c.kind === "guide" || c.kind === "vod") continue;
-    let t = t0, p = getPositionAt(c, catalog, t), hops = 0;
-    while (p && p.padding && hops++ < 50) {
-      t += (p.slotEndsInSec + 1) * 1000;
-      p = getPositionAt(c, catalog, t);
+    const start = getPositionAt(c, catalog, t0);
+    if (!start) continue;
+    const slotStartMs = t0 - start.slotOffsetSec * 1000;
+    const slotSec = Math.round(start.slotOffsetSec + start.slotEndsInSec);
+    let lastBreak = -1, lateJoins = 0, overruns = 0, repeats = 0;
+    const aired = [];
+    for (let s = 0; s < slotSec; s++) {
+      const pos = getPositionAt(c, catalog, slotStartMs + s * 1000);
+      if (!pos || !pos.padding) continue;
+      const b = pos.break;
+      if (b.index !== lastBreak) {
+        lastBreak = b.index;
+        breaksChecked++;
+        if (b.spot && b.spotOffsetSec > 1.5) lateJoins++;
+      }
+      if (!b.spot) continue; // leftover sliver: countdown card, no spot fits
+      if (b.spot.durationSec - b.spotOffsetSec > b.endsInSec + 0.001) overruns++;
+      if (aired[aired.length - 1] !== b.spot.key) {
+        if (aired.includes(b.spot.key)) repeats++;
+        aired.push(b.spot.key);
+      }
     }
-    if (!p) continue;
-    const padStart = t + (p.episode.durationSec - p.offsetSec) * 1000;
-    let firstAd = null, overruns = 0;
-    for (let s = 0; s < 3600; s++) {
-      const pos = getPositionAt(c, catalog, padStart + s * 1000);
-      if (!pos || !pos.padding) break;
-      const ad = getAdAt(pos.episode.key, pos.offsetSec - pos.episode.durationSec, pos.slotEndsInSec);
-      if (!ad) continue; // leftover sliver: countdown card, no spot fits
-      if (!firstAd) firstAd = ad;
-      if (ad.spot.durationSec - ad.offsetSec > pos.slotEndsInSec + 0.001) overruns++;
-    }
-    if (!firstAd) continue;
-    breaksChecked++;
-    if (firstAd.offsetSec > 1.5 || overruns) {
-      breakProblems.push(`ch${c.number} joinAt=${firstAd.offsetSec.toFixed(2)} overruns=${overruns}`);
+    if (lateJoins || overruns || repeats) {
+      breakProblems.push(`ch${c.number} lateJoins=${lateJoins} overruns=${overruns} repeats=${repeats}`);
     }
   }
-  check(`commercial breaks on ${breaksChecked} channels start at the top of a spot and never overrun the slot`,
-    breakProblems.length === 0, breakProblems.slice(0, 5).join("; "));
+  check(`${breaksChecked} commercial breaks start at the top of a spot, never overrun, never repeat a spot in a slot`,
+    breaksChecked > 0 && breakProblems.length === 0, breakProblems.slice(0, 5).join("; "));
 
-  // Not "shorter than a slot" — a spot only has to fit whatever padding is
-  // left in the slot's tail (getAdAt enforces that per-break), and can run
-  // well past SLOT_SEC itself (the long-form infomercial in the pool is
-  // there specifically to cover unusually long padding windows). This just
-  // checks the pool matches build-commercials.py's own MAX_SEC bound.
+  // Not "shorter than a slot" — a spot only has to fit the break it's put in
+  // (the break plan enforces that), and the long-form infomercials can run
+  // well past a short break (they exist to cover unusually long final
+  // breaks). This just checks the pool matches build-commercials.py's own
+  // MAX_SEC bound.
   check("commercials are loaded and within the configured duration bound",
-    schedInternal.adPool().pool.length > 0 &&
-      schedInternal.adPool().pool.every((e) => e.episode.durationSec > 0 && e.episode.durationSec < 1800),
-    `spots=${schedInternal.adPool().pool.length}`);
+    schedInternal.adSpots().length > 0 &&
+      schedInternal.adSpots().every((s) => s.durationSec > 0 && s.durationSec < 1800),
+    `spots=${schedInternal.adSpots().length}`);
 
   // -- every channel in the lineup resolves to a valid position ------------
   const sampleTimes = [
@@ -239,9 +276,9 @@ function main() {
     Array.from({ length: 8 }, (_, i) => (
       { key: `s${i}`, itemId: "i", fileHint: `${i}.mp4`, durationSec: 1500 })) } } };
   const inOrder = schedInternal.buildPool(["s"], serialCatalog, "seed", { ordered: true });
+  const poolKeys = (info) => info.pool.flatMap((bill) => bill.eps.map((e) => e.key)).join();
   check("ordered pool keeps catalog order",
-    inOrder.pool.map((p) => p.episode.key).join() === "s0,s1,s2,s3,s4,s5,s6,s7",
-    inOrder.pool.map((p) => p.episode.key).join());
+    poolKeys(inOrder) === "s0,s1,s2,s3,s4,s5,s6,s7", poolKeys(inOrder));
   // One slot past the last episode must wrap to the first, not stall or repeat.
   const lastStart = inOrder.cumulative[inOrder.pool.length - 1];
   check("ordered pool wraps from the last episode back to the first",
@@ -250,8 +287,7 @@ function main() {
     JSON.stringify({ last: schedInternal.locate(inOrder, lastStart).episode.key,
                      wrapped: schedInternal.locate(inOrder, inOrder.totalSec).episode.key }));
   check("without `ordered` the same pool is shuffled",
-    schedInternal.buildPool(["s"], serialCatalog, "seed").pool
-      .map((p) => p.episode.key).join() !== "s0,s1,s2,s3,s4,s5,s6,s7");
+    poolKeys(schedInternal.buildPool(["s"], serialCatalog, "seed")) !== "s0,s1,s2,s3,s4,s5,s6,s7");
 
   // -- guide timeline ------------------------------------------------------
   // programsBetween (guide.js) walks the same schedule to find the boundaries
@@ -284,9 +320,9 @@ function main() {
         tileBad.push(`ch${c.number}: gap/overlap at block ${i}`);
       }
       const justAfter = getPositionAt(c, catalog, b.airsFrom + 1000);
-      const reallyStarts = justAfter && justAfter.offsetSec <= 2;
+      const reallyStarts = justAfter && justAfter.slotOffsetSec <= 2;
       if (!b.joined && !reallyStarts) {
-        tileBad.push(`ch${c.number}: block ${i} drawn as a start but isn't (offset=${justAfter && justAfter.offsetSec})`);
+        tileBad.push(`ch${c.number}: block ${i} drawn as a start but isn't (offset=${justAfter && justAfter.slotOffsetSec})`);
       }
       if (b.joined && reallyStarts && i > 0) {
         tileBad.push(`ch${c.number}: block ${i} flagged joined but is a real start`);

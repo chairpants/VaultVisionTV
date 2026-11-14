@@ -23,13 +23,13 @@ function timeLabel(d) {
   return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
 }
 
-// Independent of scheduler.js's own SLOT_SEC (the programming grid, 5
-// minutes) on purpose: a real TV Guide's "NOW / +30 / +60" columns mean
-// literal half-hour lookaheads regardless of how finely a station grids its
-// own programming underneath — coupling the two would mean the guide's
-// column labels silently changed meaning (e.g. "+5 min" / "+10 min")
-// whenever the scheduling grid did, even though nothing about what a real
-// guide's columns represent actually changed.
+// Independent of scheduler.js's own SLOT_SEC (the programming grid) on
+// purpose, even though both are half an hour today: a real TV Guide's
+// "NOW / +30 / +60" columns mean literal half-hour lookaheads regardless of
+// how a station grids its own programming underneath — coupling the two
+// would mean the guide's column labels silently changed meaning whenever the
+// scheduling grid did, even though nothing about what a real guide's columns
+// represent actually changed.
 const GUIDE_COLUMN_SEC = 30 * 60;
 const SLOT_MS = GUIDE_COLUMN_SEC * 1000;
 const WINDOW_MS = 3 * SLOT_MS; // NOW through +60, the span a row draws across
@@ -57,8 +57,14 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&
 
 function posLabel(pos) {
   if (!pos) return "—";
-  if (pos.episode.movieTitle) return pos.episode.movieTitle; // real film title, not the host show's name
-  const ep = pos.episode.name ? ` — ${pos.episode.name}` : "";
+  // The listing is for the whole slot, so it's built from the bill rather than
+  // from whichever of its episodes happens to be on at the moment asked: two
+  // shorts sharing a half hour are listed together, a longer run of them just
+  // by the show's name.
+  const bill = pos.bill || [pos.episode];
+  if (bill[0].movieTitle) return bill[0].movieTitle; // real film title, not the host show's name
+  const names = bill.map((e) => e.name).filter(Boolean);
+  const ep = names.length && bill.length <= 2 ? ` — ${names.join(" / ")}` : "";
   return pos.show.title + ep;
 }
 
@@ -82,7 +88,7 @@ function programsBetween(catalog, channel, startMs, endMs) {
   const out = [];
   let t = startMs;
   // ponytail: 40-block cap is a runaway guard, not a real limit — 90 minutes
-  // can't hold more than 18 slots at the 5-minute grid.
+  // holds three half-hour slots, plus the odd joined block at a daypart edge.
   while (t < endMs && out.length < 40) {
     const pos = getPositionAt(channel, catalog, t);
     if (!pos) break;
@@ -92,9 +98,11 @@ function programsBetween(catalog, channel, startMs, endMs) {
       label: posLabel(pos),
       airsFrom: t,
       airsUntil,
+      // Measured from the slot, not the episode: commercial breaks and a
+      // second short on the same bill both leave the episode offset behind.
       // Sub-second offsets are grid rounding, not a real join.
-      joined: pos.offsetSec >= 1,
-      startedAtMs: t - pos.offsetSec * 1000, // true start, may predate the window
+      joined: pos.slotOffsetSec >= 1,
+      startedAtMs: t - pos.slotOffsetSec * 1000, // true start, may predate the window
     });
     t = airsUntil;
   }

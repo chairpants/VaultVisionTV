@@ -18,26 +18,20 @@
 const EPOCH_MS = new Date("2020-01-06T00:00:00").getTime();
 const WEEK_MS = 7 * 24 * 3600 * 1000;
 
-// Every episode occupies a whole number of SLOT_SEC-sized slots rather than
-// just its own runtime, so program starts always land on a clean grid mark —
-// the epoch is local midnight and every slot is a multiple of SLOT_SEC, so
-// the grid stays on the clock forever. The leftover tail of a slot (a
-// 22-minute episode in a 25-minute slot) is dead air the player fills with
-// commercials, or a countdown card once nothing fits what's left.
+// Every programme occupies a whole number of half-hour slots rather than just
+// its own runtime, so programme starts always land on :00 or :30 — the epoch
+// is local midnight and every slot is a multiple of SLOT_SEC, so the grid
+// stays on the clock forever. The difference between a programme's runtime
+// and its slot (a 22-minute episode in a 30-minute slot) is commercial time,
+// and it is spread through the programme as several short breaks rather than
+// stacked at the end — see the break plan below.
 //
-// A fine 5-minute grid rather than a flat 30 minutes specifically to cut
-// that leftover tail down: at 30 minutes, a typical ~22-minute sitcom or
-// cartoon always rounds up to the *next* half-hour mark, leaving a fixed
-// 8-minute commercial tail on every single airing, every channel, no
-// exceptions. At 5 minutes, that same episode only rounds up to 25 minutes —
-// a 3-minute tail instead. Programs still start on a clean, deterministic
-// grid mark; it's just a finer one. guide.js's own column headers ("NOW",
-// "+30", "+60") are intentionally *not* derived from this constant — see
-// GUIDE_COLUMN_SEC there — a real TV Guide's columns mean literal 30/60-
-// minute lookaheads regardless of how finely a station grids its own
-// programming underneath.
-const SLOT_SEC = 5 * 60;
-const slotFor = (durationSec) => Math.ceil(durationSec / SLOT_SEC) * SLOT_SEC;
+// This was a 5-minute grid while ads could only run in a slot's tail: at 30
+// minutes that meant a fixed 8-minute wall of commercials after every sitcom.
+// With breaks inside the programme the same 8 minutes is three ~2:40 breaks,
+// which is what a half hour of broadcast TV actually looked like.
+const SLOT_SEC = 30 * 60;
+const slotFor = (durationSec) => Math.max(1, Math.ceil(durationSec / SLOT_SEC)) * SLOT_SEC;
 
 // How much of a file actually airs. Some rips open on footage that isn't the
 // show — a station bumper, an uploader's colorization credit — and
@@ -87,17 +81,49 @@ function shuffled(arr, seedStr) {
 }
 
 // -- pool building ------------------------------------------------------------
-// A "pool" is a flat, deterministically-ordered list of every episode of
-// every show in a set of showIds, plus a prefix-sum duration index so a
-// timestamp can be located in it with a binary search.
-// `slotted`: programs occupy whole half-hour slots (the broadcast grid);
-// commercials pack back-to-back with no padding of their own.
+// A "pool" is a flat, deterministically-ordered list of *bills* — what airs in
+// one slot — plus a prefix-sum duration index so a timestamp can be located
+// in it with a binary search.
+//
+// A bill is usually one episode. Shorts are the exception: an 11-minute
+// cartoon alone in a half-hour slot would be 19 minutes of commercials, so
+// consecutive episodes of the same show share a slot for as long as they fit
+// with room left for ads — two 11-minute segments, or eight 3-minute
+// Schoolhouse Rocks, the way they actually aired. Built from each show's own
+// catalog order, before the shuffle, so a bill is always neighbouring
+// episodes of one show.
+//
 // `ordered`: skip the shuffle and keep catalog order, for serials that only
 // make sense front-to-back (Dark Shadows is 1,239 continuous chapters).
 // windowElapsedSec already carries a daypart across nights and locate() wraps
 // at the end of the pool, so "ordered" gets episode 1 -> last -> episode 1
 // for free.
-function buildPool(showIds, catalog, seedStr, { slotted = true, ordered = false } = {}) {
+const BILL_FILL_SEC = 25 * 60; // a bill stops growing here: at least 5 minutes of the half hour stays ads
+
+const billSec = (bill) => bill.eps.reduce((sec, ep) => sec + playableSec(ep), 0);
+
+function billsFor(id, show) {
+  const out = [];
+  let open = null, openSec = 0;
+  show.episodes.forEach((episode, idx) => {
+    const sec = playableSec(episode);
+    if (open && openSec + sec <= BILL_FILL_SEC) {
+      open.eps.push(episode);
+      openSec += sec;
+      return;
+    }
+    // `idx` — the first episode's position in the show's own `episodes`
+    // array — isn't needed by any scheduling math here, but persistPool
+    // below uses it to store a pool as [showId, idx, count] triples instead
+    // of duplicating episode data to localStorage.
+    open = { showId: id, show, eps: [episode], idx };
+    openSec = sec;
+    out.push(open);
+  });
+  return out;
+}
+
+function buildPool(showIds, catalog, seedStr, { ordered = false } = {}) {
   const flat = [];
   for (const id of showIds) {
     const show = catalog.shows[id];
@@ -105,31 +131,25 @@ function buildPool(showIds, catalog, seedStr, { slotted = true, ordered = false 
       console.warn(`scheduler: channel references unknown show "${id}" — skipping`);
       continue;
     }
-    // `idx` — this episode's position in the show's own `episodes` array —
-    // isn't needed by any scheduling math here, but persistPool below uses
-    // it to store a pool as [showId, idx] pairs instead of duplicating
-    // episode data to localStorage.
-    show.episodes.forEach((episode, idx) => flat.push({ showId: id, show, episode, idx }));
+    for (const bill of billsFor(id, show)) flat.push(bill);
   }
   const sequence = ordered ? flat : shuffled(flat, seedStr);
-  return poolFromSequence(sequence, slotted);
+  return poolFromSequence(sequence);
 }
 
 // Shared tail end of pool-building: turns an already-ordered sequence into
-// the {pool, cumulative, totalSec, slotted} shape locate() expects. Split
-// out from buildPool so loadPersistedPool can reuse it — a rehydrated
-// sequence still needs its duration index rebuilt (a plain sum, not the
-// shuffle/hashing work persistence exists to skip).
-function poolFromSequence(sequence, slotted) {
+// the {pool, cumulative, totalSec} shape locate() expects. Split out from
+// buildPool so loadPersistedPool can reuse it — a rehydrated sequence still
+// needs its duration index rebuilt (a plain sum, not the shuffle/hashing work
+// persistence exists to skip).
+function poolFromSequence(sequence) {
   const cumulative = new Array(sequence.length);
   let acc = 0;
   for (let i = 0; i < sequence.length; i++) {
     cumulative[i] = acc;
-    // Commercials pack by their true length; programmes by the slot their
-    // airable content rounds up to.
-    acc += slotted ? slotFor(playableSec(sequence[i].episode)) : sequence[i].episode.durationSec;
+    acc += slotFor(billSec(sequence[i]));
   }
-  return { pool: sequence, cumulative, totalSec: acc, slotted };
+  return { pool: sequence, cumulative, totalSec: acc };
 }
 
 // -- broken files -------------------------------------------------------------
@@ -141,57 +161,295 @@ function poolFromSequence(sequence, slotted) {
 // runtime observation, not a fact about the catalog.
 const brokenKeys = new Set();
 
-// The next entry at or after `idx` that isn't known-broken. Falls back to the
-// original once it's been all the way round — if every file in a pool is
-// dead there's nothing to substitute, and the player shows NO SIGNAL.
+// The next bill at or after `idx` with no known-broken file in it. Falls back
+// to the original once it's been all the way round — if every file in a pool
+// is dead there's nothing to substitute, and the player shows NO SIGNAL.
+const billBroken = (bill) => bill.eps.some((ep) => brokenKeys.has(ep.key));
 function usableFrom(pool, idx) {
   if (brokenKeys.size === 0) return pool[idx];
   let i = idx;
   for (let hops = 0; hops < pool.length; hops++) {
-    if (!brokenKeys.has(pool[i].episode.key)) return pool[i];
+    if (!billBroken(pool[i])) return pool[i];
     i = (i + 1) % pool.length;
   }
   return pool[idx];
 }
 
-function locate(poolInfo, elapsedSec) {
-  const { pool, cumulative, totalSec, slotted } = poolInfo;
+// -- commercials --------------------------------------------------------------
+// The spots come from data/commercials.js (tools/build-commercials.py),
+// shuffled once with a fixed seed so every break plan below walks the same
+// order on every machine.
+let adCache = { from: null, spots: [] };
+function adSpots() {
+  const from = (window.COMMERCIALS && window.COMMERCIALS.spots) || null;
+  if (adCache.from !== from) adCache = { from, spots: from ? shuffled(from, "ads:v1") : [] };
+  return adCache.spots;
+}
+
+// -- break plan ---------------------------------------------------------------
+// How one slot is laid out: stretches of programme with commercial breaks
+// between them and a last break running up to the next :00/:30. Pure and
+// deterministic — a function of the bill, the slot length, the channel and
+// the two data files (commercials, cut points) — so the player, the guide and
+// any other machine all see the same breaks at the same moments.
+//
+// The channel is in there so channels don't all break in lockstep: with only
+// the bill to go on, every sitcom-length episode starting on the half hour
+// would cut to commercials at nearly the same second on every channel, and
+// flipping away from a break would just find another one. Each channel
+// nudges its cuts by its own amount (see channelShift), different for every
+// bill it airs.
+//
+// How many breaks: about one per BREAK_TARGET_SEC of ad time, so 8 minutes of
+// ads in a sitcom's half hour is three breaks (two inside, one at the end) and
+// 16 minutes in a drama's hour is six. Never so many that an act would run
+// shorter than MIN_ACT_SEC.
+//
+// Where the inside breaks fall, in order of preference:
+//   1. between the episodes of a shared bill — the one place a cut is free;
+//   2. at a quiet moment near the even split, where data/cuts.js knows of one
+//      (a gap in the captions — see tools/build-cuts.py);
+//   3. the even split itself. Nothing in the catalog records where a
+//      programme's original act breaks were, so this can land mid-scene.
+//
+// How long each one runs: an inside break is exactly as long as the spots
+// chosen for it, so the programme comes back the moment the last ad ends.
+// Whatever those breaks didn't use lands in the final one, which is the only
+// place a sliver too short for any spot can occur — the player covers it with
+// the countdown card, right before the next programme starts on the mark.
+const BREAK_TARGET_SEC = 150;
+const SPLIT_PAD_SEC = 120;   // less ad time than this stays one break at the end
+const MIN_ACT_SEC = 5 * 60;
+const SNAP_SEC = 90;         // how far a cut may move to reach a quiet moment
+// Coming back from a break the programme resumes this far before the cut.
+// Returning means loading the episode's file again and seeking into it, which
+// takes a few seconds, while the schedule keeps moving — without the overlap
+// every break would swallow the first lines after it.
+const RESUME_REWIND_SEC = 3;
+const MID_SPOT_MAX_SEC = 125; // no infomercials in the middle of a programme
+const AD_LOOKAHEAD = 6;       // spots to pass over looking for one that fits
+// Recordings that already carry their own commercials (the taped broadcast
+// blocks) aren't interrupted again; their slot's ad time all goes at the end.
+const NO_MID_BREAK_GENRES = new Set(["Broadcast Blocks"]);
+// Movies run uninterrupted, premium-channel style; the time left over in
+// their slot still airs as one break after the credits, to reach the mark.
+const isMovie = (bill) => bill.eps.every((ep) => ep.code === "Movie");
+const noMidBreaks = (bill) => NO_MID_BREAK_GENRES.has(bill.show.genre) || isMovie(bill);
+
+// How far this channel moves cut k of this bill off the even split, in
+// seconds, within ±maxSec. Keyed on the channel *and* the bill, so two
+// channels never share a fixed offset (and stay in step forever), and the
+// same episode breaks at different moments on different channels.
+function channelShift(channelKey, bill, k, maxSec) {
+  if (!channelKey || maxSec <= 0) return 0;
+  const rand = mulberry32(hashSeed(`cut:${channelKey}:${bill.eps[0].key}:${k}`));
+  return (rand() * 2 - 1) * maxSec;
+}
+
+function nearest(sorted, target, within) {
+  let best = null;
+  for (const v of sorted) {
+    if (Math.abs(v - target) > within) continue;
+    if (best === null || Math.abs(v - target) < Math.abs(best - target)) best = v;
+  }
+  return best;
+}
+
+// Bill-timeline seconds at which the inside breaks start. `starts[i]` is where
+// episode i begins on that timeline, `total` its full length.
+function cutPoints(bill, starts, total, pad, channelKey) {
+  const wanted = pad < SPLIT_PAD_SEC ? 1 : Math.max(2, Math.round(pad / BREAK_TARGET_SEC));
+  let inside = Math.min(wanted - 1, Math.max(0, Math.floor(total / MIN_ACT_SEC) - 1));
+  const joins = starts.slice(1);
+  if (joins.length) {
+    // A shared bill only ever breaks between its episodes.
+    if (wanted < 2) return [];
+    inside = Math.min(Math.max(inside, 1), joins.length);
+    const cuts = new Set();
+    for (let k = 1; k <= inside; k++) {
+      const left = joins.filter((j) => !cuts.has(j));
+      cuts.add(nearest(left, (total * k) / (inside + 1), Infinity));
+    }
+    return [...cuts].sort((a, b) => a - b);
+  }
+  if (inside <= 0) return [];
+  const ep = bill.eps[0];
+  const skip = ep.introSkipSec || 0;
+  const quiet = ((window.CUTS && window.CUTS[ep.key]) || []).map((t) => t - skip);
+  const act = total / (inside + 1);
+  // The channel's nudge never shortens an act below MIN_ACT_SEC (two
+  // neighbouring cuts can move toward each other by twice it).
+  const maxShift = Math.min(SNAP_SEC, Math.max(0, (act - MIN_ACT_SEC) / 2));
+  const cuts = [];
+  for (let k = 1; k <= inside; k++) {
+    const target = act * k + channelShift(channelKey, bill, k, maxShift);
+    // Shift plus snap stays under half an act either way, so cuts can't
+    // cross or collide.
+    const within = Math.max(0, Math.min(SNAP_SEC, act * 0.45 - Math.abs(target - act * k)));
+    const snapped = nearest(quiet, target, within);
+    cuts.push(snapped === null ? target : snapped);
+  }
+  return cuts;
+}
+
+function buildPlan(bill, slotSec, channelKey) {
+  const starts = [];
+  let total = 0;
+  for (const ep of bill.eps) { starts.push(total); total += playableSec(ep); }
+  const epAt = (sec) => {
+    let i = starts.length - 1;
+    while (i > 0 && starts[i] > sec) i--;
+    return i;
+  };
+
+  const segs = [];
+  let clock = 0;
+  // Airs [from, to) of the bill's timeline, one segment per episode, never
+  // running past the end of the slot.
+  const air = (from, to) => {
+    for (let i = 0; i < starts.length && clock < slotSec; i++) {
+      const lo = Math.max(from, starts[i]);
+      const hi = Math.min(to, i + 1 < starts.length ? starts[i + 1] : total);
+      if (hi <= lo) continue;
+      const len = Math.min(hi - lo, slotSec - clock);
+      segs.push({ kind: "show", start: clock, end: clock + len, ep: i, from: lo - starts[i] });
+      clock += len;
+    }
+  };
+
+  const pad = slotSec - total;
+  // Only a stand-in for a dead file can be longer than the slot it's given:
+  // it airs as far as it gets and is cut off at the mark.
+  if (pad <= 0) { air(0, total); return segs; }
+
+  const ads = adSpots();
+  // Seeded by channel too, so one episode on two channels runs different ads.
+  let cursor = ads.length ? hashSeed(`ad:${channelKey || ""}:${bill.eps[0].key}`) % ads.length : 0;
+  const shortest = ads.reduce((min, s) => Math.min(min, s.durationSec), Infinity);
+  // Walks on from wherever the last break stopped, so no spot repeats inside
+  // one slot until the whole pool has been through.
+  const fill = (targetSec, maxSpotSec) => {
+    const spots = [];
+    let used = 0, misses = 0, tried = 0;
+    while (tried < ads.length && misses < AD_LOOKAHEAD && targetSec - used >= shortest) {
+      const spot = ads[cursor];
+      cursor = (cursor + 1) % ads.length;
+      tried++;
+      if (spot.durationSec <= targetSec - used && spot.durationSec <= maxSpotSec) {
+        spots.push({ spot, at: used });
+        used += spot.durationSec;
+        misses = 0;
+      } else {
+        misses++;
+      }
+    }
+    return { spots, used };
+  };
+  const breakSeg = (index, len, spots, back) => {
+    const last = segs[segs.length - 1];
+    segs.push({
+      kind: "break", start: clock, end: clock + len, index, spots, final: !back,
+      // what was on going into the break, and where it had got to
+      ep: last ? last.ep : 0, from: last ? last.from + (last.end - last.start) : 0,
+      backEp: back ? back.ep : -1, backFrom: back ? back.from : 0,
+    });
+    clock += len;
+  };
+
+  const cuts = ads.length && !noMidBreaks(bill)
+    ? cutPoints(bill, starts, total, pad, channelKey) : [];
+  const resumes = cuts.map((cut) =>
+    starts.includes(cut) ? cut : Math.max(starts[epAt(cut)], cut - RESUME_REWIND_SEC));
+  const rewound = cuts.reduce((sec, cut, k) => sec + (cut - resumes[k]), 0);
+  const eachSec = (pad - rewound) / (cuts.length + 1);
+
+  let pos = 0, index = 0;
+  cuts.forEach((cut, k) => {
+    air(pos, cut);
+    const { spots, used } = fill(eachSec, MID_SPOT_MAX_SEC);
+    if (!used) { pos = cut; return; } // nothing fit: no break here after all
+    const ep = epAt(resumes[k]);
+    breakSeg(index++, used, spots, { ep, from: resumes[k] - starts[ep] });
+    pos = resumes[k];
+  });
+  air(pos, total);
+  if (clock < slotSec) breakSeg(index, slotSec - clock, fill(slotSec - clock, Infinity).spots, null);
+  return segs;
+}
+
+// Memoized on the bill. A stand-in airs in someone else's slot, which can be a
+// different length from its own, so the slot length is part of the key; the
+// channel is too, in case one bill object ever serves two channels.
+function planFor(bill, slotSec, channelKey = "") {
+  const key = `${slotSec}|${channelKey}`;
+  if (!bill.plan || bill.planKey !== key) {
+    bill.plan = buildPlan(bill, slotSec, channelKey);
+    bill.planKey = key;
+  }
+  return bill.plan;
+}
+
+// What's airing `elapsedSec` into a pool's timeline:
+//   showId, show, episode  the programme on air (during a break: the one that
+//                          was on going into it)
+//   bill                   every episode sharing this slot
+//   offsetSec              seek position in the episode's airable content
+//   padding                true during a commercial break; `break` then says
+//                          which spot is on and what comes back after it
+//   slotOffsetSec          seconds since this slot started
+//   slotEndsInSec          seconds until the next programme starts
+//   segmentEndsInSec       seconds until the picture next changes source
+//   next                   the following slot's programme
+function locate(poolInfo, elapsedSec, channelKey = "") {
+  const { pool, cumulative, totalSec } = poolInfo;
   if (pool.length === 0 || totalSec <= 0) return null;
-  // Safe mod for any sign — but the negative branch's round-trip through
-  // `+ totalSec` costs an ULP, which can drop a value that sits exactly on a
-  // cumulative boundary just below it, landing the search on the *previous*
-  // entry at ~100% of its duration. getAdAt anchors breaks exactly on
-  // boundaries, so take the exact path whenever elapsed is already positive.
-  const t = elapsedSec >= 0 ? elapsedSec % totalSec : ((elapsedSec % totalSec) + totalSec) % totalSec;
+  const t = ((elapsedSec % totalSec) + totalSec) % totalSec;
   let lo = 0, hi = pool.length - 1;
   while (lo < hi) {
     const mid = (lo + hi + 1) >> 1;
     if (cumulative[mid] <= t) lo = mid; else hi = mid - 1;
   }
-  const offsetSec = t - cumulative[lo];
-  const scheduled = pool[lo]; // what the grid says; may be unplayable
-  const entry = usableFrom(pool, lo);
-  if (!slotted) {
-    // Commercial pool: no slot grid, so none of the padding fields apply.
-    return { showId: entry.showId, show: entry.show, episode: entry.episode, offsetSec };
-  }
-  const next = usableFrom(pool, (lo + 1) % pool.length);
-  return {
-    showId: entry.showId,
-    show: entry.show,
-    episode: entry.episode,
-    offsetSec,
-    // Past the episode's airable runtime but still inside its slot: dead air
-    // until the clock reaches the next grid mark. Callers must check this
-    // before treating offsetSec as a seek position. A substitute shorter than
-    // the programme it replaced simply goes to break early.
-    padding: offsetSec >= playableSec(entry.episode),
-    // Measured from the *scheduled* entry, never the substitute — a dead file
-    // must not shift the grid, or channels and the guide would disagree about
-    // when the next programme starts.
-    slotEndsInSec: slotFor(playableSec(scheduled.episode)) - offsetSec,
-    next: { showId: next.showId, show: next.show, episode: next.episode },
+  const slotOffsetSec = t - cumulative[lo];
+  // The grid is measured from the *scheduled* bill, never the substitute — a
+  // dead file must not shift it, or channels and the guide would disagree
+  // about when the next programme starts. A substitute shorter than the
+  // programme it replaced just carries more ads; a longer one is cut off.
+  const slotSec = slotFor(billSec(pool[lo]));
+  const bill = usableFrom(pool, lo);
+  const upNext = usableFrom(pool, (lo + 1) % pool.length);
+  const plan = planFor(bill, slotSec, channelKey);
+  const seg = plan.find((s) => slotOffsetSec < s.end) || plan[plan.length - 1];
+  const position = {
+    showId: bill.showId,
+    show: bill.show,
+    episode: bill.eps[seg.ep],
+    bill: bill.eps,
+    offsetSec: seg.from,
+    padding: seg.kind === "break",
+    slotOffsetSec,
+    slotEndsInSec: slotSec - slotOffsetSec,
+    segmentEndsInSec: seg.end - slotOffsetSec,
+    next: { showId: upNext.showId, show: upNext.show, episode: upNext.eps[0], bill: upNext.eps },
   };
+  if (seg.kind === "show") {
+    position.offsetSec = seg.from + (slotOffsetSec - seg.start);
+    return position;
+  }
+  const elapsed = slotOffsetSec - seg.start;
+  const airing = seg.spots.find((s) => elapsed >= s.at && elapsed < s.at + s.spot.durationSec);
+  position.break = {
+    index: seg.index,
+    count: plan.reduce((n, s) => n + (s.kind === "break"), 0),
+    final: seg.final,
+    elapsedSec: elapsed,
+    endsInSec: seg.end - slotOffsetSec,
+    // null once nothing fits what's left of the break: the countdown card
+    spot: airing ? airing.spot : null,
+    spotOffsetSec: airing ? elapsed - airing.at : 0,
+    returning: seg.final ? null
+      : { show: bill.show, episode: bill.eps[seg.backEp], offsetSec: seg.backFrom },
+  };
+  return position;
 }
 
 // -- on-device pool cache (localStorage) --------------------------------
@@ -204,7 +462,12 @@ function locate(poolInfo, elapsedSec) {
 // browsing, some file:// contexts) just falls back to a normal
 // from-scratch build, same as before this existed. Mirrors
 // VaultVisionRokuTV's cachefs:/poolcache (source/Scheduler.brs).
-const POOL_CACHE_PREFIX = "vv.poolcache.";
+//
+// The prefix names the pool's *shape*. "h30" is the half-hour grid with shared
+// bills; entries under the older "vv.poolcache." keys are per-episode
+// sequences, never read again. Change it whenever billsFor's rules change —
+// the signature below only notices the catalog moving, not the rules.
+const POOL_CACHE_PREFIX = "vv.poolcache.h30.";
 
 // A cheap fingerprint of exactly what `showIds` currently resolves to —
 // folded from each show's id/episode-count/summed-runtime, deliberately NOT
@@ -223,27 +486,27 @@ function poolSignature(showIds, catalog) {
   return String(hashSeed(joined));
 }
 
-// Rehydrates a pool stored as [[showId, idx], ...] back into real
-// {showId, show, episode} references against the live catalog — the stored
-// value never duplicates episode data, just where to find it. Returns null
-// on absolutely anything unexpected (missing key, bad JSON, signature
-// mismatch, a showId/idx that no longer resolves) so the caller always has
-// a clean, uniform "just rebuild it" fallback.
-function loadPersistedPool(cacheKey, signature, catalog, slotted) {
+// Rehydrates a pool stored as [[showId, idx, count], ...] back into real
+// bills against the live catalog — the stored value never duplicates episode
+// data, just where to find it. Returns null on absolutely anything unexpected
+// (missing key, bad JSON, signature mismatch, a showId/idx that no longer
+// resolves) so the caller always has a clean, uniform "just rebuild it"
+// fallback.
+function loadPersistedPool(cacheKey, signature, catalog) {
   try {
     const raw = localStorage.getItem(POOL_CACHE_PREFIX + cacheKey);
     if (!raw) return null;
     const stored = JSON.parse(raw);
-    if (stored.signature !== signature || stored.slotted !== slotted || !Array.isArray(stored.seq)) return null;
+    if (stored.signature !== signature || !Array.isArray(stored.seq)) return null;
     const sequence = new Array(stored.seq.length);
     for (let i = 0; i < stored.seq.length; i++) {
-      const [showId, idx] = stored.seq[i];
+      const [showId, idx, count] = stored.seq[i];
       const show = catalog.shows[showId];
-      const episode = show && show.episodes[idx];
-      if (!episode) return null; // showId/idx vanished since this was written
-      sequence[i] = { showId, show, episode, idx };
+      const eps = show && show.episodes.slice(idx, idx + count);
+      if (!eps || !count || eps.length !== count) return null; // vanished since this was written
+      sequence[i] = { showId, show, eps, idx };
     }
-    return poolFromSequence(sequence, slotted);
+    return poolFromSequence(sequence);
   } catch {
     return null;
   }
@@ -251,8 +514,8 @@ function loadPersistedPool(cacheKey, signature, catalog, slotted) {
 
 function persistPool(cacheKey, signature, info) {
   try {
-    const seq = info.pool.map((e) => [e.showId, e.idx]);
-    localStorage.setItem(POOL_CACHE_PREFIX + cacheKey, JSON.stringify({ signature, slotted: info.slotted, seq }));
+    const seq = info.pool.map((b) => [b.showId, b.idx, b.eps.length]);
+    localStorage.setItem(POOL_CACHE_PREFIX + cacheKey, JSON.stringify({ signature, seq }));
   } catch {
     // quota exceeded, storage disabled, etc. — fine, just means no
     // persistence this time; the in-session poolCache below still applies.
@@ -263,9 +526,8 @@ const poolCache = new Map(); // cacheKey -> poolInfo, memoized for this page loa
 function cachedPool(cacheKey, showIds, catalog, seedStr, opts) {
   let info = poolCache.get(cacheKey);
   if (!info) {
-    const slotted = opts && "slotted" in opts ? opts.slotted : true;
     const signature = poolSignature(showIds, catalog);
-    info = loadPersistedPool(cacheKey, signature, catalog, slotted);
+    info = loadPersistedPool(cacheKey, signature, catalog);
     if (!info) {
       info = buildPool(showIds, catalog, seedStr, opts);
       persistPool(cacheKey, signature, info);
@@ -273,38 +535,6 @@ function cachedPool(cacheKey, showIds, catalog, seedStr, opts) {
     poolCache.set(cacheKey, info);
   }
   return info;
-}
-
-// -- commercials --------------------------------------------------------------
-// Ads only ever run in the dead tail of a slot, after an episode has ended —
-// never inside one. The spots come from data/commercials.js
-// (tools/build-commercials.py); wrapping them in a one-show pseudo-catalog
-// lets the same shuffle + prefix-sum machinery index them.
-function adPool() {
-  const spots = (window.COMMERCIALS && window.COMMERCIALS.spots) || [];
-  const wrapped = { shows: { ads: { id: "ads", title: "Commercial", episodes: spots } } };
-  return cachedPool("ads", ["ads"], wrapped, "ads:v1", { slotted: false });
-}
-
-// What's airing `padElapsedSec` into a slot's dead tail, given `padLeftSec`
-// still to fill. Each break starts at the top of a spot — anchored at a
-// per-episode index in the shuffled pool, so it's deterministic like
-// everything else, but a different break every time rather than the same ads
-// in the same order. Returns null when there are no spots, or when the next
-// one wouldn't finish before the slot rolls over: the player shows the
-// countdown card for that leftover sliver rather than cutting an ad off.
-function getAdAt(episodeKey, padElapsedSec, padLeftSec) {
-  const info = adPool();
-  if (!info || info.pool.length === 0) return null;
-  const startIdx = hashSeed(`ad:${episodeKey}`) % info.pool.length;
-  const found = locate(info, info.cumulative[startIdx] + padElapsedSec);
-  if (!found) return null;
-  // A substituted spot can be shorter than the one it replaced, putting the
-  // offset past its end — skip to the STAND BY card rather than seeking off
-  // the end of it.
-  if (found.offsetSec >= found.episode.durationSec) return null;
-  if (found.episode.durationSec - found.offsetSec > padLeftSec) return null;
-  return { spot: found.episode, offsetSec: found.offsetSec };
 }
 
 function genrePool(channel, catalog) {
@@ -380,10 +610,11 @@ function matchingWindow(channel, nowMs) {
 
 // -- public API -----------------------------------------------------------
 // getPositionAt(channel, catalog, timestampMs) ->
-//   { showId, show, episode, offsetSec } | null (empty pool)
+//   a position as described at locate() | null (empty pool)
 function getPositionAt(channel, catalog, timestampMs) {
+  const channelKey = `ch${channel.number}`;
   if (channel.kind === "genre") {
-    return locate(genrePool(channel, catalog), (timestampMs - EPOCH_MS) / 1000);
+    return locate(genrePool(channel, catalog), (timestampMs - EPOCH_MS) / 1000, channelKey);
   }
 
   if (channel.kind === "curated") {
@@ -392,7 +623,7 @@ function getPositionAt(channel, catalog, timestampMs) {
       const cacheKey = `curated:${channel.number}:w${match.index}`;
       const info = cachedPool(cacheKey, match.win.pool, catalog, cacheKey,
                               { ordered: !!match.win.ordered });
-      return locate(info, windowElapsedSec(match.win, timestampMs));
+      return locate(info, windowElapsedSec(match.win, timestampMs), channelKey);
     }
     // Outside every window: plain continuous loop, same formula as a genre
     // channel. (Simplification: this does *not* track cumulative
@@ -400,7 +631,7 @@ function getPositionAt(channel, catalog, timestampMs) {
     // window starts/ends — acceptable for filler between named blocks.)
     const cacheKey = `curated:${channel.number}:fallback`;
     const info = cachedPool(cacheKey, channel.fallbackPool, catalog, cacheKey);
-    return locate(info, (timestampMs - EPOCH_MS) / 1000);
+    return locate(info, (timestampMs - EPOCH_MS) / 1000, channelKey);
   }
 
   return null; // "guide" has no position of its own
@@ -408,12 +639,13 @@ function getPositionAt(channel, catalog, timestampMs) {
 
 // Exposed for the manual test harness and for anything that wants to reason
 // about determinism directly.
+// Exposed for the manual test harness and for anything that wants to reason
+// about determinism directly.
 const _internal = { hashSeed, mulberry32, shuffled, buildPool, locate, windowElapsedSec, slotFor,
-                    playableSec, adPool, brokenKeys, poolSignature, loadPersistedPool, persistPool,
-                    POOL_CACHE_PREFIX };
+                    playableSec, billsFor, billSec, planFor, adSpots, brokenKeys, poolSignature,
+                    loadPersistedPool, persistPool, POOL_CACHE_PREFIX };
 
 window.getPositionAt = getPositionAt;
-window.getAdAt = getAdAt;
 window.markBroken = (key) => brokenKeys.add(key);
 window.isBroken = (key) => brokenKeys.has(key);
 window.EPOCH_MS = EPOCH_MS;
