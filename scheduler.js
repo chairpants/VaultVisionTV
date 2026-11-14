@@ -189,9 +189,16 @@ function adSpots() {
 // -- break plan ---------------------------------------------------------------
 // How one slot is laid out: stretches of programme with commercial breaks
 // between them and a last break running up to the next :00/:30. Pure and
-// deterministic — a function of the bill, the slot length and the two data
-// files (commercials, cut points) — so the player, the guide and any other
-// machine all see the same breaks at the same moments.
+// deterministic — a function of the bill, the slot length, the channel and
+// the two data files (commercials, cut points) — so the player, the guide and
+// any other machine all see the same breaks at the same moments.
+//
+// The channel is in there so channels don't all break in lockstep: with only
+// the bill to go on, every sitcom-length episode starting on the half hour
+// would cut to commercials at nearly the same second on every channel, and
+// flipping away from a break would just find another one. Each channel
+// nudges its cuts by its own amount (see channelShift), different for every
+// bill it airs.
 //
 // How many breaks: about one per BREAK_TARGET_SEC of ad time, so 8 minutes of
 // ads in a sitcom's half hour is three breaks (two inside, one at the end) and
@@ -224,6 +231,20 @@ const AD_LOOKAHEAD = 6;       // spots to pass over looking for one that fits
 // Recordings that already carry their own commercials (the taped broadcast
 // blocks) aren't interrupted again; their slot's ad time all goes at the end.
 const NO_MID_BREAK_GENRES = new Set(["Broadcast Blocks"]);
+// Movies run uninterrupted, premium-channel style; the time left over in
+// their slot still airs as one break after the credits, to reach the mark.
+const isMovie = (bill) => bill.eps.every((ep) => ep.code === "Movie");
+const noMidBreaks = (bill) => NO_MID_BREAK_GENRES.has(bill.show.genre) || isMovie(bill);
+
+// How far this channel moves cut k of this bill off the even split, in
+// seconds, within ±maxSec. Keyed on the channel *and* the bill, so two
+// channels never share a fixed offset (and stay in step forever), and the
+// same episode breaks at different moments on different channels.
+function channelShift(channelKey, bill, k, maxSec) {
+  if (!channelKey || maxSec <= 0) return 0;
+  const rand = mulberry32(hashSeed(`cut:${channelKey}:${bill.eps[0].key}:${k}`));
+  return (rand() * 2 - 1) * maxSec;
+}
 
 function nearest(sorted, target, within) {
   let best = null;
@@ -236,7 +257,7 @@ function nearest(sorted, target, within) {
 
 // Bill-timeline seconds at which the inside breaks start. `starts[i]` is where
 // episode i begins on that timeline, `total` its full length.
-function cutPoints(bill, starts, total, pad) {
+function cutPoints(bill, starts, total, pad, channelKey) {
   const wanted = pad < SPLIT_PAD_SEC ? 1 : Math.max(2, Math.round(pad / BREAK_TARGET_SEC));
   let inside = Math.min(wanted - 1, Math.max(0, Math.floor(total / MIN_ACT_SEC) - 1));
   const joins = starts.slice(1);
@@ -256,16 +277,22 @@ function cutPoints(bill, starts, total, pad) {
   const skip = ep.introSkipSec || 0;
   const quiet = ((window.CUTS && window.CUTS[ep.key]) || []).map((t) => t - skip);
   const act = total / (inside + 1);
+  // The channel's nudge never shortens an act below MIN_ACT_SEC (two
+  // neighbouring cuts can move toward each other by twice it).
+  const maxShift = Math.min(SNAP_SEC, Math.max(0, (act - MIN_ACT_SEC) / 2));
   const cuts = [];
   for (let k = 1; k <= inside; k++) {
-    // Under half an act either way, so snapped cuts can't cross or collide.
-    const snapped = nearest(quiet, act * k, Math.min(SNAP_SEC, act * 0.35));
-    cuts.push(snapped === null ? act * k : snapped);
+    const target = act * k + channelShift(channelKey, bill, k, maxShift);
+    // Shift plus snap stays under half an act either way, so cuts can't
+    // cross or collide.
+    const within = Math.max(0, Math.min(SNAP_SEC, act * 0.45 - Math.abs(target - act * k)));
+    const snapped = nearest(quiet, target, within);
+    cuts.push(snapped === null ? target : snapped);
   }
   return cuts;
 }
 
-function buildPlan(bill, slotSec) {
+function buildPlan(bill, slotSec, channelKey) {
   const starts = [];
   let total = 0;
   for (const ep of bill.eps) { starts.push(total); total += playableSec(ep); }
@@ -296,7 +323,8 @@ function buildPlan(bill, slotSec) {
   if (pad <= 0) { air(0, total); return segs; }
 
   const ads = adSpots();
-  let cursor = ads.length ? hashSeed(`ad:${bill.eps[0].key}`) % ads.length : 0;
+  // Seeded by channel too, so one episode on two channels runs different ads.
+  let cursor = ads.length ? hashSeed(`ad:${channelKey || ""}:${bill.eps[0].key}`) % ads.length : 0;
   const shortest = ads.reduce((min, s) => Math.min(min, s.durationSec), Infinity);
   // Walks on from wherever the last break stopped, so no spot repeats inside
   // one slot until the whole pool has been through.
@@ -328,8 +356,8 @@ function buildPlan(bill, slotSec) {
     clock += len;
   };
 
-  const cuts = ads.length && !NO_MID_BREAK_GENRES.has(bill.show.genre)
-    ? cutPoints(bill, starts, total, pad) : [];
+  const cuts = ads.length && !noMidBreaks(bill)
+    ? cutPoints(bill, starts, total, pad, channelKey) : [];
   const resumes = cuts.map((cut) =>
     starts.includes(cut) ? cut : Math.max(starts[epAt(cut)], cut - RESUME_REWIND_SEC));
   const rewound = cuts.reduce((sec, cut, k) => sec + (cut - resumes[k]), 0);
@@ -350,11 +378,13 @@ function buildPlan(bill, slotSec) {
 }
 
 // Memoized on the bill. A stand-in airs in someone else's slot, which can be a
-// different length from its own, so the slot length is part of the key.
-function planFor(bill, slotSec) {
-  if (!bill.plan || bill.planSlotSec !== slotSec) {
-    bill.plan = buildPlan(bill, slotSec);
-    bill.planSlotSec = slotSec;
+// different length from its own, so the slot length is part of the key; the
+// channel is too, in case one bill object ever serves two channels.
+function planFor(bill, slotSec, channelKey = "") {
+  const key = `${slotSec}|${channelKey}`;
+  if (!bill.plan || bill.planKey !== key) {
+    bill.plan = buildPlan(bill, slotSec, channelKey);
+    bill.planKey = key;
   }
   return bill.plan;
 }
@@ -370,7 +400,7 @@ function planFor(bill, slotSec) {
 //   slotEndsInSec          seconds until the next programme starts
 //   segmentEndsInSec       seconds until the picture next changes source
 //   next                   the following slot's programme
-function locate(poolInfo, elapsedSec) {
+function locate(poolInfo, elapsedSec, channelKey = "") {
   const { pool, cumulative, totalSec } = poolInfo;
   if (pool.length === 0 || totalSec <= 0) return null;
   const t = ((elapsedSec % totalSec) + totalSec) % totalSec;
@@ -387,7 +417,7 @@ function locate(poolInfo, elapsedSec) {
   const slotSec = slotFor(billSec(pool[lo]));
   const bill = usableFrom(pool, lo);
   const upNext = usableFrom(pool, (lo + 1) % pool.length);
-  const plan = planFor(bill, slotSec);
+  const plan = planFor(bill, slotSec, channelKey);
   const seg = plan.find((s) => slotOffsetSec < s.end) || plan[plan.length - 1];
   const position = {
     showId: bill.showId,
@@ -582,8 +612,9 @@ function matchingWindow(channel, nowMs) {
 // getPositionAt(channel, catalog, timestampMs) ->
 //   a position as described at locate() | null (empty pool)
 function getPositionAt(channel, catalog, timestampMs) {
+  const channelKey = `ch${channel.number}`;
   if (channel.kind === "genre") {
-    return locate(genrePool(channel, catalog), (timestampMs - EPOCH_MS) / 1000);
+    return locate(genrePool(channel, catalog), (timestampMs - EPOCH_MS) / 1000, channelKey);
   }
 
   if (channel.kind === "curated") {
@@ -592,7 +623,7 @@ function getPositionAt(channel, catalog, timestampMs) {
       const cacheKey = `curated:${channel.number}:w${match.index}`;
       const info = cachedPool(cacheKey, match.win.pool, catalog, cacheKey,
                               { ordered: !!match.win.ordered });
-      return locate(info, windowElapsedSec(match.win, timestampMs));
+      return locate(info, windowElapsedSec(match.win, timestampMs), channelKey);
     }
     // Outside every window: plain continuous loop, same formula as a genre
     // channel. (Simplification: this does *not* track cumulative
@@ -600,7 +631,7 @@ function getPositionAt(channel, catalog, timestampMs) {
     // window starts/ends — acceptable for filler between named blocks.)
     const cacheKey = `curated:${channel.number}:fallback`;
     const info = cachedPool(cacheKey, channel.fallbackPool, catalog, cacheKey);
-    return locate(info, (timestampMs - EPOCH_MS) / 1000);
+    return locate(info, (timestampMs - EPOCH_MS) / 1000, channelKey);
   }
 
   return null; // "guide" has no position of its own

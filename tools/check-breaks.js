@@ -95,7 +95,9 @@ for (const bill of pool) {
   }
   const pad = slotSec - total;
   const blockTape = bill.show.genre === "Broadcast Blocks";
-  if (pad >= 120 && total >= 600 && !blockTape) {
+  const movie = bill.eps.every((ep) => ep.code === "Movie");
+  if (movie) assert.ok(breaks.every((b) => b.final), `${name}: a movie was interrupted`);
+  if (pad >= 120 && total >= 600 && !blockTape && !movie) {
     assert.ok(breaks.length >= 2, `${name}: ${Math.round(pad)}s of ads all at the end`);
   }
   if (breaks.length === 1 && pad >= 120) stats.endOnly++;

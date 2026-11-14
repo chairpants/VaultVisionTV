@@ -137,8 +137,13 @@ Where a break falls inside a programme is, in order of preference: between
 two shorts sharing a slot; at a pause in the dialogue near the even split,
 for the few shows with bundled captions (`build-cuts.py` finds those pauses);
 otherwise at the even split, which can land mid-scene — the catalog has no
-record of where the original act breaks were. Coming back from a break the
-programme rewinds a few seconds, so the reload doesn't swallow a line.
+record of where the original act breaks were. Each channel nudges those
+splits by a minute or so (never leaving an act under 5 minutes), by an amount that differs per channel and per
+episode, so channels airing same-length programmes don't all cut to
+commercials at once. Movies and the taped broadcast blocks are never
+interrupted; their slot's spare time airs as one break at the end. Coming
+back from a break the programme rewinds a few seconds, so the reload doesn't
+swallow a line.
 
 `node tools/check-breaks.js` plans every slot in the catalog and checks the
 whole arrangement: starts on the half hour, programmes airing complete and in
