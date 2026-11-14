@@ -149,6 +149,7 @@ function main() {
     guideOpen = false;
     guide.hide();
     player.setGuideMode(false);
+    player.goOffAir();
     video.pause();
     video.removeAttribute("src");
     osd.classList.add("hidden");

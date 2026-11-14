@@ -48,9 +48,16 @@ channel at the same moment see the same thing, automatically.
   time of day and day of week, recreating blocks like Friday-night sitcom
   lineups or Saturday-morning cartoons the way real affiliates ran them,
   falling back to regular filler outside those windows.
-- **Simulated commercial breaks** — when an episode doesn't fill its
-  scheduled slot exactly, a lower-third chyron shows what's coming back and
-  when, just like waiting out a real break.
+- **A half-hour grid** — every programme starts on :00 or :30. A 22-minute
+  sitcom holds a half-hour slot, a 44-minute drama an hour, and shorts share
+  one: two 11-minute cartoons, or a run of Schoolhouse Rocks, air back to
+  back in the same half hour.
+- **Commercial breaks, where they used to be** — the time a programme doesn't
+  fill is spread through it as several short breaks rather than stacked at
+  the end: about three in a sitcom's half hour, six in a drama's hour. The
+  spots are ~2,100 real commercials and promos from the late 80s through the
+  2000s, and none repeats within a slot. A lower-third chyron counts down to
+  the programme coming back, or to what's up next.
 - **A live TV Guide** — press `g` to pull up a scrolling grid of every
   channel's current and upcoming lineup, with the live picture docked in the
   corner the whole time.
@@ -113,13 +120,39 @@ The second form reads that metadata off disk instead, for content added to a
 local library checkout but not published yet. Poster URLs still point at the
 published site either way, so new art 404s until that side is pushed.
 
+## Commercials and break points
+
+```bash
+python3 tools/build-commercials.py          # data/commercials.js — the spot pool
+python3 tools/build-cuts.py ../VaultVision  # data/cuts.js — where breaks may cut in
+```
+
+`build-commercials.py` lists the spots in a set of archive.org collections
+(one commercial per file), screening them by filename: adult services,
+captures the uploader marked as damaged, and stretches of taped programmes
+are left out. Nobody has watched all of them — if one airs that shouldn't,
+add its filename to `EXCLUDE_TITLES` and re-run.
+
+Where a break falls inside a programme is, in order of preference: between
+two shorts sharing a slot; at a pause in the dialogue near the even split,
+for the few shows with bundled captions (`build-cuts.py` finds those pauses);
+otherwise at the even split, which can land mid-scene — the catalog has no
+record of where the original act breaks were. Coming back from a break the
+programme rewinds a few seconds, so the reload doesn't swallow a line.
+
+`node tools/check-breaks.js` plans every slot in the catalog and checks the
+whole arrangement: starts on the half hour, programmes airing complete and in
+order, breaks spread out, no repeated spot in a slot.
+
 ## Layout
 
 | File | Role |
 |---|---|
 | `tools/build-catalog.py` | offline fetch + parse → `data/catalog.js` (+ `.json`) |
+| `tools/build-commercials.py` | archive.org commercial collections → `data/commercials.js` |
+| `tools/build-cuts.py` | VaultVision's bundled captions → `data/cuts.js` (quiet moments to cut on) |
 | `channels.js` | the channel lineup: genre channels (auto pool) + curated dayparted channels |
-| `scheduler.js` | pure scheduling math — deterministic pool + "what's airing at time T" |
+| `scheduler.js` | pure scheduling math — deterministic pool, the half-hour grid, each slot's break plan, "what's airing at time T" |
 | `player.js` | `<video>` wiring: tune, resolve archive.org URL, drift/advance resync, OSD, picture crop, intro skip |
 | `remote.js` | keyboard + on-screen remote input |
 | `guide.js` | the scrolling TV Guide channel |
@@ -129,6 +162,7 @@ published site either way, so new art 404s until that side is pushed.
 | `data/removals.md` | log of shows dropped from the catalog, and why — written by the rebuild |
 | `tools/check-channels.js` | channel pools vs the catalog (`node tools/check-channels.js`) |
 | `tools/check-vod.js` | walks the VOD menu levels (`node tools/check-vod.js`) |
+| `tools/check-breaks.js` | every slot's grid and break plan (`node tools/check-breaks.js`) |
 
 ## Credits
 

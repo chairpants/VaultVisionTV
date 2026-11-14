@@ -167,6 +167,8 @@ const DRIFT_TOLERANCE_SEC = 10;
 const OSD_VISIBLE_MS = 4000;
 
 const PAD_TICK_MS = 500; // twice a second so the countdown never visibly skips
+const SEGMENT_SLACK_MS = 100; // land just past a segment boundary, never a hair before it
+const RESUME_OVERLAP_SEC = 1; // replayed when a programme comes back from a break
 const SUBSTITUTE_MS = 1500; // how long the failure card sits before the swap
 const NO_SIGNAL_TEXT = "NO SIGNAL";
 
@@ -189,6 +191,19 @@ function createPlayer(els) {
   let driftTimer = null;
   let osdFadeTimer = null;
   let padTimer = null;
+  // Fires when the picture is next due to change source — a break cutting
+  // into the programme, or the slot rolling over. The 15s drift loop would
+  // get there eventually, but a break that starts up to 15 seconds late eats
+  // that much of the ads and lands the cut somewhere other than planned.
+  let segTimer = null;
+  let loadedIsSpot = false; // what's in the <video> is a commercial, not a programme
+  let breakIsFinal = true; // the break on screen ends the slot (vs. the programme coming back)
+  // Where the episode really was when a break cut in. The schedule's idea of
+  // that moment and the picture's can differ by up to DRIFT_TOLERANCE_SEC, so
+  // coming back by the schedule alone could skip or repeat that much; coming
+  // back to the frame it actually left doesn't.
+  let cutAt = null; // { key, time }
+  const chyronLabel = document.getElementById("chyron-label");
   let tuneToken = 0; // invalidates in-flight resolves if the user flips again before they land
   let currentCrop = null; // {x,y,w,h} of the episode currently loaded, or null
   let guideMode = false; // true while the TV Guide is up — see setGuideMode
@@ -370,7 +385,15 @@ function createPlayer(els) {
     // drift check kept yanking the picture back to the same frame.
     const seekTo = position.offsetSec + (position.episode.introSkipSec || 0);
     if (isNewTune) {
-      video.currentTime = seekTo;
+      // Back from a break into the episode it interrupted: resume from the
+      // frame it left (see cutAt), provided that's still within what the
+      // drift check would tolerate anyway.
+      const resume = cutAt && cutAt.key === position.episode.key &&
+        Math.abs(cutAt.time - seekTo) <= DRIFT_TOLERANCE_SEC;
+      video.currentTime = resume
+        ? Math.max(position.episode.introSkipSec || 0, cutAt.time - RESUME_OVERLAP_SEC)
+        : seekTo;
+      cutAt = null;
       video.play().catch(() => unlockOnFirstGesture());
     } else {
       // resync: only nudge if we've actually drifted, so normal playback
@@ -395,13 +418,16 @@ function createPlayer(els) {
     }
   }
 
-  // The lower third: what's coming back on, and how long until it does.
+  // The lower third: what's coming back on, and how long until it does — the
+  // programme this break interrupted, or the next one if the slot is over.
   // Runs for the whole break, over the spots and the STAND BY card alike.
   function showChyron(pos) {
-    const lines = titleLines(pos.next.show, pos.next.episode);
+    const back = pos.break.returning;
+    const lines = back ? titleLines(back.show, back.episode) : titleLines(pos.next.show, pos.next.episode);
+    if (chyronLabel) chyronLabel.textContent = back ? "BACK IN" : "UP NEXT";
     chyronTitle.textContent = lines.title;
     chyronSub.textContent = lines.sub;
-    chyronClock.textContent = mmss(pos.slotEndsInSec);
+    chyronClock.textContent = mmss(back ? pos.break.endsInSec : pos.slotEndsInSec);
     if (chyron.classList.contains("hidden")) {
       chyron.classList.remove("hidden");
       layoutCrop(); // shrink the picture to make room
@@ -426,7 +452,13 @@ function createPlayer(els) {
     pendingSpotKey = null;
     if (myToken !== tuneToken) return; // channel flipped, or the break moved on
     if (url === OUTAGE) return; // outage card already up; nothing to load
-    if (!url) return; // bad spot — the next tick just tries the following one
+    if (!url) {
+      // No playable file behind this spot. Retire it: renderBreak covers its
+      // stretch of the break with the countdown card from the next tick on.
+      markBroken(spot.key);
+      return;
+    }
+    loadedIsSpot = true;
     loadedEpisodeKey = spot.key;
     loadedItemId = spot.itemId;
     currentCrop = null; // ads are full-frame; never inherit the episode's crop
@@ -439,24 +471,26 @@ function createPlayer(els) {
     }, { once: true });
   }
 
-  // Decides what the dead tail of a slot shows right now: a commercial if one
-  // fits in the time left, otherwise the countdown.
+  // Decides what a break shows right now: the spot the schedule has on, or
+  // the countdown for the sliver at the end of a slot that no spot fits (and
+  // for a spot whose file turned out to be dead).
   function renderBreak(pos) {
     showChyron(pos);
-    const padElapsed = pos.offsetSec - playableSec(pos.episode);
-    const ad = getAdAt(pos.episode.key, padElapsed, pos.slotEndsInSec);
-    if (!ad) {
+    breakIsFinal = pos.break.final;
+    const { spot, spotOffsetSec } = pos.break;
+    if (!spot || isBroken(spot.key)) {
       video.pause();
       padCard.classList.remove("hidden");
       return;
     }
     padCard.classList.add("hidden");
-    playSpot(ad.spot, ad.offsetSec);
+    playSpot(spot, spotOffsetSec);
   }
 
-  // The episode is over but its slot isn't — run the commercial break, then
-  // tune the moment the clock hits the next :00/:30. Its own ticker (not the
-  // 15s drift loop) so spot changes and the countdown stay honest.
+  // The schedule has gone to a break — run it, then tune the moment it ends:
+  // back into the programme it interrupted, or on to the next one when the
+  // clock hits :00/:30. Its own ticker (not the 15s drift loop) so spot
+  // changes and the countdown stay honest.
   function showPad(channel, catalog, position) {
     osd.classList.add("hidden");
     renderBreak(position);
@@ -466,7 +500,9 @@ function createPlayer(els) {
       const pos = getPositionAt(channel, catalog, Date.now());
       if (!pos || !pos.padding) {
         stopPad();
-        tune(channel, catalog); // slot rolled over — start the next show
+        // The channel banner announces a new programme, not the same one
+        // coming back from its own break.
+        tune(channel, catalog, { silent: !breakIsFinal });
         return;
       }
       renderBreak(pos);
@@ -537,6 +573,7 @@ function createPlayer(els) {
   async function tune(channel, catalog, { silent = false } = {}) {
     const myToken = ++tuneToken;
     lastTuned = { channel, catalog };
+    clearTimeout(segTimer);
 
     // Known down and not yet due for a retry: every channel would hit the
     // same fetch and fail the same way, so skip straight to keeping the card
@@ -577,10 +614,18 @@ function createPlayer(els) {
     }
 
     if (position.padding) {
+      // The programme is still in the <video> for a moment yet: note the
+      // frame the break is cutting in on, for the return.
+      if (!loadedIsSpot && loadedEpisodeKey === position.episode.key &&
+          !video.seeking && video.currentTime > 0) {
+        cutAt = { key: loadedEpisodeKey, time: video.currentTime };
+      }
       showPad(channel, catalog, position);
       return;
     }
     stopPad();
+    segTimer = setTimeout(() => tune(channel, catalog, { silent: true }),
+                          position.segmentEndsInSec * 1000 + SEGMENT_SLACK_MS);
 
     const isNewEpisode = position.episode.key !== loadedEpisodeKey;
     if (isNewEpisode) {
@@ -594,6 +639,7 @@ function createPlayer(els) {
         failOver();
         return;
       }
+      loadedIsSpot = false;
       loadedEpisodeKey = position.episode.key;
       loadedItemId = position.episode.itemId;
       currentCrop = position.episode.crop || null;
@@ -685,6 +731,7 @@ function createPlayer(els) {
   async function playEpisode(show, episode) {
     const myToken = ++tuneToken;
     clearTimeout(substituteTimer);
+    clearTimeout(segTimer);
     stopPad();
     blankMsg.classList.add("hidden");
 
@@ -692,6 +739,7 @@ function createPlayer(els) {
     if (myToken !== tuneToken) return false; // superseded by a later tune/VOD selection while we awaited
     if (!url || url === OUTAGE) return false; // OUTAGE: card is already up behind the VOD menu
 
+    loadedIsSpot = false;
     loadedEpisodeKey = episode.key;
     loadedItemId = episode.itemId;
     currentCrop = episode.crop || null;
@@ -830,8 +878,21 @@ function createPlayer(els) {
     driftTimer = null;
   }
 
+  // Leaving live TV for something with no schedule (the VOD menu): nothing
+  // the schedule had queued may fire into it. The drift loop already stands
+  // down by channel kind; the break ticker and the segment timer have no
+  // such check, and either would start the channel playing under the menu.
+  function goOffAir() {
+    ++tuneToken;
+    clearTimeout(segTimer);
+    clearTimeout(substituteTimer);
+    stopPad();
+    loadedEpisodeKey = null; // the caller drops the src, so the next tune must reload it
+    cutAt = null;
+  }
+
   return {
-    tune, startDriftLoop, stopDriftLoop, showOsd, getItemId: () => loadedItemId, setGuideMode,
+    tune, goOffAir, startDriftLoop, stopDriftLoop, showOsd, getItemId: () => loadedItemId, setGuideMode,
     playEpisode, vodSeekBegin, vodSeekCommit,
   };
 }
